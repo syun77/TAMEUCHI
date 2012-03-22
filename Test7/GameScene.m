@@ -13,6 +13,7 @@ static GameScene* scene_ = nil;
 
 @implementation GameScene
 
+@synthesize baseLayer;
 @synthesize interfaceLayer;
 
 // シングルトンを取得
@@ -26,6 +27,7 @@ static GameScene* scene_ = nil;
     return scene_;
 }
 
+// コンストラクタ
 - (id)init {
     self = [super init];
     
@@ -33,10 +35,21 @@ static GameScene* scene_ = nil;
         return self;
     }
     
-    self.interfaceLayer = [InterfaceLayer node];
-    [self addChild:self.interfaceLayer];
+    baseLayer = [CCLayer node];
+    [self addChild:baseLayer];
+    
+    interfaceLayer = [InterfaceLayer node];
+    [baseLayer addChild:interfaceLayer];
     
     return self;
+}
+
+// デストラクタ
+- (void)dealloc {
+    baseLayer = nil;
+    interfaceLayer = nil;
+    
+    [super dealloc];
 }
 
 @end

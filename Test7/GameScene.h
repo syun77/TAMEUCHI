@@ -15,10 +15,11 @@
  * ゲームシーン
  */
 @interface GameScene : CCScene {
-    
+    CCLayer* baesLayer;
     InterfaceLayer* interfaceLayer;
 }
 
+@property (nonatomic, retain)CCLayer* baseLayer;
 @property (nonatomic, retain)InterfaceLayer* interfaceLayer;
 
 // シングルトンを取得
