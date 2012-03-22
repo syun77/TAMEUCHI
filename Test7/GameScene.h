@@ -9,10 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+#import "InterfaceLayer.h"
+
+/**
+ * ゲームシーン
+ */
 @interface GameScene : CCScene {
     
+    InterfaceLayer* interfaceLayer;
 }
 
+@property (nonatomic, retain)InterfaceLayer* interfaceLayer;
+
+// シングルトンを取得
 + (GameScene*)sharedInstance;
 
 @end

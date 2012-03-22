@@ -8,10 +8,14 @@
 
 #import "GameScene.h"
 
+// シングルトン
 static GameScene* scene_ = nil;
 
 @implementation GameScene
 
+@synthesize interfaceLayer;
+
+// シングルトンを取得
 + (GameScene*)sharedInstance {
     
     if (scene_ == nil) {
@@ -20,6 +24,19 @@ static GameScene* scene_ = nil;
     }
     
     return scene_;
+}
+
+- (id)init {
+    self = [super init];
+    
+    if (self == nil) {
+        return self;
+    }
+    
+    self.interfaceLayer = [InterfaceLayer node];
+    [self addChild:self.interfaceLayer];
+    
+    return self;
 }
 
 @end

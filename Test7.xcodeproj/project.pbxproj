@@ -122,6 +122,7 @@
 		C70F602A151B6E67003B041E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6029151B6E67003B041E /* AppDelegate.m */; };
 		C70F602D151B6E67003B041E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F602C151B6E67003B041E /* RootViewController.m */; };
 		C70F6039151B6E91003B041E /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6038151B6E91003B041E /* GameScene.m */; };
+		C70F603C151B7043003B041E /* InterfaceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F603B151B7043003B041E /* InterfaceLayer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -360,6 +361,8 @@
 		C70F6031151B6E67003B041E /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		C70F6037151B6E91003B041E /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
 		C70F6038151B6E91003B041E /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
+		C70F603A151B7043003B041E /* InterfaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLayer.h; sourceTree = "<group>"; };
+		C70F603B151B7043003B041E /* InterfaceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceLayer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -420,6 +423,8 @@
 				C70F6029151B6E67003B041E /* AppDelegate.m */,
 				C70F6037151B6E91003B041E /* GameScene.h */,
 				C70F6038151B6E91003B041E /* GameScene.m */,
+				C70F603A151B7043003B041E /* InterfaceLayer.h */,
+				C70F603B151B7043003B041E /* InterfaceLayer.m */,
 				C70F602B151B6E67003B041E /* RootViewController.h */,
 				C70F602C151B6E67003B041E /* RootViewController.m */,
 				C70F6031151B6E67003B041E /* GameConfig.h */,
@@ -925,6 +930,7 @@
 				C70F602A151B6E67003B041E /* AppDelegate.m in Sources */,
 				C70F602D151B6E67003B041E /* RootViewController.m in Sources */,
 				C70F6039151B6E91003B041E /* GameScene.m in Sources */,
+				C70F603C151B7043003B041E /* InterfaceLayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
