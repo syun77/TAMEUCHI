@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 
 #import "InterfaceLayer.h"
+#import "TokenManager.h"
 
 /**
  * ゲームシーン
