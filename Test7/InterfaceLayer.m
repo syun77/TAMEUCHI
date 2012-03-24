@@ -26,7 +26,7 @@
     GameScene* scene = [GameScene sharedInstance];
     
     Token* t = [scene.mgr add];
-    [t scheduleUpdate];
+    //[t scheduleUpdate];
     //[scene.baseLayer addChild:t];
     
     return YES;

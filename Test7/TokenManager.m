@@ -21,11 +21,16 @@
         assert(0);
     }
     
+    // 配列を確保
     self.m_Pool = [NSMutableArray arrayWithCapacity:size];
     
+    // トークンのインスタンスを生成
     for (int i = 0; i < size; i++) {
+        
         Token* token = [NSClassFromString(className) node];
         if (token == nil) {
+            
+            // クラス名が違うとか未実装とかでエラー
             NSLog(@"Error: %@ is nil.", className);
             assert(0);
         }
@@ -58,7 +63,13 @@
             
             // 初期化
             [ret initialize];
-            //[ret setExist:YES];
+            
+            // 存在フラグを立てる
+            [ret setExist:YES];
+            
+            // スケジューラーに登録
+            [ret scheduleUpdate];
+            
             return ret;
         }
         

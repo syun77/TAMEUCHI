@@ -26,8 +26,8 @@
 // 存在フラグを設定
 - (void)setExist:(BOOL)b;
 
-// レイヤーに登録する
-- (void)addLayer:(CCLayer*)layer;
+// 消滅処理
+- (void)vanish;
 
 @property (nonatomic, retain)CCSprite* m_pSprite;
 

@@ -35,21 +35,19 @@ static GameScene* scene_ = nil;
     self.position = ccp(0, 240);
 }
 
-
 - (void)update:(ccTime)dt {
     float x = self.position.x;
-    x += 240 * dt;
+    x += 480 * dt;
     if (x > 480) {
         
         NSLog(@"Vanish.");
+//        [self vanish];
         [self removeFromParentAndCleanup:YES];
         [self setExist:NO];
         return;
     }
     
     self.position = ccp(x, self.position.y);
-    
-    NSLog(@"%f,%f", self.position.x, self.position.y);
 }
 
 @end
@@ -88,7 +86,7 @@ static GameScene* scene_ = nil;
     [self.baseLayer addChild:self.interfaceLayer];
     
     self.mgr = [TokenManager node];
-    [self.mgr create:self.baseLayer size:8 className:@"Bullet"];
+    [self.mgr create:self.baseLayer size:2 className:@"Bullet"];
     
     return self;
 }

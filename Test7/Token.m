@@ -37,9 +37,14 @@
     m_isExist = b;
 }
 
-// レイヤーに登録する
-- (void)addLayer:(CCLayer*)layer {
-    [layer addChild: self.m_pSprite];
+// 消滅処理
+- (void)vanish {
+    
+    // スケジューラから破棄
+    [self removeAllChildrenWithCleanup:YES];
+    
+    // 存在フラグを下げる
+    [self setExist:NO];
 }
 
 @end
