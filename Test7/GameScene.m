@@ -11,9 +11,55 @@
 // シングルトン
 static GameScene* scene_ = nil;
 
+// 敵弾実装
+@interface Bullet : Token {
+}
+
+- (void)update:(ccTime)dt;
+@end
+
+@implementation Bullet
+
+- (id)init {
+    self = [super init];
+    if (self == nil) {
+        return self;
+    }
+    
+    [self load:@"icon.png"];
+    
+    return self;
+}
+
+- (void)initialize {
+    self.position = ccp(0, 240);
+}
+
+
+- (void)update:(ccTime)dt {
+    float x = self.position.x;
+    x += 240 * dt;
+    if (x > 480) {
+        
+        NSLog(@"Vanish.");
+        [self removeFromParentAndCleanup:YES];
+        [self setExist:NO];
+        return;
+    }
+    
+    self.position = ccp(x, self.position.y);
+    
+    NSLog(@"%f,%f", self.position.x, self.position.y);
+}
+
+@end
+
+
 @implementation GameScene
 
+// 実体定義
 @synthesize baseLayer;
+@synthesize mgr;
 @synthesize interfaceLayer;
 
 // シングルトンを取得
@@ -35,19 +81,23 @@ static GameScene* scene_ = nil;
         return self;
     }
     
-    baseLayer = [CCLayer node];
-    [self addChild:baseLayer];
+    self.baseLayer = [CCLayer node];
+    [self addChild:self.baseLayer];
     
-    interfaceLayer = [InterfaceLayer node];
-    [baseLayer addChild:interfaceLayer];
+    self.interfaceLayer = [InterfaceLayer node];
+    [self.baseLayer addChild:self.interfaceLayer];
+    
+    self.mgr = [TokenManager node];
+    [self.mgr create:self.baseLayer size:8 className:@"Bullet"];
     
     return self;
 }
 
 // デストラクタ
 - (void)dealloc {
-    baseLayer = nil;
-    interfaceLayer = nil;
+    self.mgr = nil;
+    self.baseLayer = nil;
+    self.interfaceLayer = nil;
     
     [super dealloc];
 }

@@ -14,6 +14,9 @@
     BOOL        m_isExist; // 存在フラグ
 }
 
+// 初期化
+- (void)initialize;
+
 // テクスチャをロードしてスプライトを生成
 - (void)load:(NSString*)filename;
 

@@ -8,6 +8,7 @@
 
 #import "InterfaceLayer.h"
 
+#import "GameScene.h"
 
 @implementation InterfaceLayer
 
@@ -22,7 +23,11 @@
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    NSLog(@"Touch");
+    GameScene* scene = [GameScene sharedInstance];
+    
+    Token* t = [scene.mgr add];
+    [t scheduleUpdate];
+    //[scene.baseLayer addChild:t];
     
     return YES;
 }

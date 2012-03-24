@@ -13,11 +13,18 @@
 
 @synthesize m_pSprite;
 
+// 初期化
+- (void)initialize {
+    
+    // 変数初期化
+    m_isExist = NO;
+}
+
 // テクスチャをロードしてスプライトを生成
 - (void)load:(NSString *)filename {
     
-    m_pSprite = [CCSprite spriteWithFile:filename];
-    [self addChild:m_pSprite];
+    self.m_pSprite = [CCSprite spriteWithFile:filename];
+    [self addChild:self.m_pSprite];
 }
 
 // 存在するかどうか

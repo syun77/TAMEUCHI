@@ -12,38 +12,63 @@
 
 @synthesize m_Pool;
 
-- (void)create:(NSInteger)size className:(NSString *)className {
-    m_Pool = [NSMutableArray arrayWithCapacity:size];
+// トークンの生成
+- (void)create:(CCLayer *)layer size:(NSInteger)size className:(NSString *)className {
+    
+    if (self.m_Pool) {
+        
+        // 生成済み
+        assert(0);
+    }
+    
+    self.m_Pool = [NSMutableArray arrayWithCapacity:size];
     
     for (int i = 0; i < size; i++) {
         Token* token = [NSClassFromString(className) node];
-        [m_Pool addObject:token];
+        if (token == nil) {
+            NSLog(@"Error: %@ is nil.", className);
+            assert(0);
+        }
+        [self.m_Pool addObject:token];
     }
     
-    m_Idx = 0;
+    m_Idx   = 0;
+    m_Size  = size;
+    m_Layer = layer;
 }
 
 // デストラクタ
 - (void)dealloc {
-    m_Pool = nil;
+    self.m_Pool = nil;
     
     [super dealloc];
 }
 
 // トークンの追加
 - (Token*)add {
-    NSInteger cnt = [m_Pool count];
     
-    for (int i = 0; i < cnt; i++) {
-        Token* ret = [m_Pool objectAtIndex:m_Idx];
-        m_Idx++;
+    for (int i = 0; i < m_Size; i++) {
+        
+        Token* ret = [self.m_Pool objectAtIndex:m_Idx];
+        m_Idx = (m_Idx + 1) % m_Size;
         if ([ret isExist] == NO) {
+            
+            // 空きが見つかったので生成
+            [m_Layer addChild:ret];
+            
+            // 初期化
+            [ret initialize];
+            //[ret setExist:YES];
             return ret;
         }
         
     }
     
     return nil;
+}
+
+- (void)echo {
+    NSLog(@"Hello.");
 }
 
 @end

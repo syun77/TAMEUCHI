@@ -16,11 +16,13 @@
  * ゲームシーン
  */
 @interface GameScene : CCScene {
-    CCLayer* baesLayer;
+    CCLayer*        baesLayer;
+    TokenManager*   mgr;
     InterfaceLayer* interfaceLayer;
 }
 
 @property (nonatomic, retain)CCLayer* baseLayer;
+@property (nonatomic, retain)TokenManager*   mgr;
 @property (nonatomic, retain)InterfaceLayer* interfaceLayer;
 
 // シングルトンを取得
