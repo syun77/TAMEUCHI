@@ -32,22 +32,20 @@ static GameScene* scene_ = nil;
 }
 
 - (void)initialize {
-    self.position = ccp(0, 240);
+    [self setCoordinate:0 y:240 vx:480 vy:0 ax:0 ay:0];
+    
+    NSLog(@"Intialize[%d].", [self getIndex]);
 }
 
 - (void)update:(ccTime)dt {
-    float x = self.position.x;
-    x += 480 * dt;
-    if (x > 480) {
+    [self move:dt];
+    if (self._x > 480) {
         
-        NSLog(@"Vanish.");
-//        [self vanish];
+        NSLog(@"Vanish[%d].", [self getIndex]);
         [self removeFromParentAndCleanup:YES];
         [self setExist:NO];
         return;
     }
-    
-    self.position = ccp(x, self.position.y);
 }
 
 @end

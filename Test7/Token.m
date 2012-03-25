@@ -12,12 +12,49 @@
 @implementation Token
 
 @synthesize m_pSprite;
+@synthesize _x;
+@synthesize _y;
+@synthesize _vx;
+@synthesize _vy;
+@synthesize _ax;
+@synthesize _ay;
+
 
 // 初期化
 - (void)initialize {
     
     // 変数初期化
     m_isExist = NO;
+}
+
+// 座標・移動量の設定
+- (void)setCoordinate:(float)x y:(float)y vx:(float)vx vy:(float)vy ax:(float)ax ay:(float)ay {
+    
+    self._x  = x;  self._y  = y;
+    self._vx = vx; self._vy = vy;
+    self._ax = ax; self._ay = ay;
+}
+
+// 移動する
+- (void)move:(float)dt {
+    self._vx += self._ax;
+    self._vy += self._ay;
+    self._x  += self._vx * dt;
+    self._y  += self._vy * dt;
+    
+    self.position = ccp(self._x, self._y);
+}
+
+// 要素番号の設定
+- (void)setIndex:(NSInteger)index {
+    
+    m_Index = index;
+}
+
+// 要素番号の取得
+- (NSInteger)getIndex {
+    
+    return m_Index;
 }
 
 // テクスチャをロードしてスプライトを生成

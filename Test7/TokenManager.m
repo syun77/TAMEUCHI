@@ -34,9 +34,15 @@
             NSLog(@"Error: %@ is nil.", className);
             assert(0);
         }
+        
+        // 要素番号の設定
+        [token setIndex:i];
+        
+        // 配列に追加
         [self.m_Pool addObject:token];
     }
     
+    // 初期化・設定
     m_Idx   = 0;
     m_Size  = size;
     m_Layer = layer;
