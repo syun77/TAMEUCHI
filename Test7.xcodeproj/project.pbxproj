@@ -123,8 +123,9 @@
 		C70F602D151B6E67003B041E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F602C151B6E67003B041E /* RootViewController.m */; };
 		C70F6039151B6E91003B041E /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6038151B6E91003B041E /* GameScene.m */; };
 		C70F603C151B7043003B041E /* InterfaceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F603B151B7043003B041E /* InterfaceLayer.m */; };
-		C70F6041151B7482003B041E /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F603E151B7482003B041E /* Token.m */; };
 		C70F6042151B7482003B041E /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6040151B7482003B041E /* TokenManager.m */; };
+		C72198F1151FFF83009B8B9F /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F0151FFF83009B8B9F /* Token.m */; };
+		C72198F3151FFF9E009B8B9F /* Math.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F2151FFF9E009B8B9F /* Math.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -366,9 +367,12 @@
 		C70F603A151B7043003B041E /* InterfaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLayer.h; sourceTree = "<group>"; };
 		C70F603B151B7043003B041E /* InterfaceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceLayer.m; sourceTree = "<group>"; };
 		C70F603D151B7482003B041E /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
-		C70F603E151B7482003B041E /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
 		C70F603F151B7482003B041E /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenManager.h; sourceTree = "<group>"; };
 		C70F6040151B7482003B041E /* TokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenManager.m; sourceTree = "<group>"; };
+		C72198EC151FFC2E009B8B9F /* Vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec.h; sourceTree = "<group>"; };
+		C72198F0151FFF83009B8B9F /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
+		C72198F2151FFF9E009B8B9F /* Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Math.m; sourceTree = "<group>"; };
+		C72198F51520BF47009B8B9F /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -435,9 +439,12 @@
 				C70F602C151B6E67003B041E /* RootViewController.m */,
 				C70F6031151B6E67003B041E /* GameConfig.h */,
 				C70F603D151B7482003B041E /* Token.h */,
-				C70F603E151B7482003B041E /* Token.m */,
+				C72198F0151FFF83009B8B9F /* Token.m */,
 				C70F603F151B7482003B041E /* TokenManager.h */,
 				C70F6040151B7482003B041E /* TokenManager.m */,
+				C72198F51520BF47009B8B9F /* Math.h */,
+				C72198F2151FFF9E009B8B9F /* Math.m */,
+				C72198EC151FFC2E009B8B9F /* Vec.h */,
 				C70F5ED7151B6E65003B041E /* Resources */,
 				C70F5EEB151B6E65003B041E /* libs */,
 				C70F6024151B6E67003B041E /* Supporting Files */,
@@ -941,8 +948,9 @@
 				C70F602D151B6E67003B041E /* RootViewController.m in Sources */,
 				C70F6039151B6E91003B041E /* GameScene.m in Sources */,
 				C70F603C151B7043003B041E /* InterfaceLayer.m in Sources */,
-				C70F6041151B7482003B041E /* Token.m in Sources */,
 				C70F6042151B7482003B041E /* TokenManager.m in Sources */,
+				C72198F1151FFF83009B8B9F /* Token.m in Sources */,
+				C72198F3151FFF9E009B8B9F /* Math.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1036,6 +1044,7 @@
 				C70F6036151B6E67003B041E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

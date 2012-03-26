@@ -7,6 +7,7 @@
 //
 
 #import "Token.h"
+#import "Math.h"
 
 
 @implementation Token
@@ -28,11 +29,19 @@
 }
 
 // 座標・移動量の設定
-- (void)setCoordinate:(float)x y:(float)y vx:(float)vx vy:(float)vy ax:(float)ax ay:(float)ay {
+- (void)set:(float)x y:(float)y vx:(float)vx vy:(float)vy ax:(float)ax ay:(float)ay {
     
     self._x  = x;  self._y  = y;
     self._vx = vx; self._vy = vy;
     self._ax = ax; self._ay = ay;
+}
+
+- (void)set2:(float)x y:(float)y rot:(float)rot speed:(float)speed ax:(float)ax ay:(float)ay {
+    
+    float vx = Math_CosEx(rot) * speed;
+    float vy = -Math_SinEx(rot) * speed;
+    
+    [self set:x y:y vx:vx vy:vy ax:ax ay:ay];
 }
 
 // 移動する

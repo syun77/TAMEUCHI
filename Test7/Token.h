@@ -22,7 +22,9 @@
 - (void)initialize;
 
 // 座標・移動量の設定
-- (void)setCoordinate:(float)x y:(float)y vx:(float)vx vy:(float)vy ax:(float)ax ay:(float)ay;
+- (void)set:(float)x y:(float)y vx:(float)vx vy:(float)vy ax:(float)ax ay:(float)ay;
+
+- (void)set2:(float)x y:(float)y rot:(float)rot speed:(float)speed ax:(float)ax ay:(float)ay;
 
 // 移動する
 - (void)move:(float)dt;

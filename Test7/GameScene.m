@@ -32,7 +32,7 @@ static GameScene* scene_ = nil;
 }
 
 - (void)initialize {
-    [self setCoordinate:0 y:240 vx:480 vy:0 ax:0 ay:0];
+    [self set:0 y:240 vx:480 vy:0 ax:0 ay:0];
     
     NSLog(@"Intialize[%d].", [self getIndex]);
 }

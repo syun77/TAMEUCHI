@@ -25,7 +25,10 @@
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     GameScene* scene = [GameScene sharedInstance];
     
+    static int s_count = 0;
     Token* t = [scene.mgr add];
+    [t set2:160 y:240 rot:(s_count%4)*90 speed:5 ax:0 ay:0];
+    s_count++;
     
     return YES;
 }
