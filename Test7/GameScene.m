@@ -86,16 +86,39 @@ static GameScene* scene_ = nil;
     self.mgr = [TokenManager node];
     [self.mgr create:self.baseLayer size:16 className:@"Bullet"];
     
+    // 更新スケジューラー登録
+    [self scheduleUpdate];
+    
     return self;
 }
 
 // デストラクタ
 - (void)dealloc {
+    
+    // 更新スケジューラー解除
+    [self unscheduleUpdate];
+    
+    // インスタンス開放
     self.mgr = nil;
     self.baseLayer = nil;
     self.interfaceLayer = nil;
     
     [super dealloc];
+}
+
+- (void)update:(ccTime)dt {
+    //NSLog(@"update.");
+    
+    if ([self.interfaceLayer isTouch] == NO) {
+        return;
+    }
+    
+    Vec2D p = [self.interfaceLayer getPos];
+    
+    static int s_count = 0;
+    Token* t = [self.mgr add];
+    [t set2:p.x y:p.y rot:(s_count%36)*10 speed:240 ax:0 ay:0];
+    s_count++;
 }
 
 @end
