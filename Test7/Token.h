@@ -26,6 +26,15 @@
 
 - (void)set2:(float)x y:(float)y rot:(float)rot speed:(float)speed ax:(float)ax ay:(float)ay;
 
+// 画面外に出たかどうか
+- (BOOL)isOut;
+
+// 画面外に出たかどうか（矩形）
+- (BOOL)isOutRect:(float)w h:(float)h;
+
+// 画面外に出たかどうか（円）
+- (BOOL)isOutCircle:(float)r;
+
 // 移動する
 - (void)move:(float)dt;
 

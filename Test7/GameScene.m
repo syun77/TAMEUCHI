@@ -39,7 +39,7 @@ static GameScene* scene_ = nil;
 
 - (void)update:(ccTime)dt {
     [self move:dt];
-    if (self._x > 480) {
+    if ([self isOut]) {
         
         NSLog(@"Vanish[%d].", [self getIndex]);
         [self removeFromParentAndCleanup:YES];
@@ -84,7 +84,7 @@ static GameScene* scene_ = nil;
     [self.baseLayer addChild:self.interfaceLayer];
     
     self.mgr = [TokenManager node];
-    [self.mgr create:self.baseLayer size:2 className:@"Bullet"];
+    [self.mgr create:self.baseLayer size:16 className:@"Bullet"];
     
     return self;
 }

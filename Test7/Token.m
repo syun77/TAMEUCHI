@@ -39,9 +39,48 @@
 - (void)set2:(float)x y:(float)y rot:(float)rot speed:(float)speed ax:(float)ax ay:(float)ay {
     
     float vx = Math_CosEx(rot) * speed;
-    float vy = -Math_SinEx(rot) * speed;
+    float vy = Math_SinEx(rot) * speed;
     
     [self set:x y:y vx:vx vy:vy ax:ax ay:ay];
+}
+
+// 画面外に出たかどうか
+- (BOOL)isOut {
+    CGSize win = [CCDirector sharedDirector].winSize;
+    
+    if (self._x < 0) { return YES; }
+    if (self._x > win.width) { return YES; }
+    if (self._y < 0) { return YES; }
+    if (self._y > win.height) { return YES; }
+    
+    return NO;
+}
+
+// 画面外に出たかどうか（矩形）
+- (BOOL)isOutRect:(float)w h:(float)h {
+    CGSize win = [CCDirector sharedDirector].winSize;
+    
+    if (self._x < -w) { return YES; }
+    if (self._x > win.width+w) { return YES; }
+    if (self._y < -h) { return YES; }
+    if (self._y > win.height+h) { return YES; }
+    
+    return NO;
+    
+}
+
+// 画面外に出たかどうか（円）
+- (BOOL)isOutCircle:(float)r {
+    CGSize win = [CCDirector sharedDirector].winSize;
+    
+    if (self._x < -r) { return YES; }
+    if (self._x > win.width+r) { return YES; }
+    if (self._y < -r) { return YES; }
+    if (self._y > win.height+r) { return YES; }
+    
+    return NO;
+    
+    
 }
 
 // 移動する

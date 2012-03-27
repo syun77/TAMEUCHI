@@ -126,6 +126,7 @@
 		C70F6042151B7482003B041E /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6040151B7482003B041E /* TokenManager.m */; };
 		C72198F1151FFF83009B8B9F /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F0151FFF83009B8B9F /* Token.m */; };
 		C72198F3151FFF9E009B8B9F /* Math.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F2151FFF9E009B8B9F /* Math.m */; };
+		C72198F71520C42F009B8B9F /* Vec.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F61520C42E009B8B9F /* Vec.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -373,6 +374,7 @@
 		C72198F0151FFF83009B8B9F /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
 		C72198F2151FFF9E009B8B9F /* Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Math.m; sourceTree = "<group>"; };
 		C72198F51520BF47009B8B9F /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
+		C72198F61520C42E009B8B9F /* Vec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vec.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -445,6 +447,7 @@
 				C72198F51520BF47009B8B9F /* Math.h */,
 				C72198F2151FFF9E009B8B9F /* Math.m */,
 				C72198EC151FFC2E009B8B9F /* Vec.h */,
+				C72198F61520C42E009B8B9F /* Vec.m */,
 				C70F5ED7151B6E65003B041E /* Resources */,
 				C70F5EEB151B6E65003B041E /* libs */,
 				C70F6024151B6E67003B041E /* Supporting Files */,
@@ -951,6 +954,7 @@
 				C70F6042151B7482003B041E /* TokenManager.m in Sources */,
 				C72198F1151FFF83009B8B9F /* Token.m in Sources */,
 				C72198F3151FFF9E009B8B9F /* Math.m in Sources */,
+				C72198F71520C42F009B8B9F /* Vec.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

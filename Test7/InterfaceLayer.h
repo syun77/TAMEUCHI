@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+#include "Vec.h"
+
 /**
  * 入力受け取りレイヤー
  */
