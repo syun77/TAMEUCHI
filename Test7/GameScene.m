@@ -39,7 +39,7 @@ static GameScene* scene_ = nil;
 
 - (void)update:(ccTime)dt {
     [self move:dt];
-    if ([self isOut]) {
+    if ([self isOutRect:32 h:32]) {
         
         NSLog(@"Vanish[%d].", [self getIndex]);
         [self removeFromParentAndCleanup:YES];
@@ -84,7 +84,7 @@ static GameScene* scene_ = nil;
     [self.baseLayer addChild:self.interfaceLayer];
     
     self.mgr = [TokenManager node];
-    [self.mgr create:self.baseLayer size:16 className:@"Bullet"];
+    [self.mgr create:self.baseLayer size:8 className:@"Bullet"];
     
     // 更新スケジューラー登録
     [self scheduleUpdate];

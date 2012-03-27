@@ -27,7 +27,6 @@
 }
 
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
-    GameScene* scene = [GameScene sharedInstance];
     
     CGPoint locationView = [touch locationInView:[touch view]];
     CGPoint location = [[CCDirector sharedDirector] convertToGL:locationView];
