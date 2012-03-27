@@ -11,6 +11,9 @@
 
 #include "math.h"
 
+// 数学関数の初期化
+void Math_Init();
+
 // 度をラジアンに変換する
 float Math_Deg2Rad(float deg);
 
@@ -32,5 +35,10 @@ float Math_CosEx(float deg);
 // サインを求める（度）
 float Math_SinEx(float deg);
 
+// 乱数の取得
+int Math_Rand(int range);
+
+// 乱数の取得 (float 指定)
+float Math_Randf(float range);
 
 #endif // __JP_2DGAMES_MATH2_H__

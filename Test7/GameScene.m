@@ -71,6 +71,10 @@ static GameScene* scene_ = nil;
 
 // コンストラクタ
 - (id)init {
+    
+    // 乱数初期化
+    Math_Init();
+    
     self = [super init];
     
     if (self == nil) {
