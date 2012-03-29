@@ -138,8 +138,6 @@ static GameScene* scene_ = nil;
         self._vy *= -1;
     }
     
-    
-    
 //    if ([self isOutRect:32 h:32]) {
 //        
 //        NSLog(@"Vanish[%d].", [self getIndex]);
