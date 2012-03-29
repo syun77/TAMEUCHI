@@ -26,6 +26,9 @@
     
     // 変数初期化
     m_isExist = NO;
+    
+    // 表示する
+    [self.m_pSprite setVisible:YES];
 }
 
 // 座標・移動量の設定

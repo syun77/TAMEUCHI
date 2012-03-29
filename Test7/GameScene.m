@@ -13,6 +13,7 @@ static GameScene* scene_ = nil;
 
 // 敵弾実装
 @interface Bullet : Token {
+    int m_Timer;
 }
 
 - (void)update:(ccTime)dt;
@@ -32,6 +33,9 @@ static GameScene* scene_ = nil;
 }
 
 - (void)initialize {
+    m_Timer = 0;
+    [self setRotation:0];
+    [self setScale:1];
     [self set:0 y:240 vx:480 vy:0 ax:0 ay:0];
     
     NSLog(@"Intialize[%d].", [self getIndex]);
@@ -40,6 +44,29 @@ static GameScene* scene_ = nil;
 - (void)update:(ccTime)dt {
     [self move:dt];
     
+    m_Timer++;
+    
+    [self setRotation: self.rotation + 5];
+    if (m_Timer > 120) {
+        [self setScale: self.scale * 0.95f];
+        self._vx *= 0.97f;
+        self._vy *= 0.97f;
+        
+        if (m_Timer % 4 < 2) {
+            [self setVisible:YES];
+        } else {
+            [self setVisible:NO];
+        }
+    }
+    
+    if( m_Timer > 160 ) {
+        NSLog(@"Vanish[%d].", [self getIndex]);
+        [self removeFromParentAndCleanup:YES];
+        [self setExist:NO];
+        return;
+        
+    }
+    
     if ([self isBoundRectX:32]) {
         self._vx *= -1;
     }
@@ -47,6 +74,8 @@ static GameScene* scene_ = nil;
     if ([self isBoundRectY:32]) {
         self._vy *= -1;
     }
+    
+    
     
 //    if ([self isOutRect:32 h:32]) {
 //        
@@ -58,7 +87,6 @@ static GameScene* scene_ = nil;
 }
 
 @end
-
 
 @implementation GameScene
 
