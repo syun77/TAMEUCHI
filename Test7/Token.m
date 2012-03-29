@@ -80,6 +80,75 @@
     
     return NO;
     
+}
+
+// 画面外の跳ね返りチェック（矩形）
+- (BOOL)isBoundRect:(float)w h:(float)h {
+    CGSize win = [CCDirector sharedDirector].winSize;
+    
+    if (self._x < w) { return YES; }
+    if (self._x > win.width - w) { return YES; }
+    if (self._y < h) { return YES; }
+    if (self._y > win.height - h) { return YES; }
+    
+    return NO;
+}
+
+// 画面外の跳ね返りチェック（矩形）
+- (BOOL)isBoundRectX:(float)w {
+    CGSize win = [CCDirector sharedDirector].winSize;
+    
+    if (self._x < w)
+    {
+        // 押し出し処理を入れる
+        self._x = w;
+        return YES;
+    }
+    
+    if (self._x > win.width - w)
+    {
+        // 押し出し処理を入れる
+        self._x = win.width - w;
+        return YES;
+    }
+    
+    return NO;
+    
+}
+
+// 画面外の跳ね返りチェック（矩形）
+- (BOOL)isBoundRectY:(float)h {
+    CGSize win = [CCDirector sharedDirector].winSize;
+    
+    if (self._y < h)
+    {
+        // 押し出し処理を入れる
+        self._y = h;
+        return YES;
+    }
+    
+    if (self._y > win.height - h)
+    {
+        // 押し出し処理を入れる
+        self._y = win.height - h;
+        return YES;
+    }
+    
+    return NO;
+    
+}
+
+
+// 画面外の跳ね返りチェック（円）
+- (BOOL)isBoundCircle:(float)r {
+    CGSize win = [CCDirector sharedDirector].winSize;
+    
+    if (self._x < r) { return YES; }
+    if (self._x > win.width-r) { return YES; }
+    if (self._y < r) { return YES; }
+    if (self._y > win.height-r) { return YES; }
+    
+    return NO;
     
 }
 

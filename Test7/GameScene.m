@@ -39,13 +39,22 @@ static GameScene* scene_ = nil;
 
 - (void)update:(ccTime)dt {
     [self move:dt];
-    if ([self isOutRect:32 h:32]) {
-        
-        NSLog(@"Vanish[%d].", [self getIndex]);
-        [self removeFromParentAndCleanup:YES];
-        [self setExist:NO];
-        return;
+    
+    if ([self isBoundRectX:32]) {
+        self._vx *= -1;
     }
+    
+    if ([self isBoundRectY:32]) {
+        self._vy *= -1;
+    }
+    
+//    if ([self isOutRect:32 h:32]) {
+//        
+//        NSLog(@"Vanish[%d].", [self getIndex]);
+//        [self removeFromParentAndCleanup:YES];
+//        [self setExist:NO];
+//        return;
+//    }
 }
 
 @end
@@ -88,7 +97,7 @@ static GameScene* scene_ = nil;
     [self.baseLayer addChild:self.interfaceLayer];
     
     self.mgr = [TokenManager node];
-    [self.mgr create:self.baseLayer size:8 className:@"Bullet"];
+    [self.mgr create:self.baseLayer size:32 className:@"Bullet"];
     
     // 更新スケジューラー登録
     [self scheduleUpdate];

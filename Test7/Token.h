@@ -35,6 +35,18 @@
 // 画面外に出たかどうか（円）
 - (BOOL)isOutCircle:(float)r;
 
+// 画面外の跳ね返りチェック（矩形）
+- (BOOL)isBoundRect:(float)w h:(float)h;
+
+// 画面外の跳ね返りチェック（矩形）
+- (BOOL)isBoundRectX:(float)w;
+
+// 画面外の跳ね返りチェック（矩形）
+- (BOOL)isBoundRectY:(float)h;
+
+// 画面外の跳ね返りチェック（円）
+- (BOOL)isBoundCircle:(float)r;
+
 // 移動する
 - (void)move:(float)dt;
 
