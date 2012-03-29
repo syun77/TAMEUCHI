@@ -99,6 +99,7 @@ static GameScene* scene_ = nil;
     [self setRotation: self.rotation + 5];
     if (m_Timer > 120) {
         [self setScale: self.scale * 0.95f];
+        
         self._vx *= 0.97f;
         self._vy *= 0.97f;
         
