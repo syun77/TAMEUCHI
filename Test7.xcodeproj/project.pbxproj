@@ -127,6 +127,7 @@
 		C72198F1151FFF83009B8B9F /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F0151FFF83009B8B9F /* Token.m */; };
 		C72198F3151FFF9E009B8B9F /* Math.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F2151FFF9E009B8B9F /* Math.m */; };
 		C72198F71520C42F009B8B9F /* Vec.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F61520C42E009B8B9F /* Vec.m */; };
+		C74FE7A11524892D00298CBB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = C74FE7A01524892D00298CBB /* rect.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -375,6 +376,7 @@
 		C72198F2151FFF9E009B8B9F /* Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Math.m; sourceTree = "<group>"; };
 		C72198F51520BF47009B8B9F /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
 		C72198F61520C42E009B8B9F /* Vec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vec.m; sourceTree = "<group>"; };
+		C74FE7A01524892D00298CBB /* rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rect.png; path = Resources/rect.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -459,6 +461,7 @@
 			isa = PBXGroup;
 			children = (
 				C70F5ED8151B6E65003B041E /* Default.png */,
+				C74FE7A01524892D00298CBB /* rect.png */,
 				C70F5EDA151B6E65003B041E /* fps_images.png */,
 				C70F5EDC151B6E65003B041E /* Icon-72.png */,
 				C70F5EDE151B6E65003B041E /* Icon-Small-50.png */,
@@ -842,6 +845,7 @@
 				C70F5EE5151B6E65003B041E /* Icon.png in Resources */,
 				C70F5EE7151B6E65003B041E /* Icon@2x.png in Resources */,
 				C70F5EEA151B6E65003B041E /* iTunesArtwork in Resources */,
+				C74FE7A11524892D00298CBB /* rect.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

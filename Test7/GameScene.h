@@ -18,11 +18,13 @@
 @interface GameScene : CCScene {
     CCLayer*        baesLayer;
     TokenManager*   mgr;
+    TokenManager*   mgrParticle;
     InterfaceLayer* interfaceLayer;
 }
 
 @property (nonatomic, retain)CCLayer* baseLayer;
 @property (nonatomic, retain)TokenManager*   mgr;
+@property (nonatomic, retain)TokenManager*   mgrParticle;
 @property (nonatomic, retain)InterfaceLayer* interfaceLayer;
 
 // シングルトンを取得

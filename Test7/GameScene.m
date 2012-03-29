@@ -11,6 +11,55 @@
 // シングルトン
 static GameScene* scene_ = nil;
 
+@interface Particle : Token {
+    int m_Timer;
+}
+
+@end
+
+@implementation Particle
+
+- (id)init {
+    self = [super init];
+    
+    if (self == nil) {
+        return self;
+    }
+    
+    [self load:@"rect.png"];
+    
+    return self;
+}
+
+- (void)initialize {
+    m_Timer = 0;    
+    [self setVisible:YES];
+}
+
+- (void)update:(ccTime)dt {
+    [self move:dt];
+    
+    m_Timer++;
+    
+    self._vx *= 0.95f;
+    self._vy *= 0.95f;
+    
+    if (m_Timer > 32) {
+        if (m_Timer % 4 < 2) {
+            [self setVisible:YES];
+        } else {
+            [self setVisible:NO];
+        }
+    }
+    
+    if (m_Timer > 48) {
+        [self removeFromParentAndCleanup:YES];
+        [self setExist:NO];
+    }
+}
+
+@end
+
 // 敵弾実装
 @interface Bullet : Token {
     int m_Timer;
@@ -36,7 +85,6 @@ static GameScene* scene_ = nil;
     m_Timer = 0;
     [self setRotation:0];
     [self setScale:1];
-    [self set:0 y:240 vx:480 vy:0 ax:0 ay:0];
     
     NSLog(@"Intialize[%d].", [self getIndex]);
 }
@@ -46,6 +94,8 @@ static GameScene* scene_ = nil;
     
     m_Timer++;
     
+    GameScene* scene = [GameScene sharedInstance];
+
     [self setRotation: self.rotation + 5];
     if (m_Timer > 120) {
         [self setScale: self.scale * 0.95f];
@@ -57,21 +107,34 @@ static GameScene* scene_ = nil;
         } else {
             [self setVisible:NO];
         }
+        
+        
     }
     
     if( m_Timer > 160 ) {
         NSLog(@"Vanish[%d].", [self getIndex]);
         [self removeFromParentAndCleanup:YES];
         [self setExist:NO];
+        
+        float rot = Math_Randf(360);
+        for (int i = 0; i < 8; i++) {
+            rot += Math_Randf(30) + 15;
+            
+            Token* t = (Particle*)[scene.mgrParticle add];
+            [t set2:self._x y:self._y rot:rot speed:360 ax:0 ay:-10];
+        }
+        
         return;
         
     }
     
     if ([self isBoundRectX:32]) {
+        // 横方向ヒット
         self._vx *= -1;
     }
     
     if ([self isBoundRectY:32]) {
+        // 縦方向ヒット
         self._vy *= -1;
     }
     
@@ -93,6 +156,7 @@ static GameScene* scene_ = nil;
 // 実体定義
 @synthesize baseLayer;
 @synthesize mgr;
+@synthesize mgrParticle;
 @synthesize interfaceLayer;
 
 // シングルトンを取得
@@ -127,6 +191,9 @@ static GameScene* scene_ = nil;
     self.mgr = [TokenManager node];
     [self.mgr create:self.baseLayer size:32 className:@"Bullet"];
     
+    self.mgrParticle = [TokenManager node];
+    [self.mgrParticle create:self.baseLayer size:256 className:@"Particle"];
+    
     // 更新スケジューラー登録
     [self scheduleUpdate];
     
@@ -140,6 +207,7 @@ static GameScene* scene_ = nil;
     [self unscheduleUpdate];
     
     // インスタンス開放
+    self.mgrParticle = nil;
     self.mgr = nil;
     self.baseLayer = nil;
     self.interfaceLayer = nil;
