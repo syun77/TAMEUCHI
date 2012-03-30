@@ -121,13 +121,13 @@
 		C70F6027151B6E67003B041E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6026151B6E67003B041E /* main.m */; };
 		C70F602A151B6E67003B041E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6029151B6E67003B041E /* AppDelegate.m */; };
 		C70F602D151B6E67003B041E /* RootViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F602C151B6E67003B041E /* RootViewController.m */; };
-		C70F6039151B6E91003B041E /* GameScene.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6038151B6E91003B041E /* GameScene.m */; };
-		C70F603C151B7043003B041E /* InterfaceLayer.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F603B151B7043003B041E /* InterfaceLayer.m */; };
-		C70F6042151B7482003B041E /* TokenManager.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6040151B7482003B041E /* TokenManager.m */; };
-		C72198F1151FFF83009B8B9F /* Token.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F0151FFF83009B8B9F /* Token.m */; };
-		C72198F3151FFF9E009B8B9F /* Math.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F2151FFF9E009B8B9F /* Math.m */; };
-		C72198F71520C42F009B8B9F /* Vec.m in Sources */ = {isa = PBXBuildFile; fileRef = C72198F61520C42E009B8B9F /* Vec.m */; };
 		C74FE7A11524892D00298CBB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = C74FE7A01524892D00298CBB /* rect.png */; };
+		C786B37915253D7600049CA8 /* InterfaceLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37815253D7600049CA8 /* InterfaceLayer.mm */; };
+		C786B37B15253DFC00049CA8 /* GameScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37A15253DFC00049CA8 /* GameScene.mm */; };
+		C786B37D15253E1A00049CA8 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37C15253E1A00049CA8 /* Player.mm */; };
+		C786B3811525426300049CA8 /* Math.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37E1525426300049CA8 /* Math.mm */; };
+		C786B3821525426300049CA8 /* Token.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37F1525426300049CA8 /* Token.mm */; };
+		C786B3831525426300049CA8 /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B3801525426300049CA8 /* TokenManager.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -365,18 +365,19 @@
 		C70F602C151B6E67003B041E /* RootViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RootViewController.m; sourceTree = "<group>"; };
 		C70F6031151B6E67003B041E /* GameConfig.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = GameConfig.h; sourceTree = "<group>"; };
 		C70F6037151B6E91003B041E /* GameScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameScene.h; sourceTree = "<group>"; };
-		C70F6038151B6E91003B041E /* GameScene.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GameScene.m; sourceTree = "<group>"; };
 		C70F603A151B7043003B041E /* InterfaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLayer.h; sourceTree = "<group>"; };
-		C70F603B151B7043003B041E /* InterfaceLayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = InterfaceLayer.m; sourceTree = "<group>"; };
 		C70F603D151B7482003B041E /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		C70F603F151B7482003B041E /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenManager.h; sourceTree = "<group>"; };
-		C70F6040151B7482003B041E /* TokenManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TokenManager.m; sourceTree = "<group>"; };
 		C72198EC151FFC2E009B8B9F /* Vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec.h; sourceTree = "<group>"; };
-		C72198F0151FFF83009B8B9F /* Token.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Token.m; sourceTree = "<group>"; };
-		C72198F2151FFF9E009B8B9F /* Math.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Math.m; sourceTree = "<group>"; };
 		C72198F51520BF47009B8B9F /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
-		C72198F61520C42E009B8B9F /* Vec.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Vec.m; sourceTree = "<group>"; };
 		C74FE7A01524892D00298CBB /* rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rect.png; path = Resources/rect.png; sourceTree = "<group>"; };
+		C786B37815253D7600049CA8 /* InterfaceLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InterfaceLayer.mm; sourceTree = "<group>"; };
+		C786B37A15253DFC00049CA8 /* GameScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameScene.mm; sourceTree = "<group>"; };
+		C786B37C15253E1A00049CA8 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
+		C786B37E1525426300049CA8 /* Math.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Math.mm; sourceTree = "<group>"; };
+		C786B37F1525426300049CA8 /* Token.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Token.mm; sourceTree = "<group>"; };
+		C786B3801525426300049CA8 /* TokenManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TokenManager.mm; sourceTree = "<group>"; };
+		C7D722E21524B550000AFB86 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -436,20 +437,21 @@
 				C70F6028151B6E67003B041E /* AppDelegate.h */,
 				C70F6029151B6E67003B041E /* AppDelegate.m */,
 				C70F6037151B6E91003B041E /* GameScene.h */,
-				C70F6038151B6E91003B041E /* GameScene.m */,
+				C786B37A15253DFC00049CA8 /* GameScene.mm */,
 				C70F603A151B7043003B041E /* InterfaceLayer.h */,
-				C70F603B151B7043003B041E /* InterfaceLayer.m */,
+				C786B37815253D7600049CA8 /* InterfaceLayer.mm */,
 				C70F602B151B6E67003B041E /* RootViewController.h */,
 				C70F602C151B6E67003B041E /* RootViewController.m */,
 				C70F6031151B6E67003B041E /* GameConfig.h */,
 				C70F603D151B7482003B041E /* Token.h */,
-				C72198F0151FFF83009B8B9F /* Token.m */,
+				C786B37F1525426300049CA8 /* Token.mm */,
 				C70F603F151B7482003B041E /* TokenManager.h */,
-				C70F6040151B7482003B041E /* TokenManager.m */,
+				C786B3801525426300049CA8 /* TokenManager.mm */,
 				C72198F51520BF47009B8B9F /* Math.h */,
-				C72198F2151FFF9E009B8B9F /* Math.m */,
+				C786B37E1525426300049CA8 /* Math.mm */,
 				C72198EC151FFC2E009B8B9F /* Vec.h */,
-				C72198F61520C42E009B8B9F /* Vec.m */,
+				C7D722E21524B550000AFB86 /* Player.h */,
+				C786B37C15253E1A00049CA8 /* Player.mm */,
 				C70F5ED7151B6E65003B041E /* Resources */,
 				C70F5EEB151B6E65003B041E /* libs */,
 				C70F6024151B6E67003B041E /* Supporting Files */,
@@ -953,12 +955,12 @@
 				C70F6027151B6E67003B041E /* main.m in Sources */,
 				C70F602A151B6E67003B041E /* AppDelegate.m in Sources */,
 				C70F602D151B6E67003B041E /* RootViewController.m in Sources */,
-				C70F6039151B6E91003B041E /* GameScene.m in Sources */,
-				C70F603C151B7043003B041E /* InterfaceLayer.m in Sources */,
-				C70F6042151B7482003B041E /* TokenManager.m in Sources */,
-				C72198F1151FFF83009B8B9F /* Token.m in Sources */,
-				C72198F3151FFF9E009B8B9F /* Math.m in Sources */,
-				C72198F71520C42F009B8B9F /* Vec.m in Sources */,
+				C786B37915253D7600049CA8 /* InterfaceLayer.mm in Sources */,
+				C786B37B15253DFC00049CA8 /* GameScene.mm in Sources */,
+				C786B37D15253E1A00049CA8 /* Player.mm in Sources */,
+				C786B3811525426300049CA8 /* Math.mm in Sources */,
+				C786B3821525426300049CA8 /* Token.mm in Sources */,
+				C786B3831525426300049CA8 /* TokenManager.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,8 +6,8 @@
 //  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
 //
 
-#ifndef __JP_2DGAMES_MATH2_H__
-#define __JP_2DGAMES_MATH2_H__
+#ifndef __JP_2DGAMES_MATH_H__
+#define __JP_2DGAMES_MATH_H__
 
 #include "math.h"
 
@@ -41,4 +41,4 @@ int Math_Rand(int range);
 // 乱数の取得 (float 指定)
 float Math_Randf(float range);
 
-#endif // __JP_2DGAMES_MATH2_H__
+#endif // __JP_2DGAMES_MATH_H__

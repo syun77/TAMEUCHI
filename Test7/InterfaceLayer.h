@@ -9,20 +9,20 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
-#include "Vec.h"
-
 /**
  * 入力受け取りレイヤー
  */
 @interface InterfaceLayer : CCLayer {
     BOOL  m_isTouch; // タッチしているかどうか
-    Vec2D m_Pos;     // タッチしている座標
+    float m_X;     // タッチしている座標
+    float m_Y;
 }
 
 // タッチしているかどうか
 - (BOOL)isTouch;
 
 // タッチしている座標を取得
-- (Vec2D)getPos;
+- (float)getPosX;
+- (float)getPosY;
 
 @end
