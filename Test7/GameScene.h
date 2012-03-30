@@ -19,14 +19,14 @@
 @interface GameScene : CCScene {
     CCLayer*        baesLayer;
     Player*         player;
-    TokenManager*   mgr;
+    TokenManager*   mgrBullet;
     TokenManager*   mgrParticle;
     InterfaceLayer* interfaceLayer;
 }
 
 @property (nonatomic, retain)CCLayer* baseLayer;
 @property (nonatomic, retain)Player*  player;
-@property (nonatomic, retain)TokenManager*   mgr;
+@property (nonatomic, retain)TokenManager*   mgrBullet;
 @property (nonatomic, retain)TokenManager*   mgrParticle;
 @property (nonatomic, retain)InterfaceLayer* interfaceLayer;
 
