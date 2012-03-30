@@ -3,7 +3,7 @@
 //  Test7
 //
 //  Created by OzekiSyunsuke on 12/03/22.
-//  Copyright __MyCompanyName__ 2012年. All rights reserved.
+//  Copyright 2dgame.jp 2012年. All rights reserved.
 //
 
 #ifndef __GAME_CONFIG_H

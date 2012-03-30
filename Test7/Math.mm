@@ -3,7 +3,7 @@
 //  Test3
 //
 //  Created by OzekiSyunsuke on 12/03/15.
-//  Copyright (c) 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright (c) 2012年 2dgame.jp. All rights reserved.
 //
 
 #include "Math.h"
