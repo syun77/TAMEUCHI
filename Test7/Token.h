@@ -15,11 +15,15 @@
     float _ax, _ay;
     NSInteger   m_Index;    // 要素番号
     BOOL        m_isExist;  // 存在フラグ
+    BOOL        m_isCreate; // 生成フラグ
     CCSprite*   m_pSprite;  // スプライト
 }
 
 // 初期化
 - (void)initialize;
+
+// 表示開始
+- (void)create;
 
 // 座標・移動量の設定
 - (void)set:(float)x y:(float)y vx:(float)vx vy:(float)vy ax:(float)ax ay:(float)ay;

@@ -28,12 +28,16 @@
     }
     
     self.m_pSprite = nil;
+    m_isCreate = NO;
     
     return self;
 }
 
 // 破棄
 -(void) dealloc {
+    
+    [self vanish];
+    
     self.m_pSprite = nil;
     
     [super dealloc];
@@ -48,6 +52,21 @@
     // 表示する
     [self.m_pSprite setVisible:YES];
 }
+
+// 表示開始
+- (void)create {
+    
+    // 存在フラグを立てる
+    [self setExist:YES];
+    
+    // スケジューラーに登録
+    [self scheduleUpdate];
+    
+    // 生成フラグを立てる
+    m_isCreate = YES;
+    
+}
+
 
 // 座標・移動量の設定
 - (void)set:(float)x y:(float)y vx:(float)vx vy:(float)vy ax:(float)ax ay:(float)ay {
@@ -215,11 +234,16 @@
 // 消滅処理
 - (void)vanish {
     
-    // スケジューラから破棄
-    [self removeAllChildrenWithCleanup:YES];
-    
-    // 存在フラグを下げる
-    [self setExist:NO];
+    if (m_isCreate) {
+        
+        // スケジューラから破棄
+        [self removeAllChildrenWithCleanup:YES];
+        
+        // 存在フラグを下げる
+        [self setExist:NO];
+        
+        m_isCreate = NO;
+    }    
 }
 
 @end

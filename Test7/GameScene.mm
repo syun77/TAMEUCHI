@@ -159,6 +159,7 @@ static GameScene* scene_ = nil;
 
 // 実体定義
 @synthesize baseLayer;
+@synthesize player;
 @synthesize mgr;
 @synthesize mgrParticle;
 @synthesize interfaceLayer;
@@ -189,6 +190,9 @@ static GameScene* scene_ = nil;
     self.baseLayer = [CCLayer node];
     [self addChild:self.baseLayer];
     
+    self.player = [Player node];
+    [self addChild:self.player];
+    
     self.interfaceLayer = [InterfaceLayer node];
     [self.baseLayer addChild:self.interfaceLayer];
     
@@ -213,6 +217,7 @@ static GameScene* scene_ = nil;
     // インスタンス開放
     self.mgrParticle = nil;
     self.mgr = nil;
+    self.player = nil;
     self.baseLayer = nil;
     self.interfaceLayer = nil;
     
@@ -227,7 +232,7 @@ static GameScene* scene_ = nil;
     }
     
     float x = [self.interfaceLayer getPosX];
-    float y = [self.interfaceLayer getPosX];
+    float y = [self.interfaceLayer getPosY];
     
     static int s_count = 0;
     Token* t = [self.mgr add];

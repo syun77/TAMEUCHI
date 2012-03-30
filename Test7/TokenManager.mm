@@ -70,11 +70,8 @@
             // 初期化
             [ret initialize];
             
-            // 存在フラグを立てる
-            [ret setExist:YES];
-            
-            // スケジューラーに登録
-            [ret scheduleUpdate];
+            // 表示開始
+            [ret create];
             
             return ret;
         }

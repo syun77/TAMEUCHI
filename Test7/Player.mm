@@ -24,6 +24,8 @@
     
     [self load:@"icon.png"];
     
+    [self create];
+    
     return self;
 }
 
