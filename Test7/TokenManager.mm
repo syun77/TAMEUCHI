@@ -12,7 +12,12 @@
 
 @synthesize m_Pool;
 
-// トークンの生成
+/**
+ * 生成
+ * @param layer     親レイヤー
+ * @param size      トークンの数
+ * @param className クラス名
+ */
 - (void)create:(CCLayer *)layer size:(NSInteger)size className:(NSString *)className {
     
     if (self.m_Pool) {
@@ -55,7 +60,10 @@
     [super dealloc];
 }
 
-// トークンの追加
+/**
+ * トークンの追加
+ * @return トークン（追加出来なかったときは nil)
+ */
 - (Token*)add {
     
     for (int i = 0; i < m_Size; i++) {

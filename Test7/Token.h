@@ -9,10 +9,13 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+/**
+ * トークン基底クラス
+ */
 @interface Token : CCNode {
-    float _x, _y;
-    float _vx, _vy;
-    float _ax, _ay;
+    float _x, _y;           // 座標
+    float _vx, _vy;         // 移動量
+    float _ax, _ay;         // 加速度
     NSInteger   m_Index;    // 要素番号
     BOOL        m_isExist;  // 存在フラグ
     BOOL        m_isCreate; // 生成フラグ

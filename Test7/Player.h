@@ -10,8 +10,12 @@
 #import "Token.h"
 #include "Vec.h"
 
+/**
+ * 自機クラス定義
+ */
 @interface Player : Token {
-    Vec2D m_Target;
+    
+    Vec2D m_Target; // 目標座標
 }
 
 @end

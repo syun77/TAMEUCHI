@@ -9,7 +9,9 @@
 #import "Token.h"
 #import "Math.h"
 
-
+/**
+ * トークン基底実装
+ */
 @implementation Token
 
 @synthesize m_pSprite;

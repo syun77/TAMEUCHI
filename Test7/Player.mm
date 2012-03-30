@@ -1,5 +1,5 @@
 //
-//  Player.m
+//  Player.mm
 //  Test7
 //
 //  Created by OzekiSyunsuke on 12/03/30.
@@ -12,10 +12,14 @@
 
 #include "Vec.h"
 
-
-
+/**
+ * 自機クラスを実装する
+ */
 @implementation Player
 
+/**
+ * 初期化
+ */
 - (id)init {
     self = [super init];
     if (self == nil) {
@@ -33,6 +37,9 @@
     return self;
 }
 
+/**
+ * 更新
+ */
 - (void)update:(ccTime)dt {
     [self move:dt];
     

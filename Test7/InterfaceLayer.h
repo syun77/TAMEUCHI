@@ -13,9 +13,9 @@
  * 入力受け取りレイヤー
  */
 @interface InterfaceLayer : CCLayer {
-    BOOL  m_isTouch; // タッチしているかどうか
-    float m_X;     // タッチしている座標
-    float m_Y;
+    BOOL  m_isTouch;    // タッチしているかどうか
+    float m_X;          // タッチしている座標(X)
+    float m_Y;          // タッチしている座標(Y)
 }
 
 // タッチしているかどうか

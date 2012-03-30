@@ -23,8 +23,23 @@
 
 @property (nonatomic,retain)NSMutableArray* m_Pool;
 
+/**
+ * 生成
+ * @param layer     親レイヤー
+ * @param size      トークンの数
+ * @param className クラス名
+ */
 - (void)create:(CCLayer*)layer size:(NSInteger)size className:(NSString*)className;
+
+/**
+ * トークンの追加・取得
+ * @return トークン
+ */
 - (Token*)add;
+
+/**
+ * デバッグ表示
+ */
 - (void)echo;
 
 @end
