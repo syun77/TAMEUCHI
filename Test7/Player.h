@@ -8,9 +8,10 @@
 
 #import <Foundation/Foundation.h>
 #import "Token.h"
+#include "Vec.h"
 
 @interface Player : Token {
-    
+    Vec2D m_Target;
 }
 
 @end

@@ -26,6 +26,10 @@
     
     [self create];
     
+    self._x = 320 / 2;
+    self._y = 480 / 2;
+    m_Target.Set(self._x, self._y);
+    
     return self;
 }
 
@@ -38,15 +42,15 @@
     if ([input isTouch]) {
         float x = [input getPosX];
         float y = [input getPosY];
-        Vec2D vT = Vec2D(x, y);
-        Vec2D vP = Vec2D(self._x, self._y);
-        Vec2D vM = vT - vP;
-//        vM.Normalize();
-        vM *= 0.5f;
-        
-        self._x += vM.x;
-        self._y += vM.y;
+        m_Target.Set(x, y);
     }
+    
+    Vec2D vP = Vec2D(self._x, self._y);
+    Vec2D vM = m_Target - vP;
+    vM *= 10.0f;
+    
+    self._x += vM.x * dt;
+    self._y += vM.y * dt;
 }
 
 @end
