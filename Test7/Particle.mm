@@ -19,6 +19,7 @@
     }
     
     [self load:@"rect.png"];
+    [self setScale:0.5];
     
     return self;
 }
