@@ -123,7 +123,9 @@
 		C70F602D151B6E67003B041E /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70F602C151B6E67003B041E /* RootViewController.mm */; };
 		C72542E815260B81004C157A /* Bullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542E715260B81004C157A /* Bullet.mm */; };
 		C72542ED152614F4004C157A /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542EC152614F4004C157A /* Particle.mm */; };
+		C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73A11A31529630C00C10EC4 /* AsciiFont.mm */; };
 		C74FE7A11524892D00298CBB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = C74FE7A01524892D00298CBB /* rect.png */; };
+		C7612C9A1526AA88007CCABC /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7612C991526AA88007CCABC /* font.png */; };
 		C76CC3CC1526949600AE1C69 /* LICENSE.cocos2d in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */; };
 		C76CC3CD1526949600AE1C69 /* LICENSE.cocosdenshion in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CB1526949600AE1C69 /* LICENSE.cocosdenshion */; };
 		C786B37915253D7600049CA8 /* InterfaceLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37815253D7600049CA8 /* InterfaceLayer.mm */; };
@@ -378,7 +380,10 @@
 		C72542E715260B81004C157A /* Bullet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bullet.mm; sourceTree = "<group>"; };
 		C72542EB152614F4004C157A /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		C72542EC152614F4004C157A /* Particle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Particle.mm; sourceTree = "<group>"; };
+		C73A11A21529630C00C10EC4 /* AsciiFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsciiFont.h; sourceTree = "<group>"; };
+		C73A11A31529630C00C10EC4 /* AsciiFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AsciiFont.mm; sourceTree = "<group>"; };
 		C74FE7A01524892D00298CBB /* rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rect.png; path = Resources/rect.png; sourceTree = "<group>"; };
+		C7612C991526AA88007CCABC /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Resources/font.png; sourceTree = "<group>"; };
 		C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		C76CC3CB1526949600AE1C69 /* LICENSE.cocosdenshion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocosdenshion; sourceTree = "<group>"; };
 		C786B37815253D7600049CA8 /* InterfaceLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InterfaceLayer.mm; sourceTree = "<group>"; };
@@ -446,23 +451,13 @@
 		C70F5ED6151B6E65003B041E /* Test7 */ = {
 			isa = PBXGroup;
 			children = (
-				C70F6028151B6E67003B041E /* AppDelegate.h */,
-				C70F6029151B6E67003B041E /* AppDelegate.mm */,
+				C7F0A6F615269CEA001AD819 /* App */,
+				C7F0A6F415269CB9001AD819 /* Common */,
+				C72542EA15260B95004C157A /* Token */,
 				C70F6037151B6E91003B041E /* GameScene.h */,
 				C786B37A15253DFC00049CA8 /* GameScene.mm */,
 				C70F603A151B7043003B041E /* InterfaceLayer.h */,
 				C786B37815253D7600049CA8 /* InterfaceLayer.mm */,
-				C70F602B151B6E67003B041E /* RootViewController.h */,
-				C70F602C151B6E67003B041E /* RootViewController.mm */,
-				C70F6031151B6E67003B041E /* GameConfig.h */,
-				C70F603D151B7482003B041E /* Token.h */,
-				C786B37F1525426300049CA8 /* Token.mm */,
-				C70F603F151B7482003B041E /* TokenManager.h */,
-				C786B3801525426300049CA8 /* TokenManager.mm */,
-				C72198F51520BF47009B8B9F /* Math.h */,
-				C786B37E1525426300049CA8 /* Math.mm */,
-				C72198EC151FFC2E009B8B9F /* Vec.h */,
-				C72542EA15260B95004C157A /* Token */,
 				C70F5ED7151B6E65003B041E /* Resources */,
 				C70F5EEB151B6E65003B041E /* libs */,
 				C70F6024151B6E67003B041E /* Supporting Files */,
@@ -473,6 +468,7 @@
 		C70F5ED7151B6E65003B041E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C7612C991526AA88007CCABC /* font.png */,
 				C70F5ED8151B6E65003B041E /* Default.png */,
 				C74FE7A01524892D00298CBB /* rect.png */,
 				C70F5EDA151B6E65003B041E /* fps_images.png */,
@@ -812,6 +808,34 @@
 			name = Token;
 			sourceTree = "<group>";
 		};
+		C7F0A6F415269CB9001AD819 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				C73A11A21529630C00C10EC4 /* AsciiFont.h */,
+				C73A11A31529630C00C10EC4 /* AsciiFont.mm */,
+				C70F603D151B7482003B041E /* Token.h */,
+				C786B37F1525426300049CA8 /* Token.mm */,
+				C70F603F151B7482003B041E /* TokenManager.h */,
+				C786B3801525426300049CA8 /* TokenManager.mm */,
+				C72198F51520BF47009B8B9F /* Math.h */,
+				C786B37E1525426300049CA8 /* Math.mm */,
+				C72198EC151FFC2E009B8B9F /* Vec.h */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
+		C7F0A6F615269CEA001AD819 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				C70F6028151B6E67003B041E /* AppDelegate.h */,
+				C70F6029151B6E67003B041E /* AppDelegate.mm */,
+				C70F6031151B6E67003B041E /* GameConfig.h */,
+				C70F602B151B6E67003B041E /* RootViewController.h */,
+				C70F602C151B6E67003B041E /* RootViewController.mm */,
+			);
+			name = App;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -874,6 +898,7 @@
 				C74FE7A11524892D00298CBB /* rect.png in Resources */,
 				C76CC3CC1526949600AE1C69 /* LICENSE.cocos2d in Resources */,
 				C76CC3CD1526949600AE1C69 /* LICENSE.cocosdenshion in Resources */,
+				C7612C9A1526AA88007CCABC /* font.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -989,6 +1014,7 @@
 				C786B3831525426300049CA8 /* TokenManager.mm in Sources */,
 				C72542E815260B81004C157A /* Bullet.mm in Sources */,
 				C72542ED152614F4004C157A /* Particle.mm in Sources */,
+				C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

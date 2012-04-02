@@ -32,10 +32,33 @@
 - (void)create:(CCLayer*)layer size:(NSInteger)size className:(NSString*)className;
 
 /**
+ * トークンの最大数を取得する
+ * @return 最大数
+ */
+- (NSInteger)max;
+
+/**
+ * トークンの生存数を取得する
+ * @return 生存数
+ */
+- (NSInteger)count;
+
+/**
  * トークンの追加・取得
  * @return トークン
  */
 - (Token*)add;
+
+/**
+ * トークンの取得 (Idx指定)
+ * @param idx 配列のインデックス
+ */
+- (Token*)getFromIdx:(NSInteger)idx;
+
+/**
+ * トークンを全て登録する
+ */
+- (void)addAll;
 
 /**
  * デバッグ表示

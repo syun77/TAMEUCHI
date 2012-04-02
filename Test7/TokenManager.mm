@@ -53,7 +53,33 @@
     m_Layer = layer;
 }
 
-// デストラクタ
+/**
+ * トークンの最大数を取得する
+ * @return 最大数
+ */
+- (NSInteger)max {
+    return m_Size;
+}
+
+/**
+ * トークンの生存数を取得する
+ * @return 生存数
+ */
+- (NSInteger)count {
+    NSInteger ret = 0;
+    
+    for (Token* t in self.m_Pool) {
+        if ([t isExist]) {
+            ret++;
+        }
+    }
+    
+    return ret;
+}
+
+/**
+ * デストラクタ
+ */
 - (void)dealloc {
     self.m_Pool = nil;
     
@@ -88,6 +114,39 @@
     
     return nil;
 }
+
+/**
+ * トークンの追加・取得 (Idx指定)
+ * @param idx 配列のインデックス
+ */
+- (Token*)getFromIdx:(NSInteger)idx {
+    
+    if (idx < 0 || m_Size <= idx) {
+        return nil;
+    }
+    
+    return [self.m_Pool objectAtIndex:idx];
+}
+
+/**
+ * トークンを全て登録する
+ */
+- (void)addAll {
+    
+    for (int i = 0; i < m_Size; i++) {
+        Token* t = [self.m_Pool objectAtIndex:i];
+        
+        // レイヤーに登録
+        [m_Layer addChild:t];
+        
+        // 初期化
+        [t initialize];
+        
+        // 表示
+        [t create];
+    }
+}
+
 
 - (void)echo {
     NSLog(@"Hello.");

@@ -30,8 +30,8 @@
     
     [self create];
     
-    self._x = 320 / 2;
-    self._y = 480 / 2;
+    self._x = 480 / 2;
+    self._y = 320 / 2;
     m_Target.Set(self._x, self._y);
     
     return self;
@@ -42,6 +42,10 @@
  */
 - (void)update:(ccTime)dt {
     [self move:dt];
+    
+//    CGRect rect = CGRectMake(0, 0, 32, 64);
+//    
+//    [self.m_pSprite setTextureRect:rect];
     
     GameScene* scene = [GameScene sharedInstance];
     InterfaceLayer* input = scene.interfaceLayer;

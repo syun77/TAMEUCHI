@@ -12,6 +12,7 @@
 #import "InterfaceLayer.h"
 #import "TokenManager.h"
 #import "Player.h"
+#import "AsciiFont.h"
 
 /**
  * ゲームシーン
@@ -22,13 +23,17 @@
     TokenManager*   mgrBullet;
     TokenManager*   mgrParticle;
     InterfaceLayer* interfaceLayer;
+    AsciiFont*      ascciFont;
+    AsciiFont*      ascciFont2;
 }
 
-@property (nonatomic, retain)CCLayer* baseLayer;
-@property (nonatomic, retain)Player*  player;
-@property (nonatomic, retain)TokenManager*   mgrBullet;
-@property (nonatomic, retain)TokenManager*   mgrParticle;
-@property (nonatomic, retain)InterfaceLayer* interfaceLayer;
+@property (nonatomic, retain)CCLayer*           baseLayer;
+@property (nonatomic, retain)Player*            player;
+@property (nonatomic, retain)TokenManager*      mgrBullet;
+@property (nonatomic, retain)TokenManager*      mgrParticle;
+@property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
+@property (nonatomic, retain)AsciiFont*         asciiFont;
+@property (nonatomic, retain)AsciiFont*         asciiFont2;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance;

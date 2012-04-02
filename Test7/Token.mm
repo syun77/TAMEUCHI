@@ -22,7 +22,9 @@
 @synthesize _ax;
 @synthesize _ay;
 
-// 生成
+/**
+ * 生成
+ */
 -(id) init {
     self = [super init];
     if (self) {
@@ -35,7 +37,9 @@
     return self;
 }
 
-// 破棄
+/**
+ * 破棄
+ */
 -(void) dealloc {
     
     [self vanish];
@@ -45,17 +49,27 @@
     [super dealloc];
 }
 
-// 初期化
+/**
+ * 初期化
+ */
 - (void)initialize {
     
     // 変数初期化
     m_isExist = NO;
     
     // 表示する
-    [self.m_pSprite setVisible:YES];
+    [self setVisible:YES];
+    
+    // 色初期化
+    [self setColor:ccWHITE];
+    
+    // α値初期化
+    [self setAlpha:0xFF];
 }
 
-// 表示開始
+/**
+ * 表示開始
+ */
 - (void)create {
     
     // 存在フラグを立てる
@@ -69,8 +83,9 @@
     
 }
 
-
-// 座標・移動量の設定
+/**
+ * 座標・移動量の設定
+ */
 - (void)set:(float)x y:(float)y vx:(float)vx vy:(float)vy ax:(float)ax ay:(float)ay {
     
     self._x  = x;  self._y  = y;
@@ -86,7 +101,9 @@
     [self set:x y:y vx:vx vy:vy ax:ax ay:ay];
 }
 
-// 画面外に出たかどうか
+/**
+ * 画面外に出たかどうか
+ */
 - (BOOL)isOut {
     CGSize win = [CCDirector sharedDirector].winSize;
     
@@ -98,7 +115,9 @@
     return NO;
 }
 
-// 画面外に出たかどうか（矩形）
+/**
+ * 画面外に出たかどうか（矩形）
+ */
 - (BOOL)isOutRect:(float)w h:(float)h {
     CGSize win = [CCDirector sharedDirector].winSize;
     
@@ -111,7 +130,9 @@
     
 }
 
-// 画面外に出たかどうか（円）
+/**
+ * 画面外に出たかどうか（円）
+ */
 - (BOOL)isOutCircle:(float)r {
     CGSize win = [CCDirector sharedDirector].winSize;
     
@@ -124,7 +145,9 @@
     
 }
 
-// 画面外の跳ね返りチェック（矩形）
+/**
+ * 画面外の跳ね返りチェック（矩形）
+ */
 - (BOOL)isBoundRect:(float)w h:(float)h {
     CGSize win = [CCDirector sharedDirector].winSize;
     
@@ -136,7 +159,9 @@
     return NO;
 }
 
-// 画面外の跳ね返りチェック（矩形）
+/**
+ * 画面外の跳ね返りチェック（矩形）
+ */
 - (BOOL)isBoundRectX:(float)w {
     CGSize win = [CCDirector sharedDirector].winSize;
     
@@ -158,7 +183,9 @@
     
 }
 
-// 画面外の跳ね返りチェック（矩形）
+/**
+ * 画面外の跳ね返りチェック（矩形）
+ */
 - (BOOL)isBoundRectY:(float)h {
     CGSize win = [CCDirector sharedDirector].winSize;
     
@@ -181,7 +208,9 @@
 }
 
 
-// 画面外の跳ね返りチェック（円）
+/**
+ * 画面外の跳ね返りチェック（円）
+ */
 - (BOOL)isBoundCircle:(float)r {
     CGSize win = [CCDirector sharedDirector].winSize;
     
@@ -194,7 +223,9 @@
     
 }
 
-// 移動する
+/**
+ * 移動する
+ */
 - (void)move:(float)dt {
     self._vx += self._ax;
     self._vy += self._ay;
@@ -204,36 +235,51 @@
     self.position = ccp(self._x, self._y);
 }
 
-// 要素番号の設定
+/**
+ * 要素番号の設定
+ */
 - (void)setIndex:(NSInteger)index {
     
     m_Index = index;
 }
 
-// 要素番号の取得
+/**
+ * 要素番号の取得
+ */
 - (NSInteger)getIndex {
     
     return m_Index;
 }
 
-// テクスチャをロードしてスプライトを生成
+/**
+ * テクスチャをロードしてスプライトを生成
+ */
 - (void)load:(NSString *)filename {
     
-    self.m_pSprite = [CCSprite spriteWithFile:filename];
+    CCTexture2D* pTex = [[CCTextureCache sharedTextureCache] addImage:filename];
+    self.m_pSprite = [CCSprite spriteWithTexture:pTex];
+//    self.m_pSprite = [CCSprite spriteWithFile:filename];
     [self addChild:self.m_pSprite];
 }
 
-// 存在するかどうか
+/**
+ * 存在するかどうか
+ */
 - (BOOL)isExist {
     return m_isExist;
 }
 
-// 存在フラグを設定
+/**
+ * 存在フラグを設定
+ */
 - (void)setExist:(BOOL)b {
     m_isExist = b;
 }
 
 // 消滅処理
+/**
+ * 
+ */
 - (void)vanish {
     
     if (m_isCreate) {
@@ -246,6 +292,20 @@
         
         m_isCreate = NO;
     }    
+}
+
+/**
+ * 色を設定する
+ */
+- (void)setColor:(ccColor3B) color {
+    
+    self.m_pSprite.color = color;
+}
+
+// α値を設定する (0〜255)
+- (void)setAlpha:(int) alpha {
+    
+    self.m_pSprite.opacity = alpha;    
 }
 
 @end

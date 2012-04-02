@@ -23,6 +23,8 @@ static GameScene* scene_ = nil;
 @synthesize mgrBullet;
 @synthesize mgrParticle;
 @synthesize interfaceLayer;
+@synthesize asciiFont;
+@synthesize asciiFont2;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance {
@@ -62,6 +64,14 @@ static GameScene* scene_ = nil;
     self.mgrParticle = [TokenManager node];
     [self.mgrParticle create:self.baseLayer size:256 className:@"Particle"];
     
+    self.asciiFont = [AsciiFont node];
+    [self.asciiFont createFont:self.baseLayer length:16];
+    [self.asciiFont setPosScreen:8 y:320-24];
+    
+    self.asciiFont2 = [AsciiFont node];
+    [self.asciiFont2 createFont:self.baseLayer length:16];
+    [self.asciiFont2 setPosScreen:8 y:320-24-16];
+    
     // 更新スケジューラー登録
     [self scheduleUpdate];
     
@@ -75,6 +85,7 @@ static GameScene* scene_ = nil;
     [self unscheduleUpdate];
     
     // インスタンス開放
+    self.asciiFont = nil;
     self.mgrParticle = nil;
     self.mgrBullet = nil;
     self.player = nil;
@@ -87,6 +98,10 @@ static GameScene* scene_ = nil;
 - (void)update:(ccTime)dt {
     //NSLog(@"update.");
     
+    // 敵弾の生存数を表示
+    [self.asciiFont setText:[NSString stringWithFormat:@"Bullet:%d", [self.mgrBullet count]]];
+    [self.asciiFont2 setText:[NSString stringWithFormat:@"Particle:%d", [self.mgrParticle count]]];
+    
     if ([self.interfaceLayer isTouch] == NO) {
         return;
     }
@@ -98,6 +113,7 @@ static GameScene* scene_ = nil;
     Token* t = [self.mgrBullet add];
     [t set2:x y:y rot:(s_count%36)*10 speed:240 ax:0 ay:0];
     s_count++;
+    
 }
 
 @end

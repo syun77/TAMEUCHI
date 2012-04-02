@@ -75,6 +75,13 @@
 // 消滅処理
 - (void)vanish;
 
+// 色を設定する
+- (void)setColor:(ccColor3B) color;
+
+// α値を設定する (0〜255)
+- (void)setAlpha:(int) alpha;
+
+
 
 // ■プロパティ設定
 @property (nonatomic, retain)CCSprite* m_pSprite;
