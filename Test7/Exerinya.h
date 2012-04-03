@@ -1,0 +1,29 @@
+//
+//  Exerinya.h
+//  Test7
+//
+//  Created by OzekiSyunsuke on 12/04/03.
+//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "cocos2d.h"
+
+enum eExerinyaRect
+{
+    eExerinyaRect_Player1,      // プレイヤー１
+    eExerinyaRect_Player2,      // プレイヤー２
+    eExerinyaRect_PlayerDamage, // プレイヤーダメージ
+    eExerinyaRect_Nasu,         // ナス
+    eExerinyaRect_5Box,         // 5箱
+    eExerinyaRect_Tako,         // たこ焼き
+    eExerinyaRect_Pudding,      // プリン
+    eExerinyaRect_Milk,         // 牛乳
+    eExerinyaRect_XBox,         // XBox
+    eExerinyaRect_Radish,       // 大根
+    eExerinyaRect_Carrot,       // 人参
+};
+
+// 指定のタイプに対応する矩形を取得する
+CGRect Exerinya_GetRect(eExerinyaRect rect);
+

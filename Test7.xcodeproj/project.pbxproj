@@ -134,6 +134,8 @@
 		C786B3811525426300049CA8 /* Math.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37E1525426300049CA8 /* Math.mm */; };
 		C786B3821525426300049CA8 /* Token.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37F1525426300049CA8 /* Token.mm */; };
 		C786B3831525426300049CA8 /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B3801525426300049CA8 /* TokenManager.mm */; };
+		C7F053AA152B14EA0095B76E /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7F053A9152B14EA0095B76E /* all.png */; };
+		C7F053AE152B15CF0095B76E /* Exerinya.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F053AD152B15CF0095B76E /* Exerinya.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -393,6 +395,9 @@
 		C786B37F1525426300049CA8 /* Token.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Token.mm; sourceTree = "<group>"; };
 		C786B3801525426300049CA8 /* TokenManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TokenManager.mm; sourceTree = "<group>"; };
 		C7D722E21524B550000AFB86 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		C7F053A9152B14EA0095B76E /* all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = all.png; path = Resources/all.png; sourceTree = "<group>"; };
+		C7F053AC152B15CF0095B76E /* Exerinya.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exerinya.h; sourceTree = "<group>"; };
+		C7F053AD152B15CF0095B76E /* Exerinya.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Exerinya.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -458,6 +463,8 @@
 				C786B37A15253DFC00049CA8 /* GameScene.mm */,
 				C70F603A151B7043003B041E /* InterfaceLayer.h */,
 				C786B37815253D7600049CA8 /* InterfaceLayer.mm */,
+				C7F053AC152B15CF0095B76E /* Exerinya.h */,
+				C7F053AD152B15CF0095B76E /* Exerinya.mm */,
 				C70F5ED7151B6E65003B041E /* Resources */,
 				C70F5EEB151B6E65003B041E /* libs */,
 				C70F6024151B6E67003B041E /* Supporting Files */,
@@ -468,6 +475,7 @@
 		C70F5ED7151B6E65003B041E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				C7F053A9152B14EA0095B76E /* all.png */,
 				C7612C991526AA88007CCABC /* font.png */,
 				C70F5ED8151B6E65003B041E /* Default.png */,
 				C74FE7A01524892D00298CBB /* rect.png */,
@@ -899,6 +907,7 @@
 				C76CC3CC1526949600AE1C69 /* LICENSE.cocos2d in Resources */,
 				C76CC3CD1526949600AE1C69 /* LICENSE.cocosdenshion in Resources */,
 				C7612C9A1526AA88007CCABC /* font.png in Resources */,
+				C7F053AA152B14EA0095B76E /* all.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1015,6 +1024,7 @@
 				C72542E815260B81004C157A /* Bullet.mm in Sources */,
 				C72542ED152614F4004C157A /* Particle.mm in Sources */,
 				C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */,
+				C7F053AE152B15CF0095B76E /* Exerinya.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -11,6 +11,7 @@
 #import "GameScene.h"
 
 #include "Vec.h"
+#import "Exerinya.h"
 
 /**
  * 自機クラスを実装する
@@ -26,13 +27,15 @@
         return self;
     }
     
-    [self load:@"icon.png"];
+    [self load:@"all.png"];
     
     [self create];
     
     self._x = 480 / 2;
     self._y = 320 / 2;
     m_Target.Set(self._x, self._y);
+    
+    [self.m_pSprite setTextureRect:Exerinya_GetRect(eExerinyaRect_Player1)];
     
     return self;
 }
