@@ -20,8 +20,14 @@ enum eExerinyaRect
     eExerinyaRect_Pudding,      // プリン
     eExerinyaRect_Milk,         // 牛乳
     eExerinyaRect_XBox,         // XBox
+    eExerinyaRect_Bullet,       // 弾
     eExerinyaRect_Radish,       // 大根
     eExerinyaRect_Carrot,       // 人参
+    eExerinyaRect_Pokey,        // ポッキー
+    eExerinyaRect_EftBall,      // エフェクト・球体
+    eExerinyaRect_EftRing,      // エフェクト・輪っか
+    eExerinyaRect_EftBlade,     // エフェクト・刃
+    eExerinyaRect_Max,
 };
 
 // 指定のタイプに対応する矩形を取得する
