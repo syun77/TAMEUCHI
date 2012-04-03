@@ -7,7 +7,7 @@
 //
 
 #import "Particle.h"
-
+#import "Exerinya.h"
 
 @implementation Particle
 
@@ -18,8 +18,13 @@
         return self;
     }
     
-    [self load:@"rect.png"];
+    [self load:@"all.png"];
     [self setScale:0.5];
+    
+    CGRect r = Exerinya_GetRect(eExerinyaRect_EftBall);
+    [self.m_pSprite setTextureRect:r];
+    
+    [self setBlend:eBlend_Add];
     
     return self;
 }

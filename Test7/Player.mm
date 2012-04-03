@@ -35,7 +35,11 @@
     self._y = 320 / 2;
     m_Target.Set(self._x, self._y);
     
-    [self.m_pSprite setTextureRect:Exerinya_GetRect(eExerinyaRect_Player1)];
+//    [self.m_pSprite setTextureRect:Exerinya_GetRect(eExerinyaRect_Player1)];
+    
+    CGRect rect = CGRectMake(0, 544, 640, 480);
+    [self.m_pSprite setTextureRect:rect];
+    [self setBlend:eBlend_Reverse];
     
     return self;
 }
@@ -71,7 +75,7 @@
     if (s_count%10 == 0) {
         eExerinyaRect type = (eExerinyaRect)((s_count / 10) % eExerinyaRect_Max);
         CGRect r = Exerinya_GetRect(type);
-        [self.m_pSprite setTextureRect:r];
+        //[self.m_pSprite setTextureRect:r];
     }
 }
 

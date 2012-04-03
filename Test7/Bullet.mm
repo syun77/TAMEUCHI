@@ -10,6 +10,7 @@
 
 #import "GameScene.h"
 #import "Particle.h"
+#import "Exerinya.h"
 
 @implementation Bullet
 
@@ -19,7 +20,10 @@
         return self;
     }
     
-    [self load:@"icon.png"];
+    [self load:@"all.png"];
+    
+    CGRect r = Exerinya_GetRect(eExerinyaRect_Bullet);
+    [self.m_pSprite setTextureRect:r];
     
     return self;
 }

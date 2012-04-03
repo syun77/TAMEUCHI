@@ -9,6 +9,16 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+enum eBlend {
+    eBlend_Normal,  // 通常合成
+    eBlend_Alpha,   // 半透明合成
+    eBlend_Add,     // 加算合成
+    eBlend_Mul,     // 乗算合成
+    eBlend_Reverse, // 反転合成
+    eBlend_Screen,  // スクリーン合成
+    eBlend_XOR,     // 排他的論理和
+};
+
 /**
  * トークン基底クラス
  */
@@ -80,6 +90,9 @@
 
 // α値を設定する (0〜255)
 - (void)setAlpha:(int) alpha;
+
+// ブレンドモードを設定する
+- (void)setBlend:(eBlend) mode;
 
 
 

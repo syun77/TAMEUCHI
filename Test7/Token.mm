@@ -65,6 +65,9 @@
     
     // α値初期化
     [self setAlpha:0xFF];
+    
+    // ブレンドモード初期化
+    [self setBlend:eBlend_Alpha];
 }
 
 /**
@@ -276,9 +279,8 @@
     m_isExist = b;
 }
 
-// 消滅処理
 /**
- * 
+ * 消滅処理 
  */
 - (void)vanish {
     
@@ -302,10 +304,69 @@
     self.m_pSprite.color = color;
 }
 
-// α値を設定する (0〜255)
+/**
+ * α値を設定する (0〜255)
+ */
 - (void)setAlpha:(int) alpha {
     
     self.m_pSprite.opacity = alpha;    
 }
+
+/**
+ * ブレンドモードを設定する
+ */
+- (void)setBlend:(eBlend) mode {
+    
+    switch (mode) {
+        case eBlend_Normal:
+            // 通常合成
+        {
+            self.m_pSprite.blendFunc = (ccBlendFunc) {GL_ONE, GL_ZERO};
+        }
+            break;
+            
+        case eBlend_Alpha:
+            // 通常の半透明合成
+        {
+            self.m_pSprite.blendFunc = (ccBlendFunc) {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA};
+        }
+            break;
+            
+        case eBlend_Add:
+            // 加算合成
+        {
+            self.m_pSprite.blendFunc = (ccBlendFunc){GL_SRC_ALPHA, GL_ONE};
+        }
+            break;
+            
+        case eBlend_Mul:     // 乗算合成
+        {
+            self.m_pSprite.blendFunc = (ccBlendFunc){GL_ZERO, GL_SRC_COLOR};
+        }
+            break;
+            
+        case eBlend_Reverse: // 反転合成
+        {
+            self.m_pSprite.blendFunc = (ccBlendFunc){GL_ONE_MINUS_DST_COLOR, GL_ZERO};
+        }
+            break;
+            
+        case eBlend_Screen:  // スクリーン合成
+        {
+            self.m_pSprite.blendFunc = (ccBlendFunc){GL_ONE_MINUS_DST_COLOR, GL_ONE};
+        }
+            break;
+            
+        case eBlend_XOR:     // 排他的論理和
+        {
+            self.m_pSprite.blendFunc = (ccBlendFunc){GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_COLOR};
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
 
 @end
