@@ -17,6 +17,9 @@
 // ASCII文字の横の数
 #define ASCII_X_COUNT (16)
 
+// 描画プライオリティ
+#define PRIO_ASCIIFONT (100)
+
 // 文字の描画種別
 typedef enum {
     eFontAlign_Left,   // 左寄せ

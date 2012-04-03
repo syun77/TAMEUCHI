@@ -51,6 +51,7 @@
     m_Idx   = 0;
     m_Size  = size;
     m_Layer = layer;
+    m_Prio  = 0;
 }
 
 /**
@@ -99,7 +100,7 @@
         if ([ret isExist] == NO) {
             
             // 空きが見つかったので生成
-            [m_Layer addChild:ret];
+            [m_Layer addChild:ret z:m_Prio];
             
             // 初期化
             [ret initialize];
@@ -137,7 +138,7 @@
         Token* t = [self.m_Pool objectAtIndex:i];
         
         // レイヤーに登録
-        [m_Layer addChild:t];
+        [m_Layer addChild:t z:m_Prio];
         
         // 初期化
         [t initialize];
@@ -148,6 +149,17 @@
 }
 
 
+/**
+ * 描画プライオリティの設定
+ */
+- (void)setPrio:(NSInteger)Prio {
+    
+    m_Prio = Prio;
+}
+
+/**
+ * デバッグ表示
+ */
 - (void)echo {
     NSLog(@"Hello.");
 }

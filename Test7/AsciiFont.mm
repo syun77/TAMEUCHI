@@ -97,6 +97,9 @@
     // 管理トークンの生成
     [super create:layer size:length className:@"AsciiObj"];
     
+    // 描画プライオリティを大きめにする
+    [super setPrio:PRIO_ASCIIFONT];
+    
     // 表示を有効にする
     [super addAll];
     

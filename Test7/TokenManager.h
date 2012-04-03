@@ -19,6 +19,7 @@
     NSMutableArray* m_Pool;  // 管理オブジェクト配列
     NSInteger       m_Idx;   // 検索インデックス
     NSInteger       m_Size;  // 配列のサイズ
+    NSInteger       m_Prio;  // 描画プライオリティ
 }
 
 @property (nonatomic,retain)NSMutableArray* m_Pool;
@@ -59,6 +60,11 @@
  * トークンを全て登録する
  */
 - (void)addAll;
+
+/**
+ * 描画プライオリティの設定
+ */
+- (void)setPrio:(NSInteger)Prio;
 
 /**
  * デバッグ表示
