@@ -35,11 +35,8 @@
     self._y = 320 / 2;
     m_Target.Set(self._x, self._y);
     
-//    [self.m_pSprite setTextureRect:Exerinya_GetRect(eExerinyaRect_Player1)];
-    
-    CGRect rect = CGRectMake(0, 544, 640, 480);
-    [self.m_pSprite setTextureRect:rect];
-    [self setBlend:eBlend_Reverse];
+    [self setTexRect:Exerinya_GetRect(eExerinyaRect_Back)];
+    [self setBlend:eBlend_Normal];
     
     return self;
 }

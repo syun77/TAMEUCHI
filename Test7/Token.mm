@@ -368,5 +368,11 @@
     }
 }
 
+// テクスチャ描画範囲を指定する
+- (void)setTexRect:(CGRect) rect {
+    
+    [self.m_pSprite setTextureRect:rect];
+}
+
 
 @end

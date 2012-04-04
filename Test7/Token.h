@@ -94,6 +94,9 @@ enum eBlend {
 // ブレンドモードを設定する
 - (void)setBlend:(eBlend) mode;
 
+// テクスチャ描画範囲を指定する
+- (void)setTexRect:(CGRect) rect;
+
 
 
 // ■プロパティ設定

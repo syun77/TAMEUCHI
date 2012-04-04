@@ -24,9 +24,11 @@ CGRect Exerinya_GetRect(eExerinyaRect rect) {
         {0,   256,  64,  64}, // eExerinyaRect_Bullet,       // 弾
         {0,   396, 128, 128}, // eExerinyaRect_Radish,       // 大根
         {128, 256, 128, 128}, // eExerinyaRect_Carrot,       // 人参
+        {256, 396, 128, 128}, // eExerinyaRect_Pokey,        // ポッキー
         {768, 0,   128, 128}, // eExerinyaRect_EftBall,      // エフェクト・球体
         {896, 0,   128, 128}, // eExerinyaRect_EftRing,      // エフェクト・輪っか
         {768, 128, 256, 128}, // eExerinyaRect_EftBlade,     // エフェクト・刃
+        {0,   544, 640, 480}, // eExerinyaRect_Back,         // 背景
     };
     
     return tbl[rect];
