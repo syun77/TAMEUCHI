@@ -124,6 +124,7 @@
 		C72542E815260B81004C157A /* Bullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542E715260B81004C157A /* Bullet.mm */; };
 		C72542ED152614F4004C157A /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542EC152614F4004C157A /* Particle.mm */; };
 		C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73A11A31529630C00C10EC4 /* AsciiFont.mm */; };
+		C73FEC25152BEED5008B5697 /* Back.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC24152BEED5008B5697 /* Back.mm */; };
 		C74FE7A11524892D00298CBB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = C74FE7A01524892D00298CBB /* rect.png */; };
 		C7612C9A1526AA88007CCABC /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7612C991526AA88007CCABC /* font.png */; };
 		C76CC3CC1526949600AE1C69 /* LICENSE.cocos2d in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */; };
@@ -384,6 +385,8 @@
 		C72542EC152614F4004C157A /* Particle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Particle.mm; sourceTree = "<group>"; };
 		C73A11A21529630C00C10EC4 /* AsciiFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsciiFont.h; sourceTree = "<group>"; };
 		C73A11A31529630C00C10EC4 /* AsciiFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AsciiFont.mm; sourceTree = "<group>"; };
+		C73FEC23152BEED5008B5697 /* Back.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Back.h; sourceTree = "<group>"; };
+		C73FEC24152BEED5008B5697 /* Back.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Back.mm; sourceTree = "<group>"; };
 		C74FE7A01524892D00298CBB /* rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rect.png; path = Resources/rect.png; sourceTree = "<group>"; };
 		C7612C991526AA88007CCABC /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Resources/font.png; sourceTree = "<group>"; };
 		C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
@@ -812,6 +815,8 @@
 				C72542E715260B81004C157A /* Bullet.mm */,
 				C72542EB152614F4004C157A /* Particle.h */,
 				C72542EC152614F4004C157A /* Particle.mm */,
+				C73FEC23152BEED5008B5697 /* Back.h */,
+				C73FEC24152BEED5008B5697 /* Back.mm */,
 			);
 			name = Token;
 			sourceTree = "<group>";
@@ -1025,6 +1030,7 @@
 				C72542ED152614F4004C157A /* Particle.mm in Sources */,
 				C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */,
 				C7F053AE152B15CF0095B76E /* Exerinya.mm in Sources */,
+				C73FEC25152BEED5008B5697 /* Back.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

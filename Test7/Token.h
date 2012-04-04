@@ -10,8 +10,7 @@
 #import "cocos2d.h"
 
 enum eBlend {
-    eBlend_Normal,  // 通常合成
-    eBlend_Alpha,   // 半透明合成
+    eBlend_Normal,  // 通常合成 (透過・α付き)
     eBlend_Add,     // 加算合成
     eBlend_Mul,     // 乗算合成
     eBlend_Reverse, // 反転合成

@@ -67,7 +67,7 @@
     [self setAlpha:0xFF];
     
     // ブレンドモード初期化
-    [self setBlend:eBlend_Alpha];
+    [self setBlend:eBlend_Normal];
 }
 
 /**
@@ -319,19 +319,12 @@
     
     switch (mode) {
         case eBlend_Normal:
-            // 通常合成
+            // 通常合成 (透過・α付き)
         {
-            self.m_pSprite.blendFunc = (ccBlendFunc) {GL_ONE, GL_ZERO};
+            self.m_pSprite.blendFunc = (ccBlendFunc) {CC_BLEND_SRC, CC_BLEND_DST};
         }
             break;
-            
-        case eBlend_Alpha:
-            // 通常の半透明合成
-        {
-            self.m_pSprite.blendFunc = (ccBlendFunc) {GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA};
-        }
-            break;
-            
+                        
         case eBlend_Add:
             // 加算合成
         {

@@ -35,8 +35,7 @@
     self._y = 320 / 2;
     m_Target.Set(self._x, self._y);
     
-    [self setTexRect:Exerinya_GetRect(eExerinyaRect_Back)];
-    [self setBlend:eBlend_Normal];
+    [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
     
     return self;
 }

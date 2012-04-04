@@ -10,6 +10,17 @@
 
 #include "Vec.h"
 
+// 描画プライオリティ
+enum {
+    ePrio_Back,     // 背景
+    ePrio_Player,   // プレイヤー
+    ePrio_Shot,     // 自弾
+    ePrio_Item,     // アイテム
+    ePrio_Enemy,    // 敵
+    ePrio_Bullet,   // 敵弾
+    ePrio_Particle, // パーティクル
+};
+
 
 // シングルトン
 static GameScene* scene_ = nil;
@@ -19,6 +30,7 @@ static GameScene* scene_ = nil;
 
 // 実体定義
 @synthesize baseLayer;
+@synthesize back;
 @synthesize player;
 @synthesize mgrBullet;
 @synthesize mgrParticle;
@@ -52,17 +64,22 @@ static GameScene* scene_ = nil;
     self.baseLayer = [CCLayer node];
     [self addChild:self.baseLayer];
     
+    self.back = [Back node];
+    [self.baseLayer addChild:self.back z:ePrio_Back];
+    
     self.player = [Player node];
-    [self addChild:self.player];
+    [self.baseLayer addChild:self.player z:ePrio_Player];
     
     self.interfaceLayer = [InterfaceLayer node];
     [self.baseLayer addChild:self.interfaceLayer];
     
     self.mgrBullet = [TokenManager node];
     [self.mgrBullet create:self.baseLayer size:32 className:@"Bullet"];
+    [self.mgrBullet setPrio:ePrio_Bullet];
     
     self.mgrParticle = [TokenManager node];
     [self.mgrParticle create:self.baseLayer size:256 className:@"Particle"];
+    [self.mgrParticle setPrio:ePrio_Particle];
     
     self.asciiFont = [AsciiFont node];
     [self.asciiFont createFont:self.baseLayer length:16];
@@ -89,6 +106,7 @@ static GameScene* scene_ = nil;
     self.mgrParticle = nil;
     self.mgrBullet = nil;
     self.player = nil;
+    self.back = nil;
     self.baseLayer = nil;
     self.interfaceLayer = nil;
     
