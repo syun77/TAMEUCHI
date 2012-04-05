@@ -71,6 +71,11 @@
  * 文字を設定する
  */
 - (void)setChar:(char)c {
+    
+    if (c == ' ') {
+        [self setVisible:NO];
+        return;
+    }
     CGRect rect = [self getRectWithChar:c];
     
     [self.m_pSprite setTextureRect:rect];

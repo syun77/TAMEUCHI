@@ -22,21 +22,27 @@
     CCLayer*        baesLayer;      // 描画レイヤー
     Back*           back;           // 背景画像
     Player*         player;         // プレイヤー
+    TokenManager*   mgrShot;        // 自弾
+    TokenManager*   mgrEnemy;       // 敵
     TokenManager*   mgrBullet;      // 敵弾
     TokenManager*   mgrParticle;    // パーティクル
     InterfaceLayer* interfaceLayer; // 入力受け取り
-    AsciiFont*      ascciFont;      // フォント
+    AsciiFont*      ascciFont1;     // フォント
     AsciiFont*      ascciFont2;     // フォント
+    AsciiFont*      ascciFont3;     // フォント
 }
 
 @property (nonatomic, retain)CCLayer*           baseLayer;
 @property (nonatomic, retain)Back*              back;
 @property (nonatomic, retain)Player*            player;
+@property (nonatomic, retain)TokenManager*      mgrShot;
+@property (nonatomic, retain)TokenManager*      mgrEnemy;
 @property (nonatomic, retain)TokenManager*      mgrBullet;
 @property (nonatomic, retain)TokenManager*      mgrParticle;
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
-@property (nonatomic, retain)AsciiFont*         asciiFont;
+@property (nonatomic, retain)AsciiFont*         asciiFont1;
 @property (nonatomic, retain)AsciiFont*         asciiFont2;
+@property (nonatomic, retain)AsciiFont*         asciiFont3;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance;

@@ -10,6 +10,8 @@
 
 #include "Vec.h"
 
+#import "Enemy.h"
+
 // 描画プライオリティ
 enum {
     ePrio_Back,     // 背景
@@ -32,11 +34,14 @@ static GameScene* scene_ = nil;
 @synthesize baseLayer;
 @synthesize back;
 @synthesize player;
+@synthesize mgrShot;
+@synthesize mgrEnemy;
 @synthesize mgrBullet;
 @synthesize mgrParticle;
 @synthesize interfaceLayer;
-@synthesize asciiFont;
+@synthesize asciiFont1;
 @synthesize asciiFont2;
+@synthesize asciiFont3;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance {
@@ -73,24 +78,37 @@ static GameScene* scene_ = nil;
     self.interfaceLayer = [InterfaceLayer node];
     [self.baseLayer addChild:self.interfaceLayer];
     
+    self.mgrShot = [TokenManager node];
+//    [self.mgrShot create:self.baseLayer size:16 className:@"Shot"];
+//    [self.mgrShot setPrio:ePrio_Shot];
+    
+    self.mgrEnemy = [TokenManager node];
+    [self.mgrEnemy create:self.baseLayer size:128 className:@"Enemy"];
+    [self.mgrEnemy setPrio:ePrio_Enemy];
+    
     self.mgrBullet = [TokenManager node];
-    [self.mgrBullet create:self.baseLayer size:32 className:@"Bullet"];
+    [self.mgrBullet create:self.baseLayer size:8 className:@"Bullet"];
     [self.mgrBullet setPrio:ePrio_Bullet];
     
     self.mgrParticle = [TokenManager node];
-    [self.mgrParticle create:self.baseLayer size:256 className:@"Particle"];
+    [self.mgrParticle create:self.baseLayer size:16 className:@"Particle"];
     [self.mgrParticle setPrio:ePrio_Particle];
     
-    self.asciiFont = [AsciiFont node];
-    [self.asciiFont createFont:self.baseLayer length:16];
-    [self.asciiFont setPosScreen:8 y:320-24];
+    self.asciiFont1 = [AsciiFont node];
+    [self.asciiFont1 createFont:self.baseLayer length:16];
+    [self.asciiFont1 setPosScreen:8 y:320-24];
     
     self.asciiFont2 = [AsciiFont node];
     [self.asciiFont2 createFont:self.baseLayer length:16];
     [self.asciiFont2 setPosScreen:8 y:320-24-16];
     
+    self.asciiFont3 = [AsciiFont node];
+    [self.asciiFont3 createFont:self.baseLayer length:16];
+    [self.asciiFont3 setPosScreen:8 y:320-24-32];
+    
     // 更新スケジューラー登録
     [self scheduleUpdate];
+    
     
     return self;
 }
@@ -102,9 +120,13 @@ static GameScene* scene_ = nil;
     [self unscheduleUpdate];
     
     // インスタンス開放
-    self.asciiFont = nil;
+    self.asciiFont3 = nil;
+    self.asciiFont2 = nil;
+    self.asciiFont1 = nil;
     self.mgrParticle = nil;
     self.mgrBullet = nil;
+    self.mgrEnemy = nil;
+    self.mgrShot = nil;
     self.player = nil;
     self.back = nil;
     self.baseLayer = nil;
@@ -117,12 +139,15 @@ static GameScene* scene_ = nil;
     //NSLog(@"update.");
     
     // 敵弾の生存数を表示
-    [self.asciiFont setText:[NSString stringWithFormat:@"Bullet:%d", [self.mgrBullet count]]];
-    [self.asciiFont2 setText:[NSString stringWithFormat:@"Particle:%d", [self.mgrParticle count]]];
+    [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d", [self.mgrEnemy count]]];
+    [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d", [self.mgrBullet count]]];
+    [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d", [self.mgrParticle count]]];
     
     if ([self.interfaceLayer isTouch] == NO) {
         return;
     }
+    
+    //[Enemy add:eEnemy_Nasu x:480/2 y:320/2 rot:0 speed:1];
     
     float x = [self.interfaceLayer getPosX];
     float y = [self.interfaceLayer getPosY];

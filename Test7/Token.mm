@@ -32,7 +32,6 @@
     }
     
     self.m_pSprite = nil;
-    m_isCreate = NO;
     
     return self;
 }
