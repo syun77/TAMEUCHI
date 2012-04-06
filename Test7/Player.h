@@ -15,7 +15,8 @@
  */
 @interface Player : Token {
     
-    Vec2D m_Target; // 目標座標
+    int     m_tPast;    // 更新タイマー
+    Vec2D   m_Target;   // 目標座標
 }
 
 @end

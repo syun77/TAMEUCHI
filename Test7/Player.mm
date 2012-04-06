@@ -37,6 +37,8 @@
     
     [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
     
+    m_tPast = 0;
+    
     return self;
 }
 
@@ -44,11 +46,20 @@
  * 更新
  */
 - (void)update:(ccTime)dt {
+    
+    // 移動
     [self move:dt];
     
-//    CGRect rect = CGRectMake(0, 0, 32, 64);
-//    
-//    [self.m_pSprite setTextureRect:rect];
+    // 更新タイマー
+    m_tPast++;
+    
+    // アニメーション更新
+    if (m_tPast%64 / 32) {
+        [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
+    }
+    else {
+        [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player2)];
+    }
     
     GameScene* scene = [GameScene sharedInstance];
     InterfaceLayer* input = scene.interfaceLayer;
