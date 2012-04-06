@@ -188,8 +188,8 @@
         if (i < m_Length) {
             
             // 描画する
-            [t setChar:[pText characterAtIndex:i]];
             [t setVisible:YES];
+            [t setChar:[pText characterAtIndex:i]];
         }
         else {
             

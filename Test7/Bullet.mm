@@ -33,7 +33,7 @@
     [self setRotation:0];
     [self setScale:1];
     
-    NSLog(@"Intialize[%d].", [self getIndex]);
+//    NSLog(@"Intialize[%d].", [self getIndex]);
 }
 
 - (void)update:(ccTime)dt {
@@ -60,7 +60,7 @@
     }
     
     if( m_Timer > 160 ) {
-        NSLog(@"Vanish[%d].", [self getIndex]);
+//        NSLog(@"Vanish[%d].", [self getIndex]);
         [self removeFromParentAndCleanup:YES];
         [self setExist:NO];
         

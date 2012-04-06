@@ -32,6 +32,8 @@
 - (void)initialize {
     m_Timer = 0;    
     [self setVisible:YES];
+    
+    NSLog(@"initialize[%d].", [self getIndex]);
 }
 
 - (void)update:(ccTime)dt {
@@ -53,6 +55,8 @@
     if (m_Timer > 64) {
         
         // 消滅
+        NSLog(@"vanish[%d]", [self getIndex]);
+        
         [self removeFromParentAndCleanup:YES];
         [self setExist:NO];
     }
