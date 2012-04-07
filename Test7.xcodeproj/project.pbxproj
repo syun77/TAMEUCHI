@@ -121,6 +121,7 @@
 		C70F6027151B6E67003B041E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6026151B6E67003B041E /* main.m */; };
 		C70F602A151B6E67003B041E /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70F6029151B6E67003B041E /* AppDelegate.mm */; };
 		C70F602D151B6E67003B041E /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70F602C151B6E67003B041E /* RootViewController.mm */; };
+		C71DFA00152FCA7C00873917 /* all-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C71DF9FF152FCA7C00873917 /* all-hd.png */; };
 		C72542E815260B81004C157A /* Bullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542E715260B81004C157A /* Bullet.mm */; };
 		C72542ED152614F4004C157A /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542EC152614F4004C157A /* Particle.mm */; };
 		C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73A11A31529630C00C10EC4 /* AsciiFont.mm */; };
@@ -137,6 +138,7 @@
 		C786B3811525426300049CA8 /* Math.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37E1525426300049CA8 /* Math.mm */; };
 		C786B3821525426300049CA8 /* Token.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37F1525426300049CA8 /* Token.mm */; };
 		C786B3831525426300049CA8 /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B3801525426300049CA8 /* TokenManager.mm */; };
+		C7E47378152F3EB7008EACDF /* LevelMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7E47377152F3EB7008EACDF /* LevelMgr.mm */; };
 		C7F053AA152B14EA0095B76E /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7F053A9152B14EA0095B76E /* all.png */; };
 		C7F053AE152B15CF0095B76E /* Exerinya.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F053AD152B15CF0095B76E /* Exerinya.mm */; };
 /* End PBXBuildFile section */
@@ -379,6 +381,7 @@
 		C70F603A151B7043003B041E /* InterfaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLayer.h; sourceTree = "<group>"; };
 		C70F603D151B7482003B041E /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		C70F603F151B7482003B041E /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenManager.h; sourceTree = "<group>"; };
+		C71DF9FF152FCA7C00873917 /* all-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "all-hd.png"; path = "Resources/all-hd.png"; sourceTree = "<group>"; };
 		C72198EC151FFC2E009B8B9F /* Vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec.h; sourceTree = "<group>"; };
 		C72198F51520BF47009B8B9F /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
 		C72542E615260B81004C157A /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
@@ -404,6 +407,8 @@
 		C786B37F1525426300049CA8 /* Token.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Token.mm; sourceTree = "<group>"; };
 		C786B3801525426300049CA8 /* TokenManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TokenManager.mm; sourceTree = "<group>"; };
 		C7D722E21524B550000AFB86 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
+		C7E47376152F3EB7008EACDF /* LevelMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelMgr.h; sourceTree = "<group>"; };
+		C7E47377152F3EB7008EACDF /* LevelMgr.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelMgr.mm; sourceTree = "<group>"; };
 		C7F053A9152B14EA0095B76E /* all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = all.png; path = Resources/all.png; sourceTree = "<group>"; };
 		C7F053AC152B15CF0095B76E /* Exerinya.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exerinya.h; sourceTree = "<group>"; };
 		C7F053AD152B15CF0095B76E /* Exerinya.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Exerinya.mm; sourceTree = "<group>"; };
@@ -485,6 +490,7 @@
 			isa = PBXGroup;
 			children = (
 				C7F053A9152B14EA0095B76E /* all.png */,
+				C71DF9FF152FCA7C00873917 /* all-hd.png */,
 				C7612C991526AA88007CCABC /* font.png */,
 				C70F5ED8151B6E65003B041E /* Default.png */,
 				C74FE7A01524892D00298CBB /* rect.png */,
@@ -827,6 +833,8 @@
 				C72542E715260B81004C157A /* Bullet.mm */,
 				C72542EB152614F4004C157A /* Particle.h */,
 				C72542EC152614F4004C157A /* Particle.mm */,
+				C7E47376152F3EB7008EACDF /* LevelMgr.h */,
+				C7E47377152F3EB7008EACDF /* LevelMgr.mm */,
 			);
 			name = Token;
 			sourceTree = "<group>";
@@ -923,6 +931,7 @@
 				C76CC3CD1526949600AE1C69 /* LICENSE.cocosdenshion in Resources */,
 				C7612C9A1526AA88007CCABC /* font.png in Resources */,
 				C7F053AA152B14EA0095B76E /* all.png in Resources */,
+				C71DFA00152FCA7C00873917 /* all-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1043,6 +1052,7 @@
 				C73FEC25152BEED5008B5697 /* Back.mm in Sources */,
 				C73FEC29152BF448008B5697 /* Enemy.mm in Sources */,
 				C73FEC2C152BF45F008B5697 /* Shot.mm in Sources */,
+				C7E47378152F3EB7008EACDF /* LevelMgr.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,7 +1074,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1079,7 +1089,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 5.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.2;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 			};

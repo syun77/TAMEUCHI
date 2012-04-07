@@ -27,7 +27,7 @@
         return self;
     }
     
-    [self load:@"all.png"];
+    [self load:@"all-hd.png"];
     
     [self create];
     
@@ -77,13 +77,6 @@
     self._x += vM.x * dt;
     self._y += vM.y * dt;
     
-    static int s_count = 0;
-    s_count++;
-    if (s_count%10 == 0) {
-        eExerinyaRect type = (eExerinyaRect)((s_count / 10) % eExerinyaRect_Max);
-        CGRect r = Exerinya_GetRect(type);
-        //[self.m_pSprite setTextureRect:r];
-    }
 }
 
 @end

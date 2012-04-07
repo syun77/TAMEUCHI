@@ -39,6 +39,7 @@ static GameScene* scene_ = nil;
 @synthesize mgrBullet;
 @synthesize mgrParticle;
 @synthesize interfaceLayer;
+@synthesize levelMgr;
 @synthesize asciiFont1;
 @synthesize asciiFont2;
 @synthesize asciiFont3;
@@ -94,6 +95,9 @@ static GameScene* scene_ = nil;
     [self.mgrParticle create:self.baseLayer size:256 className:@"Particle"];
     [self.mgrParticle setPrio:ePrio_Particle];
     
+    self.levelMgr = [LevelMgr node];
+    [self.levelMgr initialize];
+    
     self.asciiFont1 = [AsciiFont node];
     [self.asciiFont1 createFont:self.baseLayer length:16];
     [self.asciiFont1 setPosScreen:8 y:320-24];
@@ -123,6 +127,7 @@ static GameScene* scene_ = nil;
     self.asciiFont3 = nil;
     self.asciiFont2 = nil;
     self.asciiFont1 = nil;
+    self.levelMgr = nil;
     self.mgrParticle = nil;
     self.mgrBullet = nil;
     self.mgrEnemy = nil;
@@ -142,6 +147,8 @@ static GameScene* scene_ = nil;
     [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d", [self.mgrEnemy count]]];
     [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d", [self.mgrBullet count]]];
     [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d", [self.mgrParticle count]]];
+    
+    [self.levelMgr update:dt];
     
     if ([self.interfaceLayer isTouch] == NO) {
         return;

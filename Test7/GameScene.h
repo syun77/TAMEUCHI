@@ -14,6 +14,7 @@
 #import "Back.h"
 #import "Player.h"
 #import "AsciiFont.h"
+#import "LevelMgr.h"
 
 /**
  * ゲームシーン
@@ -27,6 +28,7 @@
     TokenManager*   mgrBullet;      // 敵弾
     TokenManager*   mgrParticle;    // パーティクル
     InterfaceLayer* interfaceLayer; // 入力受け取り
+    LevelMgr*       levelMgr;       // レベル管理
     AsciiFont*      ascciFont1;     // フォント
     AsciiFont*      ascciFont2;     // フォント
     AsciiFont*      ascciFont3;     // フォント
@@ -40,6 +42,7 @@
 @property (nonatomic, retain)TokenManager*      mgrBullet;
 @property (nonatomic, retain)TokenManager*      mgrParticle;
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
+@property (nonatomic, retain)LevelMgr*          levelMgr;
 @property (nonatomic, retain)AsciiFont*         asciiFont1;
 @property (nonatomic, retain)AsciiFont*         asciiFont2;
 @property (nonatomic, retain)AsciiFont*         asciiFont3;

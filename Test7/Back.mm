@@ -23,7 +23,7 @@
         return self;
     }
     
-    [self load:@"all.png"];
+    [self load:@"all-hd.png"];
     
     [self create];
     
@@ -32,6 +32,8 @@
     
     // 背景画像を設定
     [self setTexRect:Exerinya_GetRect(eExerinyaRect_Back)];
+    
+    [self move:0];
     
     return self;
 }

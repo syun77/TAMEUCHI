@@ -40,6 +40,8 @@
     [self setRotation:0];
     [self setScale:1];
     
+    m_Timer = 0;
+    
 }
 
 /**
@@ -107,6 +109,16 @@
  * 更新
  */
 - (void)update:(ccTime)dt {
+    [self move:dt];
+    
+    self._vx *= 0.95f;
+    self._vy *= 0.95f;
+    
+    m_Timer++;
+    if (m_Timer > 100) {
+        [self removeFromParentAndCleanup:YES];
+        [self setExist:NO];
+    }
     
 }
 

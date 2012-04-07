@@ -28,7 +28,8 @@ enum eEnemy {
  * 敵
  */
 @interface Enemy : Token {
-    eEnemy m_Id; // 敵番号
+    eEnemy  m_Id;       // 敵番号
+    int     m_Timer;    // 汎用タイマー
 }
 
 // 敵の生成
