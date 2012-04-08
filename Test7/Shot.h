@@ -14,7 +14,7 @@
  * 自弾
  */
 @interface Shot : Token {
-    
+    int m_Timer; 
 }
 
 @end

@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+#import "System.h"
+
 enum eBlend {
     eBlend_Normal,  // 通常合成 (透過・α付き)
     eBlend_Add,     // 加算合成

@@ -43,6 +43,7 @@ static GameScene* scene_ = nil;
 @synthesize asciiFont1;
 @synthesize asciiFont2;
 @synthesize asciiFont3;
+@synthesize asciiFont4;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance {
@@ -80,8 +81,8 @@ static GameScene* scene_ = nil;
     [self.baseLayer addChild:self.interfaceLayer];
     
     self.mgrShot = [TokenManager node];
-//    [self.mgrShot create:self.baseLayer size:16 className:@"Shot"];
-//    [self.mgrShot setPrio:ePrio_Shot];
+    [self.mgrShot create:self.baseLayer size:16 className:@"Shot"];
+    [self.mgrShot setPrio:ePrio_Shot];
     
     self.mgrEnemy = [TokenManager node];
     [self.mgrEnemy create:self.baseLayer size:128 className:@"Enemy"];
@@ -110,6 +111,10 @@ static GameScene* scene_ = nil;
     [self.asciiFont3 createFont:self.baseLayer length:16];
     [self.asciiFont3 setPosScreen:8 y:320-24-32];
     
+    self.asciiFont4 = [AsciiFont node];
+    [self.asciiFont4 createFont:self.baseLayer length:16];
+    [self.asciiFont4 setPosScreen:8 y:320-24-48];
+    
     // 更新スケジューラー登録
     [self scheduleUpdate];
     
@@ -124,6 +129,7 @@ static GameScene* scene_ = nil;
     [self unscheduleUpdate];
     
     // インスタンス開放
+    self.asciiFont4 = nil;
     self.asciiFont3 = nil;
     self.asciiFont2 = nil;
     self.asciiFont1 = nil;
@@ -143,7 +149,8 @@ static GameScene* scene_ = nil;
 - (void)update:(ccTime)dt {
     //NSLog(@"update.");
     
-    // 敵弾の生存数を表示
+    // Tokenの生存数を表示
+    [self.asciiFont4 setText:[NSString stringWithFormat:@"Shot    :%3d", [self.mgrShot count]]];
     [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d", [self.mgrEnemy count]]];
     [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d", [self.mgrBullet count]]];
     [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d", [self.mgrParticle count]]];
@@ -156,11 +163,11 @@ static GameScene* scene_ = nil;
     
     //[Enemy add:eEnemy_Nasu x:480/2 y:320/2 rot:0 speed:1];
     
-    float x = [self.interfaceLayer getPosX];
-    float y = [self.interfaceLayer getPosY];
+    float x = self.player._x;
+    float y = self.player._y;
     
     static int s_count = 0;
-    Token* t = [self.mgrBullet add];
+    Token* t = [self.mgrShot add];
     [t set2:x y:y rot:(s_count%36)*10 speed:240 ax:0 ay:0];
     s_count++;
     

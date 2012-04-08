@@ -31,11 +31,12 @@
     
     [self create];
     
-    self._x = 480 / 2;
-    self._y = 320 / 2;
+    self._x = System_CenterX();
+    self._y = SYstem_CenterY();
     m_Target.Set(self._x, self._y);
     
     [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
+    [self setScale:0.5f];
     
     m_tPast = 0;
     

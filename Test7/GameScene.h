@@ -32,6 +32,7 @@
     AsciiFont*      ascciFont1;     // フォント
     AsciiFont*      ascciFont2;     // フォント
     AsciiFont*      ascciFont3;     // フォント
+    AsciiFont*      ascciFont4;     // フォント
 }
 
 @property (nonatomic, retain)CCLayer*           baseLayer;
@@ -46,6 +47,7 @@
 @property (nonatomic, retain)AsciiFont*         asciiFont1;
 @property (nonatomic, retain)AsciiFont*         asciiFont2;
 @property (nonatomic, retain)AsciiFont*         asciiFont3;
+@property (nonatomic, retain)AsciiFont*         asciiFont4;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance;

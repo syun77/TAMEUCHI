@@ -129,6 +129,7 @@
 		C73FEC29152BF448008B5697 /* Enemy.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC28152BF448008B5697 /* Enemy.mm */; };
 		C73FEC2C152BF45F008B5697 /* Shot.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC2B152BF45E008B5697 /* Shot.mm */; };
 		C74FE7A11524892D00298CBB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = C74FE7A01524892D00298CBB /* rect.png */; };
+		C752C7EA15310AAE002EC31B /* System.mm in Sources */ = {isa = PBXBuildFile; fileRef = C752C7E915310AAE002EC31B /* System.mm */; };
 		C7612C9A1526AA88007CCABC /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7612C991526AA88007CCABC /* font.png */; };
 		C76CC3CC1526949600AE1C69 /* LICENSE.cocos2d in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */; };
 		C76CC3CD1526949600AE1C69 /* LICENSE.cocosdenshion in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CB1526949600AE1C69 /* LICENSE.cocosdenshion */; };
@@ -397,6 +398,8 @@
 		C73FEC2A152BF45E008B5697 /* Shot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shot.h; sourceTree = "<group>"; };
 		C73FEC2B152BF45E008B5697 /* Shot.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shot.mm; sourceTree = "<group>"; };
 		C74FE7A01524892D00298CBB /* rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rect.png; path = Resources/rect.png; sourceTree = "<group>"; };
+		C752C7E815310AAE002EC31B /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
+		C752C7E915310AAE002EC31B /* System.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = System.mm; sourceTree = "<group>"; };
 		C7612C991526AA88007CCABC /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Resources/font.png; sourceTree = "<group>"; };
 		C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		C76CC3CB1526949600AE1C69 /* LICENSE.cocosdenshion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocosdenshion; sourceTree = "<group>"; };
@@ -851,6 +854,8 @@
 				C72198F51520BF47009B8B9F /* Math.h */,
 				C786B37E1525426300049CA8 /* Math.mm */,
 				C72198EC151FFC2E009B8B9F /* Vec.h */,
+				C752C7E815310AAE002EC31B /* System.h */,
+				C752C7E915310AAE002EC31B /* System.mm */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -1053,6 +1058,7 @@
 				C73FEC29152BF448008B5697 /* Enemy.mm in Sources */,
 				C73FEC2C152BF45F008B5697 /* Shot.mm in Sources */,
 				C7E47378152F3EB7008EACDF /* LevelMgr.mm in Sources */,
+				C752C7EA15310AAE002EC31B /* System.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
