@@ -17,4 +17,7 @@
     int m_Timer; 
 }
 
+// 弾の生成
++ (Shot*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed;
+
 @end

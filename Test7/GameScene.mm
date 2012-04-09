@@ -81,7 +81,7 @@ static GameScene* scene_ = nil;
     [self.baseLayer addChild:self.interfaceLayer];
     
     self.mgrShot = [TokenManager node];
-    [self.mgrShot create:self.baseLayer size:16 className:@"Shot"];
+    [self.mgrShot create:self.baseLayer size:64 className:@"Shot"];
     [self.mgrShot setPrio:ePrio_Shot];
     
     self.mgrEnemy = [TokenManager node];
@@ -160,16 +160,6 @@ static GameScene* scene_ = nil;
     if ([self.interfaceLayer isTouch] == NO) {
         return;
     }
-    
-    //[Enemy add:eEnemy_Nasu x:480/2 y:320/2 rot:0 speed:1];
-    
-    float x = self.player._x;
-    float y = self.player._y;
-    
-    static int s_count = 0;
-    Token* t = [self.mgrShot add];
-    [t set2:x y:y rot:(s_count%36)*10 speed:240 ax:0 ay:0];
-    s_count++;
     
 }
 

@@ -35,6 +35,12 @@ float Math_CosEx(float deg);
 // サインを求める（度）
 float Math_SinEx(float deg);
 
+// アークタンジェントを求める
+float Math_Atan2(float y, float x);
+
+// アークタンジェントを求める（度）
+float Math_Atan2Ex(float y, float x);
+
 // 乱数の取得
 int Math_Rand(int range);
 

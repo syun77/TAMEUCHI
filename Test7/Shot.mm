@@ -31,7 +31,7 @@
         [self setScale:0.5f];
     }
     
-    [self setColor:ccc3(0x80, 0x80, 0xFF)];
+    [self setColor:ccc3(0x80, 0x80, 0xff)];
     
     return self;
 }
@@ -60,6 +60,16 @@
         [self removeFromParentAndCleanup:YES];
         [self setExist:NO];
     }
+}
+
++ (Shot*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed {
+    GameScene* scene = [GameScene sharedInstance];
+    Shot* s = (Shot*)[scene.mgrShot add];
+    if (s) {
+        [s set2:x y:y rot:rot speed:speed ax:0 ay:0];
+    }
+    
+    return s;
 }
 
 @end

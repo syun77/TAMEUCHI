@@ -106,6 +106,32 @@
 }
 
 /**
+ * 指定の座標に一番近い敵を探す
+ */
++ (Enemy*)getNearest:(float)x y:(float)y {
+    Enemy* ret = nil;
+    
+    GameScene* scene = [GameScene sharedInstance];
+    TokenManager* mgr = scene.mgrEnemy;
+    
+    float len = 9999999;
+    for (Enemy* e in mgr.m_Pool) {
+        if ([e isExist] == NO) {
+            continue;
+        }
+        
+        Vec2D d = Vec2D(e._x - x, e._y - y);
+        float len2 = d.LengthSq();
+        if (len2 < len) {
+            ret = e;
+            len = len2;
+        }
+    }
+    
+    return ret;
+}
+
+/**
  * 更新
  */
 - (void)update:(ccTime)dt {

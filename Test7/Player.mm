@@ -12,6 +12,8 @@
 
 #include "Vec.h"
 #import "Exerinya.h"
+#import "Enemy.h"
+#import "Shot.h"
 
 /**
  * 自機クラスを実装する
@@ -39,6 +41,7 @@
     [self setScale:0.5f];
     
     m_tPast = 0;
+    m_ShotRot = 0.0f;
     
     return self;
 }
@@ -66,9 +69,22 @@
     InterfaceLayer* input = scene.interfaceLayer;
     
     if ([input isTouch]) {
+        // タッチ中
+        // 移動処理
         float x = [input getPosX];
         float y = [input getPosY];
         m_Target.Set(x, y);
+        
+        // 弾を撃つ
+        Enemy* e = [Enemy getNearest:_x y:_y];
+        if (e) {
+            float dx = e._x - self._x;
+            float dy = e._y - self._y;
+            m_ShotRot = Math_Atan2Ex(dy, dx);
+        }
+        
+        [Shot add:self._x y:self._y rot:m_ShotRot speed:960];
+        
     }
     
     Vec2D vP = Vec2D(self._x, self._y);

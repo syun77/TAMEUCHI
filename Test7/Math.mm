@@ -65,6 +65,18 @@ float Math_SinEx(float deg)
     return Math_Sin(Math_Deg2Rad(deg));
 }
 
+// アークタンジェントを求める
+float Math_Atan2(float y, float x)
+{
+    return atan2f(y, x);
+}
+
+// アークタンジェントを求める（度）
+float Math_Atan2Ex(float y, float x)
+{
+    return Math_Rad2Deg(Math_Atan2(y, x));
+}
+
 // 乱数の取得
 int Math_Rand(int range)
 {

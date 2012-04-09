@@ -16,7 +16,8 @@
 @interface Player : Token {
     
     int     m_tPast;    // 更新タイマー
-    Vec2D   m_Target;   // 目標座標
+    Vec2D   m_Target;   // 移動目標座標
+    float   m_ShotRot;  // 弾を撃つ角度
 }
 
 @end

@@ -35,6 +35,9 @@ enum eEnemy {
 // 敵の生成
 + (Enemy*)add:(eEnemy)type x:(float)x y:(float)y rot:(float)rot speed:(float)speed;
 
+// 指定の座標に一番近い敵を探す
++ (Enemy*)getNearest:(float)x y:(float)y;
+
 // 敵種別の設定
 - (void)setType:(eEnemy)type;
 
