@@ -101,6 +101,9 @@ enum eBlend {
 // α値を設定する (0〜255)
 - (void)setAlpha:(int) alpha;
 
+// α値を設定する (0〜255)
+- (int)getAlpha;
+
 // ブレンドモードを設定する
 - (void)setBlend:(eBlend) mode;
 

@@ -171,7 +171,7 @@ static GameScene* scene_ = nil;
             }
             
             if ([s isHit2:e]) {
-                [s vanish];
+                [s hit:e._x y:e._y];
                 [e hit:s._x y:s._y];
             }
         }

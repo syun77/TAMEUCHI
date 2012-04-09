@@ -8,9 +8,13 @@
 
 #import "Particle.h"
 #import "Exerinya.h"
+#import "GameScene.h"
 
 @implementation Particle
 
+/**
+ * コンストラクタ
+ */
 - (id)init {
     self = [super init];
     
@@ -29,13 +33,19 @@
     return self;
 }
 
+/**
+ * 初期化
+ */
 - (void)initialize {
     m_Timer = 0;    
+    m_bBlink = NO;
     [self setVisible:YES];
-    
-    NSLog(@"initialize[%d].", [self getIndex]);
+    [self setAlpha:255];
 }
 
+/**
+ * 更新
+ */
 - (void)update:(ccTime)dt {
     [self move:dt];
     
@@ -44,22 +54,71 @@
     self._vx *= 0.95f;
     self._vy *= 0.95f;
     
-    if (m_Timer > 32) {
-        if (m_Timer % 4 < 2) {
-            [self setVisible:YES];
-        } else {
-            [self setVisible:NO];
-        }
-    }
+    self.scale = self.scale * 0.9f;
+    [self setAlpha:[self getAlpha] * 0.97f];
     
-    if (m_Timer > 64) {
-        
-        // 消滅
-        NSLog(@"vanish[%d]", [self getIndex]);
-        
-        [self removeFromParentAndCleanup:YES];
+    if (m_Timer > 48) {
+        [self removeAllChildrenWithCleanup:YES];
         [self setExist:NO];
     }
+    
+    if (m_bBlink) {
+        if (m_Timer > 32) {
+            if (m_Timer % 4 < 2) {
+                [self setVisible:YES];
+            } else {
+                [self setVisible:NO];
+            }
+        }
+        
+        if (m_Timer > 64) {
+            
+            // 消滅
+            NSLog(@"vanish[%d]", [self getIndex]);
+            
+            [self removeFromParentAndCleanup:YES];
+            [self setExist:NO];
+        }
+    }
+}
+
+/**
+ * 種別の設定
+ */
+- (void)setType:(eParticle)type {
+    m_Type = type;
+    CGRect r = Exerinya_GetRect(eExerinyaRect_EftBall); 
+    switch (m_Type) {
+        case eParticle_Ball:
+            r = Exerinya_GetRect(eExerinyaRect_EftBall);
+            break;
+            
+        case eParticle_Ring:
+            r = Exerinya_GetRect(eExerinyaRect_EftRing);
+            break;
+            
+        case eParticle_Blade:
+            r = Exerinya_GetRect(eExerinyaRect_EftBlade);
+            break;
+            
+        default:
+            break;
+    }
+    
+    [self setTexRect:r];
+}
+
+// 要素の追加
++ (Particle*)add:(eParticle)type x:(float)x y:(float)y rot:(float)rot speed:(float)speed {
+    
+    GameScene* scene = [GameScene sharedInstance];
+    Particle* p = (Particle*)[scene.mgrParticle add];
+    if (p) {
+        [p set2:x y:y rot:rot speed:speed ax:0 ay:0];
+        
+    }
+    
+    return p;
 }
 
 @end

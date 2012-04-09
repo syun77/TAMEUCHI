@@ -47,4 +47,10 @@ int Math_Rand(int range);
 // 乱数の取得 (float 指定)
 float Math_Randf(float range);
 
+// 乱数の取得（範囲指定 a〜b）
+int Math_RandInt(int a, int b);
+
+// 乱数の取得（範囲指定 a〜b) (float 指定)
+float Math_RandFloat(float a, float b);
+
 #endif // __JP_2DGAMES_MATH_H__

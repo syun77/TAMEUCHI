@@ -17,6 +17,9 @@
     int m_Timer; 
 }
 
+// 敵に当たった
+- (void)hit:(float)x y:(float)y;
+
 // 弾の生成
 + (Shot*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed;
 

@@ -88,3 +88,23 @@ float Math_Randf(float range)
 {
     return CCRANDOM_0_1() * range;
 }
+
+// 乱数の取得（範囲指定 a〜b）
+int Math_RandInt(int a, int b)
+{
+    if ((b - a) <= 0) {
+        return 0;
+    }
+    int d = b - a;
+    return Math_Rand(d) + a;
+}
+
+// 乱数の取得（範囲指定 a〜b) (float 指定)
+float Math_RandFloat(float a, float b)
+{
+    if ((b - a) <= 0.0f) {
+        return 0.0f;
+    }
+    float d = b - a;
+    return Math_Randf(d) + a;
+}

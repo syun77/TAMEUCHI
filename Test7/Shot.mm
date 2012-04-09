@@ -31,7 +31,7 @@
         [self setScale:0.5f];
     }
     
-    [self setSize2: 32];
+    [self setSize2: 8];
     
     [self setColor:ccc3(0x80, 0x80, 0xff)];
     
@@ -64,6 +64,18 @@
         [self vanish];
     }
     
+}
+
+/**
+ * 敵に当たった
+ */
+- (void)hit:(float)x y:(float)y {
+    Vec2D v = Vec2D(self._x - x, self._y - y);
+    float rot = v.Rot() + Math_RandInt(-30, 30);
+    Particle* p = [Particle add:eParticle_Ball x:self._x y:self._y rot:rot speed:200];
+    if (p) {
+        [p setScale:0.1];
+    }
 }
 
 + (Shot*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed {

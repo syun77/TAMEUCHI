@@ -347,6 +347,13 @@
 }
 
 /**
+ * α値を設定する (0〜255)
+ */
+- (int)getAlpha {
+    return self.m_pSprite.opacity;
+}
+
+/**
  * ブレンドモードを設定する
  */
 - (void)setBlend:(eBlend) mode {

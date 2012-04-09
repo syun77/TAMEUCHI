@@ -106,6 +106,12 @@ struct Vec2D
         x /= a;
         y /= a;
     }
+    
+    // 角度
+    float Rot()
+    {
+        return Math_Atan2Ex(y, x);
+    }
 };
 
 #endif // __JP_2DGAMES_VEC_H__
