@@ -27,8 +27,6 @@
     
     [self load:@"all.png"];
     
-    NSLog(@"Enemy::Init.");
-    
     return self;
     
 }
@@ -45,6 +43,7 @@
     [self setSize2:32];
     
     m_Timer = 0;
+    m_Hp    = 10;
     
 }
 
@@ -136,6 +135,16 @@
 }
 
 /**
+ * 消滅
+ */
+- (void)vanish {
+    // 削除する
+    [self removeFromParentAndCleanup:YES];
+    [self setExist:NO];
+    
+}
+
+/**
  * 更新
  */
 - (void)update:(ccTime)dt {
@@ -148,17 +157,28 @@
     if (m_Timer > 100) {
     }
     
-    if (m_ReqVanish) {
-        [self removeFromParentAndCleanup:YES];
-        [self setExist:NO];
+    if ([super isOutCircle:self._r]) {
+        // 画面外に出た
+        [self vanish];
     }
+    
 }
 
 /**
  * 弾がヒットした
  */
-- (BOOL)hit {
-    [self reqestVanish];
+- (BOOL)hit:(float)x y:(float)y {
+    m_Hp--;
+    
+    Vec2D v = Vec2D(x - self._x, y - self._y);
+    v.Normalize();
+    v *= -50;
+    self._vx += v.x;
+    self._vy += v.y;
+    
+    if (m_Hp <= 0) {
+        [self vanish];
+    }
     
     return YES;
 }

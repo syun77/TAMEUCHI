@@ -91,9 +91,6 @@
     // 生成フラグを立てる
     m_isCreate = YES;
     
-    // 削除フラグを下げる
-    m_ReqVanish = NO;
-    
 }
 
 /**
@@ -250,7 +247,7 @@
 /**
  * 当たり判定チェック
  */
-- (BOOL)isHit:(Token*)t {
+- (BOOL)isHit2:(Token*)t {
     float dx = t._x - self._x;
     float dy = t._y - self._y;
     
@@ -261,13 +258,6 @@
         return YES;
     }
     return NO;
-}
-
-/**
- * 消滅要求
- */
-- (void)reqestVanish {
-    m_ReqVanish = YES;
 }
 
 /**

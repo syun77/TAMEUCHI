@@ -29,7 +29,6 @@ enum eBlend {
     float _ax, _ay;         // 加速度
     float _w, _h;           // サイズ
     float _r;               // サイズ（半径）
-    BOOL        m_ReqVanish; // 削除リクエストフラグ
     NSInteger   m_Index;    // 要素番号
     BOOL        m_isExist;  // 存在フラグ
     BOOL        m_isCreate; // 生成フラグ
@@ -73,10 +72,7 @@ enum eBlend {
 - (BOOL)isBoundCircle:(float)r;
 
 // 当たり判定チェック
-- (BOOL)isHit:(Token*)t;
-
-// 消滅要求
-- (void)reqestVanish;
+- (BOOL)isHit2:(Token*)t;
 
 // 移動する
 - (void)move:(float)dt;

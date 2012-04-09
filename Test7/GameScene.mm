@@ -170,9 +170,9 @@ static GameScene* scene_ = nil;
                 continue;
             }
             
-            if ([s isHit:e]) {
-                [s reqestVanish];
-                [e hit];
+            if ([s isHit2:e]) {
+                [s vanish];
+                [e hit:s._x y:s._y];
             }
         }
     }

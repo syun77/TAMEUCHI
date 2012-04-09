@@ -46,20 +46,24 @@
 }
 
 /**
+ * 消滅
+ */
+- (void)vanish {
+    
+    // 削除する
+    [self removeFromParentAndCleanup:YES];
+    [self setExist:NO];
+}
+/**
  * 更新
  */
 - (void)update:(ccTime)dt {
     [self move:dt];
     
     if ([super isOutCircle:32]) {
-        [self reqestVanish];
+        [self vanish];
     }
     
-    
-    if (m_ReqVanish) {
-        [self removeFromParentAndCleanup:YES];
-        [self setExist:NO];
-    }
 }
 
 + (Shot*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed {

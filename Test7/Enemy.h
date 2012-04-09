@@ -30,6 +30,7 @@ enum eEnemy {
 @interface Enemy : Token {
     eEnemy  m_Id;       // 敵番号
     int     m_Timer;    // 汎用タイマー
+    int     m_Hp;       // HP
 }
 
 // 敵の生成
@@ -42,6 +43,6 @@ enum eEnemy {
 - (void)setType:(eEnemy)type;
 
 // 弾がヒットした
-- (BOOL)hit;
+- (BOOL)hit:(float)x y:(float)y;
 
 @end
