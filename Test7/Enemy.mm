@@ -42,6 +42,8 @@
     
     [self setScale:0.5];
     
+    [self setSize2:32];
+    
     m_Timer = 0;
     
 }
@@ -144,10 +146,20 @@
     
     m_Timer++;
     if (m_Timer > 100) {
+    }
+    
+    if (m_ReqVanish) {
         [self removeFromParentAndCleanup:YES];
         [self setExist:NO];
     }
-    
 }
 
+/**
+ * 弾がヒットした
+ */
+- (BOOL)hit {
+    [self reqestVanish];
+    
+    return YES;
+}
 @end

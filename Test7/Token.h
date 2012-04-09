@@ -27,6 +27,9 @@ enum eBlend {
     float _x, _y;           // 座標
     float _vx, _vy;         // 移動量
     float _ax, _ay;         // 加速度
+    float _w, _h;           // サイズ
+    float _r;               // サイズ（半径）
+    BOOL        m_ReqVanish; // 削除リクエストフラグ
     NSInteger   m_Index;    // 要素番号
     BOOL        m_isExist;  // 存在フラグ
     BOOL        m_isCreate; // 生成フラグ
@@ -43,6 +46,10 @@ enum eBlend {
 - (void)set:(float)x y:(float)y vx:(float)vx vy:(float)vy ax:(float)ax ay:(float)ay;
 
 - (void)set2:(float)x y:(float)y rot:(float)rot speed:(float)speed ax:(float)ax ay:(float)ay;
+
+// サイズを設定する
+- (void)setSize:(float)w h:(float)h;
+- (void)setSize2:(float)r;
 
 // 画面外に出たかどうか
 - (BOOL)isOut;
@@ -64,6 +71,12 @@ enum eBlend {
 
 // 画面外の跳ね返りチェック（円）
 - (BOOL)isBoundCircle:(float)r;
+
+// 当たり判定チェック
+- (BOOL)isHit:(Token*)t;
+
+// 消滅要求
+- (void)reqestVanish;
 
 // 移動する
 - (void)move:(float)dt;
@@ -108,5 +121,8 @@ enum eBlend {
 @property (nonatomic, readwrite)float _vy;
 @property (nonatomic, readwrite)float _ax;
 @property (nonatomic, readwrite)float _ay;
+@property (nonatomic, readwrite)float _w;
+@property (nonatomic, readwrite)float _h;
+@property (nonatomic, readwrite)float _r;
 
 @end

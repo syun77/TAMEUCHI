@@ -21,6 +21,9 @@
 @synthesize _vy;
 @synthesize _ax;
 @synthesize _ay;
+@synthesize _w;
+@synthesize _h;
+@synthesize _r;
 
 /**
  * 生成
@@ -32,6 +35,11 @@
     }
     
     self.m_pSprite = nil;
+    
+    // TODO:
+    self._w = 32;
+    self._h = 32;
+    self._r = 32;
     
     return self;
 }
@@ -83,6 +91,9 @@
     // 生成フラグを立てる
     m_isCreate = YES;
     
+    // 削除フラグを下げる
+    m_ReqVanish = NO;
+    
 }
 
 /**
@@ -101,6 +112,17 @@
     float vy = Math_SinEx(rot) * speed;
     
     [self set:x y:y vx:vx vy:vy ax:ax ay:ay];
+}
+
+/**
+ * サイズを設定する
+ */
+- (void)setSize:(float)w h:(float)h {
+    self._w = w;
+    self._h = h;
+}
+- (void)setSize2:(float)r {
+    self._r = r;
 }
 
 /**
@@ -223,6 +245,29 @@
     
     return NO;
     
+}
+
+/**
+ * 当たり判定チェック
+ */
+- (BOOL)isHit:(Token*)t {
+    float dx = t._x - self._x;
+    float dy = t._y - self._y;
+    
+    float len = (dx * dx) + (dy * dy);
+    float len2 = (t._r * t._r) + (self._r * self._r);
+    
+    if (len < len2) {
+        return YES;
+    }
+    return NO;
+}
+
+/**
+ * 消滅要求
+ */
+- (void)reqestVanish {
+    m_ReqVanish = YES;
 }
 
 /**

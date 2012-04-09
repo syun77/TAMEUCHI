@@ -11,6 +11,7 @@
 #include "Vec.h"
 
 #import "Enemy.h"
+#import "Shot.h"
 
 // 描画プライオリティ
 enum {
@@ -156,9 +157,24 @@ static GameScene* scene_ = nil;
     [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d", [self.mgrParticle count]]];
     
     [self.levelMgr update:dt];
+
+    // 当たり判定を行う
     
-    if ([self.interfaceLayer isTouch] == NO) {
-        return;
+    // 自弾 vs 敵
+    for (Shot* s in self.mgrShot.m_Pool) {
+        if ([s isExist] == NO) {
+            continue;
+        }
+        for (Enemy* e in self.mgrEnemy.m_Pool) {
+            if ([e isExist] == NO) {
+                continue;
+            }
+            
+            if ([s isHit:e]) {
+                [s reqestVanish];
+                [e hit];
+            }
+        }
     }
     
 }

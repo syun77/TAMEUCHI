@@ -41,4 +41,7 @@ enum eEnemy {
 // 敵種別の設定
 - (void)setType:(eEnemy)type;
 
+// 弾がヒットした
+- (BOOL)hit;
+
 @end

@@ -31,6 +31,8 @@
         [self setScale:0.5f];
     }
     
+    [self setSize2: 32];
+    
     [self setColor:ccc3(0x80, 0x80, 0xff)];
     
     return self;
@@ -50,13 +52,11 @@
     [self move:dt];
     
     if ([super isOutCircle:32]) {
-        [self removeFromParentAndCleanup:YES];
-        [self setExist:NO];
-        return;
+        [self reqestVanish];
     }
     
-    m_Timer++;
-    if (m_Timer > 120) {
+    
+    if (m_ReqVanish) {
         [self removeFromParentAndCleanup:YES];
         [self setExist:NO];
     }
