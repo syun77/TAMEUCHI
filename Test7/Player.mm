@@ -42,6 +42,7 @@
     
     m_tPast = 0;
     m_ShotRot = 0.0f;
+    m_tShot = 0;
     
     return self;
 }
@@ -75,16 +76,25 @@
         float y = [input getPosY];
         m_Target.Set(x, y);
         
-        // 弾を撃つ
-        Enemy* e = [Enemy getNearest:_x y:_y];
-        if (e) {
-            float dx = e._x - self._x;
-            float dy = e._y - self._y;
-            m_ShotRot = Math_Atan2Ex(dy, dx);
+        if (m_tShot > 0) {
+            m_tShot--;
         }
-        
-        [Shot add:self._x y:self._y rot:m_ShotRot speed:960];
-        
+        if (m_tShot <= 0) {
+            // 弾を撃つ
+            Enemy* e = [Enemy getNearest:_x y:_y];
+            if (e) {
+                float dx = e._x - self._x;
+                float dy = e._y - self._y;
+                m_ShotRot = Math_Atan2Ex(dy, dx);
+            }
+            
+            [Shot add:self._x y:self._y rot:m_ShotRot speed:240];
+            
+            m_tShot = SHOT_TIMER;
+        }
+    }
+    else {
+        m_tShot = 0;
     }
     
     Vec2D vP = Vec2D(self._x, self._y);
