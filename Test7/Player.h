@@ -22,6 +22,10 @@ static const int SHOT_TIMER = 16;
     Vec2D   m_Target;   // 移動目標座標
     float   m_ShotRot;  // 弾を撃つ角度
     int     m_tShot;    // 弾を撃つ間隔
+    int     m_tShot2;   // 弾を撃つ間隔２
 }
+
+// 弾を撃つ
+- (void)shot;
 
 @end

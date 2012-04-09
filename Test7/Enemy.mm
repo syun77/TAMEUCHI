@@ -40,6 +40,8 @@
     [self setRotation:0];
     [self setScale:1];
     
+    [self setScale:0.5];
+    
     m_Timer = 0;
     
 }
