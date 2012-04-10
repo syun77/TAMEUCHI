@@ -79,6 +79,22 @@
 }
 
 /**
+ * リーク数を取得する
+ * @return リーク数
+ */
+- (NSInteger)leak {
+    NSInteger ret = 0;
+    
+    for (Token* t in self.m_Pool) {
+        if ([t isExist] == NO && t.parent != nil) {
+            ret++;
+        }
+    }
+             
+    return ret;
+}
+
+/**
  * デストラクタ
  */
 - (void)dealloc {
@@ -97,7 +113,7 @@
         
         Token* ret = [self.m_Pool objectAtIndex:m_Idx];
         m_Idx = (m_Idx + 1) % m_Size;
-        if ([ret isExist] == NO) {
+        if ([ret isExist] == NO && [ret parent] == nil) {
             
             // 空きが見つかったので生成
             [m_Layer addChild:ret z:m_Prio];

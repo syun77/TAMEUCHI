@@ -54,15 +54,35 @@
     self._vx *= 0.95f;
     self._vy *= 0.95f;
     
-    self.scale = self.scale * 0.9f;
-    [self setAlpha:[self getAlpha] * 0.97f];
+    switch (m_Type) {
+        case eParticle_Ball:
+            // 縮小する
+            self.scale = self.scale * 0.9f;
+            
+            // じわじわ半透明にして消す
+            [self setAlpha:[self getAlpha] * 0.97f];
+            
+            break;
+        case eParticle_Ring:
+            // 拡大する
+            m_Val *= 0.97f;
+            self.scale = self.scale + m_Val;
+            
+            // じわじわ半透明にして消す
+            [self setAlpha:[self getAlpha] * 0.95f];
+            
+        default:
+            break;
+    }
     
     if (m_Timer > 48) {
-        [self removeAllChildrenWithCleanup:YES];
+        // 普通に消す
+        [self removeFromParentAndCleanup:YES];
         [self setExist:NO];
     }
     
     if (m_bBlink) {
+        // 点滅して消す
         if (m_Timer > 32) {
             if (m_Timer % 4 < 2) {
                 [self setVisible:YES];
@@ -95,6 +115,7 @@
             
         case eParticle_Ring:
             r = Exerinya_GetRect(eExerinyaRect_EftRing);
+            m_Val = 0.1;
             break;
             
         case eParticle_Blade:
@@ -108,14 +129,16 @@
     [self setTexRect:r];
 }
 
-// 要素の追加
+/**
+ * 要素の追加
+ */
 + (Particle*)add:(eParticle)type x:(float)x y:(float)y rot:(float)rot speed:(float)speed {
     
     GameScene* scene = [GameScene sharedInstance];
     Particle* p = (Particle*)[scene.mgrParticle add];
     if (p) {
         [p set2:x y:y rot:rot speed:speed ax:0 ay:0];
-        
+        [p setType:type];
     }
     
     return p;

@@ -24,6 +24,7 @@ enum eParticle {
     eParticle   m_Type;     // 種別
     BOOL        m_bBlink;   // 点滅して消える
     int         m_Timer;    // タイマー
+    float       m_Val;      // 汎用パラメータ
 }
 
 // 種別の設定

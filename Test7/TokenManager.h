@@ -45,6 +45,12 @@
 - (NSInteger)count;
 
 /**
+ * リーク数を取得する
+ * @return リーク数
+ */
+- (NSInteger)leak;
+
+/**
  * トークンの追加・取得
  * @return トークン
  */

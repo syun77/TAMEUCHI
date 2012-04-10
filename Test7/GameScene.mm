@@ -86,7 +86,7 @@ static GameScene* scene_ = nil;
     [self.mgrShot setPrio:ePrio_Shot];
     
     self.mgrEnemy = [TokenManager node];
-    [self.mgrEnemy create:self.baseLayer size:128 className:@"Enemy"];
+    [self.mgrEnemy create:self.baseLayer size:8 className:@"Enemy"];
     [self.mgrEnemy setPrio:ePrio_Enemy];
     
     self.mgrBullet = [TokenManager node];
@@ -101,19 +101,19 @@ static GameScene* scene_ = nil;
     [self.levelMgr initialize];
     
     self.asciiFont1 = [AsciiFont node];
-    [self.asciiFont1 createFont:self.baseLayer length:16];
+    [self.asciiFont1 createFont:self.baseLayer length:24];
     [self.asciiFont1 setPosScreen:8 y:320-24];
     
     self.asciiFont2 = [AsciiFont node];
-    [self.asciiFont2 createFont:self.baseLayer length:16];
+    [self.asciiFont2 createFont:self.baseLayer length:24];
     [self.asciiFont2 setPosScreen:8 y:320-24-16];
     
     self.asciiFont3 = [AsciiFont node];
-    [self.asciiFont3 createFont:self.baseLayer length:16];
+    [self.asciiFont3 createFont:self.baseLayer length:24];
     [self.asciiFont3 setPosScreen:8 y:320-24-32];
     
     self.asciiFont4 = [AsciiFont node];
-    [self.asciiFont4 createFont:self.baseLayer length:16];
+    [self.asciiFont4 createFont:self.baseLayer length:24];
     [self.asciiFont4 setPosScreen:8 y:320-24-48];
     
     // 更新スケジューラー登録
@@ -151,10 +151,10 @@ static GameScene* scene_ = nil;
     //NSLog(@"update.");
     
     // Tokenの生存数を表示
-    [self.asciiFont4 setText:[NSString stringWithFormat:@"Shot    :%3d", [self.mgrShot count]]];
-    [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d", [self.mgrEnemy count]]];
-    [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d", [self.mgrBullet count]]];
-    [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d", [self.mgrParticle count]]];
+    [self.asciiFont4 setText:[NSString stringWithFormat:@"Shot    :%3d/%3d %3d", [self.mgrShot count], [self.mgrShot max], [self.mgrShot leak]]];
+    [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d/%3d %3d", [self.mgrEnemy count], [self.mgrEnemy max], [self.mgrEnemy leak]]];
+    [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d/%3d %3d", [self.mgrBullet count], [self.mgrBullet max], [self.mgrBullet leak]]];
+    [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
     
     [self.levelMgr update:dt];
 

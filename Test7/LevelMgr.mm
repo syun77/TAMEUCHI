@@ -28,7 +28,7 @@
 - (void)update:(ccTime)dt {
     m_tPast++;
     
-    if (m_tPast%120 == 0) {
+    if (m_tPast%20 == 0) {
         // 敵の生成
         [Enemy add:eEnemy_Nasu x:480/2 y:320/2 rot:Math_Randf(360) speed:320];
         
