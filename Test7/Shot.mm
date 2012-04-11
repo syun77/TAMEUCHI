@@ -28,12 +28,13 @@
     [self.m_pSprite setTextureRect:r];
     
     if (System_IsRetina() == NO) {
-        [self setScale:0.5f];
+        [self setScale:1];
+    }
+    else {
+        [self setScale:2];
     }
     
-    [self setSize2: 8];
-    
-    [self setColor:ccc3(0x80, 0x80, 0xff)];
+    [self setSize2: 16 * self.scale];
     
     return self;
 }

@@ -16,7 +16,7 @@
 #import "Shot.h"
 
 // ダメージタイマー
-static const int TIMER_DAMAGE = 60;
+static const int TIMER_DAMAGE = 30;
 
 /**
  * 自機クラスを実装する
@@ -53,6 +53,40 @@ static const int TIMER_DAMAGE = 60;
 }
 
 /**
+ * 弾を撃つ
+ */
+- (void)checkShot {
+    GameScene* scene = [GameScene sharedInstance];
+    
+    InterfaceLayer* input = scene.interfaceLayer;
+    if ([input isTouch]) {
+        // タッチ中
+        // 移動処理
+        float x = [input getPosX];
+        float y = [input getPosY];
+        m_Target.Set(x, y);
+        
+        // ショットタイマー更新
+        if (m_tShot > 0) {
+            m_tShot--;
+        }
+        if (m_tShot <= 0) {
+            // 弾を撃つ
+            [self shot];
+            m_tShot2++;
+            if (m_tShot2 > 3) {
+                m_tShot = SHOT_TIMER;
+                m_tShot2 = 0;
+            }
+        }
+    }
+    else {
+        m_tShot = 0;
+        m_tShot2 = 0;
+    }
+}
+
+/**
  * 更新
  */
 - (void)update:(ccTime)dt {
@@ -81,35 +115,9 @@ static const int TIMER_DAMAGE = 60;
         // ダメージ中画像
         [self setTexRect:Exerinya_GetRect(eExerinyaRect_PlayerDamage)];
     }
-    
-    
-    InterfaceLayer* input = scene.interfaceLayer;
-    
-    if ([input isTouch]) {
-        // タッチ中
-        // 移動処理
-        float x = [input getPosX];
-        float y = [input getPosY];
-        m_Target.Set(x, y);
-        
-        // ショットタイマー更新
-        if (m_tShot > 0) {
-            m_tShot--;
-        }
-        if (m_tShot <= 0) {
-            // 弾を撃つ
-            [self shot];
-            m_tShot2++;
-            if (m_tShot2 > 3) {
-                m_tShot = SHOT_TIMER;
-                m_tShot2 = 0;
-            }
-        }
-    }
-    else {
-        m_tShot = 0;
-        m_tShot2 = 0;
-    }
+
+    // 弾を撃つ
+    [self checkShot];
     
     Vec2D vP = Vec2D(self._x, self._y);
     Vec2D vM = m_Target - vP;
