@@ -321,7 +321,7 @@
     if (m_isCreate) {
         
         // スケジューラから破棄
-        [self removeAllChildrenWithCleanup:YES];
+        [self removeFromParentAndCleanup:YES];
         
         // 存在フラグを下げる
         [self setExist:NO];

@@ -1144,7 +1144,7 @@
 				C70F6033151B6E67003B041E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 		C70F6034151B6E67003B041E /* Build configuration list for PBXNativeTarget "Test7" */ = {
 			isa = XCConfigurationList;
@@ -1153,7 +1153,7 @@
 				C70F6036151B6E67003B041E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
+			defaultConfigurationName = Debug;
 		};
 /* End XCConfigurationList section */
 	};
