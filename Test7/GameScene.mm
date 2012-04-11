@@ -177,6 +177,18 @@ static GameScene* scene_ = nil;
         }
     }
     
+    // 自機 vs 敵
+    for (Enemy* e in self.mgrEnemy.m_Pool) {
+        if ([e isExist] == NO) {
+            continue;
+        }
+        
+        if ([e isHit2:self.player]) {
+            // ダメージ判定
+            [self.player damage:e];
+        }
+    }
+    
 }
 
 @end

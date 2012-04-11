@@ -23,9 +23,13 @@ static const int SHOT_TIMER = 16;
     float   m_ShotRot;  // 弾を撃つ角度
     int     m_tShot;    // 弾を撃つ間隔
     int     m_tShot2;   // 弾を撃つ間隔２
+    int     m_tDamage;  // ダメージタイマー
 }
 
 // 弾を撃つ
 - (void)shot;
+
+// ダメージ
+- (void)damage:(Token*)t;
 
 @end

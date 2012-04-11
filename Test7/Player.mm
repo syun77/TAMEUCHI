@@ -15,6 +15,9 @@
 #import "Enemy.h"
 #import "Shot.h"
 
+// ダメージタイマー
+static const int TIMER_DAMAGE = 60;
+
 /**
  * 自機クラスを実装する
  */
@@ -44,6 +47,7 @@
     m_ShotRot = 0.0f;
     m_tShot = 0;
     m_tShot2 = 0;
+    m_tDamage = 0;
     
     return self;
 }
@@ -61,6 +65,9 @@
     
     // 更新タイマー
     m_tPast++;
+    if (m_tDamage > 0) {
+        m_tDamage--;
+    }
     
     // アニメーション更新
     if (m_tPast%64 / 32) {
@@ -69,6 +76,12 @@
     else {
         [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player2)];
     }
+    
+    if (m_tDamage > 0) {
+        // ダメージ中画像
+        [self setTexRect:Exerinya_GetRect(eExerinyaRect_PlayerDamage)];
+    }
+    
     
     InterfaceLayer* input = scene.interfaceLayer;
     
@@ -120,4 +133,10 @@
     
     
 }
+
+// ダメージ
+- (void)damage:(Token*)t {
+    m_tDamage = TIMER_DAMAGE;
+}
+
 @end
