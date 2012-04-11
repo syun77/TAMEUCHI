@@ -56,6 +56,9 @@
     // 移動
     [self move:dt];
     
+    GameScene* scene = [GameScene sharedInstance];
+    [scene.back setTarget:self._x y:self._y];
+    
     // 更新タイマー
     m_tPast++;
     
@@ -67,7 +70,6 @@
         [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player2)];
     }
     
-    GameScene* scene = [GameScene sharedInstance];
     InterfaceLayer* input = scene.interfaceLayer;
     
     if ([input isTouch]) {

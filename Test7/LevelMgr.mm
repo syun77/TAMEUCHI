@@ -28,9 +28,14 @@
 - (void)update:(ccTime)dt {
     m_tPast++;
     
-    if (m_tPast%20 == 0) {
+    if (m_tPast%40 == 20) {
         // 敵の生成
         [Enemy add:eEnemy_Nasu x:480/2 y:320/2 rot:Math_Randf(360) speed:320];
+        
+    }
+    if (m_tPast%40 == 0) {
+        // 敵の生成
+        [Enemy add:eEnemy_Tako x:480/2 y:320/2 rot:Math_Randf(360) speed:320];
         
     }
 }

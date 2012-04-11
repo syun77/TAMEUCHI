@@ -14,7 +14,11 @@
  * 背景トークン
  */
 @interface Back : Token {
-    
+    float m_TargetX;
+    float m_TargetY;
 }
+
+// 移動座標の設定
+- (void)setTarget:(float)x y:(float)y; 
 
 @end
