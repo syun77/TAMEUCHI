@@ -77,8 +77,7 @@
     
     if (m_Timer > 48) {
         // 普通に消す
-        [self removeFromParentAndCleanup:YES];
-        [self setExist:NO];
+        [self vanish];
     }
     
     if (m_bBlink) {
@@ -96,8 +95,7 @@
             // 消滅
             NSLog(@"vanish[%d]", [self getIndex]);
             
-            [self removeFromParentAndCleanup:YES];
-            [self setExist:NO];
+            [self vanish];
         }
     }
 }

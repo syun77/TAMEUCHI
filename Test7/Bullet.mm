@@ -61,8 +61,7 @@
     
     if( m_Timer > 160 ) {
 //        NSLog(@"Vanish[%d].", [self getIndex]);
-        [self removeFromParentAndCleanup:YES];
-        [self setExist:NO];
+        [self vanish];
         
         float rot = Math_Randf(360);
         for (int i = 0; i < 8; i++) {

@@ -46,15 +46,6 @@
 }
 
 /**
- * 消滅
- */
-- (void)vanish {
-    
-    // 削除する
-    [self removeFromParentAndCleanup:YES];
-    [self setExist:NO];
-}
-/**
  * 更新
  */
 - (void)update:(ccTime)dt {
