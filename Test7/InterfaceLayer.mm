@@ -22,6 +22,8 @@
     
     // タッチ座標を初期化
     m_isTouch = NO;
+    m_StartX = 0;
+    m_StartY = 0;
     m_X = 0;
     m_Y = 0;
 }
@@ -44,8 +46,13 @@
     CGPoint location = [[CCDirector sharedDirector] convertToGL:locationView];
     
     // タッチ座標を設定
+    m_StartX = location.x;
+    m_StartY = location.y;
     m_X = location.x;
     m_Y = location.y;
+    
+    GameScene* scene = [GameScene sharedInstance];
+    [scene.player setStartPos:location.x y:location.y];
     
     // タッチ状態を更新
     m_isTouch = YES;
@@ -86,6 +93,15 @@
 // タッチしているかどうか
 - (BOOL)isTouch {
     return m_isTouch;
+}
+
+// タッチ開始座標
+- (float)startX {
+    return m_StartX;
+}
+
+- (float)startY {
+    return m_StartY;
 }
 
 // タッチしている座標を取得

@@ -42,6 +42,7 @@ static const int TIMER_DAMAGE = 30;
     
     [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
     [self setScale:0.5f];
+    [self setSize2:32];
     
     m_tPast = 0;
     m_ShotRot = 0.0f;
@@ -50,6 +51,39 @@ static const int TIMER_DAMAGE = 30;
     m_tDamage = 0;
     
     return self;
+}
+
+// 移動開始座標を設定
+- (void)setStartPos:(float)x y:(float)y {
+    m_Start.x = self._x;
+    m_Start.y = self._y;
+    
+}
+
+/**
+ * 移動量を画面内に収める
+ */
+- (void)clipScreen:(Vec2D*)v {
+    
+    float s = self._r;
+    float x1 = s;
+    float y1 = s;
+    float x2 = System_Width() - s;
+    float y2 = System_Height() - s;
+    
+    if (v->x < x1) {
+        v->x = x1;
+    }
+    if (v->x > x2) {
+        v->x = x2;
+    }
+    if (v->y < y1) {
+        v->y = y1;
+    }
+    if (v->y > y2) {
+        v->y = y2;
+    }
+    
 }
 
 /**
@@ -62,9 +96,15 @@ static const int TIMER_DAMAGE = 30;
     if ([input isTouch]) {
         // タッチ中
         // 移動処理
-        float x = [input getPosX];
-        float y = [input getPosY];
-        m_Target.Set(x, y);
+        float startX = [input startX];
+        float startY = [input startY];
+        float nowX = [input getPosX];
+        float nowY = [input getPosY];
+        float dx = nowX - startX;
+        float dy = nowY - startY;
+        Vec2D v = Vec2D(m_Start.x + dx, m_Start.y + dy);
+        [self clipScreen:&v];
+        m_Target.Set(v.x, v.y);
         
         // ショットタイマー更新
         if (m_tShot > 0) {

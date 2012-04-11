@@ -14,12 +14,18 @@
  */
 @interface InterfaceLayer : CCLayer {
     BOOL  m_isTouch;    // タッチしているかどうか
+    float m_StartX;     // タッチ開始座標(X)
+    float m_StartY;     // タッチ開始座標(Y)
     float m_X;          // タッチしている座標(X)
     float m_Y;          // タッチしている座標(Y)
 }
 
 // タッチしているかどうか
 - (BOOL)isTouch;
+
+// タッチ開始座標
+- (float)startX;
+- (float)startY;
 
 // タッチしている座標を取得
 - (float)getPosX;
