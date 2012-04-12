@@ -19,6 +19,14 @@
 static const int TIMER_DAMAGE = 30;
 
 /**
+ * 状態
+ */
+enum eState {
+    eState_Standby, // 待機
+    eState_Damage,  // ダメージ
+};
+
+/**
  * 自機クラスを実装する
  */
 @implementation Player
@@ -44,6 +52,8 @@ static const int TIMER_DAMAGE = 30;
     [self setScale:0.5f];
     [self setSize2:32];
     
+    m_State = eState_Standby;
+    m_Timer = 0;
     m_tPast = 0;
     m_ShotRot = 0.0f;
     m_tShot = 0;
@@ -58,6 +68,11 @@ static const int TIMER_DAMAGE = 30;
     m_Start.x = self._x;
     m_Start.y = self._y;
     
+    if (m_State == eState_Damage) {
+        
+        // ダメージ中だったら待機状態に戻す
+        m_State = eState_Standby;
+    }
 }
 
 /**
@@ -126,23 +141,69 @@ static const int TIMER_DAMAGE = 30;
     }
 }
 
+- (void)updateStandby:(ccTime)dt {
+    
+    // 弾を撃つ
+    [self checkShot];
+    
+    // 移動処理
+    Vec2D vP = Vec2D(self._x, self._y);
+    Vec2D vM = m_Target - vP;
+    vM *= 10.0f;
+    
+    self._x += vM.x * dt;
+    self._y += vM.y * dt;
+    
+}
+
+- (void)updateDamage:(ccTime)dt {
+    m_Timer--;
+    if (m_Timer < 1) {
+        // ダメージ状態終了
+        m_State = eState_Standby;
+        
+        // 移動先を更新
+        m_Target.Set(self._x, self._y);
+        
+    }
+    
+}
+
 /**
  * 更新
  */
 - (void)update:(ccTime)dt {
     
-    // 移動
-    [self move:dt];
-    
-    GameScene* scene = [GameScene sharedInstance];
-    [scene.back setTarget:self._x y:self._y];
-    
-    // 更新タイマー
+    // タイマー更新
     m_tPast++;
     if (m_tDamage > 0) {
         m_tDamage--;
     }
     
+    // 移動
+    self._vx *= 0.95f;
+    self._vy *= 0.95f;
+    [self move:dt];
+    
+    // 背景を動かす
+    GameScene* scene = [GameScene sharedInstance];
+    [scene.back setTarget:self._x y:self._y];
+    
+    
+    switch (m_State) {
+        case eState_Standby:
+            [self updateStandby:dt];
+            break;
+        
+        case eState_Damage:
+            [self updateDamage:dt];
+            break;
+            
+        default:
+            break;
+    }
+    
+
     // アニメーション更新
     if (m_tPast%64 / 32) {
         [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
@@ -155,17 +216,6 @@ static const int TIMER_DAMAGE = 30;
         // ダメージ中画像
         [self setTexRect:Exerinya_GetRect(eExerinyaRect_PlayerDamage)];
     }
-
-    // 弾を撃つ
-    [self checkShot];
-    
-    Vec2D vP = Vec2D(self._x, self._y);
-    Vec2D vM = m_Target - vP;
-    vM *= 10.0f;
-    
-    self._x += vM.x * dt;
-    self._y += vM.y * dt;
-    
 }
 
 // 弾を撃つ
@@ -185,6 +235,14 @@ static const int TIMER_DAMAGE = 30;
 // ダメージ
 - (void)damage:(Token*)t {
     m_tDamage = TIMER_DAMAGE;
+    m_Timer = TIMER_DAMAGE;
+    m_State = eState_Damage;
+    
+    Vec2D d = Vec2D(self._x - t._x, self._y - t._y);
+    d.Normalize();
+    d *= 200;
+    self._vx = d.x;
+    self._vy = d.y;
 }
 
 @end

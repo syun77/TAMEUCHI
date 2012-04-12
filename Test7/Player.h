@@ -17,7 +17,8 @@ static const int SHOT_TIMER = 16;
  * 自機クラス定義
  */
 @interface Player : Token {
-    
+    int     m_State;    // 状態
+    int     m_Timer;    // 汎用タイマー
     int     m_tPast;    // 更新タイマー
     Vec2D   m_Start;    // 移動開始座標
     Vec2D   m_Target;   // 移動目標座標
