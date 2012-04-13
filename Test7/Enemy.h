@@ -43,6 +43,6 @@ enum eEnemy {
 - (void)setType:(eEnemy)type;
 
 // 弾がヒットした
-- (BOOL)hit:(float)x y:(float)y;
+- (BOOL)hit:(float)dx y:(float)dy;
 
 @end

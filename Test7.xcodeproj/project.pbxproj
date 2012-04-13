@@ -139,6 +139,7 @@
 		C786B3811525426300049CA8 /* Math.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37E1525426300049CA8 /* Math.mm */; };
 		C786B3821525426300049CA8 /* Token.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37F1525426300049CA8 /* Token.mm */; };
 		C786B3831525426300049CA8 /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B3801525426300049CA8 /* TokenManager.mm */; };
+		C7A13EE1153872DC00B53149 /* Aim.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7A13EE0153872DC00B53149 /* Aim.mm */; };
 		C7E47378152F3EB7008EACDF /* LevelMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7E47377152F3EB7008EACDF /* LevelMgr.mm */; };
 		C7F053AA152B14EA0095B76E /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7F053A9152B14EA0095B76E /* all.png */; };
 		C7F053AE152B15CF0095B76E /* Exerinya.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F053AD152B15CF0095B76E /* Exerinya.mm */; };
@@ -409,6 +410,8 @@
 		C786B37E1525426300049CA8 /* Math.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Math.mm; sourceTree = "<group>"; };
 		C786B37F1525426300049CA8 /* Token.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Token.mm; sourceTree = "<group>"; };
 		C786B3801525426300049CA8 /* TokenManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TokenManager.mm; sourceTree = "<group>"; };
+		C7A13EDF153872DC00B53149 /* Aim.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Aim.h; sourceTree = "<group>"; };
+		C7A13EE0153872DC00B53149 /* Aim.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Aim.mm; sourceTree = "<group>"; };
 		C7D722E21524B550000AFB86 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		C7E47376152F3EB7008EACDF /* LevelMgr.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LevelMgr.h; sourceTree = "<group>"; };
 		C7E47377152F3EB7008EACDF /* LevelMgr.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = LevelMgr.mm; sourceTree = "<group>"; };
@@ -828,6 +831,8 @@
 				C73FEC24152BEED5008B5697 /* Back.mm */,
 				C7D722E21524B550000AFB86 /* Player.h */,
 				C786B37C15253E1A00049CA8 /* Player.mm */,
+				C7A13EDF153872DC00B53149 /* Aim.h */,
+				C7A13EE0153872DC00B53149 /* Aim.mm */,
 				C73FEC2A152BF45E008B5697 /* Shot.h */,
 				C73FEC2B152BF45E008B5697 /* Shot.mm */,
 				C73FEC27152BF448008B5697 /* Enemy.h */,
@@ -1059,6 +1064,7 @@
 				C73FEC2C152BF45F008B5697 /* Shot.mm in Sources */,
 				C7E47378152F3EB7008EACDF /* LevelMgr.mm in Sources */,
 				C752C7EA15310AAE002EC31B /* System.mm in Sources */,
+				C7A13EE1153872DC00B53149 /* Aim.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

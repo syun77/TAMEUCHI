@@ -21,6 +21,7 @@ enum {
     ePrio_Item,     // アイテム
     ePrio_Enemy,    // 敵
     ePrio_Bullet,   // 敵弾
+    ePrio_Aim,      // 照準
     ePrio_Particle, // パーティクル
 };
 
@@ -35,6 +36,7 @@ static GameScene* scene_ = nil;
 @synthesize baseLayer;
 @synthesize back;
 @synthesize player;
+@synthesize aim;
 @synthesize mgrShot;
 @synthesize mgrEnemy;
 @synthesize mgrBullet;
@@ -77,6 +79,9 @@ static GameScene* scene_ = nil;
     
     self.player = [Player node];
     [self.baseLayer addChild:self.player z:ePrio_Player];
+    
+    self.aim = [Aim node];
+    [self.baseLayer addChild:self.aim z:ePrio_Aim];
     
     self.interfaceLayer = [InterfaceLayer node];
     [self.baseLayer addChild:self.interfaceLayer];
@@ -139,6 +144,7 @@ static GameScene* scene_ = nil;
     self.mgrBullet = nil;
     self.mgrEnemy = nil;
     self.mgrShot = nil;
+    self.aim = nil;
     self.player = nil;
     self.back = nil;
     self.baseLayer = nil;
@@ -172,7 +178,7 @@ static GameScene* scene_ = nil;
             
             if ([s isHit2:e]) {
                 [s hit:e._x y:e._y];
-                [e hit:s._x y:s._y];
+                [e hit:s._vx y:s._vy];
             }
         }
     }

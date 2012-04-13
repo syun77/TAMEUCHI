@@ -29,6 +29,9 @@ struct Vec2D
     // 設定
     void Set(float x, float y)
     {
+        if (isnan(x) || isnan(y)) {
+            assert(0);
+        }
         this->x = x;
         this->y = y;
     }

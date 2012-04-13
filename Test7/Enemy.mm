@@ -158,16 +158,18 @@
 /**
  * 弾がヒットした
  */
-- (BOOL)hit:(float)x y:(float)y {
+- (BOOL)hit:(float)dx y:(float)dy {
     m_Hp--;
     
-    Vec2D v = Vec2D(x - self._x, y - self._y);
+    Vec2D v = Vec2D(dx, dy);
     v.Normalize();
-    v *= -50;
+    v *= 20;
     self._vx += v.x;
     self._vy += v.y;
     
     if (m_Hp <= 0) {
+        
+        // エフェクトの生成
         Particle* p = [Particle add:eParticle_Ring x:self._x y:self._y rot:0 speed:0];
         if (p) {
             [p setScale:0.25];

@@ -14,6 +14,7 @@
 #import "Exerinya.h"
 #import "Enemy.h"
 #import "Shot.h"
+#import "Aim.h"
 
 // ダメージタイマー
 static const int TIMER_DAMAGE = 30;
@@ -37,6 +38,14 @@ enum eState {
  * 自機クラスを実装する
  */
 @implementation Player
+
+/**
+ * 照準を取得
+ */
+- (Aim*)getAim {
+    GameScene* scene = [GameScene sharedInstance];
+    return scene.aim;
+}
 
 /**
  * 初期化
@@ -122,6 +131,13 @@ enum eState {
 - (void)checkShot {
     if ([self isTouch] == NO) {
         // タッチしていない
+        // 一番近い敵を探す
+        Enemy* e = [Enemy getNearest:_x y:_y];
+        if (e) {
+            Aim* aim = [self getAim];
+            [aim setTarget:e._x y:e._y];
+        }
+
         // ショットタイマー更新
         if (m_tShot > 0) {
             m_tShot--;
@@ -262,6 +278,12 @@ enum eState {
 // 弾を撃つ
 - (void)shot {
     
+    Aim* aim = [self getAim];
+    Vec2D v = Vec2D(aim._x - self._x, aim._y - self._y);
+    
+    // 弾を撃つ
+    [Shot add:self._x y:self._y rot:v.Rot() + Math_RandFloat(-5, 5) speed:SPEED_SHOT];
+    
     // 一番近い敵を探す
     Enemy* e = [Enemy getNearest:_x y:_y];
     if (e) {
@@ -271,7 +293,7 @@ enum eState {
     }
     
     // 弾を撃つ
-    [Shot add:self._x y:self._y rot:m_ShotRot speed:SPEED_SHOT];
+    //[Shot add:self._x y:self._y rot:m_ShotRot speed:SPEED_SHOT];
     
     
 }
