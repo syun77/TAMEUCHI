@@ -121,7 +121,7 @@ enum eState {
  */
 - (void)checkShot {
     if ([self isTouch] == NO) {
-        // タッチ中
+        // タッチしていない
         // ショットタイマー更新
         if (m_tShot > 0) {
             m_tShot--;
