@@ -141,6 +141,9 @@ enum eState {
     }
 }
 
+/**
+ * 更新・待機中
+ */
 - (void)updateStandby:(ccTime)dt {
     
     // 弾を撃つ
@@ -156,6 +159,9 @@ enum eState {
     
 }
 
+/**
+ * 更新・ダメージ中
+ */
 - (void)updateDamage:(ccTime)dt {
     m_Timer--;
     if (m_Timer < 1) {
@@ -165,6 +171,25 @@ enum eState {
         // 移動先を更新
         m_Target.Set(self._x, self._y);
         
+    }
+    
+}
+
+/**
+ * 更新・アニメ
+ */
+- (void)updateAnime {
+    // アニメーション更新
+    if (m_tPast%64 / 32) {
+        [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
+    }
+    else {
+        [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player2)];
+    }
+    
+    if (m_tDamage > 0) {
+        // ダメージ中画像
+        [self setTexRect:Exerinya_GetRect(eExerinyaRect_PlayerDamage)];
     }
     
 }
@@ -189,7 +214,7 @@ enum eState {
     GameScene* scene = [GameScene sharedInstance];
     [scene.back setTarget:self._x y:self._y];
     
-    
+    // 各種更新
     switch (m_State) {
         case eState_Standby:
             [self updateStandby:dt];
@@ -203,19 +228,8 @@ enum eState {
             break;
     }
     
-
     // アニメーション更新
-    if (m_tPast%64 / 32) {
-        [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
-    }
-    else {
-        [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player2)];
-    }
-    
-    if (m_tDamage > 0) {
-        // ダメージ中画像
-        [self setTexRect:Exerinya_GetRect(eExerinyaRect_PlayerDamage)];
-    }
+    [self updateAnime];
 }
 
 // 弾を撃つ
