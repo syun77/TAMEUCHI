@@ -120,7 +120,7 @@ enum eState {
  * 弾を撃つ
  */
 - (void)checkShot {
-    if ([self isTouch]) {
+    if ([self isTouch] == NO) {
         // タッチ中
         // ショットタイマー更新
         if (m_tShot > 0) {
