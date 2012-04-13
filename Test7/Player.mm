@@ -209,6 +209,10 @@ enum eState {
     self._vx *= 0.95f;
     self._vy *= 0.95f;
     [self move:dt];
+    Vec2D v = Vec2D(self._x, self._y);
+    [self clipScreen:&v];
+    self._x = v.x;
+    self._y = v.y;
     
     // 背景を動かす
     GameScene* scene = [GameScene sharedInstance];
