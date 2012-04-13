@@ -18,6 +18,13 @@
 // ダメージタイマー
 static const int TIMER_DAMAGE = 30;
 
+// ダメージ時の移動量
+static const float SPEED_DAMAGE = 200;
+
+// 弾の移動量
+static const float SPEED_SHOT = 360;
+
+
 /**
  * 状態
  */
@@ -102,25 +109,19 @@ enum eState {
 }
 
 /**
+ * タッチしているかどうか
+ */
+- (BOOL)isTouch {
+    GameScene* scene = [GameScene sharedInstance];
+    return [scene.interfaceLayer isTouch];
+}
+
+/**
  * 弾を撃つ
  */
 - (void)checkShot {
-    GameScene* scene = [GameScene sharedInstance];
-    
-    InterfaceLayer* input = scene.interfaceLayer;
-    if ([input isTouch]) {
+    if ([self isTouch]) {
         // タッチ中
-        // 移動処理
-        float startX = [input startX];
-        float startY = [input startY];
-        float nowX = [input getPosX];
-        float nowY = [input getPosY];
-        float dx = nowX - startX;
-        float dy = nowY - startY;
-        Vec2D v = Vec2D(m_Start.x + dx, m_Start.y + dy);
-        [self clipScreen:&v];
-        m_Target.Set(v.x, v.y);
-        
         // ショットタイマー更新
         if (m_tShot > 0) {
             m_tShot--;
@@ -142,6 +143,14 @@ enum eState {
 }
 
 /**
+ * 入力インターフェース受け取り
+ */
+- (InterfaceLayer*)getInterfaceLayer {
+    GameScene* scene = [GameScene sharedInstance];
+    return scene.interfaceLayer;
+}
+
+/**
  * 更新・待機中
  */
 - (void)updateStandby:(ccTime)dt {
@@ -150,6 +159,20 @@ enum eState {
     [self checkShot];
     
     // 移動処理
+    if ([self isTouch]) {
+        // タッチ中
+        InterfaceLayer* input = [self getInterfaceLayer];
+        // 移動処理
+        float startX = [input startX];
+        float startY = [input startY];
+        float nowX = [input getPosX];
+        float nowY = [input getPosY];
+        float dx = nowX - startX;
+        float dy = nowY - startY;
+        Vec2D v = Vec2D(m_Start.x + dx, m_Start.y + dy);
+        [self clipScreen:&v];
+        m_Target.Set(v.x, v.y);
+    }
     Vec2D vP = Vec2D(self._x, self._y);
     Vec2D vM = m_Target - vP;
     vM *= 10.0f;
@@ -238,6 +261,8 @@ enum eState {
 
 // 弾を撃つ
 - (void)shot {
+    
+    // 一番近い敵を探す
     Enemy* e = [Enemy getNearest:_x y:_y];
     if (e) {
         float dx = e._x - self._x;
@@ -245,7 +270,8 @@ enum eState {
         m_ShotRot = Math_Atan2Ex(dy, dx);
     }
     
-    [Shot add:self._x y:self._y rot:m_ShotRot speed:360];
+    // 弾を撃つ
+    [Shot add:self._x y:self._y rot:m_ShotRot speed:SPEED_SHOT];
     
     
 }
@@ -258,7 +284,7 @@ enum eState {
     
     Vec2D d = Vec2D(self._x - t._x, self._y - t._y);
     d.Normalize();
-    d *= 200;
+    d *= SPEED_DAMAGE;
     self._vx = d.x;
     self._vy = d.y;
 }
