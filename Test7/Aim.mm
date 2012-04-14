@@ -68,7 +68,7 @@
     [self move:dt];
     
     Vec2D d = Vec2D(m_Target.x - self._x, m_Target.y - self._y);
-    d *= .05f;
+    d *= .09f;
     if (d.LengthSq() < 20) {
         d *= 2.0f;
     }

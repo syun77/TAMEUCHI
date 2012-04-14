@@ -311,6 +311,9 @@ enum eState {
     m_tDamage = TIMER_DAMAGE;
     m_Timer = TIMER_DAMAGE;
     m_State = eState_Damage;
+    
+    // パワーゲージをリセット
+    m_tPower = 0;
    
     // 吹き飛ばす
     Vec2D d = Vec2D(self._x - t._x, self._y - t._y);
