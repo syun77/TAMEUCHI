@@ -141,8 +141,8 @@
 - (void)update:(ccTime)dt {
     [self move:dt];
     
-    self._vx *= 0.95f;
-    self._vy *= 0.95f;
+    self._vx *= 0.9f;
+    self._vy *= 0.9f;
     
     m_Timer++;
     if (m_Timer > 100) {

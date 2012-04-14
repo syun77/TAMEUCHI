@@ -17,9 +17,9 @@
 enum {
     ePrio_Back,     // 背景
     ePrio_Player,   // プレイヤー
-    ePrio_Shot,     // 自弾
     ePrio_Item,     // アイテム
     ePrio_Enemy,    // 敵
+    ePrio_Shot,     // 自弾
     ePrio_Bullet,   // 敵弾
     ePrio_Aim,      // 照準
     ePrio_Particle, // パーティクル

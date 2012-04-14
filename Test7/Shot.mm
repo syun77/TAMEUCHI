@@ -17,6 +17,9 @@
  */
 @implementation Shot
 
+/**
+ * コンストラクタ
+ */
 - (id)init {
     self = [super init];
     if (self == nil) {
@@ -62,12 +65,17 @@
  * 敵に当たった
  */
 - (void)hit:(float)x y:(float)y {
+    
+    // パーティクル発生
     Vec2D v = Vec2D(self._x - x, self._y - y);
     float rot = v.Rot() + Math_RandInt(-30, 30);
     Particle* p = [Particle add:eParticle_Ball x:self._x y:self._y rot:rot speed:200];
     if (p) {
         [p setScale:0.1];
     }
+    
+    // 消滅
+    [self vanish];
 }
 
 + (Shot*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed {

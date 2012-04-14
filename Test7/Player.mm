@@ -71,7 +71,6 @@ enum eState {
     m_State = eState_Standby;
     m_Timer = 0;
     m_tPast = 0;
-    m_ShotRot = 0.0f;
     m_tShot = 0;
     m_tShot2 = 0;
     m_tDamage = 0;
@@ -283,23 +282,12 @@ enum eState {
 // 弾を撃つ
 - (void)shot {
     
+    // 照準に向けて弾を撃つ
     Aim* aim = [self getAim];
     Vec2D v = Vec2D(aim._x - self._x, aim._y - self._y);
     
     // 弾を撃つ
     [Shot add:self._x y:self._y rot:v.Rot() + Math_RandFloat(-5, 5) speed:SPEED_SHOT];
-    
-    // 一番近い敵を探す
-    Enemy* e = [Enemy getNearest:_x y:_y];
-    if (e) {
-        float dx = e._x - self._x;
-        float dy = e._y - self._y;
-        m_ShotRot = Math_Atan2Ex(dy, dx);
-    }
-    
-    // 弾を撃つ
-    //[Shot add:self._x y:self._y rot:m_ShotRot speed:SPEED_SHOT];
-    
     
 }
 
