@@ -74,6 +74,7 @@ enum eState {
     m_tShot = 0;
     m_tShot2 = 0;
     m_tDamage = 0;
+    m_tPower = 0;
     
     return self;
 }
@@ -145,15 +146,25 @@ enum eState {
             // 弾を撃つ
             [self shot];
             m_tShot2++;
-            if (m_tShot2 > 3) {
-                m_tShot = SHOT_TIMER;
-                m_tShot2 = 0;
+            if (m_tPower > 0) {
+                m_tPower--;
+            }
+            else {
+                // パワー切れ
+                if (m_tShot2 > 3) {
+                    m_tShot = SHOT_TIMER;
+                    m_tShot2 = 0;
+                }
+                
             }
         }
     }
     else {
         m_tShot = 0;
         m_tShot2 = 0;
+        
+        // パワーをためる
+        m_tPower++;
     }
 }
 
@@ -173,6 +184,8 @@ enum eState {
     // 弾を撃つ
     [self checkShot];
     
+    Aim* aim = [self getAim];
+    
     // 移動処理
     if ([self isTouch]) {
         // タッチ中
@@ -188,7 +201,14 @@ enum eState {
         Vec2D v = Vec2D(m_Start.x + dx, m_Start.y + dy);
         [self clipScreen:&v];
         m_Target.Set(v.x, v.y);
+        
+        // 照準のどうさフラグを設定
+        [aim setActive:NO];
     }
+    else {
+        [aim setActive:YES];
+    }
+    
     Vec2D vP = Vec2D(self._x, self._y);
     Vec2D vM = m_Target - vP;
     vM *= 10.0f;

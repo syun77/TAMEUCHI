@@ -23,6 +23,8 @@
     
     [self setTargetDirect:System_CenterX() y:System_CenterY()];
     m_tPast = 0;
+    m_tRot = 0;
+    m_bActive = YES;
     
     CGRect r = Exerinya_GetRect(eExerinyaRect_EftRing);
     [self setTexRect:r];
@@ -46,6 +48,11 @@
     m_Target.Set(x, y);
 }
 
+// 動作フラグを設定する
+- (void)setActive:(BOOL)b {
+    m_bActive = b;
+}
+
 // 移動目標座標の取得
 - (Vec2D*)getTarget {
     return &m_Target;
@@ -54,6 +61,10 @@
 // 更新
 - (void)update:(ccTime)dt {
     m_tPast++;
+    m_tRot++;
+    if (m_bActive) {
+        m_tRot++;
+    }
     [self move:dt];
     
     Vec2D d = Vec2D(m_Target.x - self._x, m_Target.y - self._y);
@@ -75,11 +86,13 @@
     const float w = 4;
     const float h = 4;
     for (int i = 0; i < 8; i++) {
-        float rot = i * 360 / 8 + m_tPast * 4;
+        float rot = i * 360 / 8 + m_tRot * 2;
         float cx = self._x + radius * Math_CosEx(rot);
         float cy = self._y - radius * Math_SinEx(rot);
         
-        [self drawRect:cx cy:cy w:w h:h rot:0 scale:0];        
+        glLineWidth(2);
+        
+        [self drawRect:cx cy:cy w:w h:h rot:0 scale:1];        
     }
 }
 

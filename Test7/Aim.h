@@ -17,6 +17,8 @@
 @interface Aim : Token {
     Vec2D m_Target; // 移動目標座標
     int   m_tPast;  // 経過タイマー
+    int   m_tRot;   // 回転タイマー
+    BOOL  m_bActive; // 動作フラグ
 }
 
 // 移動座標を強制的に設定する
@@ -24,6 +26,9 @@
 
 // 移動目標座標の設定
 - (void)setTarget:(float)x y:(float)y;
+
+// 動作フラグを設定する
+- (void)setActive:(BOOL)b;
 
 // 移動目標座標の取得
 - (Vec2D*)getTarget;

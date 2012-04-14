@@ -411,18 +411,20 @@
 // 矩形の描画
 - (void)drawRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float) rot scale:(float)scale {
     
-     float x1 = cx - w;
-     float y1 = cy - h;
-     float x2 = cx + w;
-     float y2 = cy + h;
-     CGPoint vertices[] = {
-     {x1, y1 },
-     {x2, y1 },
-     {x2, y2 },
-     {x1, y2 },
-     };
-     
-     ccDrawPoly(vertices, 4, YES);
+    float width  = w * scale;
+    float height = h * scale;
+    float x1 = cx - width;
+    float y1 = cy - height;
+    float x2 = cx + width;
+    float y2 = cy + height;
+    CGPoint vertices[] = {
+        {x1, y1 },
+        {x2, y1 },
+        {x2, y2 },
+        {x1, y2 },
+    };
+    
+    ccDrawPoly(vertices, 4, YES);
     
 }
 

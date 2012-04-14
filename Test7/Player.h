@@ -25,6 +25,7 @@ static const int SHOT_TIMER = 16;
     int     m_tShot;    // 弾を撃つ間隔
     int     m_tShot2;   // 弾を撃つ間隔２
     int     m_tDamage;  // ダメージタイマー
+    int     m_tPower;   // パワーゲージ
 }
 
 // 移動開始座標を設定

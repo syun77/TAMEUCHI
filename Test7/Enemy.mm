@@ -44,7 +44,7 @@
     [self setSize2:32];
     
     m_Timer = 0;
-    m_Hp    = 10;
+    m_Hp    = 3;
     
 }
 
