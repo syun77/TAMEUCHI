@@ -37,4 +37,7 @@ static const int SHOT_TIMER = 16;
 // ダメージ
 - (void)damage:(Token*)t;
 
+// パワーの取得
+- (int)getPower;
+
 @end

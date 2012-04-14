@@ -145,17 +145,12 @@ enum eState {
         if (m_tShot <= 0) {
             // 弾を撃つ
             [self shot];
-            m_tShot2++;
             if (m_tPower > 0) {
                 m_tPower--;
             }
             else {
                 // パワー切れ
-                if (m_tShot2 > 3) {
-                    m_tShot = SHOT_TIMER;
-                    m_tShot2 = 0;
-                }
-                
+                m_tShot = SHOT_TIMER;
             }
         }
     }
@@ -324,6 +319,11 @@ enum eState {
     self._vx = d.x;
     self._vy = d.y;
     
+}
+
+// パワーの取得
+- (int)getPower {
+    return m_tPower;
 }
 
 @end

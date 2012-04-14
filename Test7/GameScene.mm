@@ -47,6 +47,7 @@ static GameScene* scene_ = nil;
 @synthesize asciiFont2;
 @synthesize asciiFont3;
 @synthesize asciiFont4;
+@synthesize asciiFont5;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance {
@@ -121,6 +122,10 @@ static GameScene* scene_ = nil;
     [self.asciiFont4 createFont:self.baseLayer length:24];
     [self.asciiFont4 setPosScreen:8 y:320-24-48];
     
+    self.asciiFont5 = [AsciiFont node];
+    [self.asciiFont5 createFont:self.baseLayer length:24];
+    [self.asciiFont5 setPosScreen:8 y:320-24-64];
+    
     // 更新スケジューラー登録
     [self scheduleUpdate];
     
@@ -135,6 +140,7 @@ static GameScene* scene_ = nil;
     [self unscheduleUpdate];
     
     // インスタンス開放
+    self.asciiFont5 = nil;
     self.asciiFont4 = nil;
     self.asciiFont3 = nil;
     self.asciiFont2 = nil;
@@ -161,6 +167,8 @@ static GameScene* scene_ = nil;
     [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d/%3d %3d", [self.mgrEnemy count], [self.mgrEnemy max], [self.mgrEnemy leak]]];
     [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d/%3d %3d", [self.mgrBullet count], [self.mgrBullet max], [self.mgrBullet leak]]];
     [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
+    
+    [self.asciiFont5 setText:[NSString stringWithFormat:@"Power: %3d", [self.player getPower]]];
     
     [self.levelMgr update:dt];
 
