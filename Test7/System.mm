@@ -55,7 +55,15 @@ float System_CenterX()
 /**
  * 中心座標(Y)を取得する
  */
-float SYstem_CenterY()
+float System_CenterY()
 {
     return System_Height() / 2.0f;
+}
+
+/**
+ * 当たり判定を描画するかどうか
+ */
+bool System_IsDispCollision()
+{
+    return YES;
 }

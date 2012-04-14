@@ -61,7 +61,7 @@ enum eState {
     [self create];
     
     self._x = System_CenterX();
-    self._y = SYstem_CenterY();
+    self._y = System_CenterY();
     m_Target.Set(self._x, self._y);
     
     [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
@@ -183,6 +183,7 @@ enum eState {
         float startY = [input startY];
         float nowX = [input getPosX];
         float nowY = [input getPosY];
+        // 相対で移動する
         float dx = nowX - startX;
         float dy = nowY - startY;
         Vec2D v = Vec2D(m_Start.x + dx, m_Start.y + dy);
@@ -210,6 +211,10 @@ enum eState {
         // 移動先を更新
         m_Target.Set(self._x, self._y);
         
+        // タッチ開始座標をリセットする
+        InterfaceLayer* input = [self getInterfaceLayer];
+        [input resetStartPos];
+        m_Start.Set(self._x, self._y);
     }
     
 }
@@ -303,12 +308,14 @@ enum eState {
     m_tDamage = TIMER_DAMAGE;
     m_Timer = TIMER_DAMAGE;
     m_State = eState_Damage;
-    
+   
+    // 吹き飛ばす
     Vec2D d = Vec2D(self._x - t._x, self._y - t._y);
     d.Normalize();
     d *= SPEED_DAMAGE;
     self._vx = d.x;
     self._vy = d.y;
+    
 }
 
 @end

@@ -104,6 +104,12 @@
     return m_StartY;
 }
 
+// タッチ開始座標をリセットする
+- (void)resetStartPos {
+    m_StartX = m_X;
+    m_StartY = m_Y;
+}
+
 // タッチしている座標を取得
 - (float)getPosX {
     return m_X;

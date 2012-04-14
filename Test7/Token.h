@@ -110,6 +110,9 @@ enum eBlend {
 // テクスチャ描画範囲を指定する
 - (void)setTexRect:(CGRect) rect;
 
+// 矩形の描画
+- (void)drawRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float) rot scale:(float)scale;
+
 
 
 // ■プロパティ設定

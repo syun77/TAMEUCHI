@@ -21,7 +21,7 @@
     
     [self create];
     
-    [self setTargetDirect:System_CenterX() y:SYstem_CenterY()];
+    [self setTargetDirect:System_CenterX() y:System_CenterY()];
     m_tPast = 0;
     
     CGRect r = Exerinya_GetRect(eExerinyaRect_EftRing);
@@ -66,6 +66,21 @@
     
     float scale = 0.25f + (float)(0.25f * (m_tPast%30) / 30);
     [self setScale:scale];
+}
+
+- (void)visit {
+    glColor4f(0, 1, 0, 1);
+    
+    const float radius = 32;
+    const float w = 4;
+    const float h = 4;
+    for (int i = 0; i < 8; i++) {
+        float rot = i * 360 / 8 + m_tPast * 4;
+        float cx = self._x + radius * Math_CosEx(rot);
+        float cy = self._y - radius * Math_SinEx(rot);
+        
+        [self drawRect:cx cy:cy w:w h:h rot:0 scale:0];        
+    }
 }
 
 @end

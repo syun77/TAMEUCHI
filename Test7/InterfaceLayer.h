@@ -27,6 +27,9 @@
 - (float)startX;
 - (float)startY;
 
+// タッチ開始座標をリセットする
+- (void)resetStartPos;
+
 // タッチしている座標を取得
 - (float)getPosX;
 - (float)getPosY;

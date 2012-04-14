@@ -408,5 +408,33 @@
     [self.m_pSprite setTextureRect:rect];
 }
 
+// 矩形の描画
+- (void)drawRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float) rot scale:(float)scale {
+    
+     float x1 = cx - w;
+     float y1 = cy - h;
+     float x2 = cx + w;
+     float y2 = cy + h;
+     CGPoint vertices[] = {
+     {x1, y1 },
+     {x2, y1 },
+     {x2, y2 },
+     {x1, y2 },
+     };
+     
+     ccDrawPoly(vertices, 4, YES);
+    
+}
+
+- (void)visit {
+    [super visit];
+    
+    if (System_IsDispCollision()) {
+        CGPoint center = CGPointMake(self._x, self._y);
+        glColor4f(1, 0, 0, 1);
+        ccDrawCircle(center, self._r, 0, 20, YES);
+    }
+    
+}
 
 @end

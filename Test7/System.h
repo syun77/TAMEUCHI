@@ -25,4 +25,7 @@ float System_Height();
 float System_CenterX();
 
 // 中心座標(Y)を取得する
-float SYstem_CenterY();
+float System_CenterY();
+
+// 当たり判定を描画するかどうか
+bool System_IsDispCollision();

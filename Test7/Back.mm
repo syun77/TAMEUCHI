@@ -29,7 +29,7 @@
     [self create];
     
     self._x = System_CenterX();
-    self._y = SYstem_CenterY();
+    self._y = System_CenterY();
     [self move:0];
     
     // 背景画像を設定
@@ -50,9 +50,9 @@
     const float RATIO_Y = -0.5;
     
     float dx = x - System_CenterX();
-    float dy = y - SYstem_CenterY();
+    float dy = y - System_CenterY();
     float px = System_CenterX() + (dx * RATIO_X);
-    float py = SYstem_CenterY() + (dy * RATIO_Y);
+    float py = System_CenterY() + (dy * RATIO_Y);
     m_TargetX = px;
     m_TargetY = py;
 }
