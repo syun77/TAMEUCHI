@@ -26,6 +26,9 @@ static const float SPEED_DAMAGE = 200;
 // 弾の移動量
 static const float SPEED_SHOT = 360;
 
+// チャージが有効となる開始時間
+static const int TIMER_CHARGE_START = 60;
+
 
 /**
  * 状態
@@ -81,7 +84,6 @@ enum eState {
     m_Timer = 0;
     m_tPast = 0;
     m_tShot = 0;
-    m_tShot2 = 0;
     m_tDamage = 0;
     m_tPower = 0;
     
@@ -165,7 +167,6 @@ enum eState {
     }
     else {
         m_tShot = 0;
-        m_tShot2 = 0;
         
         // パワーをためる
         m_tPower++;
@@ -211,8 +212,7 @@ enum eState {
         [aim setActive:NO];
         
         // チャージエフェクト有効
-        [charge setVisible:YES];
-        [charge setPos:self._x y:self._y];
+        [charge reqestStart:self._x y:self._y];
         
     }
     else {
@@ -331,9 +331,9 @@ enum eState {
     // パワーゲージをリセット
     m_tPower = 0;
     
-    // チャージエフェクト非表示
+    // チャージエフェクト終了
     Charge* charge = [self getCharge];
-    [charge setVisible:NO];
+    [charge reqestEnd];
    
     // 吹き飛ばす
     Vec2D d = Vec2D(self._x - t._x, self._y - t._y);

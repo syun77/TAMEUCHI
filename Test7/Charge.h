@@ -14,7 +14,10 @@
     int m_tPast;    // 経過時間
 }
 
-// 座標を設定する
-- (void)setPos:(float)x y:(float)y;
+// チャージ開始
+- (void)reqestStart:(float)x y:(float)y;
+
+// チャージ終了
+- (void)reqestEnd;
 
 @end

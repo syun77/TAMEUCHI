@@ -20,9 +20,12 @@
     [self load:@"all-hd.png"];
     
     [super create];
-    [self setPos:System_CenterX() y:System_Height()];
+    
+    // エフェクト非表示
+    [self reqestEnd];
     m_tPast = 0;
     
+    // エフェクト描画設定
     CGRect r = Exerinya_GetRect(eExerinyaRect_EftRing);
     [self setTexRect:r];
     
@@ -37,16 +40,26 @@
     m_tPast++;
     float time = (m_tPast % 30) / 30.0f;
     
+    // 拡縮値設定
     self.scale = (1.0f - time) * 1.5f;
+    
+    // α値設定
     [self setAlpha:64 + time*192];
     
     [self move:dt];
 }
 
-// 座標を設定する
-- (void)setPos:(float)x y:(float)y {
+// チャージ開始
+- (void)reqestStart:(float)x y:(float)y {
     self._x = x;
     self._y = y;
+    [self setVisible:YES];
 }
+
+// チャージ終了
+- (void)reqestEnd {
+    [self setVisible:NO];
+}
+
 
 @end
