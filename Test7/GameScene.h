@@ -14,6 +14,7 @@
 #import "Back.h"
 #import "Player.h"
 #import "Aim.h"
+#import "Charge.h"
 #import "AsciiFont.h"
 #import "LevelMgr.h"
 
@@ -25,6 +26,7 @@
     Back*           back;           // 背景画像
     Player*         player;         // プレイヤー
     Aim*            aim;            // 照準
+    Charge*         charge;         // チャージエフェクト
     TokenManager*   mgrShot;        // 自弾
     TokenManager*   mgrEnemy;       // 敵
     TokenManager*   mgrBullet;      // 敵弾
@@ -42,6 +44,7 @@
 @property (nonatomic, retain)Back*              back;
 @property (nonatomic, retain)Player*            player;
 @property (nonatomic, retain)Aim*               aim;
+@property (nonatomic, retain)Charge*            charge;
 @property (nonatomic, retain)TokenManager*      mgrShot;
 @property (nonatomic, retain)TokenManager*      mgrEnemy;
 @property (nonatomic, retain)TokenManager*      mgrBullet;

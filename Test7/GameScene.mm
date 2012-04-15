@@ -22,6 +22,7 @@ enum {
     ePrio_Shot,     // 自弾
     ePrio_Bullet,   // 敵弾
     ePrio_Aim,      // 照準
+    ePrio_Charge,   // チャージエフェクト
     ePrio_Particle, // パーティクル
 };
 
@@ -37,6 +38,7 @@ static GameScene* scene_ = nil;
 @synthesize back;
 @synthesize player;
 @synthesize aim;
+@synthesize charge;
 @synthesize mgrShot;
 @synthesize mgrEnemy;
 @synthesize mgrBullet;
@@ -83,6 +85,9 @@ static GameScene* scene_ = nil;
     
     self.aim = [Aim node];
     [self.baseLayer addChild:self.aim z:ePrio_Aim];
+    
+    self.charge = [Charge node];
+    [self.baseLayer addChild:self.charge z:ePrio_Charge];
     
     self.interfaceLayer = [InterfaceLayer node];
     [self.baseLayer addChild:self.interfaceLayer];
@@ -150,6 +155,7 @@ static GameScene* scene_ = nil;
     self.mgrBullet = nil;
     self.mgrEnemy = nil;
     self.mgrShot = nil;
+    self.charge = nil;
     self.aim = nil;
     self.player = nil;
     self.back = nil;

@@ -15,6 +15,7 @@
 #import "Enemy.h"
 #import "Shot.h"
 #import "Aim.h"
+#import "Charge.h"
 
 // ダメージタイマー
 static const int TIMER_DAMAGE = 30;
@@ -45,6 +46,14 @@ enum eState {
 - (Aim*)getAim {
     GameScene* scene = [GameScene sharedInstance];
     return scene.aim;
+}
+
+/**
+ * チャージエフェクトを取得
+ */
+- (Charge*)getCharge {
+    GameScene* scene = [GameScene sharedInstance];
+    return scene.charge;
 }
 
 /**
@@ -180,6 +189,7 @@ enum eState {
     [self checkShot];
     
     Aim* aim = [self getAim];
+    Charge* charge = [self getCharge];
     
     // 移動処理
     if ([self isTouch]) {
@@ -197,11 +207,17 @@ enum eState {
         [self clipScreen:&v];
         m_Target.Set(v.x, v.y);
         
-        // 照準のどうさフラグを設定
+        // 照準の動作フラグを設定
         [aim setActive:NO];
+        
+        // チャージエフェクト有効
+        [charge setVisible:YES];
+        [charge setPos:self._x y:self._y];
+        
     }
     else {
         [aim setActive:YES];
+        [charge setVisible:NO];
     }
     
     Vec2D vP = Vec2D(self._x, self._y);
@@ -314,6 +330,10 @@ enum eState {
     
     // パワーゲージをリセット
     m_tPower = 0;
+    
+    // チャージエフェクト非表示
+    Charge* charge = [self getCharge];
+    [charge setVisible:NO];
    
     // 吹き飛ばす
     Vec2D d = Vec2D(self._x - t._x, self._y - t._y);

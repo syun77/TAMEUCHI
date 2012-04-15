@@ -143,6 +143,7 @@
 		C7E47378152F3EB7008EACDF /* LevelMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7E47377152F3EB7008EACDF /* LevelMgr.mm */; };
 		C7F053AA152B14EA0095B76E /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7F053A9152B14EA0095B76E /* all.png */; };
 		C7F053AE152B15CF0095B76E /* Exerinya.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F053AD152B15CF0095B76E /* Exerinya.mm */; };
+		C7F0DF55153A83BC006E26E4 /* Charge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F0DF54153A83BC006E26E4 /* Charge.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -418,6 +419,8 @@
 		C7F053A9152B14EA0095B76E /* all.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = all.png; path = Resources/all.png; sourceTree = "<group>"; };
 		C7F053AC152B15CF0095B76E /* Exerinya.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Exerinya.h; sourceTree = "<group>"; };
 		C7F053AD152B15CF0095B76E /* Exerinya.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Exerinya.mm; sourceTree = "<group>"; };
+		C7F0DF53153A83BC006E26E4 /* Charge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Charge.h; sourceTree = "<group>"; };
+		C7F0DF54153A83BC006E26E4 /* Charge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Charge.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -843,6 +846,8 @@
 				C72542EC152614F4004C157A /* Particle.mm */,
 				C7E47376152F3EB7008EACDF /* LevelMgr.h */,
 				C7E47377152F3EB7008EACDF /* LevelMgr.mm */,
+				C7F0DF53153A83BC006E26E4 /* Charge.h */,
+				C7F0DF54153A83BC006E26E4 /* Charge.mm */,
 			);
 			name = Token;
 			sourceTree = "<group>";
@@ -1065,6 +1070,7 @@
 				C7E47378152F3EB7008EACDF /* LevelMgr.mm in Sources */,
 				C752C7EA15310AAE002EC31B /* System.mm in Sources */,
 				C7A13EE1153872DC00B53149 /* Aim.mm in Sources */,
+				C7F0DF55153A83BC006E26E4 /* Charge.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
