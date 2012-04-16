@@ -65,5 +65,6 @@ float System_CenterY()
  */
 bool System_IsDispCollision()
 {
-    return YES;
+//    return YES;
+    return NO;
 }

@@ -27,14 +27,17 @@
     }
     
     [self load:@"all-hd.png"];
-    CGRect r = Exerinya_GetRect(eExerinyaRect_Bullet);
+    CGRect r = Exerinya_GetRect(eExerinyaRect_EftBall);
     [self.m_pSprite setTextureRect:r];
     
+    [self setBlend:eBlend_Add];
+    [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
+    
     if (System_IsRetina() == NO) {
-        [self setScale:1];
+        [self setScale:0.25f];
     }
     else {
-        [self setScale:2];
+        [self setScale:0.5f];
     }
     
     [self setSize2: 16 * self.scale];
