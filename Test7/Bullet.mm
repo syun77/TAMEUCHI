@@ -41,57 +41,25 @@
     
     m_Timer++;
     
-    GameScene* scene = [GameScene sharedInstance];
-    
-    [self setRotation: self.rotation + 5];
-    if (m_Timer > 120) {
-        [self setScale: self.scale * 0.95f];
-        
-        self._vx *= 0.97f;
-        self._vy *= 0.97f;
-        
-        if (m_Timer % 4 < 2) {
-            [self setVisible:YES];
-        } else {
-            [self setVisible:NO];
-        }
-        
-        
-    }
-    
-    if( m_Timer > 160 ) {
+    if([self isOutCircle:self._r]) {
 //        NSLog(@"Vanish[%d].", [self getIndex]);
         [self vanish];
-        
-        float rot = Math_Randf(360);
-        for (int i = 0; i < 8; i++) {
-            rot += Math_Randf(30) + 15;
-            
-            Token* t = (Particle*)[scene.mgrParticle add];
-            [t set2:self._x y:self._y rot:rot speed:360 ax:0 ay:-5];
-        }
         
         return;
         
     }
     
-    if ([self isBoundRectX:32]) {
-        // 横方向ヒット
-        self._vx *= -1;
+}
+
+// オブジェクト追加
++ (Bullet*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed {
+    GameScene* scene = [GameScene sharedInstance];
+    Bullet* b = (Bullet*)[scene.mgrBullet add];
+    if (b) {
+        [b set2:x y:y rot:rot speed:speed ax:0 ay:0];
     }
     
-    if ([self isBoundRectY:32]) {
-        // 縦方向ヒット
-        self._vy *= -1;
-    }
-    
-    //    if ([self isOutRect:32 h:32]) {
-    //        
-    //        NSLog(@"Vanish[%d].", [self getIndex]);
-    //        [self removeFromParentAndCleanup:YES];
-    //        [self setExist:NO];
-    //        return;
-    //    }
+    return b;
 }
 
 @end

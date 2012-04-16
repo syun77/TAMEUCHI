@@ -11,6 +11,7 @@
 #import "Exerinya.h"
 #import "GameScene.h"
 #import "Particle.h"
+#import "Bullet.h"
 
 /**
  * 敵の実装
@@ -110,6 +111,19 @@
 }
 
 /**
+ * 狙い撃ち角度を取得する
+ */
+- (float)getAim {
+    GameScene* scene = [GameScene sharedInstance];
+    Player* p = scene.player;
+    
+    float dx = p._x - self._x;
+    float dy = p._y - self._y;
+    
+    return Math_Atan2Ex(dy, dx);
+}
+
+/**
  * 指定の座標に一番近い敵を探す
  */
 + (Enemy*)getNearest:(float)x y:(float)y {
@@ -145,6 +159,12 @@
     self._vy *= 0.9f;
     
     m_Timer++;
+    if (m_Timer%60 == 0) {
+        // 弾を打つテスト
+        float rot = [self getAim];
+        [Bullet add:self._x y:self._y rot:rot speed:200];
+    }
+    
     if (m_Timer > 100) {
     }
     
