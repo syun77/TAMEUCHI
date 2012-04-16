@@ -8,6 +8,7 @@
 
 #import "Charge.h"
 #import "Exerinya.h"
+#import "Math.h"
 
 @implementation Charge
 
@@ -21,9 +22,9 @@
     
     [super create];
     
-    // エフェクト非表示
-    [self reqestEnd];
-    m_tPast = 0;
+    m_Timer = 0;
+    m_State = eCharge_Disable;
+    [self setParam:eCharge_Disable x:System_CenterX() y:System_CenterY()];
     
     // エフェクト描画設定
     CGRect r = Exerinya_GetRect(eExerinyaRect_EftRing);
@@ -37,29 +38,63 @@
 
 // 更新
 - (void)update:(ccTime)dt {
-    m_tPast++;
-    float time = (m_tPast % 30) / 30.0f;
-    
-    // 拡縮値設定
-    self.scale = (1.0f - time) * 1.5f;
-    
-    // α値設定
-    [self setAlpha:64 + time*192];
+    switch (m_State) {
+        case eCharge_Disable:
+            break;
+            
+        case eCharge_Wait:
+            self.scale = Math_RandFloat(0.8, 1.0);
+            [self setAlpha:96];
+            
+            break;
+            
+        case eCharge_Playing:
+            m_Timer++;
+        {
+            float time = (m_Timer % 30) / 30.0f;
+            
+            // 拡縮値設定
+            self.scale = (1.0f - time) * 1.5f;
+            
+            // α値設定
+            [self setAlpha:64 + time*192];
+        }
+            break;
+            
+        default:
+            break;
+    }
     
     [self move:dt];
 }
 
-// チャージ開始
-- (void)reqestStart:(float)x y:(float)y {
+// パラメータ設定
+- (void)setParam:(eCharge)state x:(float)x y:(float)y {
+
+    
+    if (state != m_State) {
+        m_Timer = 0;
+    }
+    m_State = state;
     self._x = x;
     self._y = y;
-    [self setVisible:YES];
+    
+    switch (state) {
+        case eCharge_Disable:
+            [self setVisible:NO];
+            break;
+        
+        case eCharge_Wait:
+            [self setVisible:YES];
+            break;
+            
+        case eCharge_Playing:
+            [self setVisible:YES];
+            break;
+            
+        default:
+            break;
+    }
 }
-
-// チャージ終了
-- (void)reqestEnd {
-    [self setVisible:NO];
-}
-
 
 @end

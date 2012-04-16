@@ -27,8 +27,11 @@ static const int SHOT_TIMER = 16;
     int     m_tPower;   // パワーゲージ
 }
 
-// 移動開始座標を設定
-- (void)setStartPos:(float)x y:(float)y;
+// タッチ開始コールバック
+- (void)cbTouchStart:(float)x y:(float)y;
+
+// タッチ終了コールバック
+- (void)cbTouchEnd:(float)x y:(float)y;
 
 // 弾を撃つ
 - (void)shot;

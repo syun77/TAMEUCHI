@@ -22,6 +22,7 @@ static const int TIMER_DAMAGE = 30;
 
 // ダメージ時の移動量
 static const float SPEED_DAMAGE = 200;
+static const float DECAY_DAMAGE = 0.95f; // 移動量の減衰値 
 
 // 弾の移動量
 static const float SPEED_SHOT = 360;
@@ -90,8 +91,9 @@ enum eState {
     return self;
 }
 
-// 移動開始座標を設定
-- (void)setStartPos:(float)x y:(float)y {
+// タッチ開始コールバック
+- (void)cbTouchStart:(float)x y:(float)y {
+    
     m_Start.x = self._x;
     m_Start.y = self._y;
     
@@ -99,6 +101,14 @@ enum eState {
         
         // ダメージ中だったら待機状態に戻す
         m_State = eState_Standby;
+    }
+}
+
+// タッチ終了コールバック
+- (void)cbTouchEnd:(float)x y:(float)y {
+    m_tPower -= TIMER_CHARGE_START;
+    if (m_tPower < 0) {
+        m_tPower = 0;
     }
 }
 
@@ -212,7 +222,14 @@ enum eState {
         [aim setActive:NO];
         
         // チャージエフェクト有効
-        [charge reqestStart:self._x y:self._y];
+        if (m_tPower > TIMER_CHARGE_START) {
+            
+            [charge setParam:eCharge_Playing x:self._x y:self._y];
+        }
+        else {
+            
+            [charge setParam:eCharge_Wait x:self._x y:self._y];
+        }
         
     }
     else {
@@ -280,8 +297,8 @@ enum eState {
     }
     
     // 移動
-    self._vx *= 0.95f;
-    self._vy *= 0.95f;
+    self._vx *= DECAY_DAMAGE;
+    self._vy *= DECAY_DAMAGE;
     [self move:dt];
     Vec2D v = Vec2D(self._x, self._y);
     [self clipScreen:&v];
@@ -333,7 +350,7 @@ enum eState {
     
     // チャージエフェクト終了
     Charge* charge = [self getCharge];
-    [charge reqestEnd];
+    [charge setParam:eCharge_Disable x:self._x y:self._y];
    
     // 吹き飛ばす
     Vec2D d = Vec2D(self._x - t._x, self._y - t._y);

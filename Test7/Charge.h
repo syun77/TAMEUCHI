@@ -10,14 +10,24 @@
 #import "cocos2d.h"
 #import "Token.h"
 
+/**
+ * チャージエフェクト状態
+ */
+enum eCharge {
+    eCharge_Disable,    // 無効状態
+    eCharge_Wait,       // 開始待ち状態
+    eCharge_Playing,    // 動作中
+};
+
+/**
+ * チャージ実装クラス
+ */
 @interface Charge : Token {
-    int m_tPast;    // 経過時間
+    int     m_Timer;    // 汎用タイマ
+    eCharge m_State;    // 状態
 }
 
-// チャージ開始
-- (void)reqestStart:(float)x y:(float)y;
-
-// チャージ終了
-- (void)reqestEnd;
+// パラメータ設定
+- (void)setParam:(eCharge)state x:(float)x y:(float)y;
 
 @end

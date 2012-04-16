@@ -52,7 +52,7 @@
     m_Y = location.y;
     
     GameScene* scene = [GameScene sharedInstance];
-    [scene.player setStartPos:location.x y:location.y];
+    [scene.player cbTouchStart:location.x y:location.y];
     
     // タッチ状態を更新
     m_isTouch = YES;
@@ -77,8 +77,15 @@
  */
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     
+    CGPoint locationView = [touch locationInView:[touch view]];
+    CGPoint location = [[CCDirector sharedDirector] convertToGL:locationView];
+    
+    GameScene* scene = [GameScene sharedInstance];
+    [scene.player cbTouchEnd:location.x y:location.y];
+    
     // タッチ状態を更新
     m_isTouch = NO;
+    
 }
 
 /**
