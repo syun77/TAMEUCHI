@@ -446,6 +446,10 @@
     ccDrawLine(p1, p2);
 }
 
+// 円の描画
+- (void)drawCircle:(float)cx cy:(float)cy radius:(float)radius {
+    ccDrawCircle(CGPointMake(cx, cy), radius, 0, 20, NO);
+}
 
 - (void)visit {
     [super visit];

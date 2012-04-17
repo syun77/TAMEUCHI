@@ -93,19 +93,22 @@
         glColor4f(Math_SinEx((m_tPast*4)%180), 1, 0, 1);
     }
     else {
-        glColor4f(0.5, 0.5, 0.5, 0.5);
+        glColor4f(1, 1, 1, 0.5);
         [self setBlend:eBlend_Normal];
     }
     
-    const float radius = self._r;
+    const float radius = self._r - 4;
+    
+    glLineWidth(1);
+    [self drawCircle:self._x cy:self._y radius:radius-4];
+    [self drawCircle:self._x cy:self._y radius:radius+4];
+    
     const float w = 4;
     const float h = 4;
     for (int i = 0; i < 8; i++) {
         float rot = i * 360 / 8 + m_tRot * 2;
         float cx = self._x + radius * Math_CosEx(rot);
         float cy = self._y - radius * Math_SinEx(rot);
-        
-        glLineWidth(2);
         
         if ([self isActive]) {
             [self fillRect:cx cy:cy w:w h:h rot:0 scale:1];        

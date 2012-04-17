@@ -221,6 +221,9 @@ enum eState {
         // 照準の動作フラグを設定
         [aim setActive:NO];
         
+        // 照準も移動する
+        [aim setTarget:[input getPosX] y:[input getPosY]];
+        
         // チャージエフェクト有効
         if (m_tPower > TIMER_CHARGE_START) {
             

@@ -217,7 +217,8 @@ static GameScene* scene_ = nil;
         }
         
         // 照準 vs 敵弾
-        if ([self.aim isActive]) {
+        //if ([self.aim isActive])
+        {
             if ([b isHit2:self.aim]) {
                 
                 // 敵弾消滅

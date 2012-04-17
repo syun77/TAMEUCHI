@@ -115,6 +115,9 @@ enum eBlend {
 
 - (void)fillRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float)rot scale:(float)scale;
 
+// 円の描画
+- (void)drawCircle:(float)cx cy:(float)cy radius:(float)radius;
+
 
 // ■プロパティ設定
 @property (nonatomic, retain)CCSprite* m_pSprite;
