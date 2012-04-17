@@ -411,6 +411,7 @@
 // 矩形の描画
 - (void)drawRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float) rot scale:(float)scale {
     
+    // TODO: 回転は未実装
     float width  = w * scale;
     float height = h * scale;
     float x1 = cx - width;
@@ -427,6 +428,24 @@
     ccDrawPoly(vertices, 4, YES);
     
 }
+
+- (void)fillRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float)rot scale:(float)scale {
+    
+    // TODO: 回転は未実装
+    float width  = w * scale;
+    float height = h * scale;
+    
+    float x1 = cx - width;
+//    float y1 = cy - height;
+    float x2 = cx + width;
+//    float y2 = cy + height;
+    
+    glLineWidth(height * 2);
+    CGPoint p1 = CGPointMake(x1, cy);
+    CGPoint p2 = CGPointMake(x2, cy);
+    ccDrawLine(p1, p2);
+}
+
 
 - (void)visit {
     [super visit];

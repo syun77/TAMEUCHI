@@ -107,7 +107,13 @@
         
         glLineWidth(2);
         
-        [self drawRect:cx cy:cy w:w h:h rot:0 scale:1];        
+        if ([self isActive]) {
+            [self fillRect:cx cy:cy w:w h:h rot:0 scale:1];        
+        }
+        else {
+            [self drawRect:cx cy:cy w:w h:h rot:0 scale:1];        
+            
+        }
     }
 }
 
