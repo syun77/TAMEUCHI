@@ -51,6 +51,23 @@
     
 }
 
+// ダメージ
+- (void)damage:(Token*)t {
+    
+    float rot = 0;
+    for(int i = 0; i < 8; i++)
+    {
+        rot += 30 + Math_Randf(30);
+        float speed = 100 + Math_Randf(100);
+        Particle* p = [Particle add:eParticle_Ball x:self._x y:self._y rot:rot speed:speed];
+        if (p) {
+            [p setScale:0.25f];
+            [p setColor:ccc3(0xFF, 0, 0)];
+        }
+    }
+    [self vanish];
+}
+
 // オブジェクト追加
 + (Bullet*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed {
     GameScene* scene = [GameScene sharedInstance];

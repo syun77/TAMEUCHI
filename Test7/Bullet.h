@@ -17,4 +17,7 @@
 // オブジェクト追加
 + (Bullet*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed;
 
+// ダメージ
+- (void)damage:(Token*)t;
+
 @end

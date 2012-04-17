@@ -12,6 +12,7 @@
 
 #import "Enemy.h"
 #import "Shot.h"
+#import "Bullet.h"
 
 // 描画プライオリティ
 enum {
@@ -206,6 +207,19 @@ static GameScene* scene_ = nil;
         if ([e isHit2:self.player]) {
             // ダメージ判定
             [self.player damage:e];
+        }
+    }
+    
+    // 自機 vs 敵弾
+    for (Bullet* b in self.mgrBullet.m_Pool) {
+        if ([b isExist] == NO) {
+            continue;
+        }
+        
+        if ([b isHit2:self.player]) {
+            // ダメージ判定
+            [self.player damage:b];
+            [b damage:self.player];
         }
     }
     

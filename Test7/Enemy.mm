@@ -159,10 +159,10 @@
     self._vy *= 0.9f;
     
     m_Timer++;
-    if (m_Timer%60 == 0) {
+    if (m_Timer%240 == 10) {
         // 弾を打つテスト
         float rot = [self getAim];
-        [Bullet add:self._x y:self._y rot:rot speed:200];
+        [Bullet add:self._x y:self._y rot:rot speed:100];
     }
     
     if (m_Timer > 100) {

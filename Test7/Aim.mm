@@ -30,7 +30,6 @@
     [self setTexRect:r];
     
     [self setBlend:eBlend_Add];
-    [self setColor:ccc3(0x00, 0xFF, 0x00)];
     
     return self;
 }
@@ -51,6 +50,11 @@
 // 動作フラグを設定する
 - (void)setActive:(BOOL)b {
     m_bActive = b;
+}
+
+// 動作フラグを取得する
+- (BOOL)isActive {
+    return m_bActive;
 }
 
 // 移動目標座標の取得
@@ -80,7 +84,15 @@
 }
 
 - (void)visit {
-    glColor4f(0, 1, 0, 1);
+    if ([self isActive]) {
+        
+        [self setBlend:eBlend_Add];
+        glColor4f(Math_SinEx((m_tPast*4)%180), 1, 0, 1);
+    }
+    else {
+        glColor4f(0.5, 0.5, 0.5, 0.5);
+        [self setBlend:eBlend_Normal];
+    }
     
     const float radius = 32;
     const float w = 4;

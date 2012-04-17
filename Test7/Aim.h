@@ -30,6 +30,9 @@
 // 動作フラグを設定する
 - (void)setActive:(BOOL)b;
 
+// 動作フラグを取得する
+- (BOOL)isActive;
+
 // 移動目標座標の取得
 - (Vec2D*)getTarget;
 
