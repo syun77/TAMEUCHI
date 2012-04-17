@@ -74,6 +74,7 @@
     }
     [self move:dt];
     
+    // ターゲットに向かって移動する
     Vec2D d = Vec2D(m_Target.x - self._x, m_Target.y - self._y);
     d *= .09f;
     if (d.LengthSq() < 20) {
@@ -86,7 +87,12 @@
     [self setScale:scale];
 }
 
+/**
+ * 照準の描画
+ */
 - (void)visit {
+    
+    // 色の指定
     if ([self isActive]) {
         
         [self setBlend:eBlend_Add];
@@ -97,12 +103,14 @@
         [self setBlend:eBlend_Normal];
     }
     
+    // 円の描画
     const float radius = self._r - 4;
     
     glLineWidth(1);
     [self drawCircle:self._x cy:self._y radius:radius-4];
     [self drawCircle:self._x cy:self._y radius:radius+4];
     
+    // 回る矩形の描画
     const float w = 4;
     const float h = 4;
     for (int i = 0; i < 8; i++) {

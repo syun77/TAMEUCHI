@@ -131,6 +131,7 @@
 		C74FE7A11524892D00298CBB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = C74FE7A01524892D00298CBB /* rect.png */; };
 		C752C7EA15310AAE002EC31B /* System.mm in Sources */ = {isa = PBXBuildFile; fileRef = C752C7E915310AAE002EC31B /* System.mm */; };
 		C7612C9A1526AA88007CCABC /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7612C991526AA88007CCABC /* font.png */; };
+		C76484CF153DBE5D00C79410 /* Gauge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C76484CE153DBE5D00C79410 /* Gauge.mm */; };
 		C76CC3CC1526949600AE1C69 /* LICENSE.cocos2d in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */; };
 		C76CC3CD1526949600AE1C69 /* LICENSE.cocosdenshion in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CB1526949600AE1C69 /* LICENSE.cocosdenshion */; };
 		C786B37915253D7600049CA8 /* InterfaceLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37815253D7600049CA8 /* InterfaceLayer.mm */; };
@@ -403,6 +404,8 @@
 		C752C7E815310AAE002EC31B /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		C752C7E915310AAE002EC31B /* System.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = System.mm; sourceTree = "<group>"; };
 		C7612C991526AA88007CCABC /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Resources/font.png; sourceTree = "<group>"; };
+		C76484CD153DBE5D00C79410 /* Gauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gauge.h; sourceTree = "<group>"; };
+		C76484CE153DBE5D00C79410 /* Gauge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Gauge.mm; sourceTree = "<group>"; };
 		C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		C76CC3CB1526949600AE1C69 /* LICENSE.cocosdenshion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocosdenshion; sourceTree = "<group>"; };
 		C786B37815253D7600049CA8 /* InterfaceLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InterfaceLayer.mm; sourceTree = "<group>"; };
@@ -834,6 +837,10 @@
 				C73FEC24152BEED5008B5697 /* Back.mm */,
 				C7D722E21524B550000AFB86 /* Player.h */,
 				C786B37C15253E1A00049CA8 /* Player.mm */,
+				C7F0DF53153A83BC006E26E4 /* Charge.h */,
+				C7F0DF54153A83BC006E26E4 /* Charge.mm */,
+				C76484CD153DBE5D00C79410 /* Gauge.h */,
+				C76484CE153DBE5D00C79410 /* Gauge.mm */,
 				C7A13EDF153872DC00B53149 /* Aim.h */,
 				C7A13EE0153872DC00B53149 /* Aim.mm */,
 				C73FEC2A152BF45E008B5697 /* Shot.h */,
@@ -846,8 +853,6 @@
 				C72542EC152614F4004C157A /* Particle.mm */,
 				C7E47376152F3EB7008EACDF /* LevelMgr.h */,
 				C7E47377152F3EB7008EACDF /* LevelMgr.mm */,
-				C7F0DF53153A83BC006E26E4 /* Charge.h */,
-				C7F0DF54153A83BC006E26E4 /* Charge.mm */,
 			);
 			name = Token;
 			sourceTree = "<group>";
@@ -1071,6 +1076,7 @@
 				C752C7EA15310AAE002EC31B /* System.mm in Sources */,
 				C7A13EE1153872DC00B53149 /* Aim.mm in Sources */,
 				C7F0DF55153A83BC006E26E4 /* Charge.mm in Sources */,
+				C76484CF153DBE5D00C79410 /* Gauge.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

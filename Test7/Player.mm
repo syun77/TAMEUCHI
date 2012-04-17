@@ -16,6 +16,7 @@
 #import "Shot.h"
 #import "Aim.h"
 #import "Charge.h"
+#import "Gauge.h"
 
 // ダメージタイマー
 static const int TIMER_DAMAGE = 30;
@@ -29,6 +30,9 @@ static const float SPEED_SHOT = 360;
 
 // チャージが有効となる開始時間
 static const int TIMER_CHARGE_START = 60;
+
+// チャージ最大量
+static const int MAX_POWER = 120;
 
 
 /**
@@ -61,6 +65,14 @@ enum eState {
 }
 
 /**
+ * ゲージ描画オブジェクトを取得する
+ */
+- (Gauge*)getGauge {
+    GameScene* scene = [GameScene sharedInstance];
+    return scene.gauge;
+}
+
+/**
  * 初期化
  */
 - (id)init {
@@ -89,6 +101,13 @@ enum eState {
     m_tPower = 0;
     
     return self;
+}
+
+// 開始
+- (void)initialize {
+    
+    Gauge* gauge = [self getGauge];
+    [gauge initialize:MAX_POWER];
 }
 
 // タッチ開始コールバック
@@ -180,6 +199,9 @@ enum eState {
         
         // パワーをためる
         m_tPower++;
+        if (m_tPower > MAX_POWER + TIMER_CHARGE_START) {
+            m_tPower = MAX_POWER + TIMER_CHARGE_START;
+        }
     }
 }
 
@@ -289,6 +311,15 @@ enum eState {
 }
 
 /**
+ * ゲージ更新
+ */
+- (void)updateGauge {
+    Gauge* gauge = [self getGauge];
+    
+    [gauge set:m_tPower - TIMER_CHARGE_START x:self._x y:self._y];
+}
+
+/**
  * 更新
  */
 - (void)update:(ccTime)dt {
@@ -325,6 +356,9 @@ enum eState {
         default:
             break;
     }
+    
+    // ゲージ更新
+    [self updateGauge];
     
     // アニメーション更新
     [self updateAnime];

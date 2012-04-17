@@ -25,6 +25,7 @@ enum {
     ePrio_Aim,      // 照準
     ePrio_Charge,   // チャージエフェクト
     ePrio_Particle, // パーティクル
+    ePrio_UI,       // ユーザインターフェース
 };
 
 
@@ -40,6 +41,7 @@ static GameScene* scene_ = nil;
 @synthesize player;
 @synthesize aim;
 @synthesize charge;
+@synthesize gauge;
 @synthesize mgrShot;
 @synthesize mgrEnemy;
 @synthesize mgrBullet;
@@ -81,14 +83,17 @@ static GameScene* scene_ = nil;
     self.back = [Back node];
     [self.baseLayer addChild:self.back z:ePrio_Back];
     
-    self.player = [Player node];
-    [self.baseLayer addChild:self.player z:ePrio_Player];
-    
     self.aim = [Aim node];
     [self.baseLayer addChild:self.aim z:ePrio_Aim];
     
     self.charge = [Charge node];
     [self.baseLayer addChild:self.charge z:ePrio_Charge];
+    
+    self.gauge = [Gauge node];
+    [self.baseLayer addChild:self.gauge z:ePrio_UI];
+    
+    self.player = [Player node];
+    [self.baseLayer addChild:self.player z:ePrio_Player];
     
     self.interfaceLayer = [InterfaceLayer node];
     [self.baseLayer addChild:self.interfaceLayer];
@@ -135,6 +140,8 @@ static GameScene* scene_ = nil;
     // 更新スケジューラー登録
     [self scheduleUpdate];
     
+    // 初期化するフラグ
+    m_bInitialize = YES;
     
     return self;
 }
@@ -156,6 +163,7 @@ static GameScene* scene_ = nil;
     self.mgrBullet = nil;
     self.mgrEnemy = nil;
     self.mgrShot = nil;
+    self.gauge = nil;
     self.charge = nil;
     self.aim = nil;
     self.player = nil;
@@ -167,7 +175,12 @@ static GameScene* scene_ = nil;
 }
 
 - (void)update:(ccTime)dt {
-    //NSLog(@"update.");
+    if (m_bInitialize) {
+        // 初期化
+        [self.player initialize];
+        
+        m_bInitialize = NO;
+    }
     
     // Tokenの生存数を表示
     [self.asciiFont4 setText:[NSString stringWithFormat:@"Shot    :%3d/%3d %3d", [self.mgrShot count], [self.mgrShot max], [self.mgrShot leak]]];

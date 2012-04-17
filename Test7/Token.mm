@@ -101,6 +101,8 @@
     self._x  = x;  self._y  = y;
     self._vx = vx; self._vy = vy;
     self._ax = ax; self._ay = ay;
+    
+    [self move:0];
 }
 
 - (void)set2:(float)x y:(float)y rot:(float)rot speed:(float)speed ax:(float)ax ay:(float)ay {

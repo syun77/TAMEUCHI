@@ -27,6 +27,9 @@ static const int SHOT_TIMER = 16;
     int     m_tPower;   // パワーゲージ
 }
 
+// 開始
+- (void)initialize;
+
 // タッチ開始コールバック
 - (void)cbTouchStart:(float)x y:(float)y;
 

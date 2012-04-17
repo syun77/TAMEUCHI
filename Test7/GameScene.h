@@ -17,6 +17,7 @@
 #import "Charge.h"
 #import "AsciiFont.h"
 #import "LevelMgr.h"
+#import "Gauge.h"
 
 /**
  * ゲームシーン
@@ -27,6 +28,7 @@
     Player*         player;         // プレイヤー
     Aim*            aim;            // 照準
     Charge*         charge;         // チャージエフェクト
+    Gauge*          gauge;          // チャージゲージ
     TokenManager*   mgrShot;        // 自弾
     TokenManager*   mgrEnemy;       // 敵
     TokenManager*   mgrBullet;      // 敵弾
@@ -38,12 +40,15 @@
     AsciiFont*      ascciFont3;     // フォント
     AsciiFont*      ascciFont4;     // フォント
     AsciiFont*      ascciFont5;     // フォント
+    
+    BOOL            m_bInitialize;    // 初期化フラグ
 }
 
 @property (nonatomic, retain)CCLayer*           baseLayer;
 @property (nonatomic, retain)Back*              back;
 @property (nonatomic, retain)Player*            player;
 @property (nonatomic, retain)Aim*               aim;
+@property (nonatomic, retain)Gauge*             gauge;
 @property (nonatomic, retain)Charge*            charge;
 @property (nonatomic, retain)TokenManager*      mgrShot;
 @property (nonatomic, retain)TokenManager*      mgrEnemy;
