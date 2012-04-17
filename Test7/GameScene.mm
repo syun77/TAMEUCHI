@@ -210,12 +210,23 @@ static GameScene* scene_ = nil;
         }
     }
     
-    // 自機 vs 敵弾
+    // 敵弾の当たり判定チェック
     for (Bullet* b in self.mgrBullet.m_Pool) {
         if ([b isExist] == NO) {
             continue;
         }
         
+        // 照準 vs 敵弾
+        if ([self.aim isActive]) {
+            if ([b isHit2:self.aim]) {
+                
+                // 敵弾消滅
+                [b damage:self.aim];
+                continue;
+            }
+        }
+        
+        // 自機 vs 敵弾
         if ([b isHit2:self.player]) {
             // ダメージ判定
             [self.player damage:b];

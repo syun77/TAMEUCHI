@@ -26,6 +26,9 @@
     m_tRot = 0;
     m_bActive = YES;
     
+    // 照準の半径
+    self._r = 32;
+    
     CGRect r = Exerinya_GetRect(eExerinyaRect_EftRing);
     [self setTexRect:r];
     
@@ -94,7 +97,7 @@
         [self setBlend:eBlend_Normal];
     }
     
-    const float radius = 32;
+    const float radius = self._r;
     const float w = 4;
     const float h = 4;
     for (int i = 0; i < 8; i++) {

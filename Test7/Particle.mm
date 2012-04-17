@@ -41,6 +41,7 @@
     m_bBlink = NO;
     [self setVisible:YES];
     [self setAlpha:255];
+    [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
 }
 
 /**
