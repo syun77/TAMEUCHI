@@ -68,3 +68,19 @@ bool System_IsDispCollision()
 //    return YES;
     return NO;
 }
+
+// ブレンドモードの設定
+void System_SetBlend(eBlend mode) {
+    switch (mode) {
+        case eBlend_Add:
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+            break;
+            
+        case eBlend_Normal:
+            glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
+            break;
+            
+        default:
+            break;
+    }
+}

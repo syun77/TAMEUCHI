@@ -9,6 +9,15 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+enum eBlend {
+    eBlend_Normal,  // 通常合成 (透過・α付き)
+    eBlend_Add,     // 加算合成
+    eBlend_Mul,     // 乗算合成
+    eBlend_Reverse, // 反転合成
+    eBlend_Screen,  // スクリーン合成
+    eBlend_XOR,     // 排他的論理和
+};
+
 // Retinaディスプレイかどうか
 BOOL System_IsRetina();
 
@@ -29,3 +38,6 @@ float System_CenterY();
 
 // 当たり判定を描画するかどうか
 bool System_IsDispCollision();
+
+// ブレンドモードの設定
+void System_SetBlend(eBlend mode);

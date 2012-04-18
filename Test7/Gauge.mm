@@ -39,6 +39,8 @@
     float x = self._x;
     float y = self._y;
     
+    // 加算ブレンド有効
+    System_SetBlend(eBlend_Add);
     glColor4f(1, 0, 0, 1);
     
     int cnt = 7 * m_Now / m_Max;
@@ -52,6 +54,9 @@
         
         [self fillRect:cx cy:cy w:4 h:4 rot:0 scale:1];
     }
+    
+    // 通常に戻す
+    System_SetBlend(eBlend_Normal);
 }
 
 // 初期化

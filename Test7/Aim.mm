@@ -92,15 +92,16 @@
  */
 - (void)visit {
     
+    // 加算ブレンド有効
+    System_SetBlend(eBlend_Add);
+    
     // 色の指定
     if ([self isActive]) {
         
-        [self setBlend:eBlend_Add];
         glColor4f(Math_SinEx((m_tPast*4)%180), 1, 0, 1);
     }
     else {
         glColor4f(1, 1, 1, 0.5);
-        [self setBlend:eBlend_Normal];
     }
     
     // 円の描画
@@ -126,6 +127,9 @@
             
         }
     }
+    
+    // 通常のブレンドモードに戻す
+    System_SetBlend(eBlend_Normal);
 }
 
 @end
