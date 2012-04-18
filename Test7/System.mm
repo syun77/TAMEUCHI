@@ -72,12 +72,28 @@ bool System_IsDispCollision()
 // ブレンドモードの設定
 void System_SetBlend(eBlend mode) {
     switch (mode) {
+        case eBlend_Normal:
+            glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
+            break;
+            
         case eBlend_Add:
             glBlendFunc(GL_SRC_ALPHA, GL_ONE);
             break;
             
-        case eBlend_Normal:
-            glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
+        case eBlend_Mul:
+            glBlendFunc(GL_ZERO, GL_SRC_COLOR);
+            break;
+            
+        case eBlend_XOR:
+            glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ZERO);
+            break;
+            
+        case eBlend_Screen:
+            glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE);
+            break;
+            
+        case eBlend_Reverse:
+            glBlendFunc(GL_ONE_MINUS_DST_COLOR, GL_ONE_MINUS_SRC_COLOR);
             break;
             
         default:

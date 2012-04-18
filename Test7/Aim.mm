@@ -92,22 +92,24 @@
  */
 - (void)visit {
     
-    // 加算ブレンド有効
-    System_SetBlend(eBlend_Add);
     
     // 色の指定
     if ([self isActive]) {
+        // 加算ブレンド有効
+        System_SetBlend(eBlend_Normal);
         
         glColor4f(Math_SinEx((m_tPast*4)%180), 1, 0, 1);
     }
     else {
-        glColor4f(1, 1, 1, 0.5);
+        // 反転ブレンド有効 
+        System_SetBlend(eBlend_XOR);
+        glColor4f(0, 0, 1, 0.5);
     }
     
     // 円の描画
     const float radius = self._r - 4;
     
-    glLineWidth(1);
+    glLineWidth(2);
     [self drawCircle:self._x cy:self._y radius:radius-4];
     [self drawCircle:self._x cy:self._y radius:radius+4];
     
