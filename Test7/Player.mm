@@ -17,6 +17,7 @@
 #import "Aim.h"
 #import "Charge.h"
 #import "Gauge.h"
+#import "GaugeHp.h"
 
 // ダメージタイマー
 static const int TIMER_DAMAGE = 30;
@@ -33,6 +34,9 @@ static const int TIMER_CHARGE_START = 60;
 
 // チャージ最大量
 static const int MAX_POWER = 120;
+
+// HPの最大
+static const int MAX_HP = 100;
 
 
 /**
@@ -73,6 +77,14 @@ enum eState {
 }
 
 /**
+ * HPゲージ描画オブジェクトを取得する
+ */
+- (GaugeHp*)getGaugeHp {
+    GameScene* scene = [GameScene sharedInstance];
+    return scene.gaugeHp;
+}
+
+/**
  * 初期化
  */
 - (id)init {
@@ -108,6 +120,9 @@ enum eState {
     
     Gauge* gauge = [self getGauge];
     [gauge initialize:MAX_POWER];
+    
+    GaugeHp* gaugeHp = [self getGaugeHp];
+    [gaugeHp initialize:MAX_HP];
 }
 
 // タッチ開始コールバック
@@ -317,6 +332,9 @@ enum eState {
     Gauge* gauge = [self getGauge];
     
     [gauge set:m_tPower - TIMER_CHARGE_START x:self._x y:self._y];
+    
+    GaugeHp* gaugeHp = [self getGaugeHp];
+    [gaugeHp set:m_Hp x:self._x y:self._y];
 }
 
 /**

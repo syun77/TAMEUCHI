@@ -18,6 +18,7 @@
 #import "AsciiFont.h"
 #import "LevelMgr.h"
 #import "Gauge.h"
+#import "GaugeHp.h"
 
 /**
  * ゲームシーン
@@ -29,6 +30,7 @@
     Aim*            aim;            // 照準
     Charge*         charge;         // チャージエフェクト
     Gauge*          gauge;          // チャージゲージ
+    GaugeHp*        gaugeHp;        // チャージゲージHP
     TokenManager*   mgrShot;        // 自弾
     TokenManager*   mgrEnemy;       // 敵
     TokenManager*   mgrBullet;      // 敵弾
@@ -49,6 +51,7 @@
 @property (nonatomic, retain)Player*            player;
 @property (nonatomic, retain)Aim*               aim;
 @property (nonatomic, retain)Gauge*             gauge;
+@property (nonatomic, retain)GaugeHp*           gaugeHp;
 @property (nonatomic, retain)Charge*            charge;
 @property (nonatomic, retain)TokenManager*      mgrShot;
 @property (nonatomic, retain)TokenManager*      mgrEnemy;

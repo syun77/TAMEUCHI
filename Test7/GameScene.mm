@@ -25,6 +25,7 @@ enum {
     ePrio_Aim,      // 照準
     ePrio_Charge,   // チャージエフェクト
     ePrio_Particle, // パーティクル
+    ePrio_Gauge,    // ゲージ表示
     ePrio_UI,       // ユーザインターフェース
 };
 
@@ -42,6 +43,7 @@ static GameScene* scene_ = nil;
 @synthesize aim;
 @synthesize charge;
 @synthesize gauge;
+@synthesize gaugeHp;
 @synthesize mgrShot;
 @synthesize mgrEnemy;
 @synthesize mgrBullet;
@@ -90,7 +92,10 @@ static GameScene* scene_ = nil;
     [self.baseLayer addChild:self.charge z:ePrio_Charge];
     
     self.gauge = [Gauge node];
-    [self.baseLayer addChild:self.gauge z:ePrio_UI];
+    [self.baseLayer addChild:self.gauge z:ePrio_Gauge];
+    
+    self.gaugeHp = [GaugeHp node];
+    [self.baseLayer addChild:self.gaugeHp z:ePrio_UI];
     
     self.player = [Player node];
     [self.baseLayer addChild:self.player z:ePrio_Player];
@@ -163,6 +168,7 @@ static GameScene* scene_ = nil;
     self.mgrBullet = nil;
     self.mgrEnemy = nil;
     self.mgrShot = nil;
+    self.gaugeHp = nil;
     self.gauge = nil;
     self.charge = nil;
     self.aim = nil;
