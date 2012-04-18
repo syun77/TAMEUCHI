@@ -43,16 +43,20 @@
     System_SetBlend(eBlend_Add);
     glColor4f(1, 0, 0, 1);
     
-    int cnt = 7 * m_Now / m_Max;
+    
+    const int COUNT_MAX = 8;
+    const int SIZE = 8;
+    
+    int cnt = (COUNT_MAX - 1) * m_Now / m_Max;
     if (m_Now > 0) {
         cnt++;
     }
     for (int i = 0; i < cnt; i++) {
-        float rot = 360 / 8 * i + m_tPast * 8;
+        float rot = 360 / COUNT_MAX * i + m_tPast * 8;
         float cx = x + 40 * Math_CosEx(rot);
         float cy = y + 40 * -Math_SinEx(rot);
         
-        [self fillRect:cx cy:cy w:4 h:4 rot:0 scale:1];
+        [self fillRect:cx cy:cy w:SIZE h:SIZE rot:0 scale:1];
     }
     
     // 通常に戻す
