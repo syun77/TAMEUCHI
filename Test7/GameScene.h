@@ -42,6 +42,7 @@
     AsciiFont*      ascciFont3;     // フォント
     AsciiFont*      ascciFont4;     // フォント
     AsciiFont*      ascciFont5;     // フォント
+    AsciiFont*      ascciFontLevel; // フォント（レベル）
     
     BOOL            m_bInitialize;    // 初期化フラグ
 }
@@ -64,6 +65,7 @@
 @property (nonatomic, retain)AsciiFont*         asciiFont3;
 @property (nonatomic, retain)AsciiFont*         asciiFont4;
 @property (nonatomic, retain)AsciiFont*         asciiFont5;
+@property (nonatomic, retain)AsciiFont*         asciiFontLevel;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance;

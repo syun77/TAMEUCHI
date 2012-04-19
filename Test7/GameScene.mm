@@ -55,6 +55,7 @@ static GameScene* scene_ = nil;
 @synthesize asciiFont3;
 @synthesize asciiFont4;
 @synthesize asciiFont5;
+@synthesize asciiFontLevel;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance {
@@ -142,6 +143,10 @@ static GameScene* scene_ = nil;
     [self.asciiFont5 createFont:self.baseLayer length:24];
     [self.asciiFont5 setPosScreen:8 y:320-24-64];
     
+    self.asciiFontLevel = [AsciiFont node];
+    [self.asciiFontLevel createFont:self.baseLayer length:24];
+    [self.asciiFontLevel setPosScreen:8 y:320-24-80];
+    
     // 更新スケジューラー登録
     [self scheduleUpdate];
     
@@ -158,6 +163,7 @@ static GameScene* scene_ = nil;
     [self unscheduleUpdate];
     
     // インスタンス開放
+    self.asciiFontLevel = nil;
     self.asciiFont5 = nil;
     self.asciiFont4 = nil;
     self.asciiFont3 = nil;
@@ -180,10 +186,26 @@ static GameScene* scene_ = nil;
     [super dealloc];
 }
 
+/**
+ * 初期化
+ */
+- (void)initialize {
+    
+    // プレイヤー初期化
+    [self.player initialize];
+
+    // レベル初期化
+    [self.levelMgr initialize];
+}
+
+/**
+ * 更新
+ */
 - (void)update:(ccTime)dt {
     if (m_bInitialize) {
+        
         // 初期化
-        [self.player initialize];
+        [self initialize];
         
         m_bInitialize = NO;
     }
@@ -195,6 +217,8 @@ static GameScene* scene_ = nil;
     [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
     
     [self.asciiFont5 setText:[NSString stringWithFormat:@"Power: %3d", [self.player getPower]]];
+    
+    [self.asciiFontLevel setText:[NSString stringWithFormat:@"Level: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
     
     [self.levelMgr update:dt];
 
