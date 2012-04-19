@@ -8,7 +8,9 @@
 
 #import "GaugeHp.h"
 
-static const int OFFSET_Y = 64;
+static const int OFFSET_Y = 24;
+static const int HP_WIDTH = 48;
+static const int HP_HEIGHT = 4;
 
 /**
  * HPゲージ描画モジュール
@@ -25,6 +27,8 @@ static const int OFFSET_Y = 64;
     m_Now = 1;
     m_Max = 1;
     m_tPast = 0;
+    m_X = 0;
+    m_Y = 0;
     
     return self;
 }
@@ -36,8 +40,9 @@ static const int OFFSET_Y = 64;
 
 // 現在値を設定
 - (void)set:(int)v x:(float)x y:(float)y {
-    self._x = x;
-    self._y = y;
+    m_X = x;
+    m_Y = y;
+    m_Now = v;
     
     [self move:0];
 }
@@ -49,12 +54,22 @@ static const int OFFSET_Y = 64;
 
 // ゲージ描画
 - (void)visit {
-    float x = self._x;
-    float y = self._y;
+    float x = m_X;
+    float y = m_Y;
     
-    y += OFFSET_Y;
+    y -= OFFSET_Y;
+    x -= HP_WIDTH / 2;
+    y -= HP_HEIGHT / 2;
     
-    [self drawCircle:x cy:y radius:10];
+    float ratio = m_Now / (float)m_Max;
+    
+    glColor4f(1, 0, 0, 1);
+    [self fillRectLT:x y:y w:HP_WIDTH h:HP_HEIGHT rot:0 scale:1];
+    glColor4f(1, 1, 0, 1);
+    [self fillRectLT:x y:y w:HP_WIDTH*ratio h:HP_HEIGHT rot:0 scale:1];
+    glLineWidth(1);
+    glColor4f(0, 1, 0, 1);
+    [self drawRectLT:x y:y w:HP_WIDTH h:HP_HEIGHT rot:0 scale:1];
 }
 
 @end

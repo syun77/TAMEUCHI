@@ -105,6 +105,8 @@
 - (void)drawRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float) rot scale:(float)scale;
 
 - (void)fillRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float)rot scale:(float)scale;
+- (void)drawRectLT:(float)x y:(float)y w:(float)w h:(float)h rot:(float)rot scale:(float)scale;
+- (void)fillRectLT:(float)x y:(float)y w:(float)w h:(float)h rot:(float)rot scale:(float)scale;
 
 // 円の描画
 - (void)drawCircle:(float)cx cy:(float)cy radius:(float)radius;

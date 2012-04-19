@@ -14,6 +14,8 @@
  * HPゲージ表示
  */
 @interface GaugeHp : Token {
+    float m_X; // 描画座標(X)
+    float m_Y; // 描画座標(Y)
     int m_Now; // 現在のゲージ量
     int m_Max; // 最大のゲージ量
     int m_tPast; // 経過時間

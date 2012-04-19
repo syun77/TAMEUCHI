@@ -438,14 +438,32 @@
     float height = h * scale;
     
     float x1 = cx - width;
-//    float y1 = cy - height;
     float x2 = cx + width;
-//    float y2 = cy + height;
     
     glLineWidth(height * 2);
     CGPoint p1 = CGPointMake(x1, cy);
     CGPoint p2 = CGPointMake(x2, cy);
     ccDrawLine(p1, p2);
+}
+
+- (void)drawRectLT:(float)x y:(float)y w:(float)w h:(float)h rot:(float)rot scale:(float)scale {
+    
+    float width = w / 2;
+    float height = h / 2;
+    float cx = x + width;
+    float cy = y + height;
+    
+    [self drawRect:cx cy:cy w:width h:height rot:rot scale:scale];
+}
+
+- (void)fillRectLT:(float)x y:(float)y w:(float)w h:(float)h rot:(float)rot scale:(float)scale {
+    
+    float width = w / 2;
+    float height = h / 2;
+    float cx = x + width;
+    float cy = y + height;
+    
+    [self fillRect:cx cy:cy w:width h:height rot:rot scale:scale];
 }
 
 // 円の描画

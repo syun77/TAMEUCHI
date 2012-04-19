@@ -117,6 +117,9 @@ enum eState {
 
 // 開始
 - (void)initialize {
+   
+    // HP初期化
+    m_Hp = MAX_HP;
     
     Gauge* gauge = [self getGauge];
     [gauge initialize:MAX_POWER];
@@ -232,6 +235,12 @@ enum eState {
  * 更新・待機中
  */
 - (void)updateStandby:(ccTime)dt {
+   
+    // HP 回復
+    m_Hp++;
+    if (m_Hp > MAX_HP) {
+        m_Hp = MAX_HP;
+    }
     
     // 弾を撃つ
     [self checkShot];
@@ -413,6 +422,12 @@ enum eState {
     d *= SPEED_DAMAGE;
     self._vx = d.x;
     self._vy = d.y;
+    
+    // HPを減らす
+    m_Hp -= 5;
+    if (m_Hp < 0) {
+        m_Hp = 0;
+    }
     
 }
 
