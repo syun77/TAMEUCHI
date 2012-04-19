@@ -44,6 +44,7 @@
     
     [self setSize2:32];
     
+    m_Val = Math_Rand(360);
     m_Timer = 0;
     m_Hp    = 3;
     
@@ -135,6 +136,12 @@
     float len = 9999999;
     for (Enemy* e in mgr.m_Pool) {
         if ([e isExist] == NO) {
+            // 存在しない
+            continue;
+        }
+        
+        if ([e isOutCircle:0]) {
+            // 画面外の敵は昇順をあわせない
             continue;
         }
         
@@ -150,6 +157,50 @@
 }
 
 /**
+ * 更新・ナス
+ */
+- (void)updateNasu {
+    const float speed = 100;
+    m_Timer++;
+    if (m_Timer < 2000) {
+        if ([self isOutCircle:-self._r]) {
+            // 画面内に入ろうとする
+            float dx = System_CenterX() - self._x;
+            float dy = System_CenterY() - self._y;
+            if (abs(dx) > abs(dy)) {
+                if (dx > 0) {
+                    self._vx = speed;
+                }
+                else {
+                    self._vx = -speed;
+                }
+            }
+            else {
+                if (dy > 0) {
+                    self._vy = speed;
+                }
+                else {
+                    self._vy = -speed;
+                }
+            }
+        }
+        else {
+            
+        }
+    }
+    
+    Vec2D v = Vec2D(self._vx, self._vy);
+    [self setRotation:Math_SinEx(m_Timer + m_Val) * 15];
+}
+
+/**
+ * 更新・タコ
+ */
+- (void)updateTako {
+    
+}
+
+/**
  * 更新
  */
 - (void)update:(ccTime)dt {
@@ -158,7 +209,15 @@
     self._vx *= 0.9f;
     self._vy *= 0.9f;
     
-    m_Timer++;
+    switch (m_Id) {
+        case eEnemy_Nasu:
+            [self updateNasu];
+            break;
+            
+        default:
+            break;
+    }
+    
     if (m_Timer%240 == 10) {
         // 弾を打つテスト
         float rot = [self getAim];
@@ -167,12 +226,6 @@
     
     if (m_Timer > 100) {
     }
-    
-    if ([super isOutCircle:self._r]) {
-        // 画面外に出た
-        [self vanish];
-    }
-    
 }
 
 /**

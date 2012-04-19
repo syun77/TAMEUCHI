@@ -190,9 +190,9 @@ enum eState {
     if ([self isTouch] == NO) {
         // タッチしていない
         // 一番近い敵を探す
-        Enemy* e = [Enemy getNearest:_x y:_y];
+        Aim* aim = [self getAim];
+        Enemy* e = [Enemy getNearest:aim._x y:aim._y];
         if (e) {
-            Aim* aim = [self getAim];
             [aim setTarget:e._x y:e._y];
         }
 

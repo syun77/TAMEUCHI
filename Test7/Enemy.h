@@ -30,6 +30,7 @@ enum eEnemy {
 @interface Enemy : Token {
     eEnemy  m_Id;       // 敵番号
     int     m_Timer;    // 汎用タイマー
+    int     m_Val;      // 汎用パラメータ
     int     m_Hp;       // HP
 }
 
