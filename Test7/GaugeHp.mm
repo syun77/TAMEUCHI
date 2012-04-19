@@ -54,6 +54,13 @@ static const int HP_HEIGHT = 4;
 
 // ゲージ描画
 - (void)visit {
+    
+    if (m_Now >= m_Max) {
+        
+        // Max値なら描画しない
+        return;
+    }
+    
     float x = m_X;
     float y = m_Y;
     
