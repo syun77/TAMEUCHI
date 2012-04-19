@@ -17,6 +17,8 @@ static const int SHOT_TIMER = 16;
  * 自機クラス定義
  */
 @interface Player : Token {
+    float   m_PrevX;
+    float   m_PrevY;
     int     m_State;    // 状態
     int     m_Timer;    // 汎用タイマー
     int     m_tPast;    // 更新タイマー

@@ -195,6 +195,13 @@ enum eState {
         if (e) {
             [aim setTarget:e._x y:e._y];
         }
+        
+        float nearestLength = 9999999;
+        e = [Enemy getNearest:self._x y:self._y];
+        if (e) {
+            Vec2D v = Vec2D(e._x - self._x, e._y - self._y);
+            nearestLength = v.LengthSq();
+        }
 
         // ショットタイマー更新
         if (m_tShot > 0) {
@@ -208,7 +215,12 @@ enum eState {
             }
             else {
                 // パワー切れ
-                m_tShot = SHOT_TIMER;
+                // 近くに敵がいるほど連射性能がアップ
+                float ratio = nearestLength / (160 * 120);
+                if (ratio > 1) {
+                    ratio = 1;
+                }
+                m_tShot = SHOT_TIMER * ratio;
             }
         }
     }
@@ -332,6 +344,18 @@ enum eState {
         [self setTexRect:Exerinya_GetRect(eExerinyaRect_PlayerDamage)];
     }
     
+    Aim* aim = [self getAim];
+    if ((aim._x - self._x) > 0) {
+        if (self.scaleX < 0) {
+            self.scaleX = -self.scaleX;
+        }
+    }
+    else {
+        if (self.scaleX > 0) {
+            self.scaleX = -self.scaleX;
+        }
+    }
+    
 }
 
 /**
@@ -389,6 +413,9 @@ enum eState {
     
     // アニメーション更新
     [self updateAnime];
+    
+    m_PrevX = self._x;
+    m_PrevY = self._y;
 }
 
 // 弾を撃つ
@@ -399,7 +426,8 @@ enum eState {
     Vec2D v = Vec2D(aim._x - self._x, aim._y - self._y);
     
     // 弾を撃つ
-    [Shot add:self._x y:self._y rot:v.Rot() + Math_RandFloat(-5, 5) speed:SPEED_SHOT];
+    float speed = SPEED_SHOT * (1 + ((float)m_tPower / MAX_POWER));
+    [Shot add:self._x y:self._y rot:v.Rot() + Math_RandFloat(-5, 5) speed:speed];
     
 }
 
