@@ -13,6 +13,7 @@
 #import "Particle.h"
 #import "Bullet.h"
 
+
 /**
  * 敵の実装
  */
@@ -48,6 +49,14 @@
     m_Timer = 0;
     m_Hp    = 3;
     
+}
+
+/**
+ * 目標の相手を取得する
+ */
+- (Player*)getTarget {
+    GameScene* scene = [GameScene sharedInstance];
+    return scene.player;
 }
 
 /**
@@ -115,8 +124,7 @@
  * 狙い撃ち角度を取得する
  */
 - (float)getAim {
-    GameScene* scene = [GameScene sharedInstance];
-    Player* p = scene.player;
+    Player* p = [self getTarget];
     
     float dx = p._x - self._x;
     float dy = p._y - self._y;
@@ -160,33 +168,58 @@
  * 更新・ナス
  */
 - (void)updateNasu {
-    const float speed = 100;
+    const float speedIn  = 100; // 画面に入る速度
+    const float speedMove = 50; // 移動速度
     m_Timer++;
-    if (m_Timer < 2000) {
+    if (m_Timer < 100) {
+        // 登場シーケンス
         if ([self isOutCircle:-self._r]) {
-            // 画面内に入ろうとする
+            // 画面外の場合、画面内に入ろうとする
             float dx = System_CenterX() - self._x;
             float dy = System_CenterY() - self._y;
             if (abs(dx) > abs(dy)) {
                 if (dx > 0) {
-                    self._vx = speed;
+                    self._vx = speedIn;
                 }
                 else {
-                    self._vx = -speed;
+                    self._vx = -speedIn;
                 }
             }
             else {
                 if (dy > 0) {
-                    self._vy = speed;
+                    self._vy = speedIn;
                 }
                 else {
-                    self._vy = -speed;
+                    self._vy = -speedIn;
                 }
             }
         }
-        else {
-            
+    }
+    else if ([self isOutCircle:self._r]) {
+        // 画面外に出たら消える
+        [self vanish];
+        return;
+    }
+    else if (m_Timer > 2000) {
+        // 退場シーケンス
+        float aim = [self getAim];
+        float dx = Math_CosEx(aim) * -speedMove;
+        float dy = -Math_SinEx(aim) * -speedMove;
+        self._vx = dx;
+        self._vy = dy;
+    }
+    else if (m_Timer%320 < 160) {
+        // 移動シーケンス
+        float dx = Math_CosEx(m_Timer) * speedMove;
+        float dy = Math_SinEx(m_Timer) * speedMove;
+        self._vx = dx;
+        self._vy = dy;
+        if (m_Timer%320 == 10) {
+            // 弾を打つ
+            float rot = [self getAim];
+            [Bullet add:self._x y:self._y rot:rot speed:100];
         }
+        
     }
     
     Vec2D v = Vec2D(self._vx, self._vy);
@@ -216,12 +249,6 @@
             
         default:
             break;
-    }
-    
-    if (m_Timer%240 == 10) {
-        // 弾を打つテスト
-        float rot = [self getAim];
-        [Bullet add:self._x y:self._y rot:rot speed:100];
     }
     
     if (m_Timer > 100) {
