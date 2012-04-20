@@ -259,6 +259,7 @@ enum eState {
             m_Hp = MAX_HP;
         }
         
+        m_tRecover -= TIMER_RECOVER * 0.2f;
     }
     
     // 弾を撃つ
@@ -425,6 +426,11 @@ enum eState {
     m_PrevY = self._y;
 }
 
+// HPが最大値かどうか
+- (BOOL)isHpMax {
+    return m_Hp == MAX_HP;
+}
+
 // 弾を撃つ
 - (void)shot {
     
@@ -436,13 +442,15 @@ enum eState {
     float speed = SPEED_SHOT * (1 + ((float)m_tPower / MAX_POWER));
     [Shot add:self._x y:self._y rot:v.Rot() + Math_RandFloat(-5, 5) speed:speed];
     
+    if ([self isHpMax]) {
+        // フルパワー時は3Way
+        [Shot add:self._x y:self._y rot:v.Rot() - 15 speed:speed];
+        [Shot add:self._x y:self._y rot:v.Rot() + 15 speed:speed];
+    }
 }
 
 // ダメージ
 - (void)damage:(Token*)t {
-    m_tDamage = TIMER_DAMAGE;
-    m_Timer = TIMER_DAMAGE;
-    m_State = eState_Damage;
     
     // パワーゲージをリセット
     m_tPower = 0;
@@ -460,10 +468,10 @@ enum eState {
     
     // HPを減らす
     if (m_State == eState_Standby) {
-        m_Hp -= 5;
+        m_Hp -= MAX_HP * 0.1f;
     }
     else {
-        m_Hp -= 1;
+        m_Hp--;
         if (m_Hp < 1) {
             // 連続ダメージでは死なないようにする
             m_Hp = 1;
@@ -476,6 +484,9 @@ enum eState {
     
     // 回復用タイマーをリセットする
     m_tRecover = 0;
+    m_tDamage = TIMER_DAMAGE;
+    m_Timer = TIMER_DAMAGE;
+    m_State = eState_Damage;
 }
 
 // パワーの取得
