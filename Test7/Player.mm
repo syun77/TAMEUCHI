@@ -38,6 +38,9 @@ static const int MAX_POWER = 120;
 // HPの最大
 static const int MAX_HP = 100;
 
+// 回復用タイマー
+static const int TIMER_RECOVER = 60;
+
 
 /**
  * 状態
@@ -248,10 +251,14 @@ enum eState {
  */
 - (void)updateStandby:(ccTime)dt {
    
-    // HP 回復
-    m_Hp++;
-    if (m_Hp > MAX_HP) {
-        m_Hp = MAX_HP;
+    m_tRecover++;
+    if (m_tRecover > TIMER_RECOVER) {
+        // HP 回復
+        m_Hp++;
+        if (m_Hp > MAX_HP) {
+            m_Hp = MAX_HP;
+        }
+        
     }
     
     // 弾を撃つ
@@ -452,11 +459,23 @@ enum eState {
     self._vy = d.y;
     
     // HPを減らす
-    m_Hp -= 5;
+    if (m_State == eState_Standby) {
+        m_Hp -= 5;
+    }
+    else {
+        m_Hp -= 1;
+        if (m_Hp < 1) {
+            // 連続ダメージでは死なないようにする
+            m_Hp = 1;
+        }
+    }
+    
     if (m_Hp < 0) {
         m_Hp = 0;
     }
     
+    // 回復用タイマーをリセットする
+    m_tRecover = 0;
 }
 
 // パワーの取得

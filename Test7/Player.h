@@ -28,6 +28,7 @@ static const int SHOT_TIMER = 16;
     int     m_tDamage;  // ダメージタイマー
     int     m_tPower;   // パワーゲージ
     int     m_Hp;       // HP
+    int     m_tRecover; // 回復用タイマー
 }
 
 // 開始
