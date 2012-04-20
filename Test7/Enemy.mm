@@ -63,6 +63,8 @@
  * 敵種別の設定
  */
 - (void)setType:(eEnemy)type {
+    m_Id = type;
+    
     switch (type) {
         case eEnemy_Nasu:    // ナス
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Nasu)];
@@ -231,7 +233,10 @@
         
     }
     
-    Vec2D v = Vec2D(self._vx, self._vy);
+    self._vx *= 0.9f;
+    self._vy *= 0.9f;
+    
+    
     [self setRotation:Math_SinEx(m_Timer + m_Val) * 15];
 }
 
@@ -239,6 +244,35 @@
  * 更新・タコ
  */
 - (void)updateTako {
+    const float speedIn  = 100; // 画面に入る速度
+    const float speedMove = 500; // 移動速度
+    m_Timer++;
+    if (m_Timer < 40) {
+        // 登場シーケンス
+        [self moveAppear:speedIn radius:self._r];
+    }
+    else if ([self isOutCircle:self._r]) {
+        // 画面外に出たら消える
+        [self vanish];
+        return;
+    }
+    else if (m_Timer%200 == 0) {
+        // 移動シーケンス
+        // プレイヤーに向かって移動する
+        float aim = [self getAim];
+        float dx = Math_CosEx(aim) * speedMove;
+        float dy = Math_SinEx(aim) * speedMove;
+        self._vx = dx;
+        self._vy = dy;
+        
+    }
+    else if(m_Timer%200 > 0) {
+        int t = m_Timer%200;
+        self.rotation = self.rotation + t * 0.1;
+    }
+    
+    self._vx *= 0.95f;
+    self._vy *= 0.95f;
     
 }
 
@@ -248,12 +282,13 @@
 - (void)update:(ccTime)dt {
     [self move:dt];
     
-    self._vx *= 0.9f;
-    self._vy *= 0.9f;
-    
     switch (m_Id) {
         case eEnemy_Nasu:
             [self updateNasu];
+            break;
+            
+        case eEnemy_Tako:
+            [self updateTako];
             break;
             
         default:

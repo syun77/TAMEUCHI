@@ -24,40 +24,51 @@
 }
 
 /**
+ * 敵の生成
+ */
+- (void)addEnemy:(eEnemy)type {
+    
+    const float RANGE = 0;
+    
+    float x = -RANGE;
+    float y = -RANGE;
+    if(Math_Rand(2) == 0) {
+        x = System_Width() + RANGE;
+    }
+    if(Math_Rand(2) == 0) {
+        y = System_Height() + RANGE;
+    }
+    if (Math_Rand(2) == 0) {
+        x = Math_Rand(System_Width());
+    }
+    else {
+        y = Math_Rand(System_Height());
+    }
+    [Enemy add:type x:x y:y rot:Math_Randf(360) speed:0];
+    
+}
+
+/**
  * 更新
  */
 - (void)update:(ccTime)dt {
     m_tPast++;
     m_Timer++;
     
-    const float RANGE = 0;
     
     switch (m_nLevel) {
         case 1:
             if (m_Timer%80 == 20) {
                 // 敵の生成
-                float x = -RANGE;
-                float y = -RANGE;
-                if(Math_Rand(2) == 0) {
-                    x = System_Width() + RANGE;
-                }
-                if(Math_Rand(2) == 0) {
-                    y = System_Height() + RANGE;
-                }
-                if (Math_Rand(2) == 0) {
-                    x = Math_Rand(System_Width());
-                }
-                else {
-                    y = Math_Rand(System_Height());
-                }
-                [Enemy add:eEnemy_Nasu x:x y:y rot:Math_Randf(360) speed:0];
+//                [self addEnemy:eEnemy_Nasu];
+                [self addEnemy:eEnemy_Tako];
             }
             break;
             
         case 2:
             if (m_Timer%80 == 20) {
                 // 敵の生成
-                [Enemy add:eEnemy_Tako x:480/2 y:320/2 rot:Math_Randf(360) speed:320];
+                [self addEnemy:eEnemy_Tako];
             }
             
         default:
