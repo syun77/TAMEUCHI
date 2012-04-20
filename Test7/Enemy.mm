@@ -165,35 +165,43 @@
 }
 
 /**
+ * 登場時の移動量を設定
+ */
+- (void)moveAppear:(float)speed radius:(float)radius {
+    if ([self isOutCircle:-radius]) {
+        // 画面外の場合、画面内に入ろうとする
+        float dx = System_CenterX() - self._x;
+        float dy = System_CenterY() - self._y;
+        if (abs(dx) > abs(dy)) {
+            if (dx > 0) {
+                self._vx = speed;
+            }
+            else {
+                self._vx = -speed;
+            }
+        }
+        else {
+            if (dy > 0) {
+                self._vy = speed;
+            }
+            else {
+                self._vy = -speed;
+            }
+        }
+    }
+    
+}
+
+/**
  * 更新・ナス
  */
 - (void)updateNasu {
     const float speedIn  = 100; // 画面に入る速度
     const float speedMove = 50; // 移動速度
     m_Timer++;
-    if (m_Timer < 100) {
+    if (m_Timer < 200) {
         // 登場シーケンス
-        if ([self isOutCircle:-self._r]) {
-            // 画面外の場合、画面内に入ろうとする
-            float dx = System_CenterX() - self._x;
-            float dy = System_CenterY() - self._y;
-            if (abs(dx) > abs(dy)) {
-                if (dx > 0) {
-                    self._vx = speedIn;
-                }
-                else {
-                    self._vx = -speedIn;
-                }
-            }
-            else {
-                if (dy > 0) {
-                    self._vy = speedIn;
-                }
-                else {
-                    self._vy = -speedIn;
-                }
-            }
-        }
+        [self moveAppear:speedIn radius:self._r];
     }
     else if ([self isOutCircle:self._r]) {
         // 画面外に出たら消える
@@ -202,6 +210,7 @@
     }
     else if (m_Timer > 2000) {
         // 退場シーケンス
+        // プレイヤーを逆方向に移動する
         float aim = [self getAim];
         float dx = Math_CosEx(aim) * -speedMove;
         float dy = -Math_SinEx(aim) * -speedMove;
