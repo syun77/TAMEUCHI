@@ -8,9 +8,26 @@
 
 #import "InterfaceLayer.h"
 
-#import "GameScene.h"
-
 @implementation InterfaceLayer
+
+@synthesize m_CBArray;
+
+- (id)init {
+    self = [super init];
+    if (self == nil) {
+        return self;
+    }
+    
+    self.m_CBArray = [NSMutableArray array];
+    
+    return self;
+}
+
+- (void)dealloc {
+    self.m_CBArray = nil;
+    
+    [super dealloc];
+}
 
 /**
  * 開始
@@ -38,6 +55,13 @@
 }
 
 /**
+ * コールバックオブジェクトの登録
+ */
+- (void)addCB:(Token *)token {
+    [self.m_CBArray addObject:token];
+}
+
+/**
  * タッチ開始
  */
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
@@ -51,8 +75,9 @@
     m_X = location.x;
     m_Y = location.y;
     
-    GameScene* scene = [GameScene sharedInstance];
-    [scene.player cbTouchStart:location.x y:location.y];
+    for (Token* t in self.m_CBArray) {
+        [t cbTouchStart:location.x y:location.y];
+    }
     
     // タッチ状態を更新
     m_isTouch = YES;
@@ -80,8 +105,9 @@
     CGPoint locationView = [touch locationInView:[touch view]];
     CGPoint location = [[CCDirector sharedDirector] convertToGL:locationView];
     
-    GameScene* scene = [GameScene sharedInstance];
-    [scene.player cbTouchEnd:location.x y:location.y];
+    for (Token* t in self.m_CBArray) {
+        [t cbTouchEnd:location.x y:location.y];
+    }
     
     // タッチ状態を更新
     m_isTouch = NO;

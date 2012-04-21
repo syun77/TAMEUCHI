@@ -111,6 +111,11 @@
 // 円の描画
 - (void)drawCircle:(float)cx cy:(float)cy radius:(float)radius;
 
+// ■コールバック関数
+- (void)cbTouchStart:(float)x y:(float)y;
+- (void)cbTouchMove:(float)x y:(float)y;
+- (void)cbTouchEnd:(float)x y:(float)y;
+- (void)cbTouchCancel:(float)x y:(float)y;
 
 // ■プロパティ設定
 @property (nonatomic, retain)CCSprite* m_pSprite;

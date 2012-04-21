@@ -68,38 +68,47 @@
     switch (type) {
         case eEnemy_Nasu:    // ナス
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Nasu)];
+            m_Hp = 3;
             break;
             
         case eEnemy_Tako:    // たこ焼き
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Tako)];
+            m_Hp = 3;
             break;
             
         case eEnemy_5Box:    // ５箱
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_5Box)];
+            m_Hp = 3;
             break;
             
         case eEnemy_Pudding: // プリン
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Pudding)];
+            m_Hp = 3;
             break;
             
         case eEnemy_Milk:    // 牛乳
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Milk)];
+            m_Hp = 3;
             break;
             
         case eEnemy_XBox:    // XBox
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_XBox)];
+            m_Hp = 3;
             break;
             
         case eEnemy_Radish:  // 大根
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Radish)];
+            m_Hp = 3;
             break;
             
         case eEnemy_Carrot:  // 人参
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Carrot)];
+            m_Hp = 3;
             break;
             
         case eEnemy_Pokey:   // ポッキー
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Pokey)];
+            m_Hp = 3;
             break;
             
         default:

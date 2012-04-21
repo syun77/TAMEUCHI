@@ -482,4 +482,14 @@
     
 }
 
+// ■コールバック関数定義
+- (void)cbTouchStart:(float)x y:(float)y {
+}
+- (void)cbTouchMove:(float)x y:(float)y {
+}
+- (void)cbTouchEnd:(float)x y:(float)y {
+}
+- (void)cbTouchCancel:(float)x y:(float)y {
+}
+
 @end

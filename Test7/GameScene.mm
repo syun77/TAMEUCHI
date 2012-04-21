@@ -147,6 +147,9 @@ static GameScene* scene_ = nil;
     [self.asciiFontLevel createFont:self.baseLayer length:24];
     [self.asciiFontLevel setPosScreen:8 y:320-24-80];
     
+    // コールバック関数登録
+    [self.interfaceLayer addCB:self.player];
+    
     // 更新スケジューラー登録
     [self scheduleUpdate];
     
