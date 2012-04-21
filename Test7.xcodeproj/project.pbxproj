@@ -121,13 +121,13 @@
 		C70F6027151B6E67003B041E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6026151B6E67003B041E /* main.m */; };
 		C70F602A151B6E67003B041E /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70F6029151B6E67003B041E /* AppDelegate.mm */; };
 		C70F602D151B6E67003B041E /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70F602C151B6E67003B041E /* RootViewController.mm */; };
-		C71DFA00152FCA7C00873917 /* all-hd.png in Resources */ = {isa = PBXBuildFile; fileRef = C71DF9FF152FCA7C00873917 /* all-hd.png */; };
 		C72542E815260B81004C157A /* Bullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542E715260B81004C157A /* Bullet.mm */; };
 		C72542ED152614F4004C157A /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542EC152614F4004C157A /* Particle.mm */; };
 		C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73A11A31529630C00C10EC4 /* AsciiFont.mm */; };
 		C73FEC25152BEED5008B5697 /* Back.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC24152BEED5008B5697 /* Back.mm */; };
 		C73FEC29152BF448008B5697 /* Enemy.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC28152BF448008B5697 /* Enemy.mm */; };
 		C73FEC2C152BF45F008B5697 /* Shot.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC2B152BF45E008B5697 /* Shot.mm */; };
+		C742013B1543020C007351E3 /* TitleScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C742013A1543020C007351E3 /* TitleScene.mm */; };
 		C74FE7A11524892D00298CBB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = C74FE7A01524892D00298CBB /* rect.png */; };
 		C752C7EA15310AAE002EC31B /* System.mm in Sources */ = {isa = PBXBuildFile; fileRef = C752C7E915310AAE002EC31B /* System.mm */; };
 		C7612C9A1526AA88007CCABC /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7612C991526AA88007CCABC /* font.png */; };
@@ -386,7 +386,6 @@
 		C70F603A151B7043003B041E /* InterfaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLayer.h; sourceTree = "<group>"; };
 		C70F603D151B7482003B041E /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		C70F603F151B7482003B041E /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenManager.h; sourceTree = "<group>"; };
-		C71DF9FF152FCA7C00873917 /* all-hd.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "all-hd.png"; path = "Resources/all-hd.png"; sourceTree = "<group>"; };
 		C72198EC151FFC2E009B8B9F /* Vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec.h; sourceTree = "<group>"; };
 		C72198F51520BF47009B8B9F /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
 		C72542E615260B81004C157A /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
@@ -401,6 +400,8 @@
 		C73FEC28152BF448008B5697 /* Enemy.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Enemy.mm; sourceTree = "<group>"; };
 		C73FEC2A152BF45E008B5697 /* Shot.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shot.h; sourceTree = "<group>"; };
 		C73FEC2B152BF45E008B5697 /* Shot.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Shot.mm; sourceTree = "<group>"; };
+		C74201391543020C007351E3 /* TitleScene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TitleScene.h; sourceTree = "<group>"; };
+		C742013A1543020C007351E3 /* TitleScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TitleScene.mm; sourceTree = "<group>"; };
 		C74FE7A01524892D00298CBB /* rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rect.png; path = Resources/rect.png; sourceTree = "<group>"; };
 		C752C7E815310AAE002EC31B /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		C752C7E915310AAE002EC31B /* System.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = System.mm; sourceTree = "<group>"; };
@@ -490,6 +491,8 @@
 				C72542EA15260B95004C157A /* Token */,
 				C70F6037151B6E91003B041E /* GameScene.h */,
 				C786B37A15253DFC00049CA8 /* GameScene.mm */,
+				C74201391543020C007351E3 /* TitleScene.h */,
+				C742013A1543020C007351E3 /* TitleScene.mm */,
 				C70F603A151B7043003B041E /* InterfaceLayer.h */,
 				C786B37815253D7600049CA8 /* InterfaceLayer.mm */,
 				C7F053AC152B15CF0095B76E /* Exerinya.h */,
@@ -505,7 +508,6 @@
 			isa = PBXGroup;
 			children = (
 				C7F053A9152B14EA0095B76E /* all.png */,
-				C71DF9FF152FCA7C00873917 /* all-hd.png */,
 				C7612C991526AA88007CCABC /* font.png */,
 				C70F5ED8151B6E65003B041E /* Default.png */,
 				C74FE7A01524892D00298CBB /* rect.png */,
@@ -956,7 +958,6 @@
 				C76CC3CD1526949600AE1C69 /* LICENSE.cocosdenshion in Resources */,
 				C7612C9A1526AA88007CCABC /* font.png in Resources */,
 				C7F053AA152B14EA0095B76E /* all.png in Resources */,
-				C71DFA00152FCA7C00873917 /* all-hd.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1083,6 +1084,7 @@
 				C7F0DF55153A83BC006E26E4 /* Charge.mm in Sources */,
 				C76484CF153DBE5D00C79410 /* Gauge.mm in Sources */,
 				C76484D3153E7DC700C79410 /* GaugeHp.mm in Sources */,
+				C742013B1543020C007351E3 /* TitleScene.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -9,6 +9,7 @@
 #import "GameScene.h"
 
 #include "Vec.h"
+#import "TitleScene.h"
 
 #import "Enemy.h"
 #import "Shot.h"
@@ -66,6 +67,10 @@ static GameScene* scene_ = nil;
     }
     
     return scene_;
+}
+
++ (void)releaseInstance {
+    scene_ = nil;
 }
 
 // コンストラクタ
@@ -279,6 +284,11 @@ static GameScene* scene_ = nil;
             [self.player damage:b];
             [b damage:self.player];
         }
+    }
+    
+    if ([self.interfaceLayer isTouch]) {
+        [GameScene releaseInstance];
+        [[CCDirector sharedDirector] replaceScene:[TitleScene sharedInstance]];
     }
     
 }

@@ -70,4 +70,6 @@
 // シングルトンを取得
 + (GameScene*)sharedInstance;
 
++ (void)releaseInstance;
+
 @end

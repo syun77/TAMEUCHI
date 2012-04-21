@@ -26,7 +26,7 @@
         return self;
     }
     
-    [self load:@"all-hd.png"];
+    [self load:@"all.png"];
     CGRect r = Exerinya_GetRect(eExerinyaRect_EftBall);
     [self.m_pSprite setTextureRect:r];
     

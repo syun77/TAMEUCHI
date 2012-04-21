@@ -17,7 +17,7 @@
     if (self == nil) {
         return self;
     }
-    [self load:@"all-hd.png"];
+    [self load:@"all.png"];
     
     [self create];
     
