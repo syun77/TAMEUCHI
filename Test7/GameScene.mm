@@ -9,7 +9,7 @@
 #import "GameScene.h"
 
 #include "Vec.h"
-#import "TitleScene.h"
+#import "SceneManager.h"
 
 #import "Enemy.h"
 #import "Shot.h"
@@ -287,8 +287,10 @@ static GameScene* scene_ = nil;
     }
     
     if ([self.interfaceLayer isTouch]) {
-        [GameScene releaseInstance];
-        [[CCDirector sharedDirector] replaceScene:[TitleScene sharedInstance]];
+        
+        SceneManager_Change(@"TitleScene");
+//        [GameScene releaseInstance];
+//        [[CCDirector sharedDirector] replaceScene:[TitleScene sharedInstance]];
     }
     
 }

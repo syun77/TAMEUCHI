@@ -14,6 +14,7 @@
 
 #import "GameScene.h"
 #import "TitleScene.h"
+#import "SceneManager.h"
 
 @implementation AppDelegate
 
@@ -118,7 +119,9 @@
 	
 	// Run the intro Scene
 //	[[CCDirector sharedDirector] runWithScene: [GameScene sharedInstance]];
-	[[CCDirector sharedDirector] runWithScene: [TitleScene sharedInstance]];
+//	[[CCDirector sharedDirector] runWithScene: [TitleScene sharedInstance]];
+    
+    SceneManager_Change(@"GameScene");
 }
 
 

@@ -133,6 +133,7 @@
 		C7612C9A1526AA88007CCABC /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7612C991526AA88007CCABC /* font.png */; };
 		C76484CF153DBE5D00C79410 /* Gauge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C76484CE153DBE5D00C79410 /* Gauge.mm */; };
 		C76484D3153E7DC700C79410 /* GaugeHp.mm in Sources */ = {isa = PBXBuildFile; fileRef = C76484D2153E7DC700C79410 /* GaugeHp.mm */; };
+		C76591D11544532900018DD2 /* SceneManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C76591D01544532900018DD2 /* SceneManager.mm */; };
 		C76CC3CC1526949600AE1C69 /* LICENSE.cocos2d in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */; };
 		C76CC3CD1526949600AE1C69 /* LICENSE.cocosdenshion in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CB1526949600AE1C69 /* LICENSE.cocosdenshion */; };
 		C786B37915253D7600049CA8 /* InterfaceLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37815253D7600049CA8 /* InterfaceLayer.mm */; };
@@ -410,6 +411,8 @@
 		C76484CE153DBE5D00C79410 /* Gauge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Gauge.mm; sourceTree = "<group>"; };
 		C76484D1153E7DC700C79410 /* GaugeHp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GaugeHp.h; sourceTree = "<group>"; };
 		C76484D2153E7DC700C79410 /* GaugeHp.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GaugeHp.mm; sourceTree = "<group>"; };
+		C76591CF1544532900018DD2 /* SceneManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SceneManager.h; sourceTree = "<group>"; };
+		C76591D01544532900018DD2 /* SceneManager.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SceneManager.mm; sourceTree = "<group>"; };
 		C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		C76CC3CB1526949600AE1C69 /* LICENSE.cocosdenshion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocosdenshion; sourceTree = "<group>"; };
 		C786B37815253D7600049CA8 /* InterfaceLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InterfaceLayer.mm; sourceTree = "<group>"; };
@@ -489,6 +492,8 @@
 				C7F0A6F615269CEA001AD819 /* App */,
 				C7F0A6F415269CB9001AD819 /* Common */,
 				C72542EA15260B95004C157A /* Token */,
+				C76591CF1544532900018DD2 /* SceneManager.h */,
+				C76591D01544532900018DD2 /* SceneManager.mm */,
 				C70F6037151B6E91003B041E /* GameScene.h */,
 				C786B37A15253DFC00049CA8 /* GameScene.mm */,
 				C74201391543020C007351E3 /* TitleScene.h */,
@@ -1085,6 +1090,7 @@
 				C76484CF153DBE5D00C79410 /* Gauge.mm in Sources */,
 				C76484D3153E7DC700C79410 /* GaugeHp.mm in Sources */,
 				C742013B1543020C007351E3 /* TitleScene.mm in Sources */,
+				C76591D11544532900018DD2 /* SceneManager.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

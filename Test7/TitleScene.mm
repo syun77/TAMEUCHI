@@ -8,6 +8,7 @@
 
 #import "TitleScene.h"
 #import "GameScene.h"
+#import "SceneManager.h"
 
 // シングルトン
 static TitleScene* scene_ = nil;
@@ -70,9 +71,12 @@ static TitleScene* scene_ = nil;
 - (void)update:(ccTime)dt {
     if ([self.interfaceLayer isTouch]) {
         NSLog(@"Touch!!!");
-        [TitleScene releaseInstance];
         
-        [[CCDirector sharedDirector] replaceScene:[GameScene sharedInstance]];
+        SceneManager_Change(@"GameScene");
+        
+//        [TitleScene releaseInstance];
+//        
+//        [[CCDirector sharedDirector] replaceScene:[GameScene sharedInstance]];
         
     }
 }
