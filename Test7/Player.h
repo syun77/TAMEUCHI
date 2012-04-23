@@ -49,4 +49,7 @@ static const int SHOT_TIMER = 16;
 // パワーの取得
 - (int)getPower;
 
+// 消滅したかどうか
+- (BOOL)isVanish;
+
 @end

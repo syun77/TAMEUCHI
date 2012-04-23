@@ -18,6 +18,7 @@
 #import "Charge.h"
 #import "Gauge.h"
 #import "GaugeHp.h"
+#import "Particle.h"
 
 // ダメージタイマー
 static const int TIMER_DAMAGE = 30;
@@ -48,7 +49,9 @@ static const int TIMER_RECOVER = 60;
 enum eState {
     eState_Standby, // 待機
     eState_Damage,  // ダメージ
+    eState_Vanish,  // 消滅
 };
+
 
 /**
  * 自機クラスを実装する
@@ -383,6 +386,12 @@ enum eState {
  */
 - (void)update:(ccTime)dt {
     
+    if (m_State == eState_Vanish) {
+        
+        // 死亡したので何もしない
+        return;
+    }
+    
     // タイマー更新
     m_tPast++;
     if (m_tDamage > 0) {
@@ -405,11 +414,17 @@ enum eState {
     // 各種更新
     switch (m_State) {
         case eState_Standby:
+            // 待機中
             [self updateStandby:dt];
             break;
         
         case eState_Damage:
+            // ダメージ中
             [self updateDamage:dt];
+            break;
+            
+        case eState_Vanish:
+            // 消滅
             break;
             
         default:
@@ -479,19 +494,39 @@ enum eState {
     }
     
     if (m_Hp < 0) {
+        
+        // 死亡
         m_Hp = 0;
+        
+        // 全て非表示にする
+        [self setVisible:NO];
+        Charge* charge = [self getCharge];
+        [charge setVisible:NO];
+        Gauge* gauge = [self getGauge];
+        [gauge setVisible:NO];
+        GaugeHp* gaugeHp = [self getGaugeHp];
+        [gaugeHp setVisible:NO];
+        m_State = eState_Vanish;
+    }
+    else {
+        
+        // 回復用タイマーをリセットする
+        m_tRecover = 0;
+        m_tDamage = TIMER_DAMAGE;
+        m_Timer = TIMER_DAMAGE;
+        m_State = eState_Damage;
     }
     
-    // 回復用タイマーをリセットする
-    m_tRecover = 0;
-    m_tDamage = TIMER_DAMAGE;
-    m_Timer = TIMER_DAMAGE;
-    m_State = eState_Damage;
 }
 
 // パワーの取得
 - (int)getPower {
     return m_tPower;
+}
+
+// 消滅したかどうか
+- (BOOL)isVanish {
+    return m_State == eState_Vanish;
 }
 
 @end

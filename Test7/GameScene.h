@@ -24,6 +24,7 @@
  * ゲームシーン
  */
 @interface GameScene : CCScene {
+    // オブジェクト管理
     CCLayer*        baesLayer;      // 描画レイヤー
     Back*           back;           // 背景画像
     Player*         player;         // プレイヤー
@@ -44,7 +45,7 @@
     AsciiFont*      ascciFont5;     // フォント
     AsciiFont*      ascciFontLevel; // フォント（レベル）
     
-    BOOL            m_bInitialize;    // 初期化フラグ
+    int             m_State;        // 状態
 }
 
 @property (nonatomic, retain)CCLayer*           baseLayer;

@@ -55,6 +55,12 @@ static const int HP_HEIGHT = 4;
 // ゲージ描画
 - (void)visit {
     
+    if (self.visible == NO) {
+        
+        // 非表示状態
+        return;
+    }
+    
     if (m_Now >= m_Max) {
         
         // Max値なら描画しない

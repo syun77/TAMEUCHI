@@ -30,6 +30,13 @@ enum {
     ePrio_UI,       // ユーザインターフェース
 };
 
+// 状態
+enum eState {
+    eState_Init,        // 初期化
+    eState_Main,        // メイン
+    estate_GameOver,    // ゲームオーバー
+};
+
 
 // シングルトン
 static GameScene* scene_ = nil;
@@ -158,8 +165,9 @@ static GameScene* scene_ = nil;
     // 更新スケジューラー登録
     [self scheduleUpdate];
     
+    
     // 初期化するフラグ
-    m_bInitialize = YES;
+    m_State = eState_Init;
     
     return self;
 }
@@ -207,29 +215,17 @@ static GameScene* scene_ = nil;
 }
 
 /**
- * 更新
+ * 更新・初期化
  */
-- (void)update:(ccTime)dt {
-    if (m_bInitialize) {
-        
-        // 初期化
-        [self initialize];
-        
-        m_bInitialize = NO;
-    }
-    
-    // Tokenの生存数を表示
-    [self.asciiFont4 setText:[NSString stringWithFormat:@"Shot    :%3d/%3d %3d", [self.mgrShot count], [self.mgrShot max], [self.mgrShot leak]]];
-    [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d/%3d %3d", [self.mgrEnemy count], [self.mgrEnemy max], [self.mgrEnemy leak]]];
-    [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d/%3d %3d", [self.mgrBullet count], [self.mgrBullet max], [self.mgrBullet leak]]];
-    [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
-    
-    [self.asciiFont5 setText:[NSString stringWithFormat:@"Power: %3d", [self.player getPower]]];
-    
-    [self.asciiFontLevel setText:[NSString stringWithFormat:@"Level: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
-    
-    [self.levelMgr update:dt];
+- (void)updateInit:(ccTime)dt {
+    [self initialize];
+    m_State = eState_Main;
+}
 
+/**
+ * 更新・メイン
+ */
+- (void)updateMain:(ccTime)dt {
     // 当たり判定を行う
     
     // 自弾 vs 敵
@@ -286,10 +282,61 @@ static GameScene* scene_ = nil;
         }
     }
     
+    if ([self.player isVanish]) {
+        
+        // プレイヤー死亡
+        m_State = estate_GameOver;
+    }
+    
+}
+
+/**
+ * 更新・ゲームオーバー
+ */
+- (void)updateGameOver:(ccTime)dt {
+    
     if ([self.interfaceLayer isTouch]) {
         
-//        SceneManager_Change(@"TitleScene");
+        // タイトル画面に戻る
+        SceneManager_Change(@"TitleScene");
     }
+}
+
+/**
+ * 更新
+ */
+- (void)update:(ccTime)dt {
+    
+    switch (m_State) {
+        case eState_Init:
+            [self updateInit:dt];
+            break;
+            
+        case eState_Main:
+            [self updateMain:dt];
+            break;
+            
+        case estate_GameOver:
+            [self updateGameOver:dt];
+            break;
+            
+        default:
+            break;
+    }
+    
+    // Tokenの生存数を表示
+    [self.asciiFont4 setText:[NSString stringWithFormat:@"Shot    :%3d/%3d %3d", [self.mgrShot count], [self.mgrShot max], [self.mgrShot leak]]];
+    [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d/%3d %3d", [self.mgrEnemy count], [self.mgrEnemy max], [self.mgrEnemy leak]]];
+    [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d/%3d %3d", [self.mgrBullet count], [self.mgrBullet max], [self.mgrBullet leak]]];
+    [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
+    
+    [self.asciiFont5 setText:[NSString stringWithFormat:@"Power: %3d", [self.player getPower]]];
+    
+    [self.asciiFontLevel setText:[NSString stringWithFormat:@"Level: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
+    
+    [self.levelMgr update:dt];
+
+    
     
 }
 

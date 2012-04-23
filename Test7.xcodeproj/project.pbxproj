@@ -492,14 +492,10 @@
 				C7F0A6F615269CEA001AD819 /* App */,
 				C7F0A6F415269CB9001AD819 /* Common */,
 				C72542EA15260B95004C157A /* Token */,
-				C76591CF1544532900018DD2 /* SceneManager.h */,
-				C76591D01544532900018DD2 /* SceneManager.mm */,
 				C70F6037151B6E91003B041E /* GameScene.h */,
 				C786B37A15253DFC00049CA8 /* GameScene.mm */,
 				C74201391543020C007351E3 /* TitleScene.h */,
 				C742013A1543020C007351E3 /* TitleScene.mm */,
-				C70F603A151B7043003B041E /* InterfaceLayer.h */,
-				C786B37815253D7600049CA8 /* InterfaceLayer.mm */,
 				C7F053AC152B15CF0095B76E /* Exerinya.h */,
 				C7F053AD152B15CF0095B76E /* Exerinya.mm */,
 				C70F5ED7151B6E65003B041E /* Resources */,
@@ -883,6 +879,10 @@
 				C72198EC151FFC2E009B8B9F /* Vec.h */,
 				C752C7E815310AAE002EC31B /* System.h */,
 				C752C7E915310AAE002EC31B /* System.mm */,
+				C76591CF1544532900018DD2 /* SceneManager.h */,
+				C76591D01544532900018DD2 /* SceneManager.mm */,
+				C70F603A151B7043003B041E /* InterfaceLayer.h */,
+				C786B37815253D7600049CA8 /* InterfaceLayer.mm */,
 			);
 			name = Common;
 			sourceTree = "<group>";
