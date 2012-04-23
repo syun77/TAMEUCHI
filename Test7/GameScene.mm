@@ -288,9 +288,7 @@ static GameScene* scene_ = nil;
     
     if ([self.interfaceLayer isTouch]) {
         
-        SceneManager_Change(@"TitleScene");
-//        [GameScene releaseInstance];
-//        [[CCDirector sharedDirector] replaceScene:[TitleScene sharedInstance]];
+//        SceneManager_Change(@"TitleScene");
     }
     
 }

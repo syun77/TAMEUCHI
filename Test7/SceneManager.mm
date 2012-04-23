@@ -22,6 +22,10 @@ void SceneManager_Change(NSString* pName) {
         NSString* pClass = s_CurrentName;
         SEL sel = @selector(releaseInstance);
         Method method = class_getClassMethod(NSClassFromString(pClass), sel);
+        if (method == nil) {
+            NSLog(@"Error: %@ hasn't releaseInstance method.", pClass);
+            assert(0);
+        }
         IMP imp = method_getImplementation(method);
         imp(pClass, sel);
         
@@ -33,6 +37,10 @@ void SceneManager_Change(NSString* pName) {
     NSString* pClass = pName;
     SEL sel = @selector(sharedInstance);
     Method method = class_getClassMethod(NSClassFromString(pClass), sel);
+    if (method == nil) {
+        NSLog(@"Error: %@ hasn't sharedInstance method.", pClass);
+        assert(0);
+    }
     IMP imp = method_getImplementation(method);
     CCScene* now = imp(pClass, sel);
     
