@@ -254,7 +254,7 @@
     float dy = t._y - self._y;
     
     float len = (dx * dx) + (dy * dy);
-    float len2 = (t._r * t._r) + (self._r * self._r);
+    float len2 = (t._r + self._r) * (t._r + self._r);
     
     if (len < len2) {
         return YES;
@@ -475,9 +475,11 @@
     [super visit];
     
     if (System_IsDispCollision()) {
+        
+        glLineWidth(1);
         CGPoint center = CGPointMake(self._x, self._y);
         glColor4f(1, 0, 0, 1);
-        ccDrawCircle(center, self._r, 0, 20, YES);
+        ccDrawCircle(center, self._r, 0, 20, NO);
     }
     
 }

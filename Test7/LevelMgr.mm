@@ -60,8 +60,9 @@
         case 1:
             if (m_Timer%80 == 20) {
                 // 敵の生成
+                [self addEnemy:eEnemy_Pudding];
 //                [self addEnemy:eEnemy_Nasu];
-                [self addEnemy:eEnemy_Tako];
+//                [self addEnemy:eEnemy_Tako];
             }
             break;
             

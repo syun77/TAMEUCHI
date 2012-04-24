@@ -68,46 +68,55 @@
     switch (type) {
         case eEnemy_Nasu:    // ナス
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Nasu)];
+            self._r = 16;
             m_Hp = 3;
             break;
             
         case eEnemy_Tako:    // たこ焼き
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Tako)];
+            self._r = 16;
             m_Hp = 3;
             break;
             
         case eEnemy_5Box:    // ５箱
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_5Box)];
+            self._r = 16;
             m_Hp = 3;
             break;
             
         case eEnemy_Pudding: // プリン
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Pudding)];
-            m_Hp = 3;
+            self._r = 64;
+            m_Hp = 50;
             break;
             
         case eEnemy_Milk:    // 牛乳
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Milk)];
+            self._r = 32;
             m_Hp = 3;
             break;
             
         case eEnemy_XBox:    // XBox
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_XBox)];
+            self._r = 32;
             m_Hp = 3;
             break;
             
         case eEnemy_Radish:  // 大根
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Radish)];
+            self._r = 8;
             m_Hp = 3;
             break;
             
         case eEnemy_Carrot:  // 人参
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Carrot)];
+            self._r = 8;
             m_Hp = 3;
             break;
             
         case eEnemy_Pokey:   // ポッキー
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Pokey)];
+            self._r = 8;
             m_Hp = 3;
             break;
             
@@ -286,6 +295,52 @@
 }
 
 /**
+ * 更新・プリン
+ */
+- (void)updatePudding {
+    
+    const float speedIn  = 100; // 画面に入る速度
+    const float speedMove = 50; // 移動速度
+    m_Timer++;
+    if (m_Timer < 200) {
+        // 登場シーケンス
+        [self moveAppear:speedIn radius:self._r];
+    }
+    else if ([self isOutCircle:self._r]) {
+        // 画面外に出たら消える
+        [self vanish];
+        return;
+    }
+    else if (m_Timer > 2000) {
+        // 退場シーケンス
+        // プレイヤーを逆方向に移動する
+        float aim = [self getAim];
+        float dx = Math_CosEx(aim+90) * speedMove;
+        float dy = -Math_SinEx(aim+90) * speedMove;
+        self._vx = dx;
+        self._vy = dy;
+    }
+    else if (m_Timer%320 < 160) {
+        // 移動シーケンス
+        // プレイヤーに向かって移動する
+        float aim = [self getAim];
+        float dx = Math_CosEx(aim) * speedMove;
+        float dy = Math_SinEx(aim) * speedMove;
+        self._vx = dx;
+        self._vy = dy;
+        if (m_Timer%320 == 10) {
+            // 弾を打つ
+            float rot = [self getAim];
+            [Bullet add:self._x y:self._y rot:rot speed:100];
+        }
+        
+    }
+    
+    self._vy *= 0.9f;
+    self._vy *= 0.9f;
+}
+
+/**
  * 更新
  */
 - (void)update:(ccTime)dt {
@@ -298,6 +353,10 @@
             
         case eEnemy_Tako:
             [self updateTako];
+            break;
+            
+        case eEnemy_Pudding:
+            [self updatePudding];
             break;
             
         default:

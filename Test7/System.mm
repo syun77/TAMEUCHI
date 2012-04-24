@@ -65,8 +65,8 @@ float System_CenterY()
  */
 bool System_IsDispCollision()
 {
-//    return YES;
-    return NO;
+    return YES;
+//    return NO;
 }
 
 // ブレンドモードの設定

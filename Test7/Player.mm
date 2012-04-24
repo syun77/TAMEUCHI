@@ -109,7 +109,7 @@ enum eState {
     
     [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
     [self setScale:0.5f];
-    [self setSize2:32];
+    [self setSize2:24];
     
     m_State = eState_Standby;
     m_Timer = 0;
