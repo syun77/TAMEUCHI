@@ -32,6 +32,7 @@ enum eEnemy {
     int     m_Timer;    // 汎用タイマー
     int     m_Val;      // 汎用パラメータ
     int     m_Hp;       // HP
+    int     m_HpMax;    // 最大HP
 }
 
 // 敵の生成
@@ -42,6 +43,9 @@ enum eEnemy {
 
 // 敵種別の設定
 - (void)setType:(eEnemy)type;
+
+// 残りHPの割合を取得(0〜1)
+- (float)getHpRatio;
 
 // 弾がヒットした
 - (BOOL)hit:(float)dx y:(float)dy;

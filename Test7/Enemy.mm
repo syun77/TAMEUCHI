@@ -69,60 +69,63 @@
         case eEnemy_Nasu:    // ナス
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Nasu)];
             self._r = 16;
-            m_Hp = 3;
+            m_HpMax = 3;
             break;
             
         case eEnemy_Tako:    // たこ焼き
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Tako)];
             self._r = 16;
-            m_Hp = 3;
+            m_HpMax = 3;
             break;
             
         case eEnemy_5Box:    // ５箱
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_5Box)];
             self._r = 16;
-            m_Hp = 3;
+            m_HpMax = 3;
             break;
             
         case eEnemy_Pudding: // プリン
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Pudding)];
-            self._r = 64;
-            m_Hp = 50;
+            self._r = 48;
+            m_HpMax = 50;
             break;
             
         case eEnemy_Milk:    // 牛乳
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Milk)];
-            self._r = 32;
-            m_Hp = 3;
+            self._r = 48;
+            m_HpMax = 3;
             break;
             
         case eEnemy_XBox:    // XBox
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_XBox)];
-            self._r = 32;
-            m_Hp = 3;
+            self._r = 48;
+            m_HpMax = 3;
             break;
             
         case eEnemy_Radish:  // 大根
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Radish)];
             self._r = 8;
-            m_Hp = 3;
+            m_HpMax = 3;
             break;
             
         case eEnemy_Carrot:  // 人参
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Carrot)];
             self._r = 8;
-            m_Hp = 3;
+            m_HpMax = 3;
             break;
             
         case eEnemy_Pokey:   // ポッキー
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Pokey)];
             self._r = 8;
-            m_Hp = 3;
+            m_HpMax = 3;
             break;
             
         default:
             break;
     }
+    
+    // HPを設定する
+    m_Hp = m_HpMax;
 }
 
 /**
@@ -402,5 +405,33 @@
     }
     
     return YES;
+}
+
+
+// 残りHPの割合を取得(0〜1)
+- (float)getHpRatio {
+    return (float)m_Hp / (float)m_HpMax;
+}
+
+- (void)visit {
+    [super visit];
+    
+    switch (m_Id) {
+        case eEnemy_Milk:
+        case eEnemy_Pudding:
+        case eEnemy_XBox:
+            // バリアの描画
+            if ([self getHpRatio] > 0.3f) {
+                glLineWidth(1);
+                for (int i = 0; i < 2; i++) {
+                    glColor4f(Math_Randf(0.5), 1, Math_Randf(0.5), 1);
+                    [self drawCircle:self._x cy:self._y radius:self._r + 8 + Math_Randf(2)];
+                }
+            }
+            break;
+            
+        default:
+            break;
+    }
 }
 @end
