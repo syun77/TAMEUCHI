@@ -174,12 +174,29 @@
 - (BOOL)isBoundRect:(float)w h:(float)h {
     CGSize win = [CCDirector sharedDirector].winSize;
     
-    if (self._x < w) { return YES; }
-    if (self._x > win.width - w) { return YES; }
-    if (self._y < h) { return YES; }
-    if (self._y > win.height - h) { return YES; }
+    BOOL ret = NO;
+    if (self._x < w)
+    {
+        self._x = w;
+        ret = YES;
+    }
+    if (self._x > win.width - w)
+    {
+        self._x = win.width - w;
+        ret = YES;
+    }
+    if (self._y < h)
+    {
+        self._y = h;
+        ret = YES;
+    }
+    if (self._y > win.height - h)
+    {
+        self._y = win.height - h;
+        ret = YES;
+    }
     
-    return NO;
+    return ret;
 }
 
 /**

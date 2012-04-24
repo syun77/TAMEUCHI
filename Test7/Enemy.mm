@@ -13,6 +13,11 @@
 #import "Particle.h"
 #import "Bullet.h"
 
+enum eState {
+    eState_Appear,  // 出現
+    eState_Main,    // メイン
+    eState_Escape,  // 逃走
+};
 
 /**
  * 敵の実装
@@ -48,6 +53,7 @@
     m_Val = Math_Rand(360);
     m_Timer = 0;
     m_Hp    = 3;
+    m_State = eState_Appear;
     
 }
 
@@ -303,44 +309,64 @@
 - (void)updatePudding {
     
     const float speedIn  = 100; // 画面に入る速度
-    const float speedMove = 50; // 移動速度
-    m_Timer++;
-    if (m_Timer < 200) {
-        // 登場シーケンス
-        [self moveAppear:speedIn radius:self._r];
-    }
-    else if ([self isOutCircle:self._r]) {
-        // 画面外に出たら消える
-        [self vanish];
-        return;
-    }
-    else if (m_Timer > 2000) {
-        // 退場シーケンス
-        // プレイヤーを逆方向に移動する
-        float aim = [self getAim];
-        float dx = Math_CosEx(aim+90) * speedMove;
-        float dy = -Math_SinEx(aim+90) * speedMove;
-        self._vx = dx;
-        self._vy = dy;
-    }
-    else if (m_Timer%320 < 160) {
-        // 移動シーケンス
-        // プレイヤーに向かって移動する
-        float aim = [self getAim];
-        float dx = Math_CosEx(aim) * speedMove;
-        float dy = Math_SinEx(aim) * speedMove;
-        self._vx = dx;
-        self._vy = dy;
-        if (m_Timer%320 == 10) {
-            // 弾を打つ
-            float rot = [self getAim];
-            [Bullet add:self._x y:self._y rot:rot speed:100];
-        }
-        
+    const float speedMove = 150; // 移動速度
+    
+    switch (m_State) {
+        case eState_Appear:
+            // 登場シーケンス
+            m_Timer++;
+            [self moveAppear:speedIn radius:self._r];
+            if ([self isOutCircle:-self._r] == NO || m_Timer > 200) {
+                m_Timer = 0;
+                m_State = eState_Main;
+                // プレイヤーに向かって移動する
+                float aim = [self getAim];
+                float dx = Math_CosEx(aim) * speedMove;
+                float dy = -Math_SinEx(aim) * speedMove;
+                self._vx = dx;
+                self._vy = dy;
+            }
+            self._vx *= 0.5f;
+            self._vy *= 0.5f;
+            break;
+            
+        case eState_Main:
+            m_Timer++;
+            if (Math_Rand(100) == 0) {
+                m_Timer += 10;
+            }
+            if (m_Timer%180 == 11) {
+                // 移動シーケンス
+                // プレイヤーから直角に移動する
+                float deg1 = Math_RandInt(-1, 1) * 90;
+                float deg2 = Math_RandInt(-1, 1) * 90;
+                
+                float aim = [self getAim];
+                float dx = Math_CosEx(aim + deg1) * speedMove;
+                float dy = -Math_SinEx(aim + deg2) * speedMove;
+                self._vx = dx;
+                self._vy = dy;
+                // 弾を打つ
+                float rot = [self getAim];
+                [Bullet add:self._x y:self._y rot:rot speed:100];
+                
+            }
+            if([self isBoundRectX:self._r])
+            {
+                self._vx = -self._vx * 0.8;
+            }
+            if([self isBoundRectY:self._r])
+            {
+                self._vy = -self._vy * 0.8;
+            }
+            self._vx *= 0.95f;
+            self._vy *= 0.95f;
+            break;
+            
+        default:
+            break;
     }
     
-    self._vy *= 0.9f;
-    self._vy *= 0.9f;
 }
 
 /**
@@ -455,10 +481,6 @@
  * 弾がヒットした
  */
 - (BOOL)hit:(float)dx y:(float)dy {
-    if (m_Hp < 1) {
-        return YES;
-    }
-    
     
     m_Hp--;
     

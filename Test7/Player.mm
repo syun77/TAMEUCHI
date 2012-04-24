@@ -230,6 +230,10 @@ enum eState {
             [self shot];
             if (m_tPower > 0) {
                 m_tPower--;
+                m_tShot += 2;
+                if (nearestLength < 20000) {
+                    m_tShot = 0;
+                }
             }
             else {
                 // パワー切れ

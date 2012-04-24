@@ -33,6 +33,7 @@ enum eEnemy {
     int     m_Val;      // 汎用パラメータ
     int     m_Hp;       // HP
     int     m_HpMax;    // 最大HP
+    int     m_State;    // 状態
 }
 
 // 敵の生成
