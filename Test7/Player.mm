@@ -483,7 +483,7 @@ enum eState {
     
     // HPを減らす
     if (m_State == eState_Standby) {
-        m_Hp -= MAX_HP * 0.1f;
+        m_Hp -= MAX_HP * 0.2f; // 5回ダメージで死亡
     }
     else {
         m_Hp--;
@@ -513,6 +513,7 @@ enum eState {
             [p setAlpha:255];
         }
         
+        // エフェクト生成
         float rot = 0;
         for (int i = 0; i < 6; i++) {
             rot += Math_RandFloat(30, 60);
