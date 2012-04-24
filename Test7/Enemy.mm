@@ -371,9 +371,95 @@
 }
 
 /**
+ * サイズ小
+ */
+- (void)vanishSmall {
+    Particle* p = [Particle add:eParticle_Ring x:self._x y:self._y rot:0 speed:0];
+    if (p) {
+        [p setScale:0.125];
+        [p setAlpha:255];
+    }
+    
+    float rot = 0;
+    for (int i = 0; i < 3; i++) {
+        rot += Math_RandFloat(30, 60);
+        float scale = Math_RandFloat(.1725, .3725);
+        float speed = Math_RandFloat(60, 320);
+        Particle* p2 = [Particle add:eParticle_Ball x:self._x y:self._y rot:rot speed:speed];
+        if (p2) {
+            [p2 setScale:scale];
+        }
+    }
+    
+}
+
+/**
+ * 通常サイズの敵の消滅
+ */
+- (void)vanishNormal {
+    Particle* p = [Particle add:eParticle_Ring x:self._x y:self._y rot:0 speed:0];
+    if (p) {
+        [p setScale:0.25];
+        [p setAlpha:255];
+    }
+    
+    float rot = 0;
+    for (int i = 0; i < 6; i++) {
+        rot += Math_RandFloat(30, 60);
+        float scale = Math_RandFloat(.35, .75);
+        float speed = Math_RandFloat(120, 640);
+        Particle* p2 = [Particle add:eParticle_Ball x:self._x y:self._y rot:rot speed:speed];
+        if (p2) {
+            [p2 setScale:scale];
+        }
+    }
+}
+
+/**
+ * 巨大サイズ
+ */
+- (void)vanishBig {
+    Particle* p = [Particle add:eParticle_Ring x:self._x y:self._y rot:0 speed:0];
+    if (p) {
+        [p setScale:1.5];
+        [p setAlpha:0xff];
+    }
+    
+    float rot = 0;
+    for (int i = 0; i < 6; i++) {
+        rot += Math_RandFloat(30, 60);
+        float scale = Math_RandFloat(.75, 1.5);
+        float speed = Math_RandFloat(120, 640);
+        Particle* p2 = [Particle add:eParticle_Ball x:self._x y:self._y rot:rot speed:speed];
+        if (p2) {
+            [p2 setScale:scale];
+        }
+    }
+    rot = 0;
+    for (int i = 0; i < 3; i++) {
+        rot += Math_RandFloat(60, 120);
+        float scale = Math_RandFloat(1, 2);
+        float speed = Math_RandFloat(30, 120);
+        float x = self._x + speed * Math_CosEx(rot);
+        float y = self._y + speed * -Math_SinEx(rot);
+        Particle* p2 = [Particle add:eParticle_Blade x:x y:y rot:rot speed:speed];
+        if (p2) {
+            [p2 setScale:scale];
+            [p2 setRotation:rot];
+        }
+    }
+    
+}
+
+/**
  * 弾がヒットした
  */
 - (BOOL)hit:(float)dx y:(float)dy {
+    if (m_Hp < 1) {
+        return YES;
+    }
+    
+    
     m_Hp--;
     
     Vec2D v = Vec2D(dx, dy);
@@ -385,21 +471,28 @@
     if (m_Hp <= 0) {
         
         // エフェクトの生成
-        Particle* p = [Particle add:eParticle_Ring x:self._x y:self._y rot:0 speed:0];
-        if (p) {
-            [p setScale:0.25];
-            [p setAlpha:255];
-        }
-        
-        float rot = 0;
-        for (int i = 0; i < 6; i++) {
-            rot += Math_RandFloat(30, 60);
-            float scale = Math_RandFloat(.35, .75);
-            float speed = Math_RandFloat(120, 640);
-            Particle* p2 = [Particle add:eParticle_Ball x:self._x y:self._y rot:rot speed:speed];
-            if (p2) {
-                [p2 setScale:scale];
-            }
+        switch (m_Id) {
+            case eEnemy_Carrot:
+            case eEnemy_Radish:
+            case eEnemy_Pokey:
+                break;
+                
+            case eEnemy_Nasu:
+            case eEnemy_5Box:
+            case eEnemy_Tako:
+                // 通常サイズ
+                [self vanishNormal];
+                break;
+                
+            case eEnemy_Milk:
+            case eEnemy_XBox:
+            case eEnemy_Pudding:
+                // 大サイズ
+                [self vanishBig];
+                break;
+                
+            default:
+                break;
         }
         [self vanish];
     }

@@ -72,6 +72,14 @@
             // じわじわ半透明にして消す
             [self setAlpha:[self getAlpha] * 0.95f];
             
+        case eParticle_Blade:
+            // 縮小する
+            self.scale = self.scale * 0.9f;
+            
+            // じわじわ半透明にして消す
+            [self setAlpha:[self getAlpha] * 0.97f];
+            break;
+            
         default:
             break;
     }

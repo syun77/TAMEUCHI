@@ -91,6 +91,18 @@ enum eState {
 }
 
 /**
+ * 状態遷移
+ */
+- (void)changeState:(eState)state {
+
+    if (m_State == eState_Vanish) {
+        // 消滅状態は状態変化不可
+        return;
+    }
+    m_State = state;
+}
+
+/**
  * 初期化
  */
 - (id)init {
@@ -143,7 +155,7 @@ enum eState {
     if (m_State == eState_Damage) {
         
         // ダメージ中だったら待機状態に戻す
-        m_State = eState_Standby;
+        [self changeState:eState_Standby];
     }
 }
 
@@ -325,7 +337,7 @@ enum eState {
     m_Timer--;
     if (m_Timer < 1) {
         // ダメージ状態終了
-        m_State = eState_Standby;
+        [self changeState:eState_Standby];
         
         // 移動先を更新
         m_Target.Set(self._x, self._y);
@@ -506,7 +518,9 @@ enum eState {
         [gauge setVisible:NO];
         GaugeHp* gaugeHp = [self getGaugeHp];
         [gaugeHp setVisible:NO];
-        m_State = eState_Vanish;
+        
+        [self changeState:eState_Vanish];
+        
         Particle* p = [Particle add:eParticle_Ring x:self._x y:self._y rot:0 speed:0];
         if (p) {
             [p setScale:0.25];
@@ -531,7 +545,8 @@ enum eState {
         m_tRecover = 0;
         m_tDamage = TIMER_DAMAGE;
         m_Timer = TIMER_DAMAGE;
-        m_State = eState_Damage;
+        
+        [self changeState:eState_Damage];
     }
     
 }
