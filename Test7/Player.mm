@@ -507,6 +507,22 @@ enum eState {
         GaugeHp* gaugeHp = [self getGaugeHp];
         [gaugeHp setVisible:NO];
         m_State = eState_Vanish;
+        Particle* p = [Particle add:eParticle_Ring x:self._x y:self._y rot:0 speed:0];
+        if (p) {
+            [p setScale:0.25];
+            [p setAlpha:255];
+        }
+        
+        float rot = 0;
+        for (int i = 0; i < 6; i++) {
+            rot += Math_RandFloat(30, 60);
+            float scale = Math_RandFloat(.35, .75);
+            float speed = Math_RandFloat(120, 640);
+            Particle* p2 = [Particle add:eParticle_Ball x:self._x y:self._y rot:rot speed:speed];
+            if (p2) {
+                [p2 setScale:scale];
+            }
+        }
     }
     else {
         

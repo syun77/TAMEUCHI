@@ -57,7 +57,7 @@
 /**
  * コールバックオブジェクトの登録
  */
-- (void)addCB:(Token *)token {
+- (void)addCB:(id)token {
     [self.m_CBArray addObject:token];
 }
 
@@ -75,10 +75,9 @@
     m_X = location.x;
     m_Y = location.y;
     
-    for (Token* t in self.m_CBArray) {
+    for (id t in self.m_CBArray) {
         [t cbTouchStart:location.x y:location.y];
     }
-    
     // タッチ状態を更新
     m_isTouch = YES;
     
@@ -105,7 +104,7 @@
     CGPoint locationView = [touch locationInView:[touch view]];
     CGPoint location = [[CCDirector sharedDirector] convertToGL:locationView];
     
-    for (Token* t in self.m_CBArray) {
+    for (id t in self.m_CBArray) {
         [t cbTouchEnd:location.x y:location.y];
     }
     

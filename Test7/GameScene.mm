@@ -115,6 +115,7 @@ static GameScene* scene_ = nil;
     
     self.interfaceLayer = [InterfaceLayer node];
     [self.baseLayer addChild:self.interfaceLayer];
+    [self.interfaceLayer addCB:self];
     
     self.mgrShot = [TokenManager node];
     [self.mgrShot create:self.baseLayer size:64 className:@"Shot"];
@@ -295,7 +296,7 @@ static GameScene* scene_ = nil;
  */
 - (void)updateGameOver:(ccTime)dt {
     
-    if ([self.interfaceLayer isTouch]) {
+    if ([self isPress]) {
         
         // タイトル画面に戻る
         SceneManager_Change(@"TitleScene");
@@ -337,7 +338,8 @@ static GameScene* scene_ = nil;
     [self.levelMgr update:dt];
 
     
-    
+    // フラグを下げる
+    m_bPress = NO;
 }
 
 @end

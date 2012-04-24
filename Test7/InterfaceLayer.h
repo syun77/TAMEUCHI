@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 #import "Token.h"
+#import "IScene.h"
 
 /**
  * 入力受け取りレイヤー
@@ -19,12 +20,12 @@
     float m_StartY;     // タッチ開始座標(Y)
     float m_X;          // タッチしている座標(X)
     float m_Y;          // タッチしている座標(Y)
-    NSMutableArray* m_CBArray;  // コールバックで呼び出すオブジェクト
+    NSMutableArray* m_CBArray;  // コールバックで呼び出すオブジェクト(Token)
 }
 
-@property (nonatomic,retain)NSMutableArray* m_CBArray;
+@property (nonatomic, retain)NSMutableArray* m_CBArray;
 
-- (void)addCB:(Token*)token;
+- (void)addCB:(id)token;
 
 // タッチしているかどうか
 - (BOOL)isTouch;

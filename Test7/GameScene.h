@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+#import "IScene.h"
 #import "InterfaceLayer.h"
 #import "TokenManager.h"
 #import "Back.h"
@@ -23,7 +24,7 @@
 /**
  * ゲームシーン
  */
-@interface GameScene : CCScene {
+@interface GameScene : IScene {
     // オブジェクト管理
     CCLayer*        baesLayer;      // 描画レイヤー
     Back*           back;           // 背景画像
