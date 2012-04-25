@@ -115,6 +115,7 @@ enum eState {
     
     [self create];
     
+    // 初期パラメータ設定
     self._x = System_CenterX();
     self._y = System_CenterY();
     m_Target.Set(self._x, self._y);
@@ -123,12 +124,16 @@ enum eState {
     [self setScale:0.5f];
     [self setSize2:24];
     
+    // 変数初期化
     m_State = eState_Standby;
     m_Timer = 0;
     m_tPast = 0;
     m_tShot = 0;
     m_tDamage = 0;
     m_tPower = 0;
+    m_Combo = 0;
+    m_ComboMax = 0;
+    
     
     return self;
 }
@@ -149,6 +154,9 @@ enum eState {
 // タッチ開始コールバック
 - (void)cbTouchStart:(float)x y:(float)y {
     
+    // コンボ初期化
+    [self initCombo];
+    
     m_Start.x = self._x;
     m_Start.y = self._y;
     
@@ -166,6 +174,7 @@ enum eState {
         m_tPower = 0;
     }
 }
+
 
 /**
  * 移動量を画面内に収める
@@ -199,6 +208,11 @@ enum eState {
 - (BOOL)isTouch {
     GameScene* scene = [GameScene sharedInstance];
     return [scene.interfaceLayer isTouch];
+}
+
+// 移動中かどうか
+- (BOOL)isMoving {
+    return [self isTouch];
 }
 
 /**
@@ -237,6 +251,7 @@ enum eState {
             }
             else {
                 // パワー切れ
+                
                 // 近くに敵がいるほど連射性能がアップ
                 float ratio = nearestLength / (160 * 120);
                 if (ratio > 1) {
@@ -483,6 +498,9 @@ enum eState {
 // ダメージ
 - (void)damage:(Token*)t {
     
+    // コンボ回数初期化
+    [self initCombo];
+    
     // パワーゲージをリセット
     m_tPower = 0;
     
@@ -563,6 +581,38 @@ enum eState {
 // 消滅したかどうか
 - (BOOL)isVanish {
     return m_State == eState_Vanish;
+}
+
+// コンボ初期化
+- (void)initCombo {
+    
+    m_Combo = 0;
+}
+
+// コンボ回数増加
+- (void)addCombo {
+    
+    if ([self isMoving]) {
+        // 移動中は増えない
+        return;
+    }
+    
+    m_Combo++;
+    if (m_Combo > m_ComboMax) {
+        
+        // コンボ回数更新
+        m_ComboMax = m_Combo;
+    }
+}
+
+// コンボ回数を取得
+- (int)getCombo {
+    return m_Combo;
+}
+
+// コンボ最大回数を取得
+- (int)getComboMax {
+    return m_ComboMax;
 }
 
 @end

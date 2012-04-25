@@ -29,6 +29,8 @@ static const int SHOT_TIMER = 16;
     int     m_tPower;   // パワーゲージ
     int     m_Hp;       // HP
     int     m_tRecover; // 回復用タイマー
+    int     m_Combo;    // コンボ回数
+    int     m_ComboMax; // 最大コンボ数
 }
 
 // 開始
@@ -51,5 +53,17 @@ static const int SHOT_TIMER = 16;
 
 // 消滅したかどうか
 - (BOOL)isVanish;
+
+// コンボ回数初期化
+- (void)initCombo;
+
+// コンボ回数増加
+- (void)addCombo;
+
+// コンボ回数を取得
+- (int)getCombo;
+
+// コンボ最大回数を取得
+- (int)getComboMax;
 
 @end

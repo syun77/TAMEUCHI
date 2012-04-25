@@ -33,6 +33,7 @@
     
     const float RANGE = 0;
     
+    // プレイヤー座標と反対側に出現するようにする
     float x = 0;
     float y = 0;
     if (player._x > System_CenterX()) {
