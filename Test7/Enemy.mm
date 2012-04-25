@@ -368,10 +368,10 @@ enum eState {
                 // ポッキー発射
                 float speed = 400;
                 int cnt = 5;
-                float rot = 180 + aim + (cnt / 2) * -30;
+                float rot = 180 + aim + (cnt / 2) * - 45;
                 for (int i = 0; i < cnt; i++) {
                     [Enemy add:eEnemy_Pokey x:self._x y:self._y rot:rot speed:speed];
-                    rot += 30;
+                    rot += 45;
                 }
                 
             }

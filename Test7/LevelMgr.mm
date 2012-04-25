@@ -9,6 +9,7 @@
 #import "LevelMgr.h"
 #import "GameScene.h"
 #import "Enemy.h"
+#import "Player.h"
 
 /**
  * レベル管理
@@ -28,14 +29,22 @@
  */
 - (void)addEnemy:(eEnemy)type {
     
+    Player* player = [GameScene sharedInstance].player;
+    
     const float RANGE = 0;
     
-    float x = -RANGE;
-    float y = -RANGE;
-    if(Math_Rand(2) == 0) {
+    float x = 0;
+    float y = 0;
+    if (player._x > System_CenterX()) {
+        x = -RANGE;
+    }
+    else {
         x = System_Width() + RANGE;
     }
-    if(Math_Rand(2) == 0) {
+    if(player._y > System_CenterY()) {
+        y = -RANGE;
+    }
+    else {
         y = System_Height() + RANGE;
     }
     if (Math_Rand(2) == 0) {
