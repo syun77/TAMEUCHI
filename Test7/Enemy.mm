@@ -124,6 +124,7 @@ enum eState {
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Pokey)];
             self._r = 8;
             m_HpMax = 3;
+            m_Timer = 300;
             break;
             
         default:
@@ -304,6 +305,20 @@ enum eState {
 }
 
 /**
+ * 更新・5箱
+ */
+- (void)update5Box {
+    
+}
+
+/**
+ * 更新・牛乳
+ */
+- (void)updateMilk {
+    
+}
+
+/**
  * 更新・プリン
  */
 - (void)updatePudding {
@@ -346,9 +361,18 @@ enum eState {
                 float dy = -Math_SinEx(aim + deg2) * speedMove;
                 self._vx = dx;
                 self._vy = dy;
+                
                 // 弾を打つ
-                float rot = [self getAim];
-                [Bullet add:self._x y:self._y rot:rot speed:100];
+                [Bullet add:self._x y:self._y rot:aim speed:100];
+                
+                // ポッキー発射
+                float speed = 400;
+                int cnt = 5;
+                float rot = 180 + aim + (cnt / 2) * -30;
+                for (int i = 0; i < cnt; i++) {
+                    [Enemy add:eEnemy_Pokey x:self._x y:self._y rot:rot speed:speed];
+                    rot += 30;
+                }
                 
             }
             if([self isBoundRectX:self._r])
@@ -370,6 +394,73 @@ enum eState {
 }
 
 /**
+ * 更新・XBox
+ */
+- (void)updateXBox {
+    
+}
+
+/**
+ * 更新・ポッキー
+ */
+- (void)updatePokey {
+    const float SPEED = 300;
+    
+    switch (m_State) {
+        case eState_Appear:
+            m_Timer = m_Timer * 0.97;
+            self._vx *= 0.9f;
+            self._vy *= 0.9f;
+            [self setRotation:m_Timer*4];
+            if (m_Timer == 0) {
+                m_State = eState_Main;
+                float aim = [self getAim];
+                
+                [Bullet add:self._x y:self._y rot:aim speed:100];
+                
+                float dx = Math_CosEx(aim) * SPEED;
+                float dy = Math_SinEx(aim) * SPEED;
+                
+                self._vx = dx;
+                self._vy = dy;
+                
+                [self setRotation:Math_Atan2Ex(-dy, dx)];
+            }
+            break;
+            
+        default:
+            break;
+    }
+    
+    if ([self isOutCircle:self._r]) {
+        // 画面外に出たら消える
+        [self vanish];
+    }
+}
+
+/**
+ * 更新・だいこん
+ */
+- (void)updateRadish {
+    
+    if ([self isOutCircle:self._r]) {
+        // 画面外に出たら消える
+        [self vanish];
+    }
+}
+
+/**
+ * 更新・にんじん
+ */
+- (void)updateCarrot {
+    
+    if ([self isOutCircle:self._r]) {
+        // 画面外に出たら消える
+        [self vanish];
+    }
+}
+
+/**
  * 更新
  */
 - (void)update:(ccTime)dt {
@@ -384,8 +475,32 @@ enum eState {
             [self updateTako];
             break;
             
+        case eEnemy_5Box:
+            [self update5Box];
+            break;
+            
+        case eEnemy_Milk:
+            [self updateMilk];
+            break;
+            
         case eEnemy_Pudding:
             [self updatePudding];
+            break;
+            
+        case eEnemy_XBox:
+            [self updateXBox];
+            break;
+            
+        case eEnemy_Pokey:
+            [self updatePokey];
+            break;
+            
+        case eEnemy_Carrot:
+            [self updateCarrot];
+            break;
+            
+        case eEnemy_Radish:
+            [self updateRadish];
             break;
             
         default:
@@ -497,6 +612,8 @@ enum eState {
             case eEnemy_Carrot:
             case eEnemy_Radish:
             case eEnemy_Pokey:
+                // 小サイズ
+                [self vanishSmall];
                 break;
                 
             case eEnemy_Nasu:
