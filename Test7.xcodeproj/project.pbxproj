@@ -148,6 +148,7 @@
 		C7F053AA152B14EA0095B76E /* all.png in Resources */ = {isa = PBXBuildFile; fileRef = C7F053A9152B14EA0095B76E /* all.png */; };
 		C7F053AE152B15CF0095B76E /* Exerinya.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F053AD152B15CF0095B76E /* Exerinya.mm */; };
 		C7F0DF55153A83BC006E26E4 /* Charge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F0DF54153A83BC006E26E4 /* Charge.mm */; };
+		C7F36C611549072800D67933 /* Combo.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F36C601549072800D67933 /* Combo.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -434,6 +435,8 @@
 		C7F053AD152B15CF0095B76E /* Exerinya.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Exerinya.mm; sourceTree = "<group>"; };
 		C7F0DF53153A83BC006E26E4 /* Charge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Charge.h; sourceTree = "<group>"; };
 		C7F0DF54153A83BC006E26E4 /* Charge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Charge.mm; sourceTree = "<group>"; };
+		C7F36C5F1549072800D67933 /* Combo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Combo.h; sourceTree = "<group>"; };
+		C7F36C601549072800D67933 /* Combo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Combo.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -852,6 +855,8 @@
 				C76484CE153DBE5D00C79410 /* Gauge.mm */,
 				C76484D1153E7DC700C79410 /* GaugeHp.h */,
 				C76484D2153E7DC700C79410 /* GaugeHp.mm */,
+				C7F36C5F1549072800D67933 /* Combo.h */,
+				C7F36C601549072800D67933 /* Combo.mm */,
 				C7A13EDF153872DC00B53149 /* Aim.h */,
 				C7A13EE0153872DC00B53149 /* Aim.mm */,
 				C73FEC2A152BF45E008B5697 /* Shot.h */,
@@ -1097,6 +1102,7 @@
 				C742013B1543020C007351E3 /* TitleScene.mm in Sources */,
 				C76591D11544532900018DD2 /* SceneManager.mm in Sources */,
 				C76591D515462AA700018DD2 /* IScene.mm in Sources */,
+				C7F36C611549072800D67933 /* Combo.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

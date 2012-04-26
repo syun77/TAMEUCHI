@@ -20,6 +20,7 @@
 #import "LevelMgr.h"
 #import "Gauge.h"
 #import "GaugeHp.h"
+#import "Combo.h"
 
 /**
  * ゲームシーン
@@ -33,6 +34,7 @@
     Charge*         charge;         // チャージエフェクト
     Gauge*          gauge;          // チャージゲージ
     GaugeHp*        gaugeHp;        // チャージゲージHP
+    Combo*          combo;          // コンボ数表示
     TokenManager*   mgrShot;        // 自弾
     TokenManager*   mgrEnemy;       // 敵
     TokenManager*   mgrBullet;      // 敵弾
@@ -55,6 +57,7 @@
 @property (nonatomic, retain)Aim*               aim;
 @property (nonatomic, retain)Gauge*             gauge;
 @property (nonatomic, retain)GaugeHp*           gaugeHp;
+@property (nonatomic, retain)Combo*             combo;
 @property (nonatomic, retain)Charge*            charge;
 @property (nonatomic, retain)TokenManager*      mgrShot;
 @property (nonatomic, retain)TokenManager*      mgrEnemy;

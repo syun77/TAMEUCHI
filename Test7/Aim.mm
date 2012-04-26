@@ -27,7 +27,7 @@
     m_bActive = YES;
     
     // 照準の半径
-    self._r = 32;
+    self._r = 48;
     
     CGRect r = Exerinya_GetRect(eExerinyaRect_EftRing);
     [self setTexRect:r];

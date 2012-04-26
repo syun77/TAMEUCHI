@@ -52,6 +52,7 @@ static GameScene* scene_ = nil;
 @synthesize charge;
 @synthesize gauge;
 @synthesize gaugeHp;
+@synthesize combo;
 @synthesize mgrShot;
 @synthesize mgrEnemy;
 @synthesize mgrBullet;
@@ -109,6 +110,13 @@ static GameScene* scene_ = nil;
     
     self.gaugeHp = [GaugeHp node];
     [self.baseLayer addChild:self.gaugeHp z:ePrio_UI];
+    
+    self.combo = [Combo node];
+    [self.baseLayer addChild:self.combo z:ePrio_UI];
+    [self.combo.asciiFont createFont:self.baseLayer length:8];
+    [self.combo.asciiFont setText:@""];
+    [self.combo.asciiFont2 createFont:self.baseLayer length:8];
+    [self.combo.asciiFont2 setText:@""];
     
     self.player = [Player node];
     [self.baseLayer addChild:self.player z:ePrio_Player];
@@ -191,6 +199,7 @@ static GameScene* scene_ = nil;
     self.mgrBullet = nil;
     self.mgrEnemy = nil;
     self.mgrShot = nil;
+    self.combo = nil;
     self.gaugeHp = nil;
     self.gauge = nil;
     self.charge = nil;
@@ -228,7 +237,6 @@ static GameScene* scene_ = nil;
  */
 - (void)updateMain:(ccTime)dt {
     // 当たり判定を行う
-    
     // 自弾 vs 敵
     for (Shot* s in self.mgrShot.m_Pool) {
         if ([s isExist] == NO) {
