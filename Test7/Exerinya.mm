@@ -18,7 +18,8 @@ CGRect Exerinya_GetRect(eExerinyaRect rect) {
         {0,   128, 128, 128}, // eExerinyaRect_Nasu,         // ナス
         {128, 128, 128, 128}, // eExerinyaRect_5Box,         // 5箱
         {128, 396, 128, 128}, // eExerinyaRect_Tako,         // たこ焼き
-        {768, 256, 256, 256}, // eExerinyaRect_Pudding,      // プリン
+//        {768, 256, 256, 256}, // eExerinyaRect_Pudding,      // プリン
+        {769, 257, 254, 254}, // eExerinyaRect_Pudding,      // プリン
         {256, 128, 256, 256}, // eExerinyaRect_Milk,         // 牛乳
         {512, 128, 256, 256}, // eExerinyaRect_XBox,         // XBox
         {0,   256,  64,  64}, // eExerinyaRect_Bullet,       // 弾

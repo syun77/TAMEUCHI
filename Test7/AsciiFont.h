@@ -11,20 +11,21 @@
 #import "Token.h"
 #import "TokenManager.h"
 
-// ASCII文字のサイズ
-#define ASCII_SIZE (16)
+/// ASCII文字のサイズ
+//#define ASCII_SIZE (16)
+#define ASCII_SIZE (14)
 
-// ASCII文字の横の数
+/// ASCII文字の横の数
 #define ASCII_X_COUNT (16)
 
-// 描画プライオリティ
+/// 描画プライオリティ
 #define PRIO_ASCIIFONT (100)
 
-// 文字の描画種別
+/// 文字の描画種別
 typedef enum {
-    eFontAlign_Left,   // 左寄せ
-    eFontAlign_Center, // 中央揃え
-    eFontAlign_Right,  // 右寄せ
+    eFontAlign_Left,   /// 左寄せ
+    eFontAlign_Center, /// 中央揃え
+    eFontAlign_Right,  /// 右寄せ
 } eFontAlign;
 
 /**
@@ -33,7 +34,11 @@ typedef enum {
 @interface AsciiObj : Token {    
 }
 
-// 文字に対応する矩形を取得
+/**
+ * 文字に対応する矩形を取得
+ * @param char c 文字
+ * @return 文字に対応する矩形
+ */
 - (CGRect)getRectWithChar:(char)c;
 
 // 文字を設定する
@@ -53,7 +58,11 @@ typedef enum {
     eFontAlign  m_Align;    // 描画種別
 }
 
-// フォントの生成
+/**
+ * フォントの生成
+ * @param CCLayer 描画レイヤー
+ * @param NSInteger 文字列長
+ */
 - (void)createFont:(CCLayer *)layer length:(NSInteger)length;
 
 // フォントの１文字あたりのサイズを取得する
