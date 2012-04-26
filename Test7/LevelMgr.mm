@@ -54,6 +54,10 @@
     else {
         y = Math_Rand(System_Height());
     }
+    
+    x = Math_Rand(System_Width());
+    y = Math_Rand(System_Height());
+    
     [Enemy add:type x:x y:y rot:Math_Randf(360) speed:0];
     
 }
@@ -71,7 +75,8 @@
 //            if (m_Timer%80 == 20) {
               if (m_Timer%280 == 20) {
                 // 敵の生成
-                [self addEnemy:eEnemy_Pudding];
+                  [self addEnemy:eEnemy_5Box];
+//                [self addEnemy:eEnemy_Pudding];
 //                [self addEnemy:eEnemy_Nasu];
 //                [self addEnemy:eEnemy_Tako];
             }

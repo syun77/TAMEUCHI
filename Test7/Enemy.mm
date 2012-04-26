@@ -87,7 +87,7 @@ enum eState {
         case eEnemy_5Box:    // ５箱
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_5Box)];
             self._r = 16;
-            m_HpMax = 3;
+            m_HpMax = 30;
             break;
             
         case eEnemy_Pudding: // プリン
@@ -309,6 +309,41 @@ enum eState {
  */
 - (void)update5Box {
     
+    self._vx *= 0.1f;
+    self._vy *= 0.1f;
+    
+    switch (m_State) {
+        case eState_Appear:
+            m_Timer++;
+            if(m_Timer%80 == 0)
+            {
+                // 3Way
+                float aim = [self getAim] - 30;
+                for (int i = 0; i < 3; i++) {
+                    [Bullet add:self._x y:self._y rot:aim speed:100];
+                    aim += 30;
+                }
+            }
+            if(m_Timer > 320)
+            {
+                m_Val = [self getAim];
+                m_Timer = 0;
+                m_State = eState_Main;
+            }
+            break;
+            
+        case eState_Main:
+            [Bullet add:self._x y:self._y rot:m_Val speed:200];
+            m_Timer++;
+            if (m_Timer > 160) {
+                m_Timer = 0;
+                m_State = eState_Appear;
+            }
+            break;
+            
+        default:
+            break;
+    }
 }
 
 /**
@@ -408,15 +443,16 @@ enum eState {
     
     switch (m_State) {
         case eState_Appear:
+            // 出現
             m_Timer = m_Timer * 0.97;
             self._vx *= 0.9f;
             self._vy *= 0.9f;
             [self setRotation:m_Timer*4];
+            
             if (m_Timer == 0) {
+                // 自機に向かって飛ぶ
                 m_State = eState_Main;
                 float aim = [self getAim];
-                
-                [Bullet add:self._x y:self._y rot:aim speed:100];
                 
                 float dx = Math_CosEx(aim) * SPEED;
                 float dy = Math_SinEx(aim) * SPEED;
