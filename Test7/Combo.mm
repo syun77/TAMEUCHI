@@ -40,6 +40,7 @@ enum eState {
     [self move:0];
     m_Timer = 0;
     [self setVisible:NO];
+    m_State = eState_None;
     
     return self;
 }
@@ -54,10 +55,24 @@ enum eState {
 - (void)update:(ccTime)dt {
     [self move:dt];
     
-    if (m_Timer > 0) {
-        m_Timer = m_Timer * 0.8f;
-        float scale = 1 + 2 * (float)m_Timer / TIMER_APPEAR;
-        [self.asciiFont setScale:scale];
+    switch (m_State) {
+        case eState_Appear:
+            m_Timer = m_Timer * 0.8f;
+        {
+            float scale = 1 + 2 * (float)m_Timer / TIMER_APPEAR;
+            [self.asciiFont setScale:scale];
+        }    
+            if (m_Timer < 1) {
+                m_State = eState_Wait;
+            }
+            
+            break;
+            
+        case eState_Wait:
+            break;
+            
+        default:
+            break;
     }
     
     [self.asciiFont setPosScreen:self._x y:self._y];
@@ -65,13 +80,16 @@ enum eState {
 }
 
 - (void)visit {
-    if (m_Timer == 0) {
+    if (m_State == eState_None) {
         return;
     }
     
     System_SetBlend(eBlend_Add);
     
     int t = 4 * m_Timer / TIMER_APPEAR;
+    if (t < 1) {
+        t = 1;
+    }
     glColor4f(1, 0, 0, 1);
     [self fillRect:0 cy:self._y w:System_Width() h:t rot:0 scale:1];
     
@@ -81,6 +99,7 @@ enum eState {
 // コンボ開始
 - (void)start:(int)combo {
     m_Combo = combo;
+    m_State = eState_Appear;
     m_Timer = TIMER_APPEAR;
     
     // 中央揃えでテキスト設定
@@ -94,9 +113,15 @@ enum eState {
 
 // コンボ終了
 - (void)end {
+    m_State = eState_None;
     m_Timer = 0;
     [self.asciiFont setText: @""];
     [self.asciiFont2 setText:@""];
+}
+
+// コンボが有効かどうか
+- (BOOL)isEnable {
+    return m_State != eState_None;
 }
 
 @end

@@ -9,6 +9,16 @@
 #import "Back.h"
 #import "Exerinya.h"
 #import "System.h"
+#import "GameScene.h"
+
+enum eState {
+    eState_None,
+    eState_Dark, // 暗くする
+    eState_Light, // 明るくする
+};
+
+// 暗くするタイマー
+static const int TIMER_DARK = 10;
 
 /**
  * 背景トークン実装
@@ -36,8 +46,10 @@
     [self setTexRect:Exerinya_GetRect(eExerinyaRect_Back)];
     
     // 変数初期化
-    m_TargetX = self._x;
-    m_TargetY = self._y;
+    m_TargetX   = self._x;
+    m_TargetY   = self._y;
+    m_State     = eState_Light;
+    m_Timer     = 0;
     
     return self;
 }
@@ -68,5 +80,37 @@
     self._vy = dy * 30;
     
     [super move:dt];
+    
+    switch (m_State) {
+        case eState_Light:
+            m_Timer--;
+            if (m_Timer < 1) {
+                m_Timer = 0;
+                m_State = eState_None;
+            }
+            break;
+            
+        case eState_Dark:
+            m_Timer++;
+            if (m_Timer > TIMER_DARK) {
+                m_Timer = TIMER_DARK;
+            }
+            
+        default:
+            break;
+    }
+    
+    int color = 0xFF - 0xA0 * m_Timer / TIMER_DARK;
+    [self setColor:ccc3(color, color, color)];
 }
+
+// 背景変化
+- (void)beginDark {
+    m_State = eState_Dark;
+}
+
+- (void)beginLight {
+    m_State = eState_Light;
+}
+
 @end

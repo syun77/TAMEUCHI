@@ -602,6 +602,8 @@ enum eState {
     m_Combo = 0;
     Combo* combo = [GameScene sharedInstance].combo;
     [combo end];
+    Back* back = [GameScene sharedInstance].back;
+    [back beginLight];
 }
 
 // コンボ回数増加
@@ -622,6 +624,8 @@ enum eState {
     // コンボ演出開始
     Combo* combo = [GameScene sharedInstance].combo;
     [combo start:m_Combo];
+    Back* back = [GameScene sharedInstance].back;
+    [back beginDark];
 }
 
 // コンボ回数を取得
@@ -632,6 +636,12 @@ enum eState {
 // コンボ最大回数を取得
 - (int)getComboMax {
     return m_ComboMax;
+}
+
+// コンボが有効かどうか
+- (BOOL)isEnableCombo {
+    Combo* combo = [GameScene sharedInstance].combo;
+    return [combo isEnable];
 }
 
 @end

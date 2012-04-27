@@ -31,4 +31,8 @@
 // コンボ終了
 - (void)end;
 
+// コンボが有効かどうか
+- (BOOL)isEnable;
+
+
 @end

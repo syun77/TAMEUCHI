@@ -66,4 +66,7 @@ static const int SHOT_TIMER = 16;
 // コンボ最大回数を取得
 - (int)getComboMax;
 
+// コンボが有効かどうか
+- (BOOL)isEnableCombo;
+
 @end
