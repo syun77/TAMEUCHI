@@ -31,6 +31,7 @@ enum eEnemy {
     eEnemy  m_Id;       // 敵番号
     int     m_Timer;    // 汎用タイマー
     int     m_Val;      // 汎用パラメータ
+    int     m_Step;     // 実行ステップ
     int     m_Hp;       // HP
     int     m_HpMax;    // 最大HP
     int     m_State;    // 状態

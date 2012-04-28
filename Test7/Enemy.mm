@@ -54,6 +54,7 @@ enum eState {
     m_Timer = 0;
     m_Hp    = 3;
     m_State = eState_Appear;
+    m_Step  = 0;
     
 }
 
@@ -315,7 +316,8 @@ enum eState {
     switch (m_State) {
         case eState_Appear:
             m_Timer++;
-            if(m_Timer%80 == 0)
+            m_Val = m_Val * 0.97f;
+            if(m_Val == 0)
             {
                 // 3Way
                 float aim = [self getAim] - 30;
@@ -323,7 +325,10 @@ enum eState {
                     [Bullet add:self._x y:self._y rot:aim speed:100];
                     aim += 30;
                 }
+                m_Val = 360 + Math_Rand(720);
             }
+            
+            
             if(m_Timer > 320)
             {
                 m_Val = [self getAim];
@@ -333,9 +338,13 @@ enum eState {
             break;
             
         case eState_Main:
-            [Bullet add:self._x y:self._y rot:m_Val speed:200];
             m_Timer++;
+            m_Val += m_Timer / 3;
             if (m_Timer > 160) {
+                for (int i = 0; i < 16; i++) {
+                    float rot = i * (360 / 16);
+                    [Bullet add:self._x y:self._y rot:rot speed:200];
+                }
                 m_Timer = 0;
                 m_State = eState_Appear;
             }
@@ -344,6 +353,8 @@ enum eState {
         default:
             break;
     }
+    
+    [self setRotation:m_Val];
 }
 
 /**
