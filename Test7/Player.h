@@ -48,6 +48,12 @@ static const int SHOT_TIMER = 16;
 // ダメージ
 - (void)damage:(Token*)t;
 
+// 危険状態かどうか
+- (BOOL)isDanger;
+
+// HPの割合を取得 (０〜１)
+- (float)getHpRatio;
+
 // パワーの取得
 - (int)getPower;
 

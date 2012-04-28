@@ -22,6 +22,9 @@
 #import "GaugeHp.h"
 #import "Combo.h"
 
+// 危険時に有効となる速度の係数
+static const float DANGER_SLOW_RATIO = 0.5;
+
 /**
  * ゲームシーン
  */

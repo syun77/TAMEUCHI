@@ -37,6 +37,12 @@
 }
 
 - (void)update:(ccTime)dt {
+    
+    Player* player = [GameScene sharedInstance].player;
+    if ([player isDanger]) {
+        // スローモード
+        dt *= DANGER_SLOW_RATIO;
+    }
     [self move:dt];
     
     m_Timer++;

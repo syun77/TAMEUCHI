@@ -381,6 +381,10 @@ enum eState {
         [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player2)];
     }
     
+    if ([self isDanger] && m_tPast%64 / 32) {
+        [self setTexRect:Exerinya_GetRect(eExerinyaRect_PlayerDamage)];
+    }
+    
     if (m_tDamage > 0) {
         // ダメージ中画像
         [self setTexRect:Exerinya_GetRect(eExerinyaRect_PlayerDamage)];
@@ -584,6 +588,22 @@ enum eState {
         [self changeState:eState_Damage];
     }
     
+}
+
+// HPの割合を取得 (０〜１)
+- (float)getHpRatio {
+    return (float)m_Hp / MAX_HP;
+}
+
+// 危険状態かどうか
+- (BOOL)isDanger {
+    if (m_State == eState_Vanish) {
+        // 死んでたら何もしない
+        return NO;
+    }
+    
+    // 0.3以下で危険
+    return [self getHpRatio] < 0.3;
 }
 
 // パワーの取得

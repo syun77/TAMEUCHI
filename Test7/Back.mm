@@ -100,8 +100,15 @@ static const int TIMER_DARK = 10;
             break;
     }
     
-    int color = 0xFF - 0xA0 * m_Timer / TIMER_DARK;
-    [self setColor:ccc3(color, color, color)];
+    int r = 0xFF - 0xA0 * m_Timer / TIMER_DARK;
+    int g = 0xFF - 0xA0 * m_Timer / TIMER_DARK;
+    int b = 0xFF - 0xA0 * m_Timer / TIMER_DARK;
+    Player* player = [GameScene sharedInstance].player;
+    if ([player isDanger]) {
+        g = g * 0.5;
+        b = b * 0.5;
+    }
+    [self setColor:ccc3(r, g, b)];
 }
 
 // 背景変化
