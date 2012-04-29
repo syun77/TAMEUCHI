@@ -312,37 +312,62 @@ enum eState {
 - (void)updateNasu {
     const float speedIn  = 100; // 画面に入る速度
     const float speedMove = 50; // 移動速度
-    m_Timer++;
-    if (m_Timer < 200) {
-        // 登場シーケンス
-        [self moveAppear:speedIn radius:self._r];
-    }
-    else if ([self isOutCircle:self._r]) {
-        // 画面外に出たら消える
-        [self vanish];
-        return;
-    }
-    else if (m_Timer > 2000) {
-        // 退場シーケンス
-        // プレイヤーを逆方向に移動する
-        float aim = [self getAim];
-        float dx = Math_CosEx(aim) * -speedMove;
-        float dy = -Math_SinEx(aim) * -speedMove;
-        self._vx = dx;
-        self._vy = dy;
-    }
-    else if (m_Timer%320 < 160) {
-        // 移動シーケンス
-        float dx = Math_CosEx(m_Timer) * speedMove;
-        float dy = Math_SinEx(m_Timer) * speedMove;
-        self._vx = dx;
-        self._vy = dy;
-        if (m_Timer%320 == 10) {
-            // 弾を打つ
-            float rot = [self getAim];
-            [Bullet add:self._x y:self._y rot:rot speed:100];
+    
+    switch (m_State) {
+        case eState_Appear:
+            m_Timer++;
+            // 登場シーケンス
+            [self moveAppear:speedIn radius:self._r];
+            if (m_Timer >= 200) {
+                m_State = eState_Main;
+                m_Timer = 0;
+            }
+            break;
+            
+        case eState_Main:
+            m_Timer++;
+            if (m_Timer%160 < 40) {
+                // 移動シーケンス
+                float dx = Math_CosEx(m_Timer) * speedMove;
+                float dy = Math_SinEx(m_Timer) * speedMove;
+                self._vx = dx;
+                self._vy = dy;
+                if (m_Timer%320 == 10) {
+                    // 弾を打つ
+                    float rot = [self getAim];
+                    [Bullet add:self._x y:self._y rot:rot speed:100];
+                }
+                
+            }
+            if (m_Timer > 2000) {
+                
+                // 逃走する
+                m_State = eState_Escape;
+                m_Timer = 0;
+            }
+            break;
+            
+        case eState_Escape:
+            
+            // 退場シーケンス
+            // プレイヤーを逆方向に移動する
+        {
+            float aim = [self getAim];
+            float dx = Math_CosEx(aim) * -speedMove;
+            float dy = -Math_SinEx(aim) * -speedMove;
+            self._vx = dx;
+            self._vy = dy;
         }
-        
+            
+            if([self isOutCircle:self._r]) {
+                // 画面外に出たら消える
+                [self vanish];
+                return;
+            }
+            break;
+            
+        default:
+            break;
     }
     
     self._vx *= 0.9f;

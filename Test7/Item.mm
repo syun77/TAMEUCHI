@@ -63,7 +63,7 @@
     }
     [self move:dt];
     
-    if (self._x < -self._r) {
+    if (self._y < -self._r) {
         // 画面外に出た
         [self vanish];
     }

@@ -36,12 +36,16 @@
     
     [super visit];
     
+    if (self.visible == NO) {
+        // 非表示
+        return;
+    }
+    
     float x = self._x;
     float y = self._y;
     
     // 加算ブレンド有効
     System_SetBlend(eBlend_Add);
-    glColor4f(1, 0, 0, 1);
     
     
     const int COUNT_MAX = 8;
@@ -51,6 +55,11 @@
     if (m_Now > 0) {
         cnt++;
     }
+    
+    float r = 1.0 * cnt / COUNT_MAX;
+    float g = 1.0 * (COUNT_MAX - cnt) / COUNT_MAX;
+    glColor4f(r, g, 0, 1);
+    
     for (int i = 0; i < cnt; i++) {
         float rot = 360 / COUNT_MAX * i + m_tPast * 8;
         float cx = x + 40 * Math_CosEx(rot);
