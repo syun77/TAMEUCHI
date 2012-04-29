@@ -10,6 +10,7 @@
 
 #import "Exerinya.h"
 #import "GameScene.h"
+#import "Particle.h"
 
 /**
  * アイテムの実装
@@ -71,6 +72,23 @@
 // アイテム種別の取得
 - (eItem)getType {
     return m_Type;
+}
+
+// アイテム取得演出の再生
+- (void)vanishWithEffect {
+    
+    float rot = 0;
+    for(int i = 0; i < 8; i++)
+    {
+        rot += 30 + Math_Randf(30);
+        float speed = 100 + Math_Randf(100);
+        Particle* p = [Particle add:eParticle_Ball x:self._x y:self._y rot:rot speed:speed];
+        if (p) {
+            [p setScale:0.5f];
+            [p setColor:ccc3(0xFF, 0xFF, 0)];
+        }
+    }
+    [self vanish];
 }
 
 /**

@@ -254,7 +254,7 @@ static GameScene* scene_ = nil;
         if ([item isHit2:self.player]) {
             // アイテム取得
             [self.player takeItem:item];
-            [item vanish];
+            [item vanishWithEffect];
         }
     }
     

@@ -30,6 +30,10 @@ enum eItem {
 // アイテム種別の取得
 - (eItem)getType;
 
+
+// アイテム取得演出の再生
+- (void)vanishWithEffect;
+
 // アイテムの生成
 + (Item*)add:(eItem)type x:(float)x y:(float)y rot:(float)rot speed:(float)speed;
 

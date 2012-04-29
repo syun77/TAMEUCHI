@@ -20,6 +20,9 @@ enum eState {
 // 暗くするタイマー
 static const int TIMER_DARK = 10;
 
+// 危険タイマー
+static const int TIMER_DANGER = 10;
+
 /**
  * 背景トークン実装
  */
@@ -50,6 +53,7 @@ static const int TIMER_DARK = 10;
     m_TargetY   = self._y;
     m_State     = eState_Light;
     m_Timer     = 0;
+    m_tDanger   = 0;
     
     return self;
 }
@@ -100,14 +104,25 @@ static const int TIMER_DARK = 10;
             break;
     }
     
+    Player* player = [GameScene sharedInstance].player;
+    if ([player isDanger]) {
+        if (m_tDanger < TIMER_DANGER) {
+            m_tDanger++;
+        }
+    }
+    else {
+        if (m_tDanger > 0) {
+            m_tDanger--;
+        }
+    }
+    
     int r = 0xFF - 0xA0 * m_Timer / TIMER_DARK;
     int g = 0xFF - 0xA0 * m_Timer / TIMER_DARK;
     int b = 0xFF - 0xA0 * m_Timer / TIMER_DARK;
-    Player* player = [GameScene sharedInstance].player;
-    if ([player isDanger]) {
-        g = g * 0.5;
-        b = b * 0.5;
-    }
+    
+    g = g * (1 - 0.5 * m_tDanger / TIMER_DANGER);
+    b = b * (1 - 0.5 * m_tDanger / TIMER_DANGER);
+    
     [self setColor:ccc3(r, g, b)];
 }
 

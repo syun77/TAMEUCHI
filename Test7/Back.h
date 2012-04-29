@@ -16,8 +16,9 @@
 @interface Back : Token {
     float   m_TargetX;
     float   m_TargetY;
-    int     m_State;
-    int     m_Timer;
+    int     m_State;    // 状態
+    int     m_Timer;    // コンボ用タイマー
+    int     m_tDanger;  // 危険タイマー
 }
 
 // 移動座標の設定
