@@ -21,9 +21,10 @@
 #import "Gauge.h"
 #import "GaugeHp.h"
 #import "Combo.h"
+#import "Item.h"
 
 // 危険時に有効となる速度の係数
-static const float DANGER_SLOW_RATIO = 0.5;
+static const float DANGER_SLOW_RATIO = 0.25;
 
 /**
  * ゲームシーン
@@ -39,6 +40,7 @@ static const float DANGER_SLOW_RATIO = 0.5;
     GaugeHp*        gaugeHp;        // チャージゲージHP
     Combo*          combo;          // コンボ数表示
     TokenManager*   mgrShot;        // 自弾
+    TokenManager*   mgrItem;        // アイテム
     TokenManager*   mgrEnemy;       // 敵
     TokenManager*   mgrBullet;      // 敵弾
     TokenManager*   mgrParticle;    // パーティクル
@@ -63,6 +65,7 @@ static const float DANGER_SLOW_RATIO = 0.5;
 @property (nonatomic, retain)Combo*             combo;
 @property (nonatomic, retain)Charge*            charge;
 @property (nonatomic, retain)TokenManager*      mgrShot;
+@property (nonatomic, retain)TokenManager*      mgrItem;
 @property (nonatomic, retain)TokenManager*      mgrEnemy;
 @property (nonatomic, retain)TokenManager*      mgrBullet;
 @property (nonatomic, retain)TokenManager*      mgrParticle;

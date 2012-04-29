@@ -75,4 +75,7 @@ static const int SHOT_TIMER = 16;
 // コンボが有効かどうか
 - (BOOL)isEnableCombo;
 
+// アイテム取得
+- (void)takeItem:(Token*)t;
+
 @end

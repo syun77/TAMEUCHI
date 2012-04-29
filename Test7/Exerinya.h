@@ -28,6 +28,7 @@ enum eExerinyaRect
     eExerinyaRect_EftRing,      // エフェクト・輪っか
     eExerinyaRect_EftBlade,     // エフェクト・刃
     eExerinyaRect_Back,         // 背景
+    eExerinyaRect_Banana,       // バナナ
     eExerinyaRect_Max,
 };
 

@@ -19,6 +19,7 @@
 #import "Gauge.h"
 #import "GaugeHp.h"
 #import "Particle.h"
+#import "Item.h"
 
 // ダメージタイマー
 static const int TIMER_DAMAGE = 30;
@@ -662,6 +663,19 @@ enum eState {
 - (BOOL)isEnableCombo {
     Combo* combo = [GameScene sharedInstance].combo;
     return [combo isEnable];
+}
+
+// アイテム取得
+- (void)takeItem:(Token*)t {
+    Item* item = (Item*)t;
+    switch ([item getType]) {
+        case eItem_Recover:
+            m_Hp += 100;
+            break;
+            
+        default:
+            break;
+    }
 }
 
 @end

@@ -12,6 +12,7 @@
 #import "GameScene.h"
 #import "Particle.h"
 #import "Bullet.h"
+#import "Item.h"
 
 enum eState {
     eState_Appear,  // 出現
@@ -693,6 +694,9 @@ enum eState {
             case eEnemy_Tako:
                 // 通常サイズ
                 [self vanishNormal];
+                
+                // TODO:
+                [Item add:eItem_Recover x:self._x y:self._y rot:90 speed:50];
                 break;
                 
             case eEnemy_Milk:
@@ -700,6 +704,8 @@ enum eState {
             case eEnemy_Pudding:
                 // 大サイズ
                 [self vanishBig];
+                // TODO:
+                [Item add:eItem_Recover x:self._x y:self._y rot:90 speed:50];
                 break;
                 
             default:

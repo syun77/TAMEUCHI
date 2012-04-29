@@ -137,6 +137,7 @@
 		C76591D515462AA700018DD2 /* IScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C76591D415462AA700018DD2 /* IScene.mm */; };
 		C76CC3CC1526949600AE1C69 /* LICENSE.cocos2d in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */; };
 		C76CC3CD1526949600AE1C69 /* LICENSE.cocosdenshion in Resources */ = {isa = PBXBuildFile; fileRef = C76CC3CB1526949600AE1C69 /* LICENSE.cocosdenshion */; };
+		C7731E79154C493100D773DE /* Item.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7731E78154C493100D773DE /* Item.mm */; };
 		C786B37915253D7600049CA8 /* InterfaceLayer.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37815253D7600049CA8 /* InterfaceLayer.mm */; };
 		C786B37B15253DFC00049CA8 /* GameScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37A15253DFC00049CA8 /* GameScene.mm */; };
 		C786B37D15253E1A00049CA8 /* Player.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B37C15253E1A00049CA8 /* Player.mm */; };
@@ -419,6 +420,8 @@
 		C76591D415462AA700018DD2 /* IScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IScene.mm; sourceTree = "<group>"; };
 		C76CC3CA1526949600AE1C69 /* LICENSE.cocos2d */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocos2d; sourceTree = "<group>"; };
 		C76CC3CB1526949600AE1C69 /* LICENSE.cocosdenshion */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE.cocosdenshion; sourceTree = "<group>"; };
+		C7731E77154C493100D773DE /* Item.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Item.h; sourceTree = "<group>"; };
+		C7731E78154C493100D773DE /* Item.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Item.mm; sourceTree = "<group>"; };
 		C786B37815253D7600049CA8 /* InterfaceLayer.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = InterfaceLayer.mm; sourceTree = "<group>"; };
 		C786B37A15253DFC00049CA8 /* GameScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameScene.mm; sourceTree = "<group>"; };
 		C786B37C15253E1A00049CA8 /* Player.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Player.mm; sourceTree = "<group>"; };
@@ -855,6 +858,8 @@
 				C76484CE153DBE5D00C79410 /* Gauge.mm */,
 				C76484D1153E7DC700C79410 /* GaugeHp.h */,
 				C76484D2153E7DC700C79410 /* GaugeHp.mm */,
+				C7731E77154C493100D773DE /* Item.h */,
+				C7731E78154C493100D773DE /* Item.mm */,
 				C7F36C5F1549072800D67933 /* Combo.h */,
 				C7F36C601549072800D67933 /* Combo.mm */,
 				C7A13EDF153872DC00B53149 /* Aim.h */,
@@ -1103,6 +1108,7 @@
 				C76591D11544532900018DD2 /* SceneManager.mm in Sources */,
 				C76591D515462AA700018DD2 /* IScene.mm in Sources */,
 				C7F36C611549072800D67933 /* Combo.mm in Sources */,
+				C7731E79154C493100D773DE /* Item.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

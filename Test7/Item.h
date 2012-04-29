@@ -1,0 +1,36 @@
+//
+//  Item.h
+//  Test7
+//
+//  Created by OzekiSyunsuke on 12/04/29.
+//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "cocos2d.h"
+#import "Token.h"
+
+/**
+ * アイテムの種類
+ */
+enum eItem {
+    eItem_Recover,  // 回復アイテム
+    eItem_Score,    // 得点アイテム
+    eItem_Power,    // ショットゲージアップアイテム
+    eItem_Weapon,   // 武器切り替えアイテム
+};
+
+/**
+ * アイテムトークン
+ */
+@interface Item : Token {
+    eItem m_Type;
+}
+
+// アイテム種別の取得
+- (eItem)getType;
+
+// アイテムの生成
++ (Item*)add:(eItem)type x:(float)x y:(float)y rot:(float)rot speed:(float)speed;
+
+@end

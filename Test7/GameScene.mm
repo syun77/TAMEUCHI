@@ -12,6 +12,7 @@
 #import "SceneManager.h"
 
 #import "Enemy.h"
+#import "Item.h"
 #import "Shot.h"
 #import "Bullet.h"
 
@@ -19,8 +20,8 @@
 enum {
     ePrio_Back,     // 背景
     ePrio_Player,   // プレイヤー
-    ePrio_Item,     // アイテム
     ePrio_Enemy,    // 敵
+    ePrio_Item,     // アイテム
     ePrio_Shot,     // 自弾
     ePrio_Bullet,   // 敵弾
     ePrio_Aim,      // 照準
@@ -54,6 +55,7 @@ static GameScene* scene_ = nil;
 @synthesize gaugeHp;
 @synthesize combo;
 @synthesize mgrShot;
+@synthesize mgrItem;
 @synthesize mgrEnemy;
 @synthesize mgrBullet;
 @synthesize mgrParticle;
@@ -129,6 +131,10 @@ static GameScene* scene_ = nil;
     [self.mgrShot create:self.baseLayer size:64 className:@"Shot"];
     [self.mgrShot setPrio:ePrio_Shot];
     
+    self.mgrItem = [TokenManager node];
+    [self.mgrItem create:self.baseLayer size:64 className:@"Item"];
+    [self.mgrItem setPrio:ePrio_Item];
+    
     self.mgrEnemy = [TokenManager node];
     [self.mgrEnemy create:self.baseLayer size:8 className:@"Enemy"];
     [self.mgrEnemy setPrio:ePrio_Enemy];
@@ -198,6 +204,7 @@ static GameScene* scene_ = nil;
     self.mgrParticle = nil;
     self.mgrBullet = nil;
     self.mgrEnemy = nil;
+    self.mgrItem = nil;
     self.mgrShot = nil;
     self.combo = nil;
     self.gaugeHp = nil;
@@ -237,6 +244,20 @@ static GameScene* scene_ = nil;
  */
 - (void)updateMain:(ccTime)dt {
     // 当たり判定を行う
+    
+    // 自機 vs アイテム
+    for (Item* item in self.mgrItem.m_Pool) {
+        if ([item isExist] == NO) {
+            continue;
+        }
+        
+        if ([item isHit2:self.player]) {
+            // アイテム取得
+            [self.player takeItem:item];
+            [item vanish];
+        }
+    }
+    
     // 自弾 vs 敵
     for (Shot* s in self.mgrShot.m_Pool) {
         if ([s isExist] == NO) {

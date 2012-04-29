@@ -30,6 +30,8 @@ CGRect Exerinya_GetRect(eExerinyaRect rect) {
         {896, 0,   128, 128}, // eExerinyaRect_EftRing,      // エフェクト・輪っか
         {768, 128, 256, 128}, // eExerinyaRect_EftBlade,     // エフェクト・刃
         {0,   544, 640, 480}, // eExerinyaRect_Back,         // 背景
+        {0,   320,  64,  64}, // eExerinyaRect_Banana,       // バナナ
+        {64,  320,  64,  64}, // eExerinyaRect_Banana_p1,    // バナナ＋１
     };
     
     return tbl[rect];

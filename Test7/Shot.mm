@@ -81,6 +81,9 @@
     [self vanish];
 }
 
+/**
+ * 自弾の追加
+ */
 + (Shot*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed {
     GameScene* scene = [GameScene sharedInstance];
     Shot* s = (Shot*)[scene.mgrShot add];
