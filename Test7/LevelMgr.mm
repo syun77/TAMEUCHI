@@ -16,12 +16,23 @@
  */
 @implementation LevelMgr
 
+
+/**
+ * 敵の生存数を取得する
+ */
+- (int)getEnemyCount {
+    TokenManager* mgr = [GameScene sharedInstance].mgrEnemy;
+    
+    return [mgr count];
+}
+
 /**
  * 初期化
  */
 - (void)initialize {
-    m_tPast = 0;
-    m_nLevel = 1;
+    m_tPast     = 0;
+    m_nLevel    = 1;
+    m_Mode      = eLevel_Endless;
 }
 
 /**
@@ -55,10 +66,38 @@
         y = Math_Rand(System_Height());
     }
     
-    x = Math_Rand(System_Width());
-    y = Math_Rand(System_Height());
+//    x = Math_Rand(System_Width());
+//    y = Math_Rand(System_Height());
     
     [Enemy add:type x:x y:y rot:Math_Randf(360) speed:0];
+    
+}
+
+/**
+ * 更新・エンドレスモード
+ */
+- (void)updateEndless {
+
+    if (m_nLevel < 100) {
+        if (m_Timer%40 == 20) {
+            if ([self getEnemyCount] < m_nLevel) {
+                [self addEnemy:eEnemy_Nasu];
+            }
+        }
+        
+        if (m_Timer%160 == 40) {
+            if (m_nLevel > 1) {
+                if ([self getEnemyCount] < m_nLevel) {
+                    [self addEnemy:eEnemy_Tako];
+                }
+            }
+        }
+        
+        if (m_Timer > 200) {
+            m_nLevel++;
+            m_Timer = 0;
+        }
+    }
     
 }
 
@@ -69,28 +108,37 @@
     m_tPast++;
     m_Timer++;
     
-    
-    switch (m_nLevel) {
-        case 1:
-//            if (m_Timer%80 == 20) {
-              if (m_Timer%280 == 20) {
-                // 敵の生成
-//                  [self addEnemy:eEnemy_5Box];
-                [self addEnemy:eEnemy_Pudding];
-//                [self addEnemy:eEnemy_Nasu];
-//                [self addEnemy:eEnemy_Tako];
-            }
+    switch (m_Mode) {
+        case eLevel_Endless:
+            [self updateEndless];
             break;
-            
-        case 2:
-            if (m_Timer%80 == 20) {
-                // 敵の生成
-                [self addEnemy:eEnemy_Tako];
-            }
             
         default:
+            switch (m_nLevel) {
+                case 1:
+                    //            if (m_Timer%80 == 20) {
+                    if (m_Timer%280 == 20) {
+                        // 敵の生成
+                        //                  [self addEnemy:eEnemy_5Box];
+                        [self addEnemy:eEnemy_Pudding];
+                        //                [self addEnemy:eEnemy_Nasu];
+                        //                [self addEnemy:eEnemy_Tako];
+                    }
+                    break;
+                    
+                case 2:
+                    if (m_Timer%80 == 20) {
+                        // 敵の生成
+                        [self addEnemy:eEnemy_Tako];
+                    }
+                    
+                default:
+                    break;
+            }
             break;
     }
+    
+    
     
 }
 

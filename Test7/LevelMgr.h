@@ -9,13 +9,18 @@
 #import <Foundation/Foundation.h>
 #import "cocos2d.h"
 
+enum eLevel {
+    eLevel_Endless, // エンドレスモード
+};
+
 /**
  * レベル管理
  */
 @interface LevelMgr : CCNode {
-    int m_tPast; // 経過時間
-    int m_Timer;  // 汎用タイマー
-    int m_nLevel; // レベル
+    int     m_tPast;    // 経過時間
+    int     m_Timer;    // 汎用タイマー
+    int     m_nLevel;   // レベル
+    eLevel  m_Mode;     // ゲームモード
 }
 
 // 初期化
