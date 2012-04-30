@@ -38,7 +38,7 @@
  */
 - (CGRect)getRectWithChar:(char)c {
 //    CGRect ret = CGRectMake(0, 0, ASCII_SIZE, ASCII_SIZE);
-    CGRect ret = CGRectMake(1, 1, ASCII_SIZE, ASCII_SIZE);
+    CGRect ret = CGRectMake(256, 256, ASCII_SIZE, ASCII_SIZE);
     
     // ASCII文字の並び
     const char* decode = "0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ.()[]#$%&'\"!?^+-*/=;:_<>";
@@ -63,7 +63,7 @@
     int py = idx / ASCII_X_COUNT;
     
 //    ret = CGRectMake(px * ASCII_SIZE, py * ASCII_SIZE, ASCII_SIZE, ASCII_SIZE);
-    ret = CGRectMake(1 + px * (2+ASCII_SIZE), 1 + py * (2+ASCII_SIZE), ASCII_SIZE, ASCII_SIZE);
+    ret = CGRectMake(px * (2+ASCII_SIZE), py * (2+ASCII_SIZE), ASCII_SIZE, ASCII_SIZE);
     
     return ret;
     
@@ -74,10 +74,6 @@
  */
 - (void)setChar:(char)c {
     
-    if (c == ' ') {
-        [self setVisible:NO];
-        return;
-    }
     CGRect rect = [self getRectWithChar:c];
     
     [self.m_pSprite setTextureRect:rect];
@@ -243,5 +239,17 @@
     }
 }
 
+// 表示・非表示を設定する
+- (void)setVisible:(BOOL)b {
+    for (int i = 0; i < [self max]; i++) {
+        
+        // 文字オブジェクト取得
+        AsciiObj* t = (AsciiObj*)[self getFromIdx:i];
+        
+        if (i < m_Length) {
+            [t setVisible:b];
+        }
+    }
+}
 
 @end

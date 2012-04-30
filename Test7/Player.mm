@@ -252,6 +252,8 @@ enum eState {
             }
             else {
                 // パワー切れ
+                // コンボ終了
+                [self initCombo];
                 
                 // 近くに敵がいるほど連射性能がアップ
                 float ratio = nearestLength / (160 * 120);
@@ -620,6 +622,13 @@ enum eState {
 // コンボ初期化
 - (void)initCombo {
     
+    if (m_Combo > 0) {
+        
+        // コンボ結果表示
+        ComboResult* result = [GameScene sharedInstance].comboResult;
+        [result start:m_Combo];
+    }
+    
     m_Combo = 0;
     Combo* combo = [GameScene sharedInstance].combo;
     [combo end];
@@ -632,6 +641,11 @@ enum eState {
     
     if ([self isMoving]) {
         // 移動中は増えない
+        return;
+    }
+    
+    if (m_tPower < 1) {
+        // ゲージが溜まっていないと増えない
         return;
     }
     

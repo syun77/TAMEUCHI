@@ -737,9 +737,13 @@ enum eState {
                 break;
         }
         [self vanish];
+        
+        // 死亡
+        return YES;
     }
     
-    return YES;
+    // まだ生きている
+    return NO;
 }
 
 

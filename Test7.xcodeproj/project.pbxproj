@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		C7050CB0154E199B00871C27 /* ComboResult.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7050CAF154E199B00871C27 /* ComboResult.mm */; };
 		C70F5EC7151B6E65003B041E /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C70F5EC6151B6E65003B041E /* QuartzCore.framework */; };
 		C70F5EC9151B6E65003B041E /* OpenGLES.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C70F5EC8151B6E65003B041E /* OpenGLES.framework */; };
 		C70F5ECB151B6E65003B041E /* OpenAL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C70F5ECA151B6E65003B041E /* OpenAL.framework */; };
@@ -153,6 +154,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		C7050CAE154E199B00871C27 /* ComboResult.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboResult.h; sourceTree = "<group>"; };
+		C7050CAF154E199B00871C27 /* ComboResult.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ComboResult.mm; sourceTree = "<group>"; };
 		C70F5EC2151B6E65003B041E /* Test7.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Test7.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		C70F5EC6151B6E65003B041E /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		C70F5EC8151B6E65003B041E /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
@@ -848,32 +851,34 @@
 		C72542EA15260B95004C157A /* Token */ = {
 			isa = PBXGroup;
 			children = (
+				C7A13EDF153872DC00B53149 /* Aim.h */,
+				C7A13EE0153872DC00B53149 /* Aim.mm */,
 				C73FEC23152BEED5008B5697 /* Back.h */,
 				C73FEC24152BEED5008B5697 /* Back.mm */,
-				C7D722E21524B550000AFB86 /* Player.h */,
-				C786B37C15253E1A00049CA8 /* Player.mm */,
+				C72542E615260B81004C157A /* Bullet.h */,
+				C72542E715260B81004C157A /* Bullet.mm */,
 				C7F0DF53153A83BC006E26E4 /* Charge.h */,
 				C7F0DF54153A83BC006E26E4 /* Charge.mm */,
+				C7F36C5F1549072800D67933 /* Combo.h */,
+				C7F36C601549072800D67933 /* Combo.mm */,
+				C7050CAE154E199B00871C27 /* ComboResult.h */,
+				C7050CAF154E199B00871C27 /* ComboResult.mm */,
+				C73FEC27152BF448008B5697 /* Enemy.h */,
+				C73FEC28152BF448008B5697 /* Enemy.mm */,
 				C76484CD153DBE5D00C79410 /* Gauge.h */,
 				C76484CE153DBE5D00C79410 /* Gauge.mm */,
 				C76484D1153E7DC700C79410 /* GaugeHp.h */,
 				C76484D2153E7DC700C79410 /* GaugeHp.mm */,
 				C7731E77154C493100D773DE /* Item.h */,
 				C7731E78154C493100D773DE /* Item.mm */,
-				C7F36C5F1549072800D67933 /* Combo.h */,
-				C7F36C601549072800D67933 /* Combo.mm */,
-				C7A13EDF153872DC00B53149 /* Aim.h */,
-				C7A13EE0153872DC00B53149 /* Aim.mm */,
-				C73FEC2A152BF45E008B5697 /* Shot.h */,
-				C73FEC2B152BF45E008B5697 /* Shot.mm */,
-				C73FEC27152BF448008B5697 /* Enemy.h */,
-				C73FEC28152BF448008B5697 /* Enemy.mm */,
-				C72542E615260B81004C157A /* Bullet.h */,
-				C72542E715260B81004C157A /* Bullet.mm */,
-				C72542EB152614F4004C157A /* Particle.h */,
-				C72542EC152614F4004C157A /* Particle.mm */,
 				C7E47376152F3EB7008EACDF /* LevelMgr.h */,
 				C7E47377152F3EB7008EACDF /* LevelMgr.mm */,
+				C72542EB152614F4004C157A /* Particle.h */,
+				C72542EC152614F4004C157A /* Particle.mm */,
+				C7D722E21524B550000AFB86 /* Player.h */,
+				C786B37C15253E1A00049CA8 /* Player.mm */,
+				C73FEC2A152BF45E008B5697 /* Shot.h */,
+				C73FEC2B152BF45E008B5697 /* Shot.mm */,
 			);
 			name = Token;
 			sourceTree = "<group>";
@@ -1109,6 +1114,7 @@
 				C76591D515462AA700018DD2 /* IScene.mm in Sources */,
 				C7F36C611549072800D67933 /* Combo.mm in Sources */,
 				C7731E79154C493100D773DE /* Item.mm in Sources */,
+				C7050CB0154E199B00871C27 /* ComboResult.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

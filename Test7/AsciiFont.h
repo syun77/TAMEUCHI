@@ -89,5 +89,8 @@ typedef enum {
 // 描画座標を設定する (スクリーン座標)
 - (void)setPosScreen:(float)x y:(float)y;
 
+// 表示・非表示を設定する
+- (void)setVisible:(BOOL)b;
+
 @end
 

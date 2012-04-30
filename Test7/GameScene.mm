@@ -54,6 +54,7 @@ static GameScene* scene_ = nil;
 @synthesize gauge;
 @synthesize gaugeHp;
 @synthesize combo;
+@synthesize comboResult;
 @synthesize mgrShot;
 @synthesize mgrItem;
 @synthesize mgrEnemy;
@@ -120,6 +121,11 @@ static GameScene* scene_ = nil;
     [self.combo.asciiFont2 createFont:self.baseLayer length:8];
     [self.combo.asciiFont2 setText:@""];
     
+    self.comboResult = [ComboResult node];
+    [self.baseLayer addChild:self.comboResult z:ePrio_UI];
+    [self.comboResult.asciiFont createFont:self.baseLayer length:12];
+    [self.comboResult.asciiFont setText:@""];
+    
     self.player = [Player node];
     [self.baseLayer addChild:self.player z:ePrio_Player];
     
@@ -183,6 +189,7 @@ static GameScene* scene_ = nil;
     
     // 初期化するフラグ
     m_State = eState_Init;
+    m_nDestroy = 0;
     
     return self;
 }
@@ -206,6 +213,7 @@ static GameScene* scene_ = nil;
     self.mgrEnemy = nil;
     self.mgrItem = nil;
     self.mgrShot = nil;
+    self.comboResult = nil;
     self.combo = nil;
     self.gaugeHp = nil;
     self.gauge = nil;
@@ -270,11 +278,12 @@ static GameScene* scene_ = nil;
             
             if ([s isHit2:e]) {
                 
-                // コンボ回数アップ
-                [self.player addCombo];
-                
                 [s hit:e._x y:e._y];
-                [e hit:s._vx y:s._vy];
+                if ([e hit:s._vx y:s._vy]) {
+                    
+                    // 倒したらコンボ回数アップ
+                    [self.player addCombo];
+                }
             }
         }
     }
@@ -374,6 +383,13 @@ static GameScene* scene_ = nil;
     
     // フラグを下げる
     m_bPress = NO;
+}
+
+/**
+ * 敵を倒した数を取得する
+ */
+- (int)getDestroyCount {
+    return m_nDestroy;
 }
 
 @end

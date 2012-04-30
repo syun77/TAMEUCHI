@@ -49,7 +49,12 @@ enum eEnemy {
 // 残りHPの割合を取得(0〜1)
 - (float)getHpRatio;
 
-// 弾がヒットした
+/**
+ * 弾がヒットした
+ * @param dx 弾への距離 (X)
+ * @param dy 弾への距離 (Y)
+ * @return 死亡したら「YES」
+ */
 - (BOOL)hit:(float)dx y:(float)dy;
 
 @end

@@ -21,6 +21,7 @@
 #import "Gauge.h"
 #import "GaugeHp.h"
 #import "Combo.h"
+#import "ComboResult.h"
 #import "Item.h"
 
 // 危険時に有効となる速度の係数
@@ -39,6 +40,7 @@ static const float DANGER_SLOW_RATIO = 0.25;
     Gauge*          gauge;          // チャージゲージ
     GaugeHp*        gaugeHp;        // チャージゲージHP
     Combo*          combo;          // コンボ数表示
+    ComboResult*    comboResult;    // コンボ結果表示
     TokenManager*   mgrShot;        // 自弾
     TokenManager*   mgrItem;        // アイテム
     TokenManager*   mgrEnemy;       // 敵
@@ -54,6 +56,7 @@ static const float DANGER_SLOW_RATIO = 0.25;
     AsciiFont*      ascciFontLevel; // フォント（レベル）
     
     int             m_State;        // 状態
+    int             m_nDestroy;     // 敵を倒した数
 }
 
 @property (nonatomic, retain)CCLayer*           baseLayer;
@@ -63,6 +66,7 @@ static const float DANGER_SLOW_RATIO = 0.25;
 @property (nonatomic, retain)Gauge*             gauge;
 @property (nonatomic, retain)GaugeHp*           gaugeHp;
 @property (nonatomic, retain)Combo*             combo;
+@property (nonatomic, retain)ComboResult*       comboResult;
 @property (nonatomic, retain)Charge*            charge;
 @property (nonatomic, retain)TokenManager*      mgrShot;
 @property (nonatomic, retain)TokenManager*      mgrItem;
@@ -82,5 +86,8 @@ static const float DANGER_SLOW_RATIO = 0.25;
 + (GameScene*)sharedInstance;
 
 + (void)releaseInstance;
+
+// 敵を倒した数を取得する
+- (int)getDestroyCount;
 
 @end
