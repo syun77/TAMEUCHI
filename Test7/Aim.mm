@@ -21,7 +21,7 @@
     
     [self create];
     
-    [self setTargetDirect:System_CenterX() y:System_CenterY()];
+    [self setTargetDirect:System_CenterX()+1 y:System_CenterY()];
     m_tPast = 0;
     m_tRot = 0;
     m_bActive = YES;
