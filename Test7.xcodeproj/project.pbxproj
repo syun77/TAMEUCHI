@@ -125,6 +125,7 @@
 		C72542E815260B81004C157A /* Bullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542E715260B81004C157A /* Bullet.mm */; };
 		C72542ED152614F4004C157A /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542EC152614F4004C157A /* Particle.mm */; };
 		C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73A11A31529630C00C10EC4 /* AsciiFont.mm */; };
+		C73CEF0E1550363700B9F66C /* SaveData.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73CEF0D1550363700B9F66C /* SaveData.mm */; };
 		C73FEC25152BEED5008B5697 /* Back.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC24152BEED5008B5697 /* Back.mm */; };
 		C73FEC29152BF448008B5697 /* Enemy.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC28152BF448008B5697 /* Enemy.mm */; };
 		C73FEC2C152BF45F008B5697 /* Shot.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC2B152BF45E008B5697 /* Shot.mm */; };
@@ -401,6 +402,8 @@
 		C72542EC152614F4004C157A /* Particle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Particle.mm; sourceTree = "<group>"; };
 		C73A11A21529630C00C10EC4 /* AsciiFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsciiFont.h; sourceTree = "<group>"; };
 		C73A11A31529630C00C10EC4 /* AsciiFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AsciiFont.mm; sourceTree = "<group>"; };
+		C73CEF0C1550363700B9F66C /* SaveData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveData.h; sourceTree = "<group>"; };
+		C73CEF0D1550363700B9F66C /* SaveData.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = SaveData.mm; sourceTree = "<group>"; };
 		C73FEC23152BEED5008B5697 /* Back.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Back.h; sourceTree = "<group>"; };
 		C73FEC24152BEED5008B5697 /* Back.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Back.mm; sourceTree = "<group>"; };
 		C73FEC27152BF448008B5697 /* Enemy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Enemy.h; sourceTree = "<group>"; };
@@ -507,6 +510,8 @@
 				C70F6037151B6E91003B041E /* GameScene.h */,
 				C786B37A15253DFC00049CA8 /* GameScene.mm */,
 				C74201391543020C007351E3 /* TitleScene.h */,
+				C73CEF0C1550363700B9F66C /* SaveData.h */,
+				C73CEF0D1550363700B9F66C /* SaveData.mm */,
 				C742013A1543020C007351E3 /* TitleScene.mm */,
 				C7F053AC152B15CF0095B76E /* Exerinya.h */,
 				C7F053AD152B15CF0095B76E /* Exerinya.mm */,
@@ -1115,6 +1120,7 @@
 				C7F36C611549072800D67933 /* Combo.mm in Sources */,
 				C7731E79154C493100D773DE /* Item.mm in Sources */,
 				C7050CB0154E199B00871C27 /* ComboResult.mm in Sources */,
+				C73CEF0E1550363700B9F66C /* SaveData.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

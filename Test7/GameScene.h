@@ -54,9 +54,12 @@ static const float DANGER_SLOW_RATIO = 0.25;
     AsciiFont*      ascciFont4;     // フォント
     AsciiFont*      ascciFont5;     // フォント
     AsciiFont*      ascciFontLevel; // フォント（レベル）
+    AsciiFont*      asciiFontScore; // フォント（スコア）
     
     int             m_State;        // 状態
     int             m_nDestroy;     // 敵を倒した数
+    int             m_Score;        // スコア
+    int             m_ComboMax;     // 最大コンボ数
 }
 
 @property (nonatomic, retain)CCLayer*           baseLayer;
@@ -81,6 +84,7 @@ static const float DANGER_SLOW_RATIO = 0.25;
 @property (nonatomic, retain)AsciiFont*         asciiFont4;
 @property (nonatomic, retain)AsciiFont*         asciiFont5;
 @property (nonatomic, retain)AsciiFont*         asciiFontLevel;
+@property (nonatomic, retain)AsciiFont*         asciiFontScore;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance;

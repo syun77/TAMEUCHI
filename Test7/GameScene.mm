@@ -16,6 +16,8 @@
 #import "Shot.h"
 #import "Bullet.h"
 
+#import "SaveData.h"
+
 // 描画プライオリティ
 enum {
     ePrio_Back,     // 背景
@@ -68,6 +70,7 @@ static GameScene* scene_ = nil;
 @synthesize asciiFont4;
 @synthesize asciiFont5;
 @synthesize asciiFontLevel;
+@synthesize asciiFontScore;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance {
@@ -96,6 +99,7 @@ static GameScene* scene_ = nil;
         return self;
     }
     
+    // 各種オブジェクト生成
     self.baseLayer = [CCLayer node];
     [self addChild:self.baseLayer];
     
@@ -180,6 +184,9 @@ static GameScene* scene_ = nil;
     [self.asciiFontLevel createFont:self.baseLayer length:24];
     [self.asciiFontLevel setPosScreen:8 y:320-24-80];
     
+    self.asciiFontScore = [AsciiFont node];
+    [self.asciiFontScore createFont:self.baseLayer length:24];
+    
     // コールバック関数登録
     [self.interfaceLayer addCB:self.player];
     
@@ -190,6 +197,8 @@ static GameScene* scene_ = nil;
     // 初期化するフラグ
     m_State = eState_Init;
     m_nDestroy = 0;
+    m_Score = SaveData_GetHiScore();
+    m_ComboMax = 0;
     
     return self;
 }
@@ -201,6 +210,7 @@ static GameScene* scene_ = nil;
     [self unscheduleUpdate];
     
     // インスタンス開放
+    self.asciiFontScore = nil;
     self.asciiFontLevel = nil;
     self.asciiFont5 = nil;
     self.asciiFont4 = nil;
@@ -283,6 +293,12 @@ static GameScene* scene_ = nil;
                     
                     // 倒したらコンボ回数アップ
                     [self.player addCombo];
+                    
+                    // スコアもアップ
+                    m_Score += 100;
+                    
+                    SaveData_SetHiScore(m_Score);
+                    
                 }
             }
         }
@@ -377,6 +393,8 @@ static GameScene* scene_ = nil;
     [self.asciiFont5 setText:[NSString stringWithFormat:@"Power: %3d", [self.player getPower]]];
     
     [self.asciiFontLevel setText:[NSString stringWithFormat:@"Level: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
+    
+    [self.asciiFontScore setText:[NSString stringWithFormat:@"Score: %d", m_Score]];
     
     [self.levelMgr update:dt];
 
