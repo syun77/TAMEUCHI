@@ -22,6 +22,9 @@ enum eState {
 @synthesize asciiFont;
 @synthesize asciiFont2;
 
+/**
+ * コンストラクタ
+ */
 - (id)init {
     self = [super init];
     
@@ -45,6 +48,9 @@ enum eState {
     return self;
 }
 
+/**
+ * デストラクタ
+ */
 - (void)dealloc {
     self.asciiFont2 = nil;
     self.asciiFont = nil;
@@ -52,6 +58,9 @@ enum eState {
     [super dealloc];
 }
 
+/**
+ * 更新
+ */
 - (void)update:(ccTime)dt {
     [self move:dt];
     
@@ -79,6 +88,9 @@ enum eState {
     [self.asciiFont2 setPosScreen:self._x y:self._y - 16];
 }
 
+/**
+ * 描画
+ */
 - (void)visit {
     if (m_State == eState_None) {
         return;

@@ -40,6 +40,7 @@
     [self setSize2: 16 * self.scale];
     
     m_Type = eItem_Recover;
+    m_tPast = 0;
     
     return self;
     
@@ -57,10 +58,27 @@
  */
 - (void)update:(ccTime)dt {
     
+    m_tPast++;
+    
     Player* player = [GameScene sharedInstance].player;
     if ([player isDanger]) {
+        
+        // ゆっくりにする
         dt *= DANGER_SLOW_RATIO;
     }
+    
+    if ([player isVanish] == NO) {
+        // 一定距離に近づいたらプレイヤーに近づく
+        Vec2D v = Vec2D(player._x - self._x, player._y - self._y);
+        if (v.LengthSq() < 10000) {
+            v.Normalize();
+            v *= 300;
+            self._vx = v.x;
+            self._vy = v.y;
+        }
+    }
+    
+    [self setRotation:m_tPast*4];
     [self move:dt];
     
     if (self._y < -self._r) {

@@ -24,7 +24,8 @@ enum eItem {
  * アイテムトークン
  */
 @interface Item : Token {
-    eItem m_Type;
+    int     m_tPast;    // 経過時間
+    eItem   m_Type;     // アイテムの種類
 }
 
 // アイテム種別の取得
