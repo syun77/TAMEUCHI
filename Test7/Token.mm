@@ -392,6 +392,11 @@
         }
             break;
             
+        case eBlend_Sub:
+            // 減算合成
+            NSLog(@"Warning: 'eBlend_Sub' Not implement.");
+            break;
+            
         case eBlend_Mul:     // 乗算合成
         {
             self.m_pSprite.blendFunc = (ccBlendFunc){GL_ZERO, GL_SRC_COLOR};

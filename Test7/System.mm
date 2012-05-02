@@ -71,12 +71,21 @@ bool System_IsDispCollision()
 
 // ブレンドモードの設定
 void System_SetBlend(eBlend mode) {
+    
+    // 減算合成したらこれで初期化が必要
+    glBlendEquationOES(GL_FUNC_ADD_OES);
+    
     switch (mode) {
         case eBlend_Normal:
             glBlendFunc(CC_BLEND_SRC, CC_BLEND_DST);
             break;
             
         case eBlend_Add:
+            glBlendFunc(GL_SRC_ALPHA, GL_ONE);
+            break;
+            
+        case eBlend_Sub:
+            glBlendEquationOES(GL_FUNC_REVERSE_SUBTRACT_OES);
             glBlendFunc(GL_SRC_ALPHA, GL_ONE);
             break;
             
