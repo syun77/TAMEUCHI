@@ -93,6 +93,14 @@
     [self move:0];
 }
 
+// 最大値を設定する
+- (void)setMax:(int)v {
+    m_Max = v;
+    if (m_Now > m_Max) {
+        m_Now = m_Max;
+    }
+}
+
 // 現在値を取得する
 - (int)getNow {
     return m_Now;

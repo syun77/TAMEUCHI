@@ -25,6 +25,9 @@
 // 現在値を設定
 - (void)set:(int)v x:(float)x y:(float)y;
 
+// 最大値を設定する
+- (void)setMax:(int)v;
+
 // 現在値を取得する
 - (int)getNow;
 

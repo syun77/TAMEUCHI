@@ -134,6 +134,7 @@ enum eState {
     m_tPower = 0;
     m_Combo = 0;
     m_ComboMax = 0;
+    m_nLevel = 0;
     
     
     return self;
@@ -144,9 +145,10 @@ enum eState {
    
     // HP初期化
     m_Hp = MAX_HP;
+    m_PowerMax = MAX_POWER;
     
     Gauge* gauge = [self getGauge];
-    [gauge initialize:MAX_POWER];
+    [gauge initialize:m_PowerMax];
     
     GaugeHp* gaugeHp = [self getGaugeHp];
     [gaugeHp initialize:MAX_HP];
@@ -224,7 +226,7 @@ enum eState {
 // 弾を撃つ
 - (void)shot:(float)rot {
     // 弾を撃つ
-    float speed = SPEED_SHOT * (1 + ((float)m_tPower / MAX_POWER));
+    float speed = SPEED_SHOT * (1 + ((float)m_tPower / m_PowerMax));
     [Shot add:self._x y:self._y rot:rot + Math_RandFloat(-5, 5) speed:speed];
     
     if ([self isHpMax]) {
@@ -297,8 +299,8 @@ enum eState {
         
         // パワーをためる
         m_tPower++;
-        if (m_tPower > MAX_POWER + TIMER_CHARGE_START) {
-            m_tPower = MAX_POWER + TIMER_CHARGE_START;
+        if (m_tPower > m_PowerMax + TIMER_CHARGE_START) {
+            m_tPower = m_PowerMax + TIMER_CHARGE_START;
         }
     }
 }
