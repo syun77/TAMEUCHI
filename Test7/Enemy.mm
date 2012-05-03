@@ -724,7 +724,11 @@ enum eState {
  * 更新・にんじん
  */
 - (void)updateCarrot {
-    
+   
+    m_Timer++;
+    if (m_Timer > 200) {
+        m_Val2 = 0;
+    }
     if (m_Val2 == 0) {
         Vec2D v = Vec2D(self._vx, self._vy);
         float rot = v.Rot();
@@ -734,10 +738,10 @@ enum eState {
         if (abs(dRot) > 10) {
             float next = rot;
             if (dRot > 0) {
-                next += 3;
+                next += 2;
             }
             else {
-                next -= 3;
+                next -= 2;
             }
             float speed = v.Length();
             self._vx = speed * Math_CosEx(next);
