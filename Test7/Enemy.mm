@@ -545,8 +545,7 @@ enum eState {
                 int cnt = 3;
                 float rot = aim - 45;
                 for (int i = 0; i < cnt; i++) {
-                    //[Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
-                    [Enemy add:eEnemy_Carrot x:self._x y:self._y rot:rot speed:speed];
+                    [Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
                     rot += 45;
                 }
             }
@@ -734,7 +733,7 @@ enum eState {
         float rot = v.Rot();
         float aim = Math_Atan2Ex(m_AimY-self._y, m_AimX-self._x);;
         
-        const float SPEED_ROT = 2;
+        const float SPEED_ROT = 3;
         float dRot = Math_GetNearestRot(aim, rot);
         if (abs(dRot) > SPEED_ROT * 3) {
             float next = rot;

@@ -26,6 +26,7 @@ static const int SHOT_TIMER = 16;
     Vec2D   m_Target;   // 移動目標座標
     int     m_tShot;    // 弾を撃つ間隔
     int     m_tDamage;  // ダメージタイマー
+    int     m_tCharge;  // チャージゲージ
     int     m_tPower;   // パワーゲージ
     int     m_PowerMax; // パワーゲージの最大
     int     m_Hp;       // HP

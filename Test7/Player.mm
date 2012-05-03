@@ -34,8 +34,11 @@ static const float SPEED_SHOT = 360;
 // チャージが有効となる開始時間
 static const int TIMER_CHARGE_START = 60;
 
+// ■チャージゲージ
+// チャージ初期値
+static const int POWER_MIN = TIMER_CHARGE_START;
 // チャージ最大量
-static const int MAX_POWER = 120;
+static const int POWER_MAX = 120;
 
 // HPの最大
 static const int MAX_HP = 100;
@@ -132,6 +135,7 @@ enum eState {
     m_tShot = 0;
     m_tDamage = 0;
     m_tPower = 0;
+    m_tCharge = 0;
     m_Combo = 0;
     m_ComboMax = 0;
     m_nLevel = 0;
@@ -145,7 +149,7 @@ enum eState {
    
     // HP初期化
     m_Hp = MAX_HP;
-    m_PowerMax = MAX_POWER;
+    m_PowerMax = POWER_MIN;
     
     Gauge* gauge = [self getGauge];
     [gauge initialize:m_PowerMax];
@@ -172,10 +176,7 @@ enum eState {
 
 // タッチ終了コールバック
 - (void)cbTouchEnd:(float)x y:(float)y {
-    m_tPower -= TIMER_CHARGE_START;
-    if (m_tPower < 0) {
-        m_tPower = 0;
-    }
+    m_tCharge = 0;
 }
 
 
@@ -298,9 +299,12 @@ enum eState {
         m_tShot = 0;
         
         // パワーをためる
-        m_tPower++;
-        if (m_tPower > m_PowerMax + TIMER_CHARGE_START) {
-            m_tPower = m_PowerMax + TIMER_CHARGE_START;
+        m_tCharge++;
+        if (m_tCharge > TIMER_CHARGE_START) {
+            m_tPower++;
+            if (m_tPower > m_PowerMax) {
+                m_tPower = m_PowerMax;
+            }
         }
     }
 }
@@ -358,7 +362,7 @@ enum eState {
         [aim setTarget:[input getPosX] y:[input getPosY]];
         
         // チャージエフェクト有効
-        if (m_tPower > TIMER_CHARGE_START) {
+        if (m_tCharge >= TIMER_CHARGE_START) {
             
             [charge setParam:eCharge_Playing x:self._x y:self._y];
         }
@@ -443,7 +447,7 @@ enum eState {
 - (void)updateGauge {
     Gauge* gauge = [self getGauge];
     
-    [gauge set:m_tPower - TIMER_CHARGE_START x:self._x y:self._y];
+    [gauge set:m_tPower x:self._x y:self._y];
     
     GaugeHp* gaugeHp = [self getGaugeHp];
     [gaugeHp set:m_Hp x:self._x y:self._y];
