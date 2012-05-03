@@ -216,6 +216,34 @@ enum eState {
     return [self isTouch];
 }
 
+// HPが最大値かどうか
+- (BOOL)isHpMax {
+    return m_Hp == MAX_HP;
+}
+
+// 弾を撃つ
+- (void)shot:(float)rot {
+    // 弾を撃つ
+    float speed = SPEED_SHOT * (1 + ((float)m_tPower / MAX_POWER));
+    [Shot add:self._x y:self._y rot:rot + Math_RandFloat(-5, 5) speed:speed];
+    
+    if ([self isHpMax]) {
+        // フルパワー時は3Way
+        [Shot add:self._x y:self._y rot:rot - 15 speed:speed];
+        [Shot add:self._x y:self._y rot:rot + 15 speed:speed];
+    }
+}
+
+// 弾を撃つ
+- (void)shotAim {
+    
+    // 照準に向けて弾を撃つ
+    Aim* aim = [self getAim];
+    Vec2D v = Vec2D(aim._x - self._x, aim._y - self._y);
+    
+    [self shot:v.Rot()];
+}
+
 /**
  * 弾を撃つ
  */
@@ -242,7 +270,7 @@ enum eState {
         }
         if (m_tShot <= 0) {
             // 弾を撃つ
-            [self shot];
+            [self shotAim];
             if (m_tPower > 0) {
                 m_tPower--;
                 m_tShot += 2;
@@ -479,26 +507,11 @@ enum eState {
     m_PrevY = self._y;
 }
 
-// HPが最大値かどうか
-- (BOOL)isHpMax {
-    return m_Hp == MAX_HP;
-}
-
-// 弾を撃つ
-- (void)shot {
+// 危険回避ショット
+- (void)shotDanger {
     
-    // 照準に向けて弾を撃つ
-    Aim* aim = [self getAim];
-    Vec2D v = Vec2D(aim._x - self._x, aim._y - self._y);
-    
-    // 弾を撃つ
-    float speed = SPEED_SHOT * (1 + ((float)m_tPower / MAX_POWER));
-    [Shot add:self._x y:self._y rot:v.Rot() + Math_RandFloat(-5, 5) speed:speed];
-    
-    if ([self isHpMax]) {
-        // フルパワー時は3Way
-        [Shot add:self._x y:self._y rot:v.Rot() - 15 speed:speed];
-        [Shot add:self._x y:self._y rot:v.Rot() + 15 speed:speed];
+    for (int i = 0; i < 32; i++) {
+        [self shot:i * 360 / 32];
     }
 }
 
@@ -523,6 +536,7 @@ enum eState {
     self._vy = d.y;
     
     // HPを減らす
+    float bDanger = [self isDanger];
     if (m_State == eState_Standby) {
         m_Hp -= MAX_HP * 0.2f; // 5回ダメージで死亡
     }
@@ -531,6 +545,13 @@ enum eState {
         if (m_Hp < 1) {
             // 連続ダメージでは死なないようにする
             m_Hp = 1;
+        }
+    }
+    if (bDanger == NO) {
+        if ([self isDanger]) {
+            // 危険状態になった
+            // 危険回避ショット
+            [self shotDanger];
         }
     }
     

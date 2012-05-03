@@ -734,14 +734,15 @@ enum eState {
         float rot = v.Rot();
         float aim = Math_Atan2Ex(m_AimY-self._y, m_AimX-self._x);;
         
+        const float SPEED_ROT = 2;
         float dRot = Math_GetNearestRot(aim, rot);
-        if (abs(dRot) > 10) {
+        if (abs(dRot) > SPEED_ROT * 3) {
             float next = rot;
             if (dRot > 0) {
-                next += 2;
+                next += SPEED_ROT;
             }
             else {
-                next -= 2;
+                next -= SPEED_ROT;
             }
             float speed = v.Length();
             self._vx = speed * Math_CosEx(next);

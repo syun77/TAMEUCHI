@@ -43,7 +43,7 @@ static const int SHOT_TIMER = 16;
 - (void)cbTouchEnd:(float)x y:(float)y;
 
 // 弾を撃つ
-- (void)shot;
+- (void)shot:(float)rot;
 
 // ダメージ
 - (void)damage:(Token*)t;
