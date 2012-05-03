@@ -53,4 +53,7 @@ int Math_RandInt(int a, int b);
 // 乱数の取得（範囲指定 a〜b) (float 指定)
 float Math_RandFloat(float a, float b);
 
+// 指定の角度に近づくにはどれだけ回すのかを計算する
+float Math_GetNearestRot(float next, float now);
+
 #endif // __JP_2DGAMES_MATH_H__

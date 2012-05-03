@@ -108,3 +108,26 @@ float Math_RandFloat(float a, float b)
     float d = b - a;
     return Math_Randf(d) + a;
 }
+
+// 指定の角度に近づくにはどれだけ回すのかを計算する
+float Math_GetNearestRot(float next, float now) {
+    
+    while (next < 0) {
+        // 0〜360になるようにする
+        next += 360;
+    }
+    
+    while (now < 0) {
+        // 0〜360になるようにする
+        now += 360;
+    }
+    
+    float dRot = next - now;
+    if (dRot > 180) {
+        return dRot - 360;
+    }
+    if (dRot < -180) {
+        return dRot += 360;
+    }
+    return dRot;
+}

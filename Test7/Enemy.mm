@@ -41,6 +41,26 @@ enum eState {
 }
 
 /**
+ * 目標の相手を取得する
+ */
+- (Player*)getTarget {
+    GameScene* scene = [GameScene sharedInstance];
+    return scene.player;
+}
+
+/**
+ * 狙い撃ち角度を取得する
+ */
+- (float)getAim {
+    Player* p = [self getTarget];
+    
+    float dx = p._x - self._x;
+    float dy = p._y - self._y;
+    
+    return Math_Atan2Ex(dy, dx);
+}
+
+/**
  * 初期化
  */
 - (void)initialize {
@@ -57,15 +77,9 @@ enum eState {
     m_Hp    = 3;
     m_State = eState_Appear;
     m_Step  = 0;
+    m_AimX  = [self getTarget]._x;
+    m_AimY  = [self getTarget]._y;
     
-}
-
-/**
- * 目標の相手を取得する
- */
-- (Player*)getTarget {
-    GameScene* scene = [GameScene sharedInstance];
-    return scene.player;
 }
 
 /**
@@ -151,18 +165,6 @@ enum eState {
     }
     
     return e;
-}
-
-/**
- * 狙い撃ち角度を取得する
- */
-- (float)getAim {
-    Player* p = [self getTarget];
-    
-    float dx = p._x - self._x;
-    float dy = p._y - self._y;
-    
-    return Math_Atan2Ex(dy, dx);
 }
 
 /**
@@ -527,12 +529,24 @@ enum eState {
                 self._vx = dx;
                 self._vy = dy;
                 
+                // にんじん発射
+                {
+                float speed = 200;
+                int cnt = 3;
+                float rot = aim - 180 - 45;
+                for (int i = 0; i < cnt; i++) {
+                    //[Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
+                    [Enemy add:eEnemy_Carrot x:self._x y:self._y rot:rot speed:speed];
+                    rot += 45;
+                }
+                }
                 // だいこん発射
                 float speed = 200;
                 int cnt = 3;
                 float rot = aim - 45;
                 for (int i = 0; i < cnt; i++) {
-                    [Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
+                    //[Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
+                    [Enemy add:eEnemy_Carrot x:self._x y:self._y rot:rot speed:speed];
                     rot += 45;
                 }
             }
@@ -711,10 +725,35 @@ enum eState {
  */
 - (void)updateCarrot {
     
+    if (m_Val2 == 0) {
+        Vec2D v = Vec2D(self._vx, self._vy);
+        float rot = v.Rot();
+        float aim = Math_Atan2Ex(m_AimY-self._y, m_AimX-self._x);;
+        
+        float dRot = Math_GetNearestRot(aim, rot);
+        if (abs(dRot) > 10) {
+            float next = rot;
+            if (dRot > 0) {
+                next += 3;
+            }
+            else {
+                next -= 3;
+            }
+            float speed = v.Length();
+            self._vx = speed * Math_CosEx(next);
+            self._vy = speed * Math_SinEx(next);
+        }
+        else {
+            m_Val2 = 1;
+        }
+    }
+    
     if ([self isOutCircle:self._r]) {
         // 画面外に出たら消える
         [self vanish];
     }
+    
+    [self setRotation:Math_Atan2Ex(-self._vy, self._vx)];
 }
 
 /**
