@@ -146,11 +146,11 @@ static GameScene* scene_ = nil;
     [self.mgrItem setPrio:ePrio_Item];
     
     self.mgrEnemy = [TokenManager node];
-    [self.mgrEnemy create:self.baseLayer size:8 className:@"Enemy"];
+    [self.mgrEnemy create:self.baseLayer size:64 className:@"Enemy"];
     [self.mgrEnemy setPrio:ePrio_Enemy];
     
     self.mgrBullet = [TokenManager node];
-    [self.mgrBullet create:self.baseLayer size:64 className:@"Bullet"];
+    [self.mgrBullet create:self.baseLayer size:256 className:@"Bullet"];
     [self.mgrBullet setPrio:ePrio_Bullet];
     
     self.mgrParticle = [TokenManager node];

@@ -138,6 +138,34 @@
     return NO;
 }
 
+// 画面外に出たかどうか (X方向)
+- (BOOL)isOutRectX:(float)w {
+    CGSize win = [CCDirector sharedDirector].winSize;
+    
+    if (self._x < -w) {
+        return YES;
+    }
+    if (self._x > win.width+w) {
+        return YES;
+    }
+    
+    return NO;
+}
+
+// 画面外に出たかどうか (Y方向)
+- (BOOL)isOutRectY:(float)h {
+    CGSize win = [CCDirector sharedDirector].winSize;
+    
+    if (self._y < -h) {
+        return YES;
+    }
+    if (self._y > win.height+h) {
+        return YES;
+    }
+    
+    return NO;
+}
+
 /**
  * 画面外に出たかどうか（矩形）
  */

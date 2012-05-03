@@ -33,6 +33,7 @@
     m_tPast     = 0;
     m_nLevel    = 1;
     m_Mode      = eLevel_Endless;
+    m_Mode      = eLevel_TimeAttack;
 }
 
 /**
@@ -86,9 +87,17 @@
         }
         
         if (m_Timer%160 == 40) {
-            if (m_nLevel > 1) {
+            if (m_nLevel > 5) {
                 if ([self getEnemyCount] < m_nLevel) {
                     [self addEnemy:eEnemy_Tako];
+                }
+            }
+        }
+        
+        if (m_Timer%320 == 160) {
+            if (m_nLevel > 10) {
+                if ([self getEnemyCount] < m_nLevel) {
+                    [self addEnemy:eEnemy_Pudding];
                 }
             }
         }
@@ -119,10 +128,11 @@
                     //            if (m_Timer%80 == 20) {
                     if (m_Timer%280 == 20) {
                         // 敵の生成
-                        //                  [self addEnemy:eEnemy_5Box];
-                        [self addEnemy:eEnemy_Pudding];
+                        //                [self addEnemy:eEnemy_5Box];
+                        //                [self addEnemy:eEnemy_Pudding];
                         //                [self addEnemy:eEnemy_Nasu];
                         //                [self addEnemy:eEnemy_Tako];
+                        [self addEnemy:eEnemy_Milk];
                     }
                     break;
                     

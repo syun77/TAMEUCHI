@@ -52,6 +52,7 @@ enum eState {
     [self setSize2:32];
     
     m_Val = Math_Rand(360);
+    m_Val2 = 0;
     m_Timer = 0;
     m_Hp    = 3;
     m_State = eState_Appear;
@@ -101,13 +102,13 @@ enum eState {
         case eEnemy_Milk:    // 牛乳
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Milk)];
             self._r = 48;
-            m_HpMax = 3;
+            m_HpMax = 70;
             break;
             
         case eEnemy_XBox:    // XBox
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_XBox)];
             self._r = 48;
-            m_HpMax = 3;
+            m_HpMax = 100;
             break;
             
         case eEnemy_Radish:  // 大根
@@ -275,7 +276,7 @@ enum eState {
 - (void)vanishBig {
     Particle* p = [Particle add:eParticle_Ring x:self._x y:self._y rot:0 speed:0];
     if (p) {
-        [p setScale:1.5];
+        [p setScale:2];
         [p setAlpha:0xff];
     }
     
@@ -487,6 +488,71 @@ enum eState {
  */
 - (void)updateMilk {
     
+    const float speedIn  = 100; // 画面に入る速度
+    const float speedMove = 150; // 移動速度
+    
+    switch (m_State) {
+        case eState_Appear:
+            // 登場シーケンス
+            m_Timer++;
+            [self moveAppear:speedIn radius:self._r];
+            if ([self isOutCircle:-self._r] == NO || m_Timer > 200) {
+                m_Timer = 0;
+                m_State = eState_Main;
+                // プレイヤーに向かって移動する
+                float aim = [self getAim];
+                float dx = Math_CosEx(aim) * speedMove;
+                float dy = -Math_SinEx(aim) * speedMove;
+                self._vx = dx;
+                self._vy = dy;
+            }
+            self._vx *= 0.5f;
+            self._vy *= 0.5f;
+            break;
+            
+        case eState_Main:
+            m_Timer++;
+            if (Math_Rand(100) == 0) {
+                m_Timer += 10;
+            }
+            if (m_Timer%180 == 11) {
+                // 移動シーケンス
+                // プレイヤーから直角に移動する
+                float deg1 = Math_RandInt(-1, 1) * 90;
+                float deg2 = Math_RandInt(-1, 1) * 90;
+                
+                float aim = [self getAim];
+                float dx = Math_CosEx(aim + deg1) * speedMove;
+                float dy = -Math_SinEx(aim + deg2) * speedMove;
+                self._vx = dx;
+                self._vy = dy;
+                
+                // だいこん発射
+                float speed = 200;
+                int cnt = 3;
+                float rot = aim - 45;
+                for (int i = 0; i < cnt; i++) {
+                    [Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
+                    rot += 45;
+                }
+            }
+            if([self isBoundRectX:self._r])
+            {
+                self._vx = -self._vx * 0.8;
+            }
+            if([self isBoundRectY:self._r])
+            {
+                self._vy = -self._vy * 0.8;
+            }
+            self._vx *= 0.95f;
+            self._vy *= 0.95f;
+            break;
+            
+        default:
+            break;
+    }
+    
+    
 }
 
 /**
@@ -534,7 +600,9 @@ enum eState {
                 self._vy = dy;
                 
                 // 弾を打つ
-                [Bullet add:self._x y:self._y rot:aim speed:100];
+                for (int i = 0 ; i < 3; i++) {
+                    [Bullet add:self._x y:self._y rot:aim - 30 + 30 * i speed:100];
+                }
                 
                 // ポッキー発射
                 float speed = 400;
@@ -615,8 +683,25 @@ enum eState {
  */
 - (void)updateRadish {
     
-    if ([self isOutCircle:self._r]) {
-        // 画面外に出たら消える
+    // 移動方向に合わせて回転
+    float rot = Math_Atan2Ex(-self._vy, self._vx);
+    
+    [self setRotation:rot];
+    
+    if ([self isOutRectX:-self._r]) {
+        self._vx = -self._vx;
+        m_Val2++;
+    }
+    if ([self isOutRectY:-self._r]) {
+        self._vy = -self._vy;
+        m_Val2++;
+    }
+    
+    m_Timer++;
+    if (m_Timer > 200 || m_Val2 >= 3) {
+        
+        // 一定時間経過・３回跳ね返りで消える
+        [self vanishSmall];
         [self vanish];
     }
 }

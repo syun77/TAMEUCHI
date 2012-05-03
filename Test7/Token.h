@@ -44,6 +44,12 @@
 // 画面外に出たかどうか
 - (BOOL)isOut;
 
+// 画面外に出たかどうか (X方向)
+- (BOOL)isOutRectX:(float)w;
+
+// 画面外に出たかどうか (Y方向)
+- (BOOL)isOutRectY:(float)h;
+
 // 画面外に出たかどうか（矩形）
 - (BOOL)isOutRect:(float)w h:(float)h;
 

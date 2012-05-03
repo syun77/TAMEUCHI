@@ -10,7 +10,8 @@
 #import "cocos2d.h"
 
 enum eLevel {
-    eLevel_Endless, // エンドレスモード
+    eLevel_Endless,     // エンドレスモード
+    eLevel_TimeAttack,  // 制限時間モード
 };
 
 /**
