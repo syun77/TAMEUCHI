@@ -17,6 +17,9 @@
 // オブジェクト追加
 + (Bullet*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed;
 
+// 敵弾をすべて消す
++ (void)vanishAll;
+
 // ダメージ
 - (void)damage:(Token*)t;
 

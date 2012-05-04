@@ -20,6 +20,7 @@
 #import "GaugeHp.h"
 #import "Particle.h"
 #import "Item.h"
+#import "Bullet.h"
 
 // ダメージタイマー
 static const int TIMER_DAMAGE = 30;
@@ -104,6 +105,44 @@ enum eState {
         return;
     }
     m_State = state;
+}
+
+// レベルアップ判定
+- (BOOL)checkLevelUp {
+    
+    // レベルアップしたかどうか
+    BOOL ret = NO;
+    
+    switch (m_nLevel) {
+        case 0:
+            if (m_Combo > 5) {
+                
+                // レベルアップ
+                m_nLevel++;
+                
+                ret = YES;
+            }
+            break;
+            
+        case 1:
+            if (m_Combo > 10) {
+                m_nLevel++;
+                
+                ret = YES;
+            }
+            
+        case 2:
+            if (m_Combo > 15) {
+                m_nLevel++;
+                
+                ret = YES;
+            }
+            
+        default:
+            break;
+    }
+    
+    return ret;
 }
 
 /**
@@ -516,7 +555,28 @@ enum eState {
 // 危険回避ショット
 - (void)shotDanger {
     
-    [Enemy vanishAllSmall:NO];
+    switch (m_nLevel) {
+        case 1:
+            // レベル１特典
+            // 敵サイズ・小を消す
+            [Enemy vanishAllSmall:NO];
+            break;
+            
+        case 2:
+            // レベル２特典
+            // 敵サイズ・小を消して撃ち返し弾発生
+            [Enemy vanishAllSmall:YES];
+            break;
+            
+        default:
+            break;
+    }
+    
+    // 敵弾はいつでも消える
+    [Bullet vanishAll];
+    
+    // レベルリセット
+    m_nLevel = 0;
 }
 
 // ダメージ
@@ -639,6 +699,11 @@ enum eState {
     return m_tPower;
 }
 
+// レベルの取得
+- (int)getLevel {
+    return m_nLevel;
+}
+
 // 消滅したかどうか
 - (BOOL)isVanish {
     return m_State == eState_Vanish;
@@ -652,6 +717,9 @@ enum eState {
         // コンボ結果表示
         ComboResult* result = [GameScene sharedInstance].comboResult;
         [result start:m_Combo];
+        
+        // レベルアップ判定
+        [self checkLevelUp];
     }
     
     m_Combo = 0;
@@ -680,6 +748,7 @@ enum eState {
         // コンボ回数更新
         m_ComboMax = m_Combo;
     }
+    
     
     // コンボ演出開始
     Combo* combo = [GameScene sharedInstance].combo;

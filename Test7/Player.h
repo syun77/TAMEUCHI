@@ -60,6 +60,9 @@ static const int SHOT_TIMER = 16;
 // パワーの取得
 - (int)getPower;
 
+// レベルの取得
+- (int)getLevel;
+
 // 消滅したかどうか
 - (BOOL)isVanish;
 

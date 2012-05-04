@@ -57,8 +57,8 @@
     
 }
 
-// ダメージ
-- (void)damage:(Token*)t {
+// 破壊エフェクト生成
+- (void)destroy {
     
     float rot = 0;
     for(int i = 0; i < 8; i++)
@@ -74,6 +74,12 @@
     [self vanish];
 }
 
+// ダメージ
+- (void)damage:(Token*)t {
+    
+    [self destroy];
+}
+
 // オブジェクト追加
 + (Bullet*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed {
     GameScene* scene = [GameScene sharedInstance];
@@ -83,6 +89,18 @@
     }
     
     return b;
+}
+
+// 敵弾をすべて消す
++ (void)vanishAll {
+    TokenManager* mgr = [GameScene sharedInstance].mgrBullet;
+    for (Bullet* b in mgr.m_Pool) {
+        if ([b isExist] == NO) {
+            continue;
+        }
+        
+        [b destroy];
+    }
 }
 
 @end

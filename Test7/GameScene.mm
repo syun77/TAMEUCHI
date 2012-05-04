@@ -385,7 +385,7 @@ static GameScene* scene_ = nil;
     
     // Tokenの生存数を表示
 //    [self.asciiFont4 setText:[NSString stringWithFormat:@"Shot    :%3d/%3d %3d", [self.mgrShot count], [self.mgrShot max], [self.mgrShot leak]]];
-    [self.asciiFont4 setText:[NSString stringWithFormat:@"Combo   :%3d", [self.player getCombo]]];
+    [self.asciiFont4 setText:[NSString stringWithFormat:@"Level :%3d", [self.player getLevel]]];
     [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d/%3d %3d", [self.mgrEnemy count], [self.mgrEnemy max], [self.mgrEnemy leak]]];
     [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d/%3d %3d", [self.mgrBullet count], [self.mgrBullet max], [self.mgrBullet leak]]];
     [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
