@@ -56,12 +56,43 @@
  * 更新
  */
 - (void)update:(ccTime)dt {
+    m_Timer++;
     [self move:dt];
+    switch (m_Id) {
+        case eShot_Power:
+            if (m_Timer%4 == 2) {
+                [self setColor:ccc3(0xFF, 0, 0)];
+                
+            }
+            else {
+                [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
+            }
+            break;
+            
+        default:
+            break;
+    }
     
     if ([super isOutCircle:32]) {
         [self vanish];
     }
     
+}
+
+- (void)setId:(eShot)type {
+    m_Id = type;
+    
+    switch (m_Id) {
+        case eShot_Power:
+            [self setColor:ccc3(0xFF, 0, 0)];
+            m_Power = 5;
+            break;
+            
+        default:
+            [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
+            m_Power = 1;
+            break;
+    }
 }
 
 /**
@@ -77,18 +108,23 @@
         [p setScale:0.1];
     }
     
-    // 消滅
-    [self vanish];
+    m_Power--;
+    if (m_Power < 1) {
+        // 消滅
+        [self vanish];
+    }
+    
 }
 
 /**
  * 自弾の追加
  */
-+ (Shot*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed {
++ (Shot*)add:(eShot)type x:(float)x y:(float)y rot:(float)rot speed:(float)speed {
     GameScene* scene = [GameScene sharedInstance];
     Shot* s = (Shot*)[scene.mgrShot add];
     if (s) {
         [s set2:x y:y rot:rot speed:speed ax:0 ay:0];
+        [s setId:type];
     }
     
     return s;

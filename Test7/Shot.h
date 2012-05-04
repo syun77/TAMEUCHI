@@ -10,17 +10,27 @@
 #import "cocos2d.h"
 #import "Token.h"
 
+
+enum eShot {
+    eShot_Normal,
+    eShot_Power,
+};
+
 /**
  * 自弾
  */
 @interface Shot : Token {
-    int m_Timer; 
+    eShot   m_Id;
+    int     m_Power;
+    int     m_Timer; 
 }
+
+- (void)setId:(eShot)type;
 
 // 敵に当たった
 - (void)hit:(float)x y:(float)y;
 
 // 弾の生成
-+ (Shot*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed;
++ (Shot*)add:(eShot)type x:(float)x y:(float)y rot:(float)rot speed:(float)speed;
 
 @end

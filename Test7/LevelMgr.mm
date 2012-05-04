@@ -126,7 +126,7 @@
             switch (m_nLevel) {
                 case 1:
                     //            if (m_Timer%80 == 20) {
-                    if (m_Timer%280 == 20) {
+                    if (m_Timer%2800 == 20) {
                         // 敵の生成
                         //                [self addEnemy:eEnemy_5Box];
                         //                [self addEnemy:eEnemy_Pudding];

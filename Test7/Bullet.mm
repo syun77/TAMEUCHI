@@ -11,6 +11,7 @@
 #import "GameScene.h"
 #import "Particle.h"
 #import "Exerinya.h"
+#import "Shot.h"
 
 @implementation Bullet
 
@@ -92,7 +93,7 @@
 }
 
 // 敵弾をすべて消す
-+ (void)vanishAll {
++ (void)vanishAll:(BOOL)bReflect {
     TokenManager* mgr = [GameScene sharedInstance].mgrBullet;
     for (Bullet* b in mgr.m_Pool) {
         if ([b isExist] == NO) {
@@ -100,6 +101,12 @@
         }
         
         [b destroy];
+        
+        if (bReflect) {
+            // 打ち返しあり
+            float rot = Math_Atan2Ex(b._vy, b._vx);
+            [Shot add:eShot_Power x:b._x y:b._y rot:rot+180 speed:100];
+        }
     }
 }
 

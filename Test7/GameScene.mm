@@ -138,7 +138,7 @@ static GameScene* scene_ = nil;
     [self.interfaceLayer addCB:self];
     
     self.mgrShot = [TokenManager node];
-    [self.mgrShot create:self.baseLayer size:64 className:@"Shot"];
+    [self.mgrShot create:self.baseLayer size:256 className:@"Shot"];
     [self.mgrShot setPrio:ePrio_Shot];
     
     self.mgrItem = [TokenManager node];
@@ -174,7 +174,7 @@ static GameScene* scene_ = nil;
     
     self.asciiFont4 = [AsciiFont node];
     [self.asciiFont4 createFont:self.baseLayer length:24];
-    [self.asciiFont4 setPosScreen:8 y:320-24-48];
+    [self.asciiFont4 setPosScreen:8 y:32];
     
     self.asciiFont5 = [AsciiFont node];
     [self.asciiFont5 createFont:self.baseLayer length:24];
@@ -385,7 +385,6 @@ static GameScene* scene_ = nil;
     
     // Tokenの生存数を表示
 //    [self.asciiFont4 setText:[NSString stringWithFormat:@"Shot    :%3d/%3d %3d", [self.mgrShot count], [self.mgrShot max], [self.mgrShot leak]]];
-    [self.asciiFont4 setText:[NSString stringWithFormat:@"Level :%3d", [self.player getLevel]]];
     [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d/%3d %3d", [self.mgrEnemy count], [self.mgrEnemy max], [self.mgrEnemy leak]]];
     [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d/%3d %3d", [self.mgrBullet count], [self.mgrBullet max], [self.mgrBullet leak]]];
     [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
@@ -395,6 +394,8 @@ static GameScene* scene_ = nil;
     [self.asciiFontLevel setText:[NSString stringWithFormat:@"Level: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
     
     [self.asciiFontScore setText:[NSString stringWithFormat:@"Score: %d", m_Score]];
+    
+    [self.asciiFont4 setText:[NSString stringWithFormat:@"Lv :%3d", [self.player getLevel]]];
     
     [self.levelMgr update:dt];
 

@@ -33,7 +33,7 @@ static const float DECAY_DAMAGE = 0.95f; // 移動量の減衰値
 static const float SPEED_SHOT = 360;
 
 // チャージが有効となる開始時間
-static const int TIMER_CHARGE_START = 60;
+static const int TIMER_CHARGE_START = 20;
 
 // ■チャージゲージ
 // チャージ初期値
@@ -98,6 +98,13 @@ enum eState {
 }
 
 /**
+ * チャージが開始できるかどうか
+ */
+- (BOOL)isChargeStart {
+    return TIMER_CHARGE_START + m_nLevel * 30 >= m_tCharge;
+}
+
+/**
  * 状態遷移
  */
 - (void)changeState:(eState)state {
@@ -117,7 +124,7 @@ enum eState {
     
     switch (m_nLevel) {
         case 0:
-            if (m_Combo > 5) {
+            if (m_Combo >= 2) {
                 
                 // レベルアップ
                 m_nLevel++;
@@ -127,18 +134,27 @@ enum eState {
             break;
             
         case 1:
-            if (m_Combo > 10) {
+            if (m_Combo >= 5) {
                 m_nLevel++;
                 
                 ret = YES;
             }
             
         case 2:
-            if (m_Combo > 15) {
+            if (m_Combo >= 8) {
                 m_nLevel++;
                 
                 ret = YES;
             }
+            break;
+            
+        case 3:
+            if (m_Combo >= 15) {
+                m_nLevel++;
+                
+                ret = YES;
+            }
+            break;
             
         default:
             break;
@@ -179,7 +195,7 @@ enum eState {
     m_tCharge = 0;
     m_Combo = 0;
     m_ComboMax = 0;
-    m_nLevel = 0;
+    m_nLevel = 10;
     
     
     return self;
@@ -269,12 +285,12 @@ enum eState {
 - (void)shot:(float)rot {
     // 弾を撃つ
     float speed = SPEED_SHOT * (1 + ((float)m_tPower / m_PowerMax));
-    [Shot add:self._x y:self._y rot:rot + Math_RandFloat(-5, 5) speed:speed];
+    [Shot add:eShot_Normal x:self._x y:self._y rot:rot + Math_RandFloat(-5, 5) speed:speed];
     
     if ([self isHpMax]) {
         // フルパワー時は3Way
-        [Shot add:self._x y:self._y rot:rot - 15 speed:speed];
-        [Shot add:self._x y:self._y rot:rot + 15 speed:speed];
+        [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 15 speed:speed];
+        [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 15 speed:speed];
     }
 }
 
@@ -341,7 +357,7 @@ enum eState {
         
         // パワーをためる
         m_tCharge++;
-        if (m_tCharge > TIMER_CHARGE_START) {
+        if ([self isChargeStart]) {
             m_tPower++;
             if (m_tPower > m_PowerMax) {
                 m_tPower = m_PowerMax;
@@ -403,7 +419,7 @@ enum eState {
         [aim setTarget:[input getPosX] y:[input getPosY]];
         
         // チャージエフェクト有効
-        if (m_tCharge >= TIMER_CHARGE_START) {
+        if ([self isChargeStart]) {
             
             [charge setParam:eCharge_Playing x:self._x y:self._y];
         }
@@ -557,25 +573,32 @@ enum eState {
 // 危険回避ショット
 - (void)shotDanger {
     
-    switch (m_nLevel) {
-        case 1:
-            // レベル１特典
-            // 敵サイズ・小を消す
-            [Enemy vanishAllSmall:NO];
-            break;
-            
-        case 2:
-            // レベル２特典
-            // 敵サイズ・小を消して撃ち返し弾発生
-            [Enemy vanishAllSmall:YES];
-            break;
-            
-        default:
-            break;
+    if (m_nLevel >= 3) {
+        // レベル３特典
+        // 全方位弾発射
+        for (int i = 0; i < 64; i++) {
+            [Shot add:eShot_Power x:self._x y:self._y rot:i * (360/64) speed:100];
+        }
+    }
+   
+    if (m_nLevel >= 2) {
+        // レベル２特典
+        // 敵サイズ・小を消して撃ち返し弾発生
+        [Enemy vanishAllSmall:YES];
+        
+        // 敵弾を消して打ち返し発生
+        [Bullet vanishAll:YES];
+    }
+    
+    if (m_nLevel >= 1) {
+        // レベル１特典
+        // 敵サイズ・小を消す
+        [Enemy vanishAllSmall:NO];
+        
     }
     
     // 敵弾はいつでも消える
-    [Bullet vanishAll];
+    [Bullet vanishAll:NO];
     
     // レベルリセット
     m_nLevel = 0;

@@ -1075,7 +1075,7 @@ enum eRange {
         if (bReflect) {
             // 打ち返しあり
             float rot = Math_Atan2Ex(e._vy, e._vx);
-            [Shot add:e._x y:e._y rot:rot+180 speed:100];
+            [Shot add:eShot_Power x:e._x y:e._y rot:rot+180 speed:100];
         }
     } 
 }
