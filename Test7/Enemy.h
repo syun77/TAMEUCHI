@@ -34,6 +34,7 @@ enum eEnemy {
     int     m_Val2;     // 汎用パラメータ２
     float   m_AimX;     // 狙い撃ち座標 (X)
     float   m_AimY;     // 狙い撃ち座標 (Y)
+    BOOL    m_bWhip;    // ウィップ弾フラグ
     int     m_Step;     // 実行ステップ
     int     m_Hp;       // HP
     int     m_HpMax;    // 最大HP

@@ -34,6 +34,15 @@ enum eSize {
 };
 
 /**
+ * プレイヤーとの距離
+ */
+enum eRange {
+    eRange_Short,   // 近距離
+    eRange_Middle,  // 中距離
+    eRange_Long,    // 遠距離
+};
+
+/**
  * 敵の実装
  */
 @implementation Enemy
@@ -102,6 +111,34 @@ enum eSize {
 }
 
 /**
+ * プレイヤーとの距離を計算する
+ */
+- (eRange)getRange {
+    
+    // プレイヤーとの距離を計算する
+    Player* p = [self getTarget];
+    
+    float dx = p._x - self._x;
+    float dy = p._y - self._y;
+    
+    float distance = Math_Sqrt(dx * dx + dy * dy);
+    
+    if (distance < 144) {
+        
+        // 近距離 (√80^2 + 120^2)
+        return eRange_Short;
+    }
+    if (distance < 288) {
+        
+        // 中距離 (√160^2 + 240^2)
+        return eRange_Middle;
+    }
+    
+    // 遠距離
+    return eRange_Long;
+}
+
+/**
  * 初期化
  */
 - (void)initialize {
@@ -117,6 +154,7 @@ enum eSize {
     m_Timer = 0;
     m_Hp    = 3;
     m_State = eState_Appear;
+    m_bWhip = NO;
     m_Step  = 0;
     m_AimX  = [self getTarget]._x;
     m_AimY  = [self getTarget]._y;
@@ -360,6 +398,7 @@ enum eSize {
 - (void)updateNasu {
     const float speedIn  = 100; // 画面に入る速度
     const float speedMove = 50; // 移動速度
+    eRange range = [self getRange]; // プレイヤーとの距離
     
     switch (m_State) {
         case eState_Appear:
@@ -387,6 +426,16 @@ enum eSize {
                 }
                 
             }
+            
+            if (m_Timer%80 == 0) {
+                if (range >= eRange_Long) {
+                    // 遠距離以上なら近づく
+                    float aim = [self getAim];
+                    self._vx += Math_CosEx(aim) * speedMove * 5;
+                    self._vy += Math_SinEx(aim) * speedMove * 5;
+                }
+            }
+            
             if (m_Timer > 2000) {
                 
                 // 逃走する
@@ -620,6 +669,7 @@ enum eSize {
     
     const float speedIn  = 100; // 画面に入る速度
     const float speedMove = 150; // 移動速度
+    eRange range = [self getRange]; // プレイヤーとの距離
     
     switch (m_State) {
         case eState_Appear:
@@ -642,9 +692,20 @@ enum eSize {
             
         case eState_Main:
             m_Timer++;
-            if (Math_Rand(100) == 0) {
-                m_Timer += 10;
+            if (m_bWhip) {
+                if (m_Val2 > 0) {
+                    m_Val2--;
+                    
+                    [Bullet add:self._x y:self._y rot:m_Val+m_Val2*7 speed:100 + m_Val2 * 1];
+                    [Bullet add:self._x y:self._y rot:m_Val-m_Val2*7 speed:100 + m_Val2 * 1];
+                    
+                    if (m_Val2 < 1) {
+                        // ウィップ弾終了
+                        m_bWhip = NO;
+                    }
+                }
             }
+            
             if (m_Timer%180 == 11) {
                 // 移動シーケンス
                 // プレイヤーから直角に移動する
@@ -662,13 +723,45 @@ enum eSize {
                     [Bullet add:self._x y:self._y rot:aim - 30 + 30 * i speed:100];
                 }
                 
-                // ポッキー発射
-                float speed = 400;
-                int cnt = 5;
-                float rot = 180 + aim + (cnt / 2) * - 45;
-                for (int i = 0; i < cnt; i++) {
-                    [Enemy add:eEnemy_Pokey x:self._x y:self._y rot:rot speed:speed];
-                    rot += 45;
+                if (range == eRange_Long) {
+                    // 遠距離
+                    if (Math_Rand(2) == 0) {
+                        
+                        // ウィップ弾
+                        m_Val = [self getAim];
+                        m_Val2 = 64; // 16発撃つ
+                        m_bWhip = YES;
+                    }
+                    else {
+                        
+                        // リング弾
+                        for (int i = 0; i < 16; i++) {
+                            float rot = i * (360 / 16);
+                            float x = self._x + Math_CosEx(rot) * 64;
+                            float y = self._y + Math_SinEx(rot) * 64;
+                            
+                            Player* p = [self getTarget];
+                            float rot2 = Math_Atan2Ex(p._y - y, p._x - x);
+                            
+                            [Bullet add:x y:y rot:rot2 speed:200];
+                        }
+                        
+                    }
+                }
+                else if(range == eRange_Middle) {
+                    // 中距離
+                    
+                }
+                else {
+                    // ポッキー発射
+                    float speed = 400;
+                    int cnt = 5;
+                    float rot = 180 + aim + (cnt / 2) * - 45;
+                    for (int i = 0; i < cnt; i++) {
+                        [Enemy add:eEnemy_Pokey x:self._x y:self._y rot:rot speed:speed];
+                        rot += 45;
+                    }
+                    
                 }
                 
             }
