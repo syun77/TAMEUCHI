@@ -52,6 +52,9 @@ enum eEnemy {
 // 残りHPの割合を取得(0〜1)
 - (float)getHpRatio;
 
+// サイズ・小をすべて消す
++ (void)vanishAllSmall:(BOOL)bReflect;
+
 /**
  * 弾がヒットした
  * @param dx 弾への距離 (X)

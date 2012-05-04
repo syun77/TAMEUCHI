@@ -516,9 +516,7 @@ enum eState {
 // 危険回避ショット
 - (void)shotDanger {
     
-    for (int i = 0; i < 32; i++) {
-        [self shot:i * 360 / 32];
-    }
+    [Enemy vanishAllSmall:NO];
 }
 
 // ダメージ

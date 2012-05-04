@@ -13,11 +13,24 @@
 #import "Particle.h"
 #import "Bullet.h"
 #import "Item.h"
+#import "Shot.h"
 
+/**
+ * 状態
+ */
 enum eState {
     eState_Appear,  // 出現
     eState_Main,    // メイン
     eState_Escape,  // 逃走
+};
+
+/**
+ * 敵の大きさ
+ */
+enum eSize {
+    eSize_Small,    // 小
+    eSize_Middle,   // 中
+    eSize_Big,      // 大
 };
 
 /**
@@ -38,6 +51,34 @@ enum eState {
     
     return self;
     
+}
+
+/**
+ * 敵の大きさを取得
+ */
+- (eSize)getSize {
+    switch (m_Id) {
+        case eEnemy_Carrot:
+        case eEnemy_Radish:
+        case eEnemy_Pokey:
+            // 小サイズ
+            return eSize_Small;
+            
+        case eEnemy_Nasu:
+        case eEnemy_5Box:
+        case eEnemy_Tako:
+            // 通常サイズ
+            return eSize_Middle;
+            
+        case eEnemy_Milk:
+        case eEnemy_XBox:
+        case eEnemy_Pudding:
+            // 大サイズ
+            return eSize_Big;
+            
+        default:
+            return eSize_Middle;
+    }
 }
 
 /**
@@ -180,6 +221,10 @@ enum eState {
     for (Enemy* e in mgr.m_Pool) {
         if ([e isExist] == NO) {
             // 存在しない
+            continue;
+        }
+        if ([e getSize] == eSize_Small) {
+            // サイズ・小はロックしない
             continue;
         }
         
@@ -819,52 +864,68 @@ enum eState {
 }
 
 /**
+ * 破壊
+ */
+- (void)destroy {
+    
+    // エフェクトの生成
+    switch ([self getSize]) {
+        case eSize_Small:
+            // 小サイズ
+            [self vanishSmall];
+            break;
+            
+        case eSize_Middle:
+            // 通常サイズ
+            [self vanishNormal];
+            
+            // TODO:
+            [Item add:eItem_Recover x:self._x y:self._y rot:90 speed:50];
+            break;
+            
+        case eSize_Big:
+            // 大サイズ
+            [self vanishBig];
+            // TODO:
+            [Item add:eItem_Recover x:self._x y:self._y rot:90 speed:50];
+            break;
+            
+        default:
+            break;
+    }
+    [self vanish];
+}
+
+/**
  * 弾がヒットした
  */
 - (BOOL)hit:(float)dx y:(float)dy {
     
     m_Hp--;
     
+    // 反動
     Vec2D v = Vec2D(dx, dy);
     v.Normalize();
-    v *= 20;
+    switch ([self getSize]) {
+        case eSize_Small:
+            v *= 0;
+            break;
+        
+        case eSize_Middle:
+            v *= 20;
+            break;
+            
+        default:
+            v *= 5;
+            break;
+    }
     self._vx += v.x;
     self._vy += v.y;
     
     if (m_Hp <= 0) {
         
-        // エフェクトの生成
-        switch (m_Id) {
-            case eEnemy_Carrot:
-            case eEnemy_Radish:
-            case eEnemy_Pokey:
-                // 小サイズ
-                [self vanishSmall];
-                break;
-                
-            case eEnemy_Nasu:
-            case eEnemy_5Box:
-            case eEnemy_Tako:
-                // 通常サイズ
-                [self vanishNormal];
-                
-                // TODO:
-                [Item add:eItem_Recover x:self._x y:self._y rot:90 speed:50];
-                break;
-                
-            case eEnemy_Milk:
-            case eEnemy_XBox:
-            case eEnemy_Pudding:
-                // 大サイズ
-                [self vanishBig];
-                // TODO:
-                [Item add:eItem_Recover x:self._x y:self._y rot:90 speed:50];
-                break;
-                
-            default:
-                break;
-        }
-        [self vanish];
+        // 破壊演出
+        [self destroy];
         
         // 死亡
         return YES;
@@ -900,5 +961,29 @@ enum eState {
         default:
             break;
     }
+}
+
+/**
+ * サイズ・小をすべて消す
+ */
++ (void)vanishAllSmall:(BOOL)bReflect {
+    TokenManager* mgr = [GameScene sharedInstance].mgrEnemy;
+    for (Enemy* e in mgr.m_Pool) {
+        if ([e isExist] == NO) {
+            continue;
+        }
+        
+        if ([e getSize] != eSize_Small) {
+            continue;
+        }
+        
+        [e destroy];
+        
+        if (bReflect) {
+            // 打ち返しあり
+            float rot = Math_Atan2Ex(e._vy, e._vx);
+            [Shot add:e._x y:e._y rot:rot+180 speed:100];
+        }
+    } 
 }
 @end
