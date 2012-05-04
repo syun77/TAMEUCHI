@@ -40,6 +40,8 @@ static const int TIMER_CHARGE_START = 60;
 static const int POWER_MIN = TIMER_CHARGE_START;
 // チャージ最大量
 static const int POWER_MAX = 120;
+// チャージレベルアップ時増加分
+static const int POWER_INC = (POWER_MAX - POWER_MIN) / 3;
 
 // HPの最大
 static const int MAX_HP = 100;
@@ -577,6 +579,11 @@ enum eState {
     
     // レベルリセット
     m_nLevel = 0;
+    
+    // パワーゲージを初期値に戻す
+    m_PowerMax = POWER_MIN;
+    Gauge* gauge = [self getGauge];
+    [gauge setMax:m_PowerMax];
 }
 
 // ダメージ
@@ -719,7 +726,11 @@ enum eState {
         [result start:m_Combo];
         
         // レベルアップ判定
-        [self checkLevelUp];
+        if ([self checkLevelUp]) {
+            m_PowerMax += POWER_INC;
+            Gauge* gauge = [self getGauge];
+            [gauge setMax:m_PowerMax];
+        }
     }
     
     m_Combo = 0;

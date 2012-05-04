@@ -9,6 +9,11 @@
 #import "Gauge.h"
 #import "Math.h"
 
+static const int POS_X = 8;
+static const int POS_Y = 24;
+static const int GAUGE_WIDTH  = 2;
+static const int GAUGE_HEIGHT = 8;
+
 /**
  * ゲージ実装
  */
@@ -70,6 +75,14 @@
     
     // 通常に戻す
     System_SetBlend(eBlend_Normal);
+    
+    // バーの描画
+    float px = POS_X;
+    float py = POS_Y;
+    [self fillRectLT:px y:py w:GAUGE_WIDTH * m_Now h:GAUGE_HEIGHT rot:0 scale:1];
+    glColor4f(1, 1, 1, 1);
+    glLineWidth(1);
+    [self drawRectLT:px y:py w:GAUGE_WIDTH * m_Max h:GAUGE_HEIGHT rot:0 scale:1];
 }
 
 // 初期化
