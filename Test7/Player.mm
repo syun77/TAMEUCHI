@@ -127,6 +127,8 @@ enum eState {
             
             // レベルアップ
             m_nLevel++;
+            GameScene* scene = [GameScene sharedInstance];
+            [scene startLevelUp];
             
             ret = YES;
         }
@@ -167,7 +169,7 @@ enum eState {
     m_tCharge = 0;
     m_Combo = 0;
     m_ComboMax = 0;
-    m_nLevel = 10;
+    m_nLevel = 0;
     
     
     return self;

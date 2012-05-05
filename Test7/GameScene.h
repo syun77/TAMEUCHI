@@ -57,6 +57,8 @@ static const float DANGER_SLOW_RATIO = 0.25;
     AsciiFont*      asciiFontScore; // フォント（スコア）
     
     int             m_State;        // 状態
+    int             m_Step;         // ステップ
+    int             m_Timer;        // 汎用タイマー
     int             m_nDestroy;     // 敵を倒した数
     int             m_Score;        // スコア
     int             m_ComboMax;     // 最大コンボ数
@@ -93,5 +95,8 @@ static const float DANGER_SLOW_RATIO = 0.25;
 
 // 敵を倒した数を取得する
 - (int)getDestroyCount;
+
+// レベルアップ演出を開始する
+- (void)startLevelUp;
 
 @end

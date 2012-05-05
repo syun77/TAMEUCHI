@@ -73,6 +73,16 @@
 - (void)setPrio:(NSInteger)Prio;
 
 /**
+ * スケジューラの更新を止める
+ */
+- (void)pauseAll;
+
+/**
+ * スケジューラの更新を再開する
+ */
+- (void)resumeAll;
+
+/**
  * デバッグ表示
  */
 - (void)echo;

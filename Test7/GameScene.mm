@@ -18,6 +18,9 @@
 
 #import "SaveData.h"
 
+// レベルアップ演出タイマー
+static const int TIMER_LEVELUP = 60;
+
 // 描画プライオリティ
 enum {
     ePrio_Back,     // 背景
@@ -38,6 +41,11 @@ enum eState {
     eState_Init,        // 初期化
     eState_Main,        // メイン
     estate_GameOver,    // ゲームオーバー
+};
+
+enum eStep {
+    eStep_Main,     // メイン
+    eStep_Levelup,  // レベルアップ
 };
 
 
@@ -331,14 +339,11 @@ static GameScene* scene_ = nil;
         }
         
         // 照準 vs 敵弾
-        //if ([self.aim isActive])
-        {
-            if ([b isHit2:self.aim]) {
-                
-                // 敵弾消滅
-                [b damage:self.aim];
-                continue;
-            }
+        if ([b isHit2:self.aim]) {
+            
+            // 敵弾消滅
+            [b damage:self.aim];
+            continue;
         }
         
         // 自機 vs 敵弾
@@ -355,6 +360,24 @@ static GameScene* scene_ = nil;
         m_State = estate_GameOver;
     }
     
+}
+
+/**
+ * レベルアップ演出中
+ */
+- (void)updateLevelUp:(ccTime)dt {
+    
+    m_Timer--;
+    if (m_Timer < 1) {
+        
+        // メインに戻る
+        m_Step = eStep_Main;
+        
+        [self.mgrBullet resumeAll];
+        [self.mgrEnemy resumeAll];
+        [self.mgrItem resumeAll];
+        [self.mgrShot resumeAll];
+    }
 }
 
 /**
@@ -377,10 +400,24 @@ static GameScene* scene_ = nil;
     switch (m_State) {
         case eState_Init:
             [self updateInit:dt];
+            m_Step = eStep_Main;
             break;
             
         case eState_Main:
-            [self updateMain:dt];
+            switch (m_Step) {
+                case eStep_Main:
+                    
+                    [self updateMain:dt];
+                    break;
+                    
+                case eStep_Levelup:
+                    
+                    [self updateLevelUp:dt];
+                    break;
+                    
+                default:
+                    break;
+            }
             break;
             
         case estate_GameOver:
@@ -393,9 +430,9 @@ static GameScene* scene_ = nil;
     
     // Tokenの生存数を表示
 //    [self.asciiFont4 setText:[NSString stringWithFormat:@"Shot    :%3d/%3d %3d", [self.mgrShot count], [self.mgrShot max], [self.mgrShot leak]]];
-    [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d/%3d %3d", [self.mgrEnemy count], [self.mgrEnemy max], [self.mgrEnemy leak]]];
-    [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d/%3d %3d", [self.mgrBullet count], [self.mgrBullet max], [self.mgrBullet leak]]];
-    [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
+//    [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d/%3d %3d", [self.mgrEnemy count], [self.mgrEnemy max], [self.mgrEnemy leak]]];
+//    [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d/%3d %3d", [self.mgrBullet count], [self.mgrBullet max], [self.mgrBullet leak]]];
+//    [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
     
     [self.asciiFont5 setText:[NSString stringWithFormat:@"State: %@", [self.player getStateString]]];
     
@@ -417,6 +454,23 @@ static GameScene* scene_ = nil;
  */
 - (int)getDestroyCount {
     return m_nDestroy;
+}
+
+// レベルアップ演出を開始する
+- (void)startLevelUp {
+    if (m_State != eState_Main) {
+        
+        // メインでなければ開始できない
+        return;
+    }
+    
+    m_Step = eStep_Levelup;
+    m_Timer = TIMER_LEVELUP;
+    
+    [self.mgrBullet pauseAll];
+    [self.mgrEnemy pauseAll];
+    [self.mgrItem pauseAll];
+    [self.mgrShot pauseAll];
 }
 
 @end

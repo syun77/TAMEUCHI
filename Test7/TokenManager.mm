@@ -174,6 +174,24 @@
 }
 
 /**
+ * スケジューラの更新を止める
+ */
+- (void)pauseAll {
+    for (Token* t in self.m_Pool) {
+        [t pauseSchedulerAndActions];
+    } 
+}
+
+/**
+ * スケジューラの更新を再開する
+ */
+- (void)resumeAll {
+    for (Token* t in self.m_Pool) {
+        [t resumeSchedulerAndActions];
+    }
+}
+
+/**
  * デバッグ表示
  */
 - (void)echo {

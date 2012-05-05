@@ -26,6 +26,7 @@ enum eItem {
 @interface Item : Token {
     int     m_tPast;    // 経過時間
     eItem   m_Type;     // アイテムの種類
+    BOOL    m_bHorming; // ホーミング開始フラグ
 }
 
 // アイテム種別の取得
