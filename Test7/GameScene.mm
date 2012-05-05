@@ -272,6 +272,14 @@ static GameScene* scene_ = nil;
         if ([item isHit2:self.player]) {
             // アイテム取得
             [self.player takeItem:item];
+            switch ([item getType]) {
+                case eItem_Score:
+                    m_Score += 10;
+                    break;
+                    
+                default:
+                    break;
+            }
             [item vanishWithEffect];
         }
     }
@@ -389,7 +397,7 @@ static GameScene* scene_ = nil;
     [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d/%3d %3d", [self.mgrBullet count], [self.mgrBullet max], [self.mgrBullet leak]]];
     [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
     
-    [self.asciiFont5 setText:[NSString stringWithFormat:@"Power: %3d", [self.player getPower]]];
+    [self.asciiFont5 setText:[NSString stringWithFormat:@"State: %@", [self.player getStateString]]];
     
     [self.asciiFontLevel setText:[NSString stringWithFormat:@"Level: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
     

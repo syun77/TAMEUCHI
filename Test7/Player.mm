@@ -37,11 +37,11 @@ static const int TIMER_CHARGE_START = 20;
 
 // ■チャージゲージ
 // チャージ初期値
-static const int POWER_MIN = TIMER_CHARGE_START;
+static const int POWER_MIN = 20;
 // チャージ最大量
 static const int POWER_MAX = 120;
 // チャージレベルアップ時増加分
-static const int POWER_INC = (POWER_MAX - POWER_MIN) / 3;
+static const int POWER_INC = 10;
 
 // HPの最大
 static const int MAX_HP = 100;
@@ -121,43 +121,15 @@ enum eState {
     
     // レベルアップしたかどうか
     BOOL ret = NO;
-    
-    switch (m_nLevel) {
-        case 0:
-            if (m_Combo >= 2) {
-                
-                // レベルアップ
-                m_nLevel++;
-                
-                ret = YES;
-            }
-            break;
+
+    if (m_nLevel < 10) {
+        if (m_Combo >= m_nLevel + 1) {
             
-        case 1:
-            if (m_Combo >= 5) {
-                m_nLevel++;
-                
-                ret = YES;
-            }
+            // レベルアップ
+            m_nLevel++;
             
-        case 2:
-            if (m_Combo >= 8) {
-                m_nLevel++;
-                
-                ret = YES;
-            }
-            break;
-            
-        case 3:
-            if (m_Combo >= 15) {
-                m_nLevel++;
-                
-                ret = YES;
-            }
-            break;
-            
-        default:
-            break;
+            ret = YES;
+        }
     }
     
     return ret;
@@ -244,7 +216,7 @@ enum eState {
     
     float s = self._r;
     float x1 = s;
-    float y1 = s;
+    float y1 = s * 1.2;
     float x2 = System_Width() - s;
     float y2 = System_Height() - s;
     
@@ -633,6 +605,7 @@ enum eState {
     float bDanger = [self isDanger];
     if (m_State == eState_Standby) {
         m_Hp -= MAX_HP * 0.2f; // 5回ダメージで死亡
+        
     }
     else {
         m_Hp--;
@@ -809,14 +782,35 @@ enum eState {
 
 // アイテム取得
 - (void)takeItem:(Token*)t {
+    
     Item* item = (Item*)t;
     switch ([item getType]) {
         case eItem_Recover:
             m_Hp += 100;
+            if (m_Hp > MAX_HP) {
+                m_Hp = MAX_HP;
+            }
             break;
             
         default:
             break;
+    }
+}
+
+// 状態を取得
+- (NSString*)getStateString {
+    switch (m_State) {
+        case eState_Standby:
+            return @"Standby";
+            
+        case eState_Damage:
+            return @"Damage";
+            
+        case eState_Vanish:
+            return @"Vanish";
+            
+        default:
+            return @"None";
     }
 }
 

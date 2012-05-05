@@ -973,7 +973,7 @@ enum eRange {
             [self vanishNormal];
             
             // TODO:
-            [Item add:eItem_Recover x:self._x y:self._y rot:90 speed:50];
+            [Item add:eItem_Score x:self._x y:self._y rot:90 speed:50];
             break;
             
         case eSize_Big:

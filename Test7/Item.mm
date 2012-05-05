@@ -87,6 +87,31 @@
     }
 }
 
+// アイテム種別の設定
+- (void)setType:(eItem)type {
+    m_Type = type;
+    CGRect r = Exerinya_GetRect(eExerinyaRect_Banana);
+    switch (m_Type) {
+        case eItem_Recover:
+            r = Exerinya_GetRect(eExerinyaRect_Banana);
+            [self setTexRect:r];
+            [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
+            break;
+            
+        case eItem_Score:
+            r = Exerinya_GetRect(eExerinyaRect_Banana);
+            [self setTexRect:r];
+            [self setColor:ccc3(0x80, 0xFF, 0x80)];
+            break;
+            
+        case eItem_Power:
+            break;
+            
+        default:
+            break;
+    }
+}
+
 // アイテム種別の取得
 - (eItem)getType {
     return m_Type;
@@ -103,7 +128,22 @@
         Particle* p = [Particle add:eParticle_Ball x:self._x y:self._y rot:rot speed:speed];
         if (p) {
             [p setScale:0.5f];
-            [p setColor:ccc3(0xFF, 0xFF, 0)];
+            
+            switch (m_Type) {
+                case eItem_Recover:
+                    [p setColor:ccc3(0xFF, 0xFF, 0)];
+                    break;
+                    
+                case eItem_Score:
+                    [p setColor:ccc3(0x00, 0xFF, 0x00)];
+                    break;
+                    
+                case eItem_Power:
+                    break;
+                    
+                default:
+                    break;
+            }
         }
     }
     [self vanish];
@@ -118,6 +158,7 @@
     Item* item = (Item*)[scene.mgrItem add];
     if (item) {
         [item set2:x y:y rot:rot speed:speed ax:0 ay:-1];
+        [item setType:type];
     }
     
     return item;
