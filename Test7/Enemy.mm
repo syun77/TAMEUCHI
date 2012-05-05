@@ -148,7 +148,9 @@ enum eRange {
     [self setScale:0.5];
     
     [self setSize2:32];
+    [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
     
+    m_tPast = 0;
     m_Val = Math_Rand(360);
     m_Val2 = 0;
     m_Timer = 0;
@@ -898,10 +900,18 @@ enum eRange {
     [self setRotation:Math_Atan2Ex(-self._vy, self._vx)];
 }
 
+- (BOOL)isDanger {
+    float ratio = (float)m_Hp / m_HpMax;
+    
+    return ratio < 0.3;
+}
+
 /**
  * 更新
  */
 - (void)update:(ccTime)dt {
+    
+    m_tPast++;
     
     Player* player = [GameScene sharedInstance].player;
     if ([player isDanger]) {
@@ -952,7 +962,13 @@ enum eRange {
             break;
     }
     
-    if (m_Timer > 100) {
+    if ([self isDanger]) {
+        if (m_tPast%60 < 5) {
+            [self setColor:ccc3(0xFF, 0, 0)];
+        }
+        else {
+            [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
+        }
     }
 }
 

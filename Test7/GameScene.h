@@ -23,6 +23,7 @@
 #import "Combo.h"
 #import "ComboResult.h"
 #import "Item.h"
+#import "Black.h"
 
 // 危険時に有効となる速度の係数
 static const float DANGER_SLOW_RATIO = 0.25;
@@ -45,6 +46,7 @@ static const float DANGER_SLOW_RATIO = 0.25;
     TokenManager*   mgrItem;        // アイテム
     TokenManager*   mgrEnemy;       // 敵
     TokenManager*   mgrBullet;      // 敵弾
+    Black*          black;          // 暗転用スプライト
     TokenManager*   mgrParticle;    // パーティクル
     InterfaceLayer* interfaceLayer; // 入力受け取り
     LevelMgr*       levelMgr;       // レベル管理
@@ -73,6 +75,7 @@ static const float DANGER_SLOW_RATIO = 0.25;
 @property (nonatomic, retain)Combo*             combo;
 @property (nonatomic, retain)ComboResult*       comboResult;
 @property (nonatomic, retain)Charge*            charge;
+@property (nonatomic, retain)Black*             black;
 @property (nonatomic, retain)TokenManager*      mgrShot;
 @property (nonatomic, retain)TokenManager*      mgrItem;
 @property (nonatomic, retain)TokenManager*      mgrEnemy;
@@ -98,5 +101,8 @@ static const float DANGER_SLOW_RATIO = 0.25;
 
 // レベルアップ演出を開始する
 - (void)startLevelUp;
+
+// レベルアップ演出中かどうか
+- (BOOL)isLevelUp;
 
 @end

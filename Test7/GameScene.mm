@@ -24,6 +24,7 @@ static const int TIMER_LEVELUP = 60;
 // 描画プライオリティ
 enum {
     ePrio_Back,     // 背景
+    ePrio_LevelUp,  // レベルアップ文字
     ePrio_Player,   // プレイヤー
     ePrio_Enemy,    // 敵
     ePrio_Item,     // アイテム
@@ -31,6 +32,7 @@ enum {
     ePrio_Bullet,   // 敵弾
     ePrio_Aim,      // 照準
     ePrio_Charge,   // チャージエフェクト
+    ePrio_Black,    // 画面全体を暗くする
     ePrio_Particle, // パーティクル
     ePrio_Gauge,    // ゲージ表示
     ePrio_UI,       // ユーザインターフェース
@@ -65,6 +67,7 @@ static GameScene* scene_ = nil;
 @synthesize gaugeHp;
 @synthesize combo;
 @synthesize comboResult;
+@synthesize black;
 @synthesize mgrShot;
 @synthesize mgrItem;
 @synthesize mgrEnemy;
@@ -126,6 +129,9 @@ static GameScene* scene_ = nil;
     self.gaugeHp = [GaugeHp node];
     [self.baseLayer addChild:self.gaugeHp z:ePrio_UI];
     
+    self.black = [Black node];
+    [self.baseLayer addChild:self.black z:ePrio_Black];
+    
     self.combo = [Combo node];
     [self.baseLayer addChild:self.combo z:ePrio_UI];
     [self.combo.asciiFont createFont:self.baseLayer length:8];
@@ -170,7 +176,10 @@ static GameScene* scene_ = nil;
     
     self.asciiFont1 = [AsciiFont node];
     [self.asciiFont1 createFont:self.baseLayer length:24];
-    [self.asciiFont1 setPosScreen:8 y:320-24];
+    [self.asciiFont1 setPrio:ePrio_LevelUp];
+    [self.asciiFont1 setPosScreen:System_CenterX() y:System_CenterY()];
+    [self.asciiFont1 setAlign:eFontAlign_Center];
+    [self.asciiFont1 setVisible:NO];
     
     self.asciiFont2 = [AsciiFont node];
     [self.asciiFont2 createFont:self.baseLayer length:24];
@@ -231,6 +240,7 @@ static GameScene* scene_ = nil;
     self.mgrEnemy = nil;
     self.mgrItem = nil;
     self.mgrShot = nil;
+    self.black = nil;
     self.comboResult = nil;
     self.combo = nil;
     self.gaugeHp = nil;
@@ -367,8 +377,21 @@ static GameScene* scene_ = nil;
  */
 - (void)updateLevelUp:(ccTime)dt {
     
+    float px = System_CenterX() - 16 + 16.0 * m_Timer / TIMER_LEVELUP;
+    if (m_Timer > TIMER_LEVELUP - 10) {
+        
+        px += 32 * (10 - (TIMER_LEVELUP - m_Timer));
+    }
+    
+    [self.asciiFont1 setPosScreen:px y:System_CenterY()];
+    [self.asciiFont1 setScale:1.5];
+    [self.asciiFont1 setText:[NSString stringWithFormat:@"LEVEL %d", [self.player getLevel]]];
+    [self.asciiFont1 setVisible:YES];
+    
     m_Timer--;
     if (m_Timer < 1) {
+        
+        [self.asciiFont1 setVisible:NO];
         
         // メインに戻る
         m_Step = eStep_Main;
@@ -471,6 +494,17 @@ static GameScene* scene_ = nil;
     [self.mgrEnemy pauseAll];
     [self.mgrItem pauseAll];
     [self.mgrShot pauseAll];
+    
 }
 
+// レベルアップ演出中かどうか
+- (BOOL)isLevelUp {
+    if (m_State == eState_Main) {
+        if (m_Step == eStep_Levelup) {
+            return YES;
+        }
+    }
+    
+    return NO;
+}
 @end

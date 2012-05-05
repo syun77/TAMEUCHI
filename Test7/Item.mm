@@ -76,7 +76,7 @@
         }
     }
     
-    if (m_bHorming) {
+    if (m_bHorming && [player isVanish] == NO) {
         
         Vec2D v = Vec2D(player._x - self._x, player._y - self._y);
         v.Normalize();

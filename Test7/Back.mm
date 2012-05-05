@@ -124,6 +124,15 @@ static const int TIMER_DANGER = 10;
     b = b * (1 - 0.5 * m_tDanger / TIMER_DANGER);
     
     [self setColor:ccc3(r, g, b)];
+    
+    if ([[GameScene sharedInstance] isLevelUp]) {
+        [self setColor:ccc3(0x80, 0x80, 0x80)];
+    }    
+}
+
+- (void)visit {
+    [super visit];
+
 }
 
 // 背景変化

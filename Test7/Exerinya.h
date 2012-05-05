@@ -30,6 +30,7 @@ enum eExerinyaRect
     eExerinyaRect_Back,         // 背景
     eExerinyaRect_Banana,       // バナナ (黄色)
     eExerinyaRect_Banana_p1,    // バナナ (黄色＋１)
+    eExerinyaRect_Black,        // 暗い部分だけ取る
     eExerinyaRect_Max,
 };
 

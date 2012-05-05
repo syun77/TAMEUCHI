@@ -706,7 +706,7 @@ enum eState {
 
 // レベルの取得
 - (int)getLevel {
-    return m_nLevel;
+    return m_nLevel + 1;
 }
 
 // 消滅したかどうか

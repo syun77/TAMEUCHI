@@ -132,6 +132,7 @@
 		C742013B1543020C007351E3 /* TitleScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C742013A1543020C007351E3 /* TitleScene.mm */; };
 		C74FE7A11524892D00298CBB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = C74FE7A01524892D00298CBB /* rect.png */; };
 		C752C7EA15310AAE002EC31B /* System.mm in Sources */ = {isa = PBXBuildFile; fileRef = C752C7E915310AAE002EC31B /* System.mm */; };
+		C75A89BA1555835300154276 /* Black.mm in Sources */ = {isa = PBXBuildFile; fileRef = C75A89B91555835300154276 /* Black.mm */; };
 		C7612C9A1526AA88007CCABC /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7612C991526AA88007CCABC /* font.png */; };
 		C76484CF153DBE5D00C79410 /* Gauge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C76484CE153DBE5D00C79410 /* Gauge.mm */; };
 		C76484D3153E7DC700C79410 /* GaugeHp.mm in Sources */ = {isa = PBXBuildFile; fileRef = C76484D2153E7DC700C79410 /* GaugeHp.mm */; };
@@ -415,6 +416,8 @@
 		C74FE7A01524892D00298CBB /* rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rect.png; path = Resources/rect.png; sourceTree = "<group>"; };
 		C752C7E815310AAE002EC31B /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		C752C7E915310AAE002EC31B /* System.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = System.mm; sourceTree = "<group>"; };
+		C75A89B81555835300154276 /* Black.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Black.h; sourceTree = "<group>"; };
+		C75A89B91555835300154276 /* Black.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Black.mm; sourceTree = "<group>"; };
 		C7612C991526AA88007CCABC /* font.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = font.png; path = Resources/font.png; sourceTree = "<group>"; };
 		C76484CD153DBE5D00C79410 /* Gauge.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Gauge.h; sourceTree = "<group>"; };
 		C76484CE153DBE5D00C79410 /* Gauge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Gauge.mm; sourceTree = "<group>"; };
@@ -860,6 +863,8 @@
 				C7A13EE0153872DC00B53149 /* Aim.mm */,
 				C73FEC23152BEED5008B5697 /* Back.h */,
 				C73FEC24152BEED5008B5697 /* Back.mm */,
+				C75A89B81555835300154276 /* Black.h */,
+				C75A89B91555835300154276 /* Black.mm */,
 				C72542E615260B81004C157A /* Bullet.h */,
 				C72542E715260B81004C157A /* Bullet.mm */,
 				C7F0DF53153A83BC006E26E4 /* Charge.h */,
@@ -1121,6 +1126,7 @@
 				C7731E79154C493100D773DE /* Item.mm in Sources */,
 				C7050CB0154E199B00871C27 /* ComboResult.mm in Sources */,
 				C73CEF0E1550363700B9F66C /* SaveData.mm in Sources */,
+				C75A89BA1555835300154276 /* Black.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
