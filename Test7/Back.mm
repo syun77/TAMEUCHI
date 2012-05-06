@@ -132,6 +132,18 @@ static const int TIMER_DANGER = 10;
 
 - (void)visit {
     [super visit];
+    
+    GameScene* scene = [GameScene sharedInstance];
+    if ([scene isLevelUp]) {
+        // レベルアップ演出中
+        
+        System_SetBlend(eBlend_Normal);
+        float height = 16 * [scene getTimer] / TIMER_LEVELUP;
+        
+        glColor4f(0, 0, 0, 0.2);
+        
+        [self fillRect:System_CenterX() cy:System_CenterY() w:System_Width() h:height rot:0 scale:1]; 
+    }
 
 }
 

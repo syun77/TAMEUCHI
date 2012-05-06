@@ -28,6 +28,9 @@
 // 危険時に有効となる速度の係数
 static const float DANGER_SLOW_RATIO = 0.25;
 
+// レベルアップ演出タイマー
+static const int TIMER_LEVELUP = 60;
+
 /**
  * ゲームシーン
  */
@@ -104,5 +107,8 @@ static const float DANGER_SLOW_RATIO = 0.25;
 
 // レベルアップ演出中かどうか
 - (BOOL)isLevelUp;
+
+// タイマーを取得する
+- (int)getTimer;
 
 @end

@@ -37,9 +37,9 @@ static const int TIMER_CHARGE_START = 20;
 
 // ■チャージゲージ
 // チャージ初期値
-static const int POWER_MIN = 20;
+static const int POWER_MIN = 40;
 // チャージ最大量
-static const int POWER_MAX = 120;
+static const int POWER_MAX = 240;
 // チャージレベルアップ時増加分
 static const int POWER_INC = 10;
 

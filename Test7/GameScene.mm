@@ -18,8 +18,6 @@
 
 #import "SaveData.h"
 
-// レベルアップ演出タイマー
-static const int TIMER_LEVELUP = 60;
 
 // 描画プライオリティ
 enum {
@@ -506,5 +504,10 @@ static GameScene* scene_ = nil;
     }
     
     return NO;
+}
+
+// タイマーを取得する
+- (int)getTimer {
+    return m_Timer;
 }
 @end
