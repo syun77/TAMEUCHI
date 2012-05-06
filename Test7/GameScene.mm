@@ -74,13 +74,13 @@ static GameScene* scene_ = nil;
 @synthesize mgrParticle;
 @synthesize interfaceLayer;
 @synthesize levelMgr;
-@synthesize asciiFont1;
 @synthesize asciiFont2;
 @synthesize asciiFont3;
 @synthesize asciiFont4;
 @synthesize asciiFont5;
 @synthesize asciiFontLevel;
 @synthesize asciiFontScore;
+@synthesize asciiFontLevelUp;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance {
@@ -173,13 +173,6 @@ static GameScene* scene_ = nil;
     self.levelMgr = [LevelMgr node];
     [self.levelMgr initialize];
     
-    self.asciiFont1 = [AsciiFont node];
-    [self.asciiFont1 createFont:self.baseLayer length:24];
-    [self.asciiFont1 setPrio:ePrio_LevelUp];
-    [self.asciiFont1 setPosScreen:System_CenterX() y:System_CenterY()];
-    [self.asciiFont1 setAlign:eFontAlign_Center];
-    [self.asciiFont1 setVisible:NO];
-    
     self.asciiFont2 = [AsciiFont node];
     [self.asciiFont2 createFont:self.baseLayer length:24];
     [self.asciiFont2 setPosScreen:8 y:320-24-16];
@@ -202,6 +195,13 @@ static GameScene* scene_ = nil;
     
     self.asciiFontScore = [AsciiFont node];
     [self.asciiFontScore createFont:self.baseLayer length:24];
+    
+    self.asciiFontLevelUp = [AsciiFont node];
+    [self.asciiFontLevelUp createFont:self.baseLayer length:24];
+    [self.asciiFontLevelUp setPrio:ePrio_LevelUp];
+    [self.asciiFontLevelUp setPosScreen:System_CenterX() y:System_CenterY()];
+    [self.asciiFontLevelUp setAlign:eFontAlign_Center];
+    [self.asciiFontLevelUp setVisible:NO];
     
     // コールバック関数登録
     [self.interfaceLayer addCB:self.player];
@@ -227,13 +227,13 @@ static GameScene* scene_ = nil;
     [self unscheduleUpdate];
     
     // インスタンス開放
+    self.asciiFontLevelUp = nil;
     self.asciiFontScore = nil;
     self.asciiFontLevel = nil;
     self.asciiFont5 = nil;
     self.asciiFont4 = nil;
     self.asciiFont3 = nil;
     self.asciiFont2 = nil;
-    self.asciiFont1 = nil;
     self.levelMgr = nil;
     self.mgrParticle = nil;
     self.mgrBullet = nil;
@@ -384,15 +384,15 @@ static GameScene* scene_ = nil;
         px += 32 * (10 - (TIMER_LEVELUP - m_Timer));
     }
     
-    [self.asciiFont1 setPosScreen:px y:System_CenterY()];
-    [self.asciiFont1 setScale:1.5];
-    [self.asciiFont1 setText:[NSString stringWithFormat:@"LEVEL %d", [self.player getLevel]]];
-    [self.asciiFont1 setVisible:YES];
+    [self.asciiFontLevelUp setPosScreen:px y:System_CenterY()];
+    [self.asciiFontLevelUp setScale:1.5];
+    [self.asciiFontLevelUp setText:[NSString stringWithFormat:@"LEVEL %d", [self.player getLevel]]];
+    [self.asciiFontLevelUp setVisible:YES];
     
     m_Timer--;
     if (m_Timer < 1) {
         
-        [self.asciiFont1 setVisible:NO];
+        [self.asciiFontLevelUp setVisible:NO];
         
         // メインに戻る
         m_Step = eStep_Main;

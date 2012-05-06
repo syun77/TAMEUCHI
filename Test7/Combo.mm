@@ -91,6 +91,8 @@ enum eState {
     
     [self.asciiFont setColor:ccc3(0xFF, 0xFF, 0xFF)];
     if ([[GameScene sharedInstance].player isLevelUp]) {
+        
+        // レベルアップ演出
         if (m_Timer%8 < 4) {
             [self.asciiFont setColor:ccc3(0xFF, 0x80, 0x80)];
         }
@@ -107,16 +109,18 @@ enum eState {
     
     System_SetBlend(eBlend_Add);
     
-    int t = 4 * m_Timer / TIMER_APPEAR;
+    int t = 8 * m_Timer / TIMER_APPEAR;
     if (t < 1) {
         t = 1;
     }
     
     if ([[GameScene sharedInstance].player isLevelUp]) {
+        
+        // レベルアップ演出
         glColor4f(1, 0, 0, 1);
     }
     else {
-        glColor4f(0.5f, 0.5f, 0.5f, 1);
+        glColor4f(0.2, 0.2, 0.2, 1);
     }
     [self fillRect:0 cy:self._y w:System_Width() h:t rot:0 scale:1];
     

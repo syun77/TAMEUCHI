@@ -53,13 +53,13 @@ static const int TIMER_LEVELUP = 60;
     TokenManager*   mgrParticle;    // パーティクル
     InterfaceLayer* interfaceLayer; // 入力受け取り
     LevelMgr*       levelMgr;       // レベル管理
-    AsciiFont*      ascciFont1;     // フォント
     AsciiFont*      ascciFont2;     // フォント
     AsciiFont*      ascciFont3;     // フォント
     AsciiFont*      ascciFont4;     // フォント
     AsciiFont*      ascciFont5;     // フォント
     AsciiFont*      ascciFontLevel; // フォント（レベル）
     AsciiFont*      asciiFontScore; // フォント（スコア）
+    AsciiFont*      asciiFontLevelUp; // フォント（レベルアップ演出）
     
     int             m_State;        // 状態
     int             m_Step;         // ステップ
@@ -87,13 +87,13 @@ static const int TIMER_LEVELUP = 60;
 @property (nonatomic, retain)TokenManager*      mgrParticle;
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
 @property (nonatomic, retain)LevelMgr*          levelMgr;
-@property (nonatomic, retain)AsciiFont*         asciiFont1;
 @property (nonatomic, retain)AsciiFont*         asciiFont2;
 @property (nonatomic, retain)AsciiFont*         asciiFont3;
 @property (nonatomic, retain)AsciiFont*         asciiFont4;
 @property (nonatomic, retain)AsciiFont*         asciiFont5;
 @property (nonatomic, retain)AsciiFont*         asciiFontLevel;
 @property (nonatomic, retain)AsciiFont*         asciiFontScore;
+@property (nonatomic, retain)AsciiFont*         asciiFontLevelUp;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance;
