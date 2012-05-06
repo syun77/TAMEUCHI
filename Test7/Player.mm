@@ -49,6 +49,8 @@ static const int MAX_HP = 100;
 // 回復用タイマー
 static const int TIMER_RECOVER = 60;
 
+static const float RECOVER_HP_RATIO = 0.2f;
+
 
 /**
  * 状態
@@ -804,7 +806,7 @@ enum eState {
     Item* item = (Item*)t;
     switch ([item getType]) {
         case eItem_Recover:
-            m_Hp += 100;
+            m_Hp += MAX_HP * RECOVER_HP_RATIO;
             if (m_Hp > MAX_HP) {
                 m_Hp = MAX_HP;
             }

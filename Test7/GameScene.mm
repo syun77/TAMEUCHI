@@ -385,8 +385,11 @@ static GameScene* scene_ = nil;
     }
     
     [self.asciiFontLevelUp setPosScreen:px y:System_CenterY()];
-    [self.asciiFontLevelUp setScale:1.5];
-    [self.asciiFontLevelUp setText:[NSString stringWithFormat:@"LEVEL %d", [self.player getLevel]]];
+    [self.asciiFontLevelUp setScale:1.0];
+    int c = Math_Rand(0xA0) + 0x5F;
+    [self.asciiFontLevelUp setColor:ccc3(c, c, c)];
+    int level = [self.player getLevel];
+    [self.asciiFontLevelUp setText:[NSString stringWithFormat:@"LEVEL UP %d >>> %d", level - 1, level]];
     [self.asciiFontLevelUp setVisible:YES];
     
     m_Timer--;
