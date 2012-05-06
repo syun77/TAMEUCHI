@@ -101,7 +101,20 @@ enum eState {
  * チャージが開始できるかどうか
  */
 - (BOOL)isChargeStart {
-    return TIMER_CHARGE_START + m_nLevel * 30 >= m_tCharge;
+    
+    // TODO: 開始判定は不要
+    return YES;
+    
+    int max = TIMER_CHARGE_START + m_nLevel * 10;
+    if (m_tCharge >= max) {
+        
+        // 開始できる
+        m_tCharge = max;
+        return YES;
+    }
+    
+    // 溜まっていない
+    return NO; 
 }
 
 /**
@@ -702,6 +715,11 @@ enum eState {
 // パワーの取得
 - (int)getPower {
     return m_tPower;
+}
+
+// チャージタイマーの取得
+- (int)getChargeTimer {
+    return m_tCharge;
 }
 
 // レベルの取得

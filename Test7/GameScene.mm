@@ -454,8 +454,9 @@ static GameScene* scene_ = nil;
 //    [self.asciiFont1 setText:[NSString stringWithFormat:@"Enemy   :%3d/%3d %3d", [self.mgrEnemy count], [self.mgrEnemy max], [self.mgrEnemy leak]]];
 //    [self.asciiFont2 setText:[NSString stringWithFormat:@"Bullet  :%3d/%3d %3d", [self.mgrBullet count], [self.mgrBullet max], [self.mgrBullet leak]]];
 //    [self.asciiFont3 setText:[NSString stringWithFormat:@"Particle:%3d/%3d %3d", [self.mgrParticle count], [self.mgrParticle max], [self.mgrParticle leak]]];
+//    [self.asciiFont3 setText:[NSString stringWithFormat:@"C/P:%3d/%3d", [self.player getChargeTimer], [self.player getPower]]];
     
-    [self.asciiFont5 setText:[NSString stringWithFormat:@"State: %@", [self.player getStateString]]];
+//    [self.asciiFont5 setText:[NSString stringWithFormat:@"State: %@", [self.player getStateString]]];
     
     [self.asciiFontLevel setText:[NSString stringWithFormat:@"Level: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
     

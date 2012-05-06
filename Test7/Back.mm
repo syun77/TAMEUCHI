@@ -137,12 +137,14 @@ static const int TIMER_DANGER = 10;
     if ([scene isLevelUp]) {
         // レベルアップ演出中
         
-        System_SetBlend(eBlend_Normal);
-        float height = 16 * [scene getTimer] / TIMER_LEVELUP;
+        System_SetBlend(eBlend_Add);
+        float height = 1 + 16 * [scene getTimer] / TIMER_LEVELUP;
         
-        glColor4f(0, 0, 0, 0.2);
+        glColor4f(1, 1, 1, 0.2);
         
         [self fillRect:System_CenterX() cy:System_CenterY() w:System_Width() h:height rot:0 scale:1]; 
+        
+        System_SetBlend(eBlend_Normal);
     }
 
 }

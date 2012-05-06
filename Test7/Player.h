@@ -60,6 +60,9 @@ static const int SHOT_TIMER = 16;
 // パワーの取得
 - (int)getPower;
 
+// チャージタイマーの取得
+- (int)getChargeTimer;
+
 // レベルの取得
 - (int)getLevel;
 
