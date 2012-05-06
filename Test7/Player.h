@@ -87,6 +87,9 @@ static const int SHOT_TIMER = 16;
 // アイテム取得
 - (void)takeItem:(Token*)t;
 
+// レベルアップできるかどうか
+- (BOOL)isLevelUp;
+
 // 状態を取得
 - (NSString*)getStateString;
 

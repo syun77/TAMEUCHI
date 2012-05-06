@@ -67,6 +67,7 @@ static const int TIMER_LEVELUP = 60;
     int             m_nDestroy;     // 敵を倒した数
     int             m_Score;        // スコア
     int             m_ComboMax;     // 最大コンボ数
+    int             m_tPast;        // 経過時間
 }
 
 @property (nonatomic, retain)CCLayer*           baseLayer;

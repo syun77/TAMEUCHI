@@ -18,6 +18,7 @@
 
 #import "SaveData.h"
 
+static const int TIMER_GAMEOVER = 60;
 
 // 描画プライオリティ
 enum {
@@ -214,6 +215,7 @@ static GameScene* scene_ = nil;
     m_nDestroy = 0;
     m_Score = SaveData_GetHiScore();
     m_ComboMax = 0;
+    m_tPast = 0;
     
     return self;
 }
@@ -366,6 +368,7 @@ static GameScene* scene_ = nil;
         
         // プレイヤー死亡
         m_State = estate_GameOver;
+        m_Timer = TIMER_GAMEOVER;
     }
     
 }
@@ -406,6 +409,11 @@ static GameScene* scene_ = nil;
  */
 - (void)updateGameOver:(ccTime)dt {
     
+    if (m_Timer > 0) {
+        m_Timer--;
+        return;
+    }
+    
     if ([self isPress]) {
         
         // タイトル画面に戻る
@@ -417,6 +425,8 @@ static GameScene* scene_ = nil;
  * 更新
  */
 - (void)update:(ccTime)dt {
+    
+    m_tPast++;
     
     switch (m_State) {
         case eState_Init:
@@ -461,7 +471,13 @@ static GameScene* scene_ = nil;
     [self.asciiFontLevel setText:[NSString stringWithFormat:@"Level: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
     
     [self.asciiFontScore setText:[NSString stringWithFormat:@"Score: %d", m_Score]];
-    
+   
+    if ([self.player isLevelUp] && m_tPast%8 < 4) {
+        [self.asciiFont4 setColor:ccc3(0xFF, 0, 0)];
+    }
+    else {
+        [self.asciiFont4 setColor:ccc3(0xFF, 0xFF, 0xFF)];
+    }
     [self.asciiFont4 setText:[NSString stringWithFormat:@"Lv :%3d", [self.player getLevel]]];
     
     [self.levelMgr update:dt];

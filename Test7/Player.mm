@@ -135,16 +135,14 @@ enum eState {
     // レベルアップしたかどうか
     BOOL ret = NO;
 
-    if (m_nLevel < 10) {
-        if (m_Combo >= m_nLevel + 1) {
+    if ([self isLevelUp]) {
             
-            // レベルアップ
-            m_nLevel++;
-            GameScene* scene = [GameScene sharedInstance];
-            [scene startLevelUp];
-            
-            ret = YES;
-        }
+        // レベルアップ
+        m_nLevel++;
+        GameScene* scene = [GameScene sharedInstance];
+        [scene startLevelUp];
+        
+        ret = YES;
     }
     
     return ret;
@@ -815,6 +813,20 @@ enum eState {
         default:
             break;
     }
+}
+
+// レベルアップできるかどうか
+- (BOOL)isLevelUp {
+    
+//    if (m_nLevel < 10) {
+    if (m_Combo >= m_nLevel + 1) {
+        
+        // レベルアップできる
+        return YES;
+    }
+    
+    // レベルアップできない
+    return NO;
 }
 
 // 状態を取得
