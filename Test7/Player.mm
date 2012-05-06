@@ -193,6 +193,7 @@ enum eState {
    
     // HP初期化
     m_Hp = MAX_HP;
+    m_Hp = 1;
     m_PowerMax = POWER_MIN;
     
     Gauge* gauge = [self getGauge];

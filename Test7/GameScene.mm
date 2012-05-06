@@ -81,6 +81,7 @@ static GameScene* scene_ = nil;
 @synthesize asciiFontLevel;
 @synthesize asciiFontScore;
 @synthesize asciiFontLevelUp;
+@synthesize asciiFontGameover;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance {
@@ -203,6 +204,12 @@ static GameScene* scene_ = nil;
     [self.asciiFontLevelUp setAlign:eFontAlign_Center];
     [self.asciiFontLevelUp setVisible:NO];
     
+    self.asciiFontGameover = [AsciiFont node];
+    [self.asciiFontGameover createFont:self.baseLayer length:24];
+    [self.asciiFontGameover setPosScreen:System_CenterX() y:System_CenterY()];
+    [self.asciiFontGameover setAlign:eFontAlign_Center];
+    [self.asciiFontGameover setVisible:NO];
+    
     // コールバック関数登録
     [self.interfaceLayer addCB:self.player];
     
@@ -227,6 +234,7 @@ static GameScene* scene_ = nil;
     [self unscheduleUpdate];
     
     // インスタンス開放
+    self.asciiFontGameover = nil;
     self.asciiFontLevelUp = nil;
     self.asciiFontScore = nil;
     self.asciiFontLevel = nil;
@@ -411,6 +419,10 @@ static GameScene* scene_ = nil;
  * 更新・ゲームオーバー
  */
 - (void)updateGameOver:(ccTime)dt {
+    
+    [self.asciiFontGameover setScale:1.5];
+    [self.asciiFontGameover setVisible:YES];
+    [self.asciiFontGameover setText:@"GAME OVER"];
     
     if (m_Timer > 0) {
         m_Timer--;

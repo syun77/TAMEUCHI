@@ -60,6 +60,7 @@ static const int TIMER_LEVELUP = 60;
     AsciiFont*      ascciFontLevel; // フォント（レベル）
     AsciiFont*      asciiFontScore; // フォント（スコア）
     AsciiFont*      asciiFontLevelUp; // フォント（レベルアップ演出）
+    AsciiFont*      asciiFontGameover; // フォント（ゲームオーバー）
     
     int             m_State;        // 状態
     int             m_Step;         // ステップ
@@ -94,6 +95,7 @@ static const int TIMER_LEVELUP = 60;
 @property (nonatomic, retain)AsciiFont*         asciiFontLevel;
 @property (nonatomic, retain)AsciiFont*         asciiFontScore;
 @property (nonatomic, retain)AsciiFont*         asciiFontLevelUp;
+@property (nonatomic, retain)AsciiFont*         asciiFontGameover;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance;
