@@ -571,6 +571,8 @@ enum eState {
 // 危険回避ショット
 - (void)shotDanger {
     
+    Sound_PlaySe(@"damage.wav");
+    
     if (m_nLevel >= 3) {
         // レベル３特典
         // 全方位弾発射

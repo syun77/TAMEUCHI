@@ -10,6 +10,7 @@
 #import "cocos2d.h"
 
 #import "System.h"
+#import "Sound.h"
 
 /**
  * トークン基底クラス

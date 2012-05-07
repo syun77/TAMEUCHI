@@ -15,6 +15,7 @@
 #import "Item.h"
 #import "Shot.h"
 #import "Bullet.h"
+#import "Sound.h"
 
 #import "SaveData.h"
 
@@ -224,6 +225,9 @@ static GameScene* scene_ = nil;
     m_ComboMax = 0;
     m_tPast = 0;
     
+    Sound_SetBgmVolume(1);
+    Sound_PlayBgm(@"001.mp3");
+    
     return self;
 }
 
@@ -372,11 +376,21 @@ static GameScene* scene_ = nil;
         }
     }
     
+    if ([self.player isDanger]) {
+        Sound_SetBgmVolume(0.5);
+    }
+    else {
+        Sound_SetBgmVolume(1);
+    }
+    
     if ([self.player isVanish]) {
         
         // プレイヤー死亡
         m_State = estate_GameOver;
         m_Timer = TIMER_GAMEOVER;
+        
+        // BGMを止める
+        Sound_StopBgm();
     }
     
 }
@@ -517,6 +531,8 @@ static GameScene* scene_ = nil;
         // メインでなければ開始できない
         return;
     }
+    
+    Sound_PlaySe(@"kin.wav");
     
     m_Step = eStep_Levelup;
     m_Timer = TIMER_LEVELUP;

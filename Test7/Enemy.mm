@@ -14,6 +14,7 @@
 #import "Bullet.h"
 #import "Item.h"
 #import "Shot.h"
+#import "Sound.h"
 
 /**
  * 状態
@@ -1037,6 +1038,14 @@ enum eRange {
         [self destroy];
         
         // 死亡
+        if ([self getSize] == eSize_Big) {
+            Sound_PlaySe(@"damage.wav");
+        }
+        else {
+            
+            Sound_PlaySe(@"destroy1.wav");
+        }
+        
         return YES;
     }
     
