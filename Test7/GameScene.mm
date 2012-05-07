@@ -28,6 +28,7 @@ enum {
     ePrio_Player,   // プレイヤー
     ePrio_Enemy,    // 敵
     ePrio_Item,     // アイテム
+    ePrio_Banana,   // バナナボーナス
     ePrio_Shot,     // 自弾
     ePrio_Bullet,   // 敵弾
     ePrio_Aim,      // 照準
@@ -73,6 +74,7 @@ static GameScene* scene_ = nil;
 @synthesize mgrEnemy;
 @synthesize mgrBullet;
 @synthesize mgrParticle;
+@synthesize mgrBanana;
 @synthesize interfaceLayer;
 @synthesize levelMgr;
 @synthesize asciiFont2;
@@ -169,8 +171,12 @@ static GameScene* scene_ = nil;
     [self.mgrBullet setPrio:ePrio_Bullet];
     
     self.mgrParticle = [TokenManager node];
-    [self.mgrParticle create:self.baseLayer size:256 className:@"Particle"];
+    [self.mgrParticle create:self.baseLayer size:512 className:@"Particle"];
     [self.mgrParticle setPrio:ePrio_Particle];
+    
+    self.mgrBanana = [TokenManager node];
+    [self.mgrBanana create:self.baseLayer size:256 className:@"Banana"];
+    [self.mgrBanana setPrio:ePrio_Banana];
     
     self.levelMgr = [LevelMgr node];
     [self.levelMgr initialize];
@@ -226,7 +232,7 @@ static GameScene* scene_ = nil;
     m_tPast = 0;
     
     Sound_SetBgmVolume(1);
-    Sound_PlayBgm(@"001.mp3");
+    Sound_PlayBgm([NSString stringWithFormat: @"%03d.mp3", Math_RandInt(1, 4)]);
     
     return self;
 }
@@ -247,6 +253,7 @@ static GameScene* scene_ = nil;
     self.asciiFont3 = nil;
     self.asciiFont2 = nil;
     self.levelMgr = nil;
+    self.mgrBanana = nil;
     self.mgrParticle = nil;
     self.mgrBullet = nil;
     self.mgrEnemy = nil;
@@ -304,7 +311,7 @@ static GameScene* scene_ = nil;
             [self.player takeItem:item];
             switch ([item getType]) {
                 case eItem_Score:
-                    m_Score += 10;
+                    [self addScore:10];
                     break;
                     
                 default:
@@ -333,7 +340,7 @@ static GameScene* scene_ = nil;
                     [self.player addCombo];
                     
                     // スコアもアップ
-                    m_Score += 100;
+                    [self addScore:100];
                     
                     SaveData_SetHiScore(m_Score);
                     
@@ -559,4 +566,12 @@ static GameScene* scene_ = nil;
 - (int)getTimer {
     return m_Timer;
 }
+
+// スコアを加算する
+- (void)addScore:(int)score {
+    
+    m_Score += score;
+    
+}
+
 @end

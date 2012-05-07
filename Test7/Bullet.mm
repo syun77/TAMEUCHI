@@ -12,6 +12,7 @@
 #import "Particle.h"
 #import "Exerinya.h"
 #import "Shot.h"
+#import "Banana.h"
 
 @implementation Bullet
 
@@ -93,19 +94,32 @@
 }
 
 // 敵弾をすべて消す
-+ (void)vanishAll:(BOOL)bReflect {
-    TokenManager* mgr = [GameScene sharedInstance].mgrBullet;
++ (void)vanishAll:(eBulletVanish)type {
+    GameScene* scene = [GameScene sharedInstance];
+    TokenManager* mgr = scene.mgrBullet;
     for (Bullet* b in mgr.m_Pool) {
         if ([b isExist] == NO) {
             continue;
         }
         
         [b destroy];
+        float rot = Math_Atan2Ex(b._vy, b._vx);
         
-        if (bReflect) {
-            // 打ち返しあり
-            float rot = Math_Atan2Ex(b._vy, b._vx);
-            [Shot add:eShot_Power x:b._x y:b._y rot:rot+180 speed:100];
+        switch (type) {
+            case eBulletVanish_Banana:
+                // バナナボーナス発生
+                [scene addScore: SCORE_BANANA_BONUS];
+                [Banana add:eBanana_Normal x:b._x y:b._y];
+                break;
+                
+            case eBulletVanish_Reflect:
+                // 打ち返しあり
+                [Shot add:eShot_Power x:b._x y:b._y rot:rot+180 speed:100];
+                break;
+                
+            case eBulletVanish_Normal:
+            default:
+                break;
         }
     }
 }

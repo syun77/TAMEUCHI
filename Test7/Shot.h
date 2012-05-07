@@ -10,10 +10,12 @@
 #import "cocos2d.h"
 #import "Token.h"
 
-
+/**
+ * ショット種別
+ */
 enum eShot {
-    eShot_Normal,
-    eShot_Power,
+    eShot_Normal, // 通常
+    eShot_Power,  // パワーショット
 };
 
 /**

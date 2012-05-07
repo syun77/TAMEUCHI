@@ -24,12 +24,16 @@
 #import "ComboResult.h"
 #import "Item.h"
 #import "Black.h"
+#import "Banana.h"
 
 // 危険時に有効となる速度の係数
 static const float DANGER_SLOW_RATIO = 0.25;
 
 // レベルアップ演出タイマー
 static const int TIMER_LEVELUP = 60;
+
+// バナナボーナススコア
+static const int SCORE_BANANA_BONUS = 500;
 
 /**
  * ゲームシーン
@@ -49,6 +53,7 @@ static const int TIMER_LEVELUP = 60;
     TokenManager*   mgrItem;        // アイテム
     TokenManager*   mgrEnemy;       // 敵
     TokenManager*   mgrBullet;      // 敵弾
+    TokenManager*   mgrBanana;      // バナナボーナス
     Black*          black;          // 暗転用スプライト
     TokenManager*   mgrParticle;    // パーティクル
     InterfaceLayer* interfaceLayer; // 入力受け取り
@@ -86,6 +91,7 @@ static const int TIMER_LEVELUP = 60;
 @property (nonatomic, retain)TokenManager*      mgrEnemy;
 @property (nonatomic, retain)TokenManager*      mgrBullet;
 @property (nonatomic, retain)TokenManager*      mgrParticle;
+@property (nonatomic, retain)TokenManager*      mgrBanana;
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
 @property (nonatomic, retain)LevelMgr*          levelMgr;
 @property (nonatomic, retain)AsciiFont*         asciiFont2;
@@ -113,5 +119,8 @@ static const int TIMER_LEVELUP = 60;
 
 // タイマーを取得する
 - (int)getTimer;
+
+// スコアを加算する
+- (void)addScore:(int)score;
 
 @end

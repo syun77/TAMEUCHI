@@ -97,7 +97,15 @@
         if (m_Timer%320 == 160) {
             if (m_nLevel > 10) {
                 if ([self getEnemyCount] < m_nLevel) {
-                    [self addEnemy:eEnemy_Pudding];
+                    
+                    if (Math_Rand(2) == 0) {
+                        
+                        [self addEnemy:eEnemy_Pudding];
+                    }
+                    else {
+                        
+                        [self addEnemy:eEnemy_Milk];
+                    }
                 }
             }
         }

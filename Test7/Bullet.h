@@ -9,6 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "Token.h"
 
+enum eBulletVanish {
+    eBulletVanish_Normal,   // そのまま消すだけ
+    eBulletVanish_Reflect,  // 打ち返し弾発生
+    eBulletVanish_Banana,   // バナナボーナス
+};
+
 // 敵弾実装
 @interface Bullet : Token {
     int m_Timer;
@@ -18,7 +24,7 @@
 + (Bullet*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed;
 
 // 敵弾をすべて消す
-+ (void)vanishAll:(BOOL)bReflect;
++ (void)vanishAll:(eBulletVanish)type;
 
 // ダメージ
 - (void)damage:(Token*)t;

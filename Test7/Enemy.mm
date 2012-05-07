@@ -15,6 +15,7 @@
 #import "Item.h"
 #import "Shot.h"
 #import "Sound.h"
+#import "Banana.h"
 
 /**
  * 状態
@@ -1046,6 +1047,12 @@ enum eRange {
             Sound_PlaySe(@"destroy1.wav");
         }
         
+        // 中ボスなら弾消し -> バナナボーナス
+        if ([self getSize] == eSize_Big) {
+            [Bullet vanishAll:eBulletVanish_Banana];
+            [Enemy vanishAllSmall:eEnemyVanish_Banana];
+        }
+        
         return YES;
     }
     
@@ -1084,8 +1091,10 @@ enum eRange {
 /**
  * サイズ・小をすべて消す
  */
-+ (void)vanishAllSmall:(BOOL)bReflect {
-    TokenManager* mgr = [GameScene sharedInstance].mgrEnemy;
++ (void)vanishAllSmall:(eEnemyVanish)type {
+    
+    GameScene* scene = [GameScene sharedInstance];
+    TokenManager* mgr = scene.mgrEnemy;
     for (Enemy* e in mgr.m_Pool) {
         if ([e isExist] == NO) {
             continue;
@@ -1097,10 +1106,22 @@ enum eRange {
         
         [e destroy];
         
-        if (bReflect) {
-            // 打ち返しあり
-            float rot = Math_Atan2Ex(e._vy, e._vx);
-            [Shot add:eShot_Power x:e._x y:e._y rot:rot+180 speed:100];
+        float rot = Math_Atan2Ex(e._vy, e._vx);
+        switch (type) {
+            case eEnemyVanish_Banana:
+                // バナナボーナス発生
+                [scene addScore: SCORE_BANANA_BONUS];
+                [Banana add:eBanana_Normal x:e._x y:e._y];
+                break;
+                
+            case eEnemyVanish_Reflect:
+                // 打ち返しあり
+                [Shot add:eShot_Power x:e._x y:e._y rot:rot+180 speed:100];
+                break;
+                
+            case eEnemyVanish_Normal:
+            default:
+                break;
         }
     } 
 }

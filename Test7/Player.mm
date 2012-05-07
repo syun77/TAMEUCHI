@@ -573,6 +573,16 @@ enum eState {
     
     Sound_PlaySe(@"damage.wav");
     
+    
+    if (m_nLevel > 1) {
+        int cnt = m_nLevel * 4;
+        for (int i = 0; i < cnt; i++) {
+            // 全方位弾発射
+            [Shot add:eShot_Power x:self._x y:self._y rot:i * (360/cnt) speed:100];
+        }
+    }
+    
+    /*
     if (m_nLevel >= 3) {
         // レベル３特典
         // 全方位弾発射
@@ -587,7 +597,7 @@ enum eState {
         [Enemy vanishAllSmall:YES];
         
         // 敵弾を消して打ち返し発生
-        [Bullet vanishAll:YES];
+        [Bullet vanishAll:eBulletVanish_Reflect];
     }
     
     if (m_nLevel >= 1) {
@@ -598,7 +608,8 @@ enum eState {
     }
     
     // 敵弾はいつでも消える
-    [Bullet vanishAll:NO];
+    [Bullet vanishAll:eBulletVanish_Normal];
+     */
     
     // レベルリセット
     m_nLevel = 0;
@@ -669,6 +680,9 @@ enum eState {
         [gaugeHp setVisible:NO];
         
         [self changeState:eState_Vanish];
+        
+        // 死亡SE再生
+        Sound_PlaySe(@"damage.wav");
         
         // 死亡エフェクト生成
         Particle* p = [Particle add:eParticle_Ring x:self._x y:self._y rot:0 speed:0];

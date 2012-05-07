@@ -96,7 +96,7 @@ int Math_RandInt(int a, int b)
         return 0;
     }
     int d = b - a;
-    return Math_Rand(d) + a;
+    return Math_Rand(d + 1) + a;
 }
 
 // 乱数の取得（範囲指定 a〜b) (float 指定)

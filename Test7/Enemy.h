@@ -10,6 +10,12 @@
 #import "cocos2d.h"
 #import "Token.h"
 
+enum eEnemyVanish {
+    eEnemyVanish_Normal,    // 消すだけ
+    eEnemyVanish_Reflect,   // 打ち返し弾発生
+    eEnemyVanish_Banana,    // バナナボーナス発生
+};
+
 /**
  * 敵種別
  */
@@ -55,7 +61,7 @@ enum eEnemy {
 - (float)getHpRatio;
 
 // サイズ・小をすべて消す
-+ (void)vanishAllSmall:(BOOL)bReflect;
++ (void)vanishAllSmall:(eEnemyVanish)type;
 
 /**
  * 弾がヒットした
