@@ -46,10 +46,20 @@ static const int POWER_INC = 10;
 // HPの最大
 static const int MAX_HP = 100;
 
-// 回復用タイマー
-static const int TIMER_RECOVER = 60;
+// 自動回復用タイマー
+// 初回回復までの時間
+static const int TIMER_AUTO_RECOVER_INIT = 100;
+// それ以降の回復時間
+static const int TIMER_AUTO_RECOVER = 20;
 
-static const float RECOVER_HP_RATIO = 0.2f;
+// HP回復アイテム取得
+static const float RECOVER_ITEM_HP_RATIO = 0.2f;
+
+// ダメージ量
+// 初回
+static const float DAMAGE_HP_RATIO_INIT   = 0.3f;
+// 連続ダメージ
+static const float DAMAGE_HP_RATIO_REPEAT = 0.02f;
 
 
 /**
@@ -193,7 +203,7 @@ enum eState {
    
     // HP初期化
     m_Hp = MAX_HP;
-    m_Hp = 1;
+    //m_Hp = 1;
     m_PowerMax = POWER_MIN;
     
     Gauge* gauge = [self getGauge];
@@ -368,14 +378,14 @@ enum eState {
 - (void)updateStandby:(ccTime)dt {
    
     m_tRecover++;
-    if (m_tRecover > TIMER_RECOVER) {
+    if (m_tRecover > TIMER_AUTO_RECOVER_INIT) {
         // HP 回復
         m_Hp++;
         if (m_Hp > MAX_HP) {
             m_Hp = MAX_HP;
         }
         
-        m_tRecover -= TIMER_RECOVER * 0.2f;
+        m_tRecover -= TIMER_AUTO_RECOVER;
     }
     
     // 弾を撃つ
@@ -620,11 +630,15 @@ enum eState {
     // HPを減らす
     float bDanger = [self isDanger];
     if (m_State == eState_Standby) {
-        m_Hp -= MAX_HP * 0.2f; // 5回ダメージで死亡
+        
+        // 初回ダメージ
+        m_Hp -= MAX_HP * DAMAGE_HP_RATIO_INIT;
         
     }
     else {
-        m_Hp--;
+        
+        // 連続ダメージ
+        m_Hp -= MAX_HP * DAMAGE_HP_RATIO_REPEAT;
         if (m_Hp < 1) {
             // 連続ダメージでは死なないようにする
             m_Hp = 1;
@@ -807,7 +821,7 @@ enum eState {
     Item* item = (Item*)t;
     switch ([item getType]) {
         case eItem_Recover:
-            m_Hp += MAX_HP * RECOVER_HP_RATIO;
+            m_Hp += MAX_HP * RECOVER_ITEM_HP_RATIO;
             if (m_Hp > MAX_HP) {
                 m_Hp = MAX_HP;
             }
