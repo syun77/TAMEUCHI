@@ -131,6 +131,8 @@
 		C73FEC2C152BF45F008B5697 /* Shot.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC2B152BF45E008B5697 /* Shot.mm */; };
 		C742013B1543020C007351E3 /* TitleScene.mm in Sources */ = {isa = PBXBuildFile; fileRef = C742013A1543020C007351E3 /* TitleScene.mm */; };
 		C745514715580C5A00404C32 /* Banana.mm in Sources */ = {isa = PBXBuildFile; fileRef = C745514615580C5A00404C32 /* Banana.mm */; };
+		C745514F15582E6D00404C32 /* 005.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C745514D15582E6D00404C32 /* 005.mp3 */; };
+		C745515015582E6D00404C32 /* 006.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C745514E15582E6D00404C32 /* 006.mp3 */; };
 		C74FE7A11524892D00298CBB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = C74FE7A01524892D00298CBB /* rect.png */; };
 		C752C7EA15310AAE002EC31B /* System.mm in Sources */ = {isa = PBXBuildFile; fileRef = C752C7E915310AAE002EC31B /* System.mm */; };
 		C75A89BA1555835300154276 /* Black.mm in Sources */ = {isa = PBXBuildFile; fileRef = C75A89B91555835300154276 /* Black.mm */; };
@@ -424,6 +426,8 @@
 		C742013A1543020C007351E3 /* TitleScene.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = TitleScene.mm; sourceTree = "<group>"; };
 		C745514515580C5A00404C32 /* Banana.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Banana.h; sourceTree = "<group>"; };
 		C745514615580C5A00404C32 /* Banana.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Banana.mm; sourceTree = "<group>"; };
+		C745514D15582E6D00404C32 /* 005.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 005.mp3; path = Resources/005.mp3; sourceTree = "<group>"; };
+		C745514E15582E6D00404C32 /* 006.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 006.mp3; path = Resources/006.mp3; sourceTree = "<group>"; };
 		C74FE7A01524892D00298CBB /* rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rect.png; path = Resources/rect.png; sourceTree = "<group>"; };
 		C752C7E815310AAE002EC31B /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		C752C7E915310AAE002EC31B /* System.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = System.mm; sourceTree = "<group>"; };
@@ -552,6 +556,8 @@
 				C7E63BBD15578F9A0081F946 /* 002.mp3 */,
 				C7E63BBE15578F9A0081F946 /* 003.mp3 */,
 				C7E63BBF15578F9A0081F946 /* 004.mp3 */,
+				C745514D15582E6D00404C32 /* 005.mp3 */,
+				C745514E15582E6D00404C32 /* 006.mp3 */,
 				C7E63BB515578B1A0081F946 /* damage.wav */,
 				C7E63BB615578B1A0081F946 /* destroy1.wav */,
 				C7E63BB715578B1A0081F946 /* kin.wav */,
@@ -1031,6 +1037,8 @@
 				C7E63BC015578F9A0081F946 /* 002.mp3 in Resources */,
 				C7E63BC115578F9A0081F946 /* 003.mp3 in Resources */,
 				C7E63BC215578F9A0081F946 /* 004.mp3 in Resources */,
+				C745514F15582E6D00404C32 /* 005.mp3 in Resources */,
+				C745515015582E6D00404C32 /* 006.mp3 in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

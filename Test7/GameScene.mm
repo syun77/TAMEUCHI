@@ -21,6 +21,9 @@
 
 static const int TIMER_GAMEOVER = 60;
 
+static const int BGM_MIN = 1;
+static const int BGM_MAX = 6;
+
 // 描画プライオリティ
 enum {
     ePrio_Back,     // 背景
@@ -99,6 +102,16 @@ static GameScene* scene_ = nil;
 
 + (void)releaseInstance {
     scene_ = nil;
+}
+
+- (void)changeBgm {
+    
+    Sound_PlayBgm([NSString stringWithFormat: @"%03d.mp3", m_nBgm]);
+    
+    m_nBgm++;
+    if (m_nBgm > BGM_MAX) {
+        m_nBgm = BGM_MIN;
+    }
 }
 
 // コンストラクタ
@@ -231,8 +244,9 @@ static GameScene* scene_ = nil;
     m_ComboMax = 0;
     m_tPast = 0;
     
+    m_nBgm = Math_RandInt(BGM_MIN, BGM_MAX);
     Sound_SetBgmVolume(1);
-    Sound_PlayBgm([NSString stringWithFormat: @"%03d.mp3", Math_RandInt(1, 4)]);
+    [self changeBgm];
     
     return self;
 }
@@ -388,6 +402,13 @@ static GameScene* scene_ = nil;
     }
     else {
         Sound_SetBgmVolume(1);
+        
+        // BGM切り替え判定
+        if (m_tBgm > 60 * 60 * 4) {
+            // おおよそ４分で切り替え
+            [self changeBgm];
+            m_tBgm = 0;
+        }
     }
     
     if ([self.player isVanish]) {
@@ -464,6 +485,7 @@ static GameScene* scene_ = nil;
 - (void)update:(ccTime)dt {
     
     m_tPast++;
+    m_tBgm++;
     
     switch (m_State) {
         case eState_Init:

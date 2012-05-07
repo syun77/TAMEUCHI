@@ -199,13 +199,13 @@ enum eRange {
         case eEnemy_Milk:    // 牛乳
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Milk)];
             self._r = 48;
-            m_HpMax = 70;
+            m_HpMax = 50;
             break;
             
         case eEnemy_XBox:    // XBox
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_XBox)];
             self._r = 48;
-            m_HpMax = 100;
+            m_HpMax = 50;
             break;
             
         case eEnemy_Radish:  // 大根

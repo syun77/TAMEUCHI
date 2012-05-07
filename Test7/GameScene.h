@@ -74,6 +74,8 @@ static const int SCORE_BANANA_BONUS = 500;
     int             m_Score;        // スコア
     int             m_ComboMax;     // 最大コンボ数
     int             m_tPast;        // 経過時間
+    int             m_tBgm;         // BGM切り替え用番号
+    int             m_nBgm;         // BGM番号
 }
 
 @property (nonatomic, retain)CCLayer*           baseLayer;
