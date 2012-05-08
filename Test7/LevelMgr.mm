@@ -32,6 +32,7 @@
 - (void)initialize {
     m_tPast     = 0;
     m_nLevel    = 1;
+    m_nLevel    = 10;
     m_Mode      = eLevel_Endless;
 //    m_Mode      = eLevel_TimeAttack;
 }

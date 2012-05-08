@@ -23,6 +23,9 @@ enum eBulletVanish {
 // オブジェクト追加
 + (Bullet*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed;
 
+// 弾を消して打ち返し弾にする
+- (void)vanishReflect;
+
 // 敵弾をすべて消す
 + (void)vanishAll:(eBulletVanish)type;
 

@@ -428,6 +428,22 @@ static GameScene* scene_ = nil;
  */
 - (void)updateLevelUp:(ccTime)dt {
     
+    // 当たり判定
+    // 照準 vs 敵弾
+    for (Bullet* b in self.mgrBullet.m_Pool) {
+        if ([b isExist] == NO) {
+            continue;
+        }
+        
+        if ([b isHit2:self.aim]) {
+            
+            // 打ち返し弾に変える
+            [b vanishReflect];
+        }
+    }
+    
+    
+    // レベルアップ文字の表示
     float px = System_CenterX() - 16 + 16.0 * m_Timer / TIMER_LEVELUP;
     if (m_Timer > TIMER_LEVELUP - 10) {
         
@@ -436,7 +452,6 @@ static GameScene* scene_ = nil;
     
     [self.asciiFontLevelUp setPosScreen:px y:System_CenterY()];
     [self.asciiFontLevelUp setScale:1.5];
-//    int c = Math_Rand(0xA0) + 0x5F;
     int c = 0xFF;
     [self.asciiFontLevelUp setColor:ccc3(c, c, c)];
     int level = [self.player getLevel];

@@ -40,7 +40,7 @@
         [self setScale:0.5f];
     }
     
-    [self setSize2: 16 * self.scale];
+    [self setSize2: 32 * self.scale];
     
     return self;
 }

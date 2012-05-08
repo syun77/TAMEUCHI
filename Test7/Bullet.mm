@@ -62,6 +62,10 @@
 // 破壊エフェクト生成
 - (void)destroy {
     
+    if ([self isExist] == NO) {
+        return;
+    }
+    
     float rot = 0;
     for(int i = 0; i < 8; i++)
     {
@@ -79,6 +83,18 @@
 // ダメージ
 - (void)damage:(Token*)t {
     
+    [self destroy];
+}
+
+// 弾を消して打ち返し弾にする
+- (void)vanishReflect {
+    
+    float rot = Math_Atan2Ex(self._vy, self._vx);
+    float x = self._x;
+    float y = self._y;
+    [Shot add:eShot_Power x:x y:y rot:rot+180 speed:100];
+    
+    // 弾を消す
     [self destroy];
 }
 
@@ -102,8 +118,8 @@
             continue;
         }
         
+        // 弾を消す
         [b destroy];
-        float rot = Math_Atan2Ex(b._vy, b._vx);
         
         switch (type) {
             case eBulletVanish_Banana:
@@ -114,7 +130,7 @@
                 
             case eBulletVanish_Reflect:
                 // 打ち返しあり
-                [Shot add:eShot_Power x:b._x y:b._y rot:rot+180 speed:100];
+                [b vanishReflect];
                 break;
                 
             case eBulletVanish_Normal:
