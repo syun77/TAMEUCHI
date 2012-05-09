@@ -70,7 +70,6 @@ static TitleScene* scene_ = nil;
 // 更新
 - (void)update:(ccTime)dt {
     if ([self.interfaceLayer isTouch]) {
-        NSLog(@"Touch!!!");
         
         SceneManager_Change(@"GameScene");
         

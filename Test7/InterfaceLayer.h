@@ -26,6 +26,7 @@
 @property (nonatomic, retain)NSMutableArray* m_CBArray;
 
 - (void)addCB:(id)token;
+- (void)delCB;
 
 // タッチしているかどうか
 - (BOOL)isTouch;

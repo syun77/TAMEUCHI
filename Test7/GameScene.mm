@@ -126,6 +126,7 @@ static GameScene* scene_ = nil;
         return self;
     }
     
+    
     // 各種オブジェクト生成
     self.baseLayer = [CCLayer node];
     [self addChild:self.baseLayer];
@@ -236,7 +237,7 @@ static GameScene* scene_ = nil;
     // 更新スケジューラー登録
     [self scheduleUpdate];
     
-    
+   
     // 初期化するフラグ
     m_State = eState_Init;
     m_nDestroy = 0;
@@ -247,6 +248,7 @@ static GameScene* scene_ = nil;
     m_nBgm = Math_RandInt(BGM_MIN, BGM_MAX);
     Sound_SetBgmVolume(1);
     [self changeBgm];
+    
     
     return self;
 }
@@ -496,6 +498,9 @@ static GameScene* scene_ = nil;
     if ([self isPress]) {
         
         [self pause];
+        
+        // ■相互参照しているので解除しないとメモリリークになる
+        [self.interfaceLayer delCB];
         
         // タイトル画面に戻る
         SceneManager_Change(@"TitleScene");

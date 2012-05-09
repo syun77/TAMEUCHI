@@ -62,6 +62,13 @@
 }
 
 /**
+ * コールバックオブジェクトの登録解除
+ */
+- (void)delCB {
+    [self.m_CBArray removeAllObjects];
+}
+
+/**
  * タッチ開始
  */
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
