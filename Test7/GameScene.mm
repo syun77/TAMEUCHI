@@ -419,6 +419,12 @@ static GameScene* scene_ = nil;
         
         // BGMを止める
         Sound_StopBgm();
+        
+        // レベルの更新を止める
+        [self.levelMgr stop];
+        
+        // 更新を再開する
+        [self resume];
     }
     
 }
@@ -428,6 +434,8 @@ static GameScene* scene_ = nil;
  */
 - (void)updateLevelUp:(ccTime)dt {
     
+    
+/*
     // 当たり判定
     // 照準 vs 敵弾
     for (Bullet* b in self.mgrBullet.m_Pool) {
@@ -441,7 +449,7 @@ static GameScene* scene_ = nil;
             [b vanishReflect];
         }
     }
-    
+*/    
     
     // レベルアップ文字の表示
     float px = System_CenterX() - 16 + 16.0 * m_Timer / TIMER_LEVELUP;
@@ -466,10 +474,8 @@ static GameScene* scene_ = nil;
         // メインに戻る
         m_Step = eStep_Main;
         
-        [self.mgrBullet resumeAll];
-        [self.mgrEnemy resumeAll];
-        [self.mgrItem resumeAll];
-        [self.mgrShot resumeAll];
+        // トークンの更新を再開する
+        [self resume];
     }
 }
 
@@ -488,6 +494,8 @@ static GameScene* scene_ = nil;
     }
     
     if ([self isPress]) {
+        
+        [self pause];
         
         // タイトル画面に戻る
         SceneManager_Change(@"TitleScene");
@@ -581,11 +589,8 @@ static GameScene* scene_ = nil;
     m_Step = eStep_Levelup;
     m_Timer = TIMER_LEVELUP;
     
-    [self.mgrBullet pauseAll];
-    [self.mgrEnemy pauseAll];
-    [self.mgrItem pauseAll];
-    [self.mgrShot pauseAll];
-    
+    // トークンの更新を止める
+    [self pause]; 
 }
 
 // レベルアップ演出中かどうか
@@ -609,6 +614,24 @@ static GameScene* scene_ = nil;
     
     m_Score += score;
     
+}
+
+// トークンの更新を開始する
+- (void)resume {
+    
+    [self.mgrBullet resumeAll];
+    [self.mgrEnemy resumeAll];
+    [self.mgrItem resumeAll];
+    [self.mgrShot resumeAll];
+}
+
+// トークンの更新を停止する
+- (void)pause {
+    
+    [self.mgrBullet pauseAll];
+    [self.mgrEnemy pauseAll];
+    [self.mgrItem pauseAll];
+    [self.mgrShot pauseAll];
 }
 
 @end

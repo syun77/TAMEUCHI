@@ -15,11 +15,12 @@
  * トークン管理クラス
  */
 @interface TokenManager : CCNode {
-    CCLayer*        m_Layer; // トークン描画用レイヤー
-    NSMutableArray* m_Pool;  // 管理オブジェクト配列
-    NSInteger       m_Idx;   // 検索インデックス
-    NSInteger       m_Size;  // 配列のサイズ
-    NSInteger       m_Prio;  // 描画プライオリティ
+    NSString*       m_Name;     // 管理トークン名
+    CCLayer*        m_Layer;    // トークン描画用レイヤー
+    NSMutableArray* m_Pool;     // 管理オブジェクト配列
+    NSInteger       m_Idx;      // 検索インデックス
+    NSInteger       m_Size;     // 配列のサイズ
+    NSInteger       m_Prio;     // 描画プライオリティ
 }
 
 @property (nonatomic,retain)NSMutableArray* m_Pool;

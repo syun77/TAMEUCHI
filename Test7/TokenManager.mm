@@ -48,10 +48,13 @@
     }
     
     // 初期化・設定
+    m_Name  = className;
     m_Idx   = 0;
     m_Size  = size;
     m_Layer = layer;
     m_Prio  = 0;
+    
+    NSLog(@"TokenManager::Create '%@'", m_Name);
 }
 
 /**
@@ -101,6 +104,8 @@
     self.m_Pool = nil;
     
     [super dealloc];
+    
+    NSLog(@"TokenManager::Dealloc '%@'", m_Name);
 }
 
 /**

@@ -74,10 +74,6 @@ static TitleScene* scene_ = nil;
         
         SceneManager_Change(@"GameScene");
         
-//        [TitleScene releaseInstance];
-//        
-//        [[CCDirector sharedDirector] replaceScene:[GameScene sharedInstance]];
-        
     }
 }
 

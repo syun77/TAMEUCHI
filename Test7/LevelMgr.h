@@ -36,4 +36,7 @@ enum eLevel {
 // タイマーの取得
 - (int)getTimer;
 
+// 更新の停止
+- (void)stop;
+
 @end

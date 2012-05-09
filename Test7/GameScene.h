@@ -125,4 +125,10 @@ static const int SCORE_BANANA_BONUS = 500;
 // スコアを加算する
 - (void)addScore:(int)score;
 
+// トークンの更新を開始する
+- (void)resume;
+
+// トークンの更新を停止する
+- (void)pause;
+
 @end

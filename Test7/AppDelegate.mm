@@ -118,9 +118,6 @@
 	[self removeStartupFlicker];
 	
 	// Run the intro Scene
-//	[[CCDirector sharedDirector] runWithScene: [GameScene sharedInstance]];
-//	[[CCDirector sharedDirector] runWithScene: [TitleScene sharedInstance]];
-    
     SceneManager_Change(@"GameScene");
 }
 
