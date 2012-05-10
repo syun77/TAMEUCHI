@@ -25,6 +25,7 @@
     BOOL        m_isExist;  // 存在フラグ
     BOOL        m_isCreate; // 生成フラグ
     CCSprite*   m_pSprite;  // スプライト
+    BOOL        m_isHit;    // 当たり判定が有効かどうか
 }
 
 // 初期化
@@ -69,7 +70,7 @@
 // 画面外の跳ね返りチェック（円）
 - (BOOL)isBoundCircle:(float)r;
 
-// 当たり判定チェック
+// 当たり判定チェック (円)
 - (BOOL)isHit2:(Token*)t;
 
 // 移動する
@@ -107,6 +108,12 @@
 
 // テクスチャ描画範囲を指定する
 - (void)setTexRect:(CGRect) rect;
+
+// 当たり判定を有効にするかどうか
+- (void)setHitEnabled:(BOOL)b;
+
+// 当たり判定が有効かどうか
+- (BOOL)isHitEnabled;
 
 // 矩形の描画
 - (void)drawRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float) rot scale:(float)scale;

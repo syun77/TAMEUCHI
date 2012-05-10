@@ -47,12 +47,10 @@ void SceneManager_Change(NSString* pName) {
     if (bInit) {
         
         [[CCDirector sharedDirector] runWithScene:now];
-        NSLog(@"count %d", [now retainCount]);
     }
     else {
         
         [[CCDirector sharedDirector] replaceScene:now];
-        NSLog(@"count %d", [now retainCount]);
     }
     s_CurrentName = pName;
 }

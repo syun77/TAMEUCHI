@@ -41,6 +41,8 @@
     self._h = 32;
     self._r = 32;
     
+    [self setHitEnabled:YES];
+    
     return self;
 }
 
@@ -75,6 +77,9 @@
     
     // ブレンドモード初期化
     [self setBlend:eBlend_Normal];
+    
+    // 当たり判定有効
+    [self setHitEnabled:YES];
 }
 
 /**
@@ -91,6 +96,8 @@
     // 生成フラグを立てる
     m_isCreate = YES;
     
+    // 当たり判定有効
+    [self setHitEnabled:YES];
 }
 
 /**
@@ -295,6 +302,20 @@
  * 当たり判定チェック
  */
 - (BOOL)isHit2:(Token*)t {
+    
+    if (m_isHit == NO) {
+        
+        // 当たり判定無効
+        return NO;
+    }
+    
+    if ([t isHitEnabled] == NO) {
+        
+        // 当たり判定無効
+        return NO;
+    }
+    
+    // 円の当たり判定を行う
     float dx = t._x - self._x;
     float dy = t._y - self._y;
     
@@ -458,6 +479,18 @@
 - (void)setTexRect:(CGRect) rect {
     
     [self.m_pSprite setTextureRect:rect];
+}
+
+// 当たり判定を有効にするかどうか
+- (void)setHitEnabled:(BOOL)b {
+    
+    m_isHit = b;
+}
+
+// 当たり判定が有効かどうか
+- (BOOL)isHitEnabled {
+    
+    return m_isHit;
 }
 
 // 矩形の描画

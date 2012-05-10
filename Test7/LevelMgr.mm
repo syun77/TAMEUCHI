@@ -33,8 +33,8 @@
     m_tPast     = 0;
     m_nLevel    = 1;
     m_nLevel    = 10;
-    m_Mode      = eLevel_Endless;
-//    m_Mode      = eLevel_TimeAttack;
+//    m_Mode      = eLevel_Endless;
+    m_Mode      = eLevel_TimeAttack;
 }
 
 /**
@@ -68,8 +68,18 @@
         y = Math_Rand(System_Height());
     }
     
-//    x = Math_Rand(System_Width());
-//    y = Math_Rand(System_Height());
+    if (type == eEnemy_5Box) {
+        
+        // 5箱のみ出現条件を変更
+        float size = 64;
+        float x1 = size;
+        float y1 = size;
+        float x2 = System_Width() - size;
+        float y2 = System_Height() - size;
+        x = Math_RandFloat(x1, x2);
+        y = Math_RandFloat(y1, y2);
+        
+    }
     
     [Enemy add:type x:x y:y rot:Math_Randf(360) speed:0];
     
@@ -133,15 +143,15 @@
             
         default:
             switch (m_nLevel) {
-                case 1:
+                case 10:
                     //            if (m_Timer%80 == 20) {
-                    if (m_Timer%2800 == 20) {
+                    if (m_Timer%280 == 20) {
                         // 敵の生成
-                        //                [self addEnemy:eEnemy_5Box];
+                        [self addEnemy:eEnemy_5Box];
                         //                [self addEnemy:eEnemy_Pudding];
                         //                [self addEnemy:eEnemy_Nasu];
                         //                [self addEnemy:eEnemy_Tako];
-                        [self addEnemy:eEnemy_Milk];
+                        //[self addEnemy:eEnemy_Milk];
                     }
                     break;
                     
