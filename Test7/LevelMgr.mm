@@ -33,8 +33,8 @@
     m_tPast     = 0;
     m_nLevel    = 1;
     m_nLevel    = 10;
-//    m_Mode      = eLevel_Endless;
-    m_Mode      = eLevel_TimeAttack;
+    m_Mode      = eLevel_Endless;
+//    m_Mode      = eLevel_TimeAttack;
 }
 
 /**
@@ -116,6 +116,18 @@
                     else {
                         
                         [self addEnemy:eEnemy_Milk];
+                    }
+                }
+            }
+        }
+        
+        if (m_Timer%240 == 180) {
+            if (m_nLevel > 5) {
+                if ([self getEnemyCount] < m_nLevel) {
+                    
+                    if (Math_Rand(2) == 0) {
+                        
+                        [self addEnemy:eEnemy_5Box];
                     }
                 }
             }

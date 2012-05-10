@@ -524,55 +524,80 @@ enum eRange {
     
     switch (m_State) {
         case eState_Appear:
+            
+            // 出現開始
+            [self setHitEnabled:NO];
             m_Timer++;
-            m_Val = m_Val * 0.97f;
-            if(m_Val == 0)
-            {
-                // 3Way
-                float aim = [self getAim] - 30;
-                for (int i = 0; i < 3; i++) {
-                    [Bullet add:self._x y:self._y rot:aim speed:100];
-                    aim += 30;
-                }
-                m_Val = 360 + Math_Rand(720);
-            }
-            
-            
-            if(m_Timer > 320)
-            {
-                m_Val = [self getAim];
+            [self setVisible:m_Timer%4 < 2];
+            if (m_Timer > 45) {
                 m_Timer = 0;
+                [self setVisible:YES];
+                [self setHitEnabled:YES];
                 m_State = eState_Main;
+                m_Step = 0;
             }
             break;
             
         case eState_Main:
-            m_Timer++;
-            m_Val += m_Timer / 3;
-            switch (m_Timer) {
-                case 80:
-                case 120:
-                case 160:
-                    // 16way
-                    for (int i = 0; i < 16; i++) {
-                        float rot = i * (360 / 16);
-                        [Bullet add:self._x y:self._y rot:rot speed:200];
+            
+            // メイン
+            switch (m_Step) {
+                case 0:
+                    m_Timer++;
+                    m_Val = m_Val * 0.97f;
+                    if(m_Val == 0)
+                    {
+                        // 3Way
+                        float aim = [self getAim] - 30;
+                        for (int i = 0; i < 3; i++) {
+                            [Bullet add:self._x y:self._y rot:aim speed:100];
+                            aim += 30;
+                        }
+                        m_Val = 360 + Math_Rand(720);
+                    }
+                    
+                    
+                    if(m_Timer > 320)
+                    {
+                        m_Val = [self getAim];
+                        m_Timer = 0;
+                        m_Step = 1;
+                    }
+                    
+                    break;
+                    
+                case 1:
+                    m_Timer++;
+                    m_Val += m_Timer / 3;
+                    switch (m_Timer) {
+                        case 80:
+                        case 120:
+                        case 160:
+                            // 16way
+                            for (int i = 0; i < 16; i++) {
+                                float rot = i * (360 / 16);
+                                [Bullet add:self._x y:self._y rot:rot speed:200];
+                            }
+                            break;
+                            
+                        default:
+                            break;
+                    }
+                    if (m_Timer > 160) {
+                        m_Step++;
+                        if (m_Step >= 0) {
+                            
+                            // 自動消滅
+                            [self vanishNormal];
+                            [self vanish];
+                        }
+                        m_Timer = 0;
+                        m_State = eState_Appear;
                     }
                     break;
                     
                 default:
                     break;
-            }
-            if (m_Timer > 160) {
-                m_Step++;
-                if (m_Step >= 0) {
-                    
-                    // 自動消滅
-                    [self vanishNormal];
-                    [self vanish];
-                }
-                m_Timer = 0;
-                m_State = eState_Appear;
             }
             break;
             
@@ -989,6 +1014,15 @@ enum eRange {
         case eSize_Middle:
             // 通常サイズ
             [self vanishNormal];
+            
+            if (m_Id == eEnemy_5Box) {
+                // 5箱は爆発する
+                
+                for (int i = 0; i < 16; i++) {
+                    float dRot = 360 / 16;
+                    [Shot add:eShot_Power x:self._x y:self._y rot:i*dRot speed:100];
+                }
+            }
             
             // TODO:
             [Item add:eItem_Score x:self._x y:self._y rot:90 speed:50];
