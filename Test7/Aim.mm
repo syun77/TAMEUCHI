@@ -3,7 +3,7 @@
 //  Test7
 //
 //  Created by OzekiSyunsuke on 12/04/13.
-//  Copyright 2012年 __MyCompanyName__. All rights reserved.
+//  Copyright 2012年 2dgames.jp. All rights reserved.
 //
 
 #import "Aim.h"
