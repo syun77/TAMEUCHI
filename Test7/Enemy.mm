@@ -28,15 +28,6 @@ enum eState {
 };
 
 /**
- * 敵の大きさ
- */
-enum eSize {
-    eSize_Small,    // 小
-    eSize_Middle,   // 中
-    eSize_Big,      // 大
-};
-
-/**
  * プレイヤーとの距離
  */
 enum eRange {
@@ -1019,7 +1010,7 @@ enum eRange {
             if (m_Id == eEnemy_5Box) {
                 // 5箱は爆発する
                 
-                [Bomb add:self._x y:self._y];
+                [Bomb add:80 x:self._x y:self._y];
             }
             
             // TODO:
@@ -1069,15 +1060,6 @@ enum eRange {
         
         // 破壊演出
         [self destroy];
-        
-        // 死亡
-        if ([self getSize] == eSize_Big) {
-            Sound_PlaySe(@"damage.wav");
-        }
-        else {
-            
-            Sound_PlaySe(@"destroy1.wav");
-        }
         
         // 中ボスなら弾消し -> バナナボーナス
         if ([self getSize] == eSize_Big) {

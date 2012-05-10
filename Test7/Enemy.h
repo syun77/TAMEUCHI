@@ -30,6 +30,16 @@ enum eEnemy {
     eEnemy_Carrot,  // 人参
     eEnemy_Pokey,   // ポッキー
 };
+
+/**
+ * 敵の大きさ
+ */
+enum eSize {
+    eSize_Small,    // 小
+    eSize_Middle,   // 中
+    eSize_Big,      // 大
+};
+
 /**
  * 敵
  */
@@ -56,6 +66,9 @@ enum eEnemy {
 
 // 敵種別の設定
 - (void)setType:(eEnemy)type;
+
+// サイズの取得
+- (eSize)getSize;
 
 // 残りHPの割合を取得(0〜1)
 - (float)getHpRatio;

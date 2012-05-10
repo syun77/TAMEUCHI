@@ -28,7 +28,6 @@ static const int BGM_MAX = 6;
 enum {
     ePrio_Back,     // 背景
     ePrio_LevelUp,  // レベルアップ文字
-    ePrio_Bomb,     // ボム
     ePrio_Player,   // プレイヤー
     ePrio_Enemy,    // 敵
     ePrio_Item,     // アイテム
@@ -37,6 +36,7 @@ enum {
     ePrio_Bullet,   // 敵弾
     ePrio_Aim,      // 照準
     ePrio_Charge,   // チャージエフェクト
+    ePrio_Bomb,     // ボム
     ePrio_Black,    // 画面全体を暗くする
     ePrio_Particle, // パーティクル
     ePrio_Gauge,    // ゲージ表示
@@ -344,6 +344,8 @@ static GameScene* scene_ = nil;
         }
     }
     
+    BOOL bDestroy = NO;
+    BOOL bDestroyBig = NO;
     // 敵の当たり判定
     for (Enemy* e in self.mgrEnemy.m_Pool) {
         
@@ -361,6 +363,13 @@ static GameScene* scene_ = nil;
                 
                 [s hit:e._x y:e._y];
                 if ([e hit:s._vx y:s._vy]) {
+                    
+                    if ([e getSize] == eSize_Big) {
+                        bDestroyBig = YES;
+                    }
+                    else {
+                        bDestroy = YES;
+                    }
                     
                     // 倒したらコンボ回数アップ
                     [self.player addCombo];
@@ -386,6 +395,12 @@ static GameScene* scene_ = nil;
                 if ([e hit:bomb._vx y:bomb._vy]) {
                     
                     // TODO: コピペなので後で共通化
+                    if ([e getSize] == eSize_Big) {
+                        bDestroyBig = YES;
+                    }
+                    else {
+                        bDestroy = YES;
+                    }
                     // 倒したらコンボ回数アップ
                     [self.player addCombo];
                     
@@ -453,7 +468,17 @@ static GameScene* scene_ = nil;
             [b damage:self.player];
         }
     }
+   
+    // SE 再生
+    if (bDestroy) {
+        Sound_PlaySe(@"destroy1.wav");
+    }
     
+    if (bDestroyBig) {
+        Sound_PlaySe(@"damage.wav");
+    }
+    
+    // BGM 更新
     if ([self.player isDanger]) {
         Sound_SetBgmVolume(0.5);
     }

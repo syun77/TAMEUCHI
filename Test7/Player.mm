@@ -575,7 +575,14 @@ enum eState {
     Sound_PlaySe(@"damage.wav");
     
     // オートボム発動
-    [Bomb add:self._x y:self._y];
+    if (m_nLevel > 1) {
+        
+        float r = 32 + m_nLevel * 4;
+        if (r > 256) {
+            r = 256;
+        }
+        [Bomb add:r x:self._x y:self._y];
+    }
     
     if (m_nLevel > 1) {
         int cnt = m_nLevel * 4;
