@@ -25,6 +25,7 @@
 #import "Item.h"
 #import "Black.h"
 #import "Banana.h"
+#import "Bomb.h"
 
 // 危険時に有効となる速度の係数
 static const float DANGER_SLOW_RATIO = 0.25;
@@ -54,6 +55,7 @@ static const int SCORE_BANANA_BONUS = 500;
     TokenManager*   mgrEnemy;       // 敵
     TokenManager*   mgrBullet;      // 敵弾
     TokenManager*   mgrBanana;      // バナナボーナス
+    TokenManager*   mgrBomb;        // ボム
     Black*          black;          // 暗転用スプライト
     TokenManager*   mgrParticle;    // パーティクル
     InterfaceLayer* interfaceLayer; // 入力受け取り
@@ -94,6 +96,7 @@ static const int SCORE_BANANA_BONUS = 500;
 @property (nonatomic, retain)TokenManager*      mgrBullet;
 @property (nonatomic, retain)TokenManager*      mgrParticle;
 @property (nonatomic, retain)TokenManager*      mgrBanana;
+@property (nonatomic, retain)TokenManager*      mgrBomb;
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
 @property (nonatomic, retain)LevelMgr*          levelMgr;
 @property (nonatomic, retain)AsciiFont*         asciiFont2;

@@ -16,6 +16,7 @@
 #import "Shot.h"
 #import "Sound.h"
 #import "Banana.h"
+#import "Bomb.h"
 
 /**
  * 状態
@@ -1018,10 +1019,7 @@ enum eRange {
             if (m_Id == eEnemy_5Box) {
                 // 5箱は爆発する
                 
-                for (int i = 0; i < 16; i++) {
-                    float dRot = 360 / 16;
-                    [Shot add:eShot_Power x:self._x y:self._y rot:i*dRot speed:100];
-                }
+                [Bomb add:self._x y:self._y];
             }
             
             // TODO:

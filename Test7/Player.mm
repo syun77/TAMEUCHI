@@ -21,6 +21,7 @@
 #import "Particle.h"
 #import "Item.h"
 #import "Bullet.h"
+#import "Bomb.h"
 
 // ダメージタイマー
 static const int TIMER_DAMAGE = 30;
@@ -573,6 +574,8 @@ enum eState {
     
     Sound_PlaySe(@"damage.wav");
     
+    // オートボム発動
+    [Bomb add:self._x y:self._y];
     
     if (m_nLevel > 1) {
         int cnt = m_nLevel * 4;

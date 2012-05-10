@@ -28,6 +28,7 @@ static const int BGM_MAX = 6;
 enum {
     ePrio_Back,     // 背景
     ePrio_LevelUp,  // レベルアップ文字
+    ePrio_Bomb,     // ボム
     ePrio_Player,   // プレイヤー
     ePrio_Enemy,    // 敵
     ePrio_Item,     // アイテム
@@ -78,6 +79,7 @@ static GameScene* scene_ = nil;
 @synthesize mgrBullet;
 @synthesize mgrParticle;
 @synthesize mgrBanana;
+@synthesize mgrBomb;
 @synthesize interfaceLayer;
 @synthesize levelMgr;
 @synthesize asciiFont2;
@@ -192,6 +194,10 @@ static GameScene* scene_ = nil;
     [self.mgrBanana create:self.baseLayer size:256 className:@"Banana"];
     [self.mgrBanana setPrio:ePrio_Banana];
     
+    self.mgrBomb = [TokenManager node];
+    [self.mgrBomb create:self.baseLayer size:32 className:@"Bomb"];
+    [self.mgrBomb setPrio:ePrio_Bomb];
+    
     self.levelMgr = [LevelMgr node];
     [self.levelMgr initialize];
     
@@ -269,6 +275,7 @@ static GameScene* scene_ = nil;
     self.asciiFont3 = nil;
     self.asciiFont2 = nil;
     self.levelMgr = nil;
+    self.mgrBomb = nil;
     self.mgrBanana = nil;
     self.mgrParticle = nil;
     self.mgrBullet = nil;
@@ -337,13 +344,16 @@ static GameScene* scene_ = nil;
         }
     }
     
-    // 自弾 vs 敵
-    for (Shot* s in self.mgrShot.m_Pool) {
-        if ([s isExist] == NO) {
+    // 敵の当たり判定
+    for (Enemy* e in self.mgrEnemy.m_Pool) {
+        
+        if ([e isExist] == NO) {
             continue;
         }
-        for (Enemy* e in self.mgrEnemy.m_Pool) {
-            if ([e isExist] == NO) {
+        
+        // 敵 vs 自弾
+        for (Shot* s in self.mgrShot.m_Pool) {
+            if ([s isExist] == NO) {
                 continue;
             }
             
@@ -363,6 +373,34 @@ static GameScene* scene_ = nil;
                 }
             }
         }
+        
+        // ボム vs 敵
+        BOOL bHit = NO;
+        for (Bomb* bomb in self.mgrBomb.m_Pool) {
+            if ([bomb isExist] == NO) {
+                continue;
+            }
+            
+            if ([bomb isHit2:e]) {
+                
+                if ([e hit:bomb._vx y:bomb._vy]) {
+                    
+                    // TODO: コピペなので後で共通化
+                    // 倒したらコンボ回数アップ
+                    [self.player addCombo];
+                    
+                    // スコアもアップ
+                    [self addScore:100];
+                    
+                    SaveData_SetHiScore(m_Score);
+                    
+                    bHit = YES;
+                    
+                    break;
+                }
+            }
+        }
+        
     }
     
     // 自機 vs 敵
@@ -388,6 +426,23 @@ static GameScene* scene_ = nil;
             
             // 敵弾消滅
             [b damage:self.aim];
+            continue;
+        }
+        
+        // ボム vs 敵弾
+        BOOL bHit = NO;
+        for (Bomb* bomb in self.mgrBomb.m_Pool) {
+            if ([bomb isExist] == NO) {
+                continue;
+            }
+            
+            // 敵弾消滅
+            [b damage:bomb];
+            bHit = YES;
+            break;
+        }
+        
+        if (bHit) {
             continue;
         }
         
@@ -628,6 +683,7 @@ static GameScene* scene_ = nil;
     [self.mgrEnemy resumeAll];
     [self.mgrItem resumeAll];
     [self.mgrShot resumeAll];
+    [self.mgrBomb resumeAll];
 }
 
 // トークンの更新を停止する
@@ -637,6 +693,7 @@ static GameScene* scene_ = nil;
     [self.mgrEnemy pauseAll];
     [self.mgrItem pauseAll];
     [self.mgrShot pauseAll];
+    [self.mgrBomb pauseAll];
 }
 
 @end
