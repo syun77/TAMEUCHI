@@ -286,10 +286,21 @@ enum eState {
     float speed = SPEED_SHOT * (1 + ((float)m_tPower / m_PowerMax));
     [Shot add:eShot_Normal x:self._x y:self._y rot:rot + Math_RandFloat(-5, 5) speed:speed];
     
-    if ([self isHpMax]) {
-        // フルパワー時は3Way
+    if ([self getPowerRatio] > 0.6) {
+        // 3WAV
         [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 15 speed:speed];
         [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 15 speed:speed];
+    }
+    
+    if ([self getPowerRatio] > 0.8) {
+        // 5WAV
+        [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 30 speed:speed];
+        [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 30 speed:speed];
+    }
+    if ([self getPowerRatio] > 0.95 && m_PowerMax - m_tPower < 8) {
+        // 7WAV
+        [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 45 speed:speed];
+        [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 45 speed:speed];
     }
 }
 
@@ -357,7 +368,8 @@ enum eState {
         // パワーをためる
         m_tCharge++;
         if ([self isChargeStart]) {
-            m_tPower++;
+            
+            m_tPower += 0.3f;
             if (m_tPower > m_PowerMax) {
                 m_tPower = m_PowerMax;
             }
@@ -577,7 +589,7 @@ enum eState {
     // オートボム発動
     if (m_nLevel > 1) {
         
-        float r = 32 + m_nLevel * 4;
+        float r = 32 + m_nLevel * 8;
         if (r > 256) {
             r = 256;
         }
@@ -758,6 +770,20 @@ enum eState {
     return m_tPower;
 }
 
+// パワーの割合を取得
+- (float)getPowerRatio {
+    return m_tPower / (float)m_PowerMax;
+}
+
+// パワーの追加
+- (void)addPower:(float)v {
+    m_tPower += v;
+    if (m_tPower > m_PowerMax) {
+        m_tPower = m_PowerMax;
+    }
+}
+
+
 // チャージタイマーの取得
 - (int)getChargeTimer {
     return m_tCharge;
@@ -851,6 +877,10 @@ enum eState {
             if (m_Hp > MAX_HP) {
                 m_Hp = MAX_HP;
             }
+            break;
+            
+        case eItem_Score:
+            [self addPower:3];
             break;
             
         default:

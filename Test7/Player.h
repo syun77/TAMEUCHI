@@ -27,8 +27,8 @@ static const int SHOT_TIMER = 16;
     int     m_tShot;    // 弾を撃つ間隔
     int     m_tDamage;  // ダメージタイマー
     int     m_tCharge;  // チャージゲージ
-    int     m_tPower;   // パワーゲージ
-    int     m_PowerMax; // パワーゲージの最大
+    float   m_tPower;   // パワーゲージ
+    float   m_PowerMax; // パワーゲージの最大
     int     m_Hp;       // HP
     int     m_tRecover; // 回復用タイマー
     int     m_Combo;    // コンボ回数
@@ -59,6 +59,12 @@ static const int SHOT_TIMER = 16;
 
 // パワーの取得
 - (int)getPower;
+
+// パワーの割合を取得
+- (float)getPowerRatio;
+
+// パワーの追加
+- (void)addPower:(float)v;
 
 // チャージタイマーの取得
 - (int)getChargeTimer;
