@@ -28,7 +28,7 @@
 #import "Bomb.h"
 
 // 危険時に有効となる速度の係数
-static const float DANGER_SLOW_RATIO = 0.25;
+static const float DANGER_SLOW_RATIO = 0.4;
 
 // レベルアップ演出タイマー
 static const int TIMER_LEVELUP = 60;

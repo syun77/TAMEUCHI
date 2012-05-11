@@ -286,21 +286,27 @@ enum eState {
     float speed = SPEED_SHOT * (1 + ((float)m_tPower / m_PowerMax));
     [Shot add:eShot_Normal x:self._x y:self._y rot:rot + Math_RandFloat(-5, 5) speed:speed];
     
-    if ([self getPowerRatio] > 0.6) {
+    if ([self getPowerRatio] > 0.3) {
         // 3WAV
         [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 15 speed:speed];
         [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 15 speed:speed];
     }
     
-    if ([self getPowerRatio] > 0.8) {
-        // 5WAV
-        [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 30 speed:speed];
-        [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 30 speed:speed];
+    if (m_nLevel > 4) {
+        if ([self getPowerRatio] > 0.8) {
+            // 5WAV
+            [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 30 speed:speed];
+            [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 30 speed:speed];
+        }
     }
-    if ([self getPowerRatio] > 0.95 && m_PowerMax - m_tPower < 8) {
-        // 7WAV
-        [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 45 speed:speed];
-        [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 45 speed:speed];
+    
+    if (m_nLevel > 9) {
+        
+        if ([self getPowerRatio] > 0.95 && m_PowerMax - m_tPower < 8) {
+            // 7WAV
+            [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 45 speed:speed];
+            [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 45 speed:speed];
+        }
     }
 }
 
