@@ -89,7 +89,7 @@ static const int TIMER_VANISH = 60;
     GameScene* scene = [GameScene sharedInstance];
     Banana* b = (Banana*)[scene.mgrBanana add];
     if (b) {
-        [b set2:x y:y rot:Math_Rand(360) speed:100 ax:0 ay:0];
+        [b set2:x y:y rot:Math_Rand(360) speed:100 + Math_Rand(50) ax:0 ay:0];
         [b setId:type];
     }
     

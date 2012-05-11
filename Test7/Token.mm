@@ -9,6 +9,55 @@
 #import "Token.h"
 #import "Math.h"
 
+// 塗りつぶしポリゴンの描画
+void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolygon )
+{
+	ccVertex2F newPoint[numberOfPoints];
+
+	// Default GL states: GL_TEXTURE_2D, GL_VERTEX_ARRAY, GL_COLOR_ARRAY, GL_TEXTURE_COORD_ARRAY
+	// Needed states: GL_VERTEX_ARRAY, 
+	// Unneeded states: GL_TEXTURE_2D, GL_TEXTURE_COORD_ARRAY, GL_COLOR_ARRAY	
+	glDisable(GL_TEXTURE_2D);
+	glDisableClientState(GL_TEXTURE_COORD_ARRAY);
+	glDisableClientState(GL_COLOR_ARRAY);
+
+	
+	// iPhone and 32-bit machines
+	if( sizeof(CGPoint) == sizeof(ccVertex2F) ) {
+
+		// convert to pixels ?
+		if( CC_CONTENT_SCALE_FACTOR() != 1 ) {
+			memcpy( newPoint, poli, numberOfPoints * sizeof(ccVertex2F) );
+			for( NSUInteger i=0; i<numberOfPoints;i++)
+				newPoint[i] = (ccVertex2F) { poli[i].x * CC_CONTENT_SCALE_FACTOR(), poli[i].y * CC_CONTENT_SCALE_FACTOR() };
+
+			glVertexPointer(2, GL_FLOAT, 0, newPoint);
+
+		} else
+			glVertexPointer(2, GL_FLOAT, 0, poli);
+
+		
+	} else {
+		// 64-bit machines (Mac)
+		
+		for( NSUInteger i=0; i<numberOfPoints;i++)
+			newPoint[i] = (ccVertex2F) { poli[i].x, poli[i].y };
+
+		glVertexPointer(2, GL_FLOAT, 0, newPoint );
+
+	}
+		
+	if( closePolygon )
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) numberOfPoints);
+	else
+		glDrawArrays(GL_TRIANGLE_STRIP, 0, (GLsizei) numberOfPoints);
+	
+	// restore default state
+	glEnableClientState(GL_COLOR_ARRAY);
+	glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+	glEnable(GL_TEXTURE_2D);	
+}
+
 /**
  * トークン基底実装
  */
@@ -519,15 +568,18 @@
     // TODO: 回転は未実装
     float width  = w * scale;
     float height = h * scale;
-    
     float x1 = cx - width;
+    float y1 = cy - height;
     float x2 = cx + width;
+    float y2 = cy + height;
+    CGPoint vertices[] = {
+        {x1, y1 },
+        {x2, y1 },
+        {x1, y2 },
+        {x2, y2 },
+    };
     
-    glLineWidth(height * 2);
-    
-    CGPoint p1 = CGPointMake(x1, cy);
-    CGPoint p2 = CGPointMake(x2, cy);
-    ccDrawLine(p1, p2);
+    ccFillPoly(vertices, 4, YES);
 }
 
 - (void)drawRectLT:(float)x y:(float)y w:(float)w h:(float)h rot:(float)rot scale:(float)scale {
