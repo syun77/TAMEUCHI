@@ -15,6 +15,7 @@ static TitleScene* scene_ = nil;
 
 @implementation TitleScene
 
+@synthesize back;
 @synthesize baseLayer;
 @synthesize interfaceLayer;
 @synthesize asciiFont;
@@ -44,6 +45,9 @@ static TitleScene* scene_ = nil;
     self.baseLayer = [CCLayer node];
     [self addChild:self.baseLayer];
     
+    self.back = [BackTitle node];
+    [self.baseLayer addChild:self.back];
+    
     self.interfaceLayer = [InterfaceLayer node];
     [self.baseLayer addChild:self.interfaceLayer];
     
@@ -62,6 +66,7 @@ static TitleScene* scene_ = nil;
 - (void)dealloc {
     self.asciiFont = nil;
     self.interfaceLayer = nil;
+    self.back = nil;
     self.baseLayer = nil;
     
     [super dealloc];
