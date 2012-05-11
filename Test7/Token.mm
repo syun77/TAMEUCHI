@@ -524,6 +524,7 @@
     float x2 = cx + width;
     
     glLineWidth(height * 2);
+    
     CGPoint p1 = CGPointMake(x1, cy);
     CGPoint p2 = CGPointMake(x2, cy);
     ccDrawLine(p1, p2);

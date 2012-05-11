@@ -379,6 +379,8 @@ static GameScene* scene_ = nil;
                     
                     SaveData_SetHiScore(m_Score);
                     
+                    break;
+                    
                 }
             }
         }
@@ -451,6 +453,9 @@ static GameScene* scene_ = nil;
                 continue;
             }
             
+            if ([b isHit2:bomb] == NO) {
+                continue;
+            }
             // 敵弾消滅
             [b damage:bomb];
             bHit = YES;
