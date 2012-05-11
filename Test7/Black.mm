@@ -51,6 +51,19 @@
 
 - (void)visit {
     [super visit];
+    
+    if (self.visible) {
+        // ゲームオーバー時の帯描画
+        glColor4f(0, 0, 0, 0.5f);
+       
+        float cx = System_CenterX();
+        float cy = System_CenterY();
+        float w = System_Width();
+        float h = 64;
+        
+        [self fillRect:cx cy:cy w:w h:h rot:0 scale:1];
+        
+    }
 }
 
 @end

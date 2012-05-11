@@ -37,10 +37,10 @@ enum {
     ePrio_Aim,      // 照準
     ePrio_Charge,   // チャージエフェクト
     ePrio_Bomb,     // ボム
-    ePrio_Black,    // 画面全体を暗くする
     ePrio_Particle, // パーティクル
     ePrio_Gauge,    // ゲージ表示
     ePrio_UI,       // ユーザインターフェース
+    ePrio_Black,    // 画面全体を暗くする
 };
 
 // 状態
@@ -504,6 +504,9 @@ static GameScene* scene_ = nil;
         
         // レベルの更新を止める
         [self.levelMgr stop];
+        
+        // 画面を暗くする
+        [self.black setVisible:YES];
         
         // 更新を再開する
         [self resume];
