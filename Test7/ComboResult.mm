@@ -82,14 +82,19 @@ enum eState {
     switch (m_State) {
         case eState_Appear:
             // 出現
-            
+        {
             self._x += 100 * m_Timer / TIMER_APPEAR;
             
-            m_Timer = m_Timer * 0.9f;
+            int val = m_Timer * 0.2;
+            if (val < 1) {
+                val = 1;
+            }
+            m_Timer -= val;
             if (m_Timer < 1) {
                 m_State = eState_Wait;
                 m_Timer = TIMER_WAIT;
             }
+        }
             break;
         
         case eState_Wait:

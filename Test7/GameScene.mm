@@ -327,6 +327,8 @@ static GameScene* scene_ = nil;
     // 当たり判定を行う
     
     // 自機 vs アイテム
+    BOOL bItemScore = NO;
+    BOOL bItemRecover = NO;
     for (Item* item in self.mgrItem.m_Pool) {
         if ([item isExist] == NO) {
             continue;
@@ -338,6 +340,11 @@ static GameScene* scene_ = nil;
             switch ([item getType]) {
                 case eItem_Score:
                     [self addScore:10];
+                    bItemScore = YES;
+                    break;
+                
+                case eItem_Recover:
+                    bItemRecover = YES;
                     break;
                     
                 default:
@@ -346,6 +353,15 @@ static GameScene* scene_ = nil;
             [item vanishWithEffect];
         }
     }
+    
+    if (bItemRecover) {
+        
+    }
+    
+    if (bItemScore) {
+        Sound_PlaySe(@"item.wav");
+    }
+    
     
     BOOL bDestroy = NO;
     BOOL bDestroyBig = NO;

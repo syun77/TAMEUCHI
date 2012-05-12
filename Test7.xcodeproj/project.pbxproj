@@ -133,7 +133,6 @@
 		C745514715580C5A00404C32 /* Banana.mm in Sources */ = {isa = PBXBuildFile; fileRef = C745514615580C5A00404C32 /* Banana.mm */; };
 		C745514F15582E6D00404C32 /* 005.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C745514D15582E6D00404C32 /* 005.mp3 */; };
 		C745515015582E6D00404C32 /* 006.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C745514E15582E6D00404C32 /* 006.mp3 */; };
-		C74FE7A11524892D00298CBB /* rect.png in Resources */ = {isa = PBXBuildFile; fileRef = C74FE7A01524892D00298CBB /* rect.png */; };
 		C752C7EA15310AAE002EC31B /* System.mm in Sources */ = {isa = PBXBuildFile; fileRef = C752C7E915310AAE002EC31B /* System.mm */; };
 		C75A89BA1555835300154276 /* Black.mm in Sources */ = {isa = PBXBuildFile; fileRef = C75A89B91555835300154276 /* Black.mm */; };
 		C7612C9A1526AA88007CCABC /* font.png in Resources */ = {isa = PBXBuildFile; fileRef = C7612C991526AA88007CCABC /* font.png */; };
@@ -153,6 +152,10 @@
 		C786B3831525426300049CA8 /* TokenManager.mm in Sources */ = {isa = PBXBuildFile; fileRef = C786B3801525426300049CA8 /* TokenManager.mm */; };
 		C7A13EE1153872DC00B53149 /* Aim.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7A13EE0153872DC00B53149 /* Aim.mm */; };
 		C7B133EB155785A000D98A9C /* Sound.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7B133EA155785A000D98A9C /* Sound.mm */; };
+		C7CA27A2155ED096009BCED3 /* damage2.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7CA27A1155ED096009BCED3 /* damage2.wav */; };
+		C7CA27A5155ED13D009BCED3 /* item.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7CA27A4155ED13D009BCED3 /* item.wav */; };
+		C7CA27A7155ED639009BCED3 /* crash.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7CA27A6155ED639009BCED3 /* crash.wav */; };
+		C7CA27A9155ED69E009BCED3 /* clock.wav in Resources */ = {isa = PBXBuildFile; fileRef = C7CA27A8155ED69E009BCED3 /* clock.wav */; };
 		C7E1FEDA155B7AE90088C835 /* Bomb.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7E1FED9155B7AE90088C835 /* Bomb.mm */; };
 		C7E47378152F3EB7008EACDF /* LevelMgr.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7E47377152F3EB7008EACDF /* LevelMgr.mm */; };
 		C7E63BB815578B1A0081F946 /* 001.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = C7E63BB415578B1A0081F946 /* 001.mp3 */; };
@@ -430,7 +433,6 @@
 		C745514615580C5A00404C32 /* Banana.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Banana.mm; sourceTree = "<group>"; };
 		C745514D15582E6D00404C32 /* 005.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 005.mp3; path = Resources/005.mp3; sourceTree = "<group>"; };
 		C745514E15582E6D00404C32 /* 006.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; name = 006.mp3; path = Resources/006.mp3; sourceTree = "<group>"; };
-		C74FE7A01524892D00298CBB /* rect.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = rect.png; path = Resources/rect.png; sourceTree = "<group>"; };
 		C752C7E815310AAE002EC31B /* System.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = System.h; sourceTree = "<group>"; };
 		C752C7E915310AAE002EC31B /* System.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = System.mm; sourceTree = "<group>"; };
 		C75A89B81555835300154276 /* Black.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Black.h; sourceTree = "<group>"; };
@@ -460,6 +462,10 @@
 		C7A13EE0153872DC00B53149 /* Aim.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Aim.mm; sourceTree = "<group>"; };
 		C7B133E9155785A000D98A9C /* Sound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Sound.h; sourceTree = "<group>"; };
 		C7B133EA155785A000D98A9C /* Sound.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Sound.mm; sourceTree = "<group>"; };
+		C7CA27A1155ED096009BCED3 /* damage2.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = damage2.wav; sourceTree = "<group>"; };
+		C7CA27A4155ED13D009BCED3 /* item.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = item.wav; sourceTree = "<group>"; };
+		C7CA27A6155ED639009BCED3 /* crash.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = crash.wav; sourceTree = "<group>"; };
+		C7CA27A8155ED69E009BCED3 /* clock.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = clock.wav; sourceTree = "<group>"; };
 		C7D722E21524B550000AFB86 /* Player.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Player.h; sourceTree = "<group>"; };
 		C7E1FED8155B7AE90088C835 /* Bomb.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bomb.h; sourceTree = "<group>"; };
 		C7E1FED9155B7AE90088C835 /* Bomb.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bomb.mm; sourceTree = "<group>"; };
@@ -564,13 +570,16 @@
 				C7E63BBF15578F9A0081F946 /* 004.mp3 */,
 				C745514D15582E6D00404C32 /* 005.mp3 */,
 				C745514E15582E6D00404C32 /* 006.mp3 */,
+				C7CA27A8155ED69E009BCED3 /* clock.wav */,
+				C7CA27A6155ED639009BCED3 /* crash.wav */,
 				C7E63BB515578B1A0081F946 /* damage.wav */,
+				C7CA27A1155ED096009BCED3 /* damage2.wav */,
 				C7E63BB615578B1A0081F946 /* destroy1.wav */,
+				C7CA27A4155ED13D009BCED3 /* item.wav */,
 				C7E63BB715578B1A0081F946 /* kin.wav */,
 				C7F053A9152B14EA0095B76E /* all.png */,
 				C7612C991526AA88007CCABC /* font.png */,
 				C70F5ED8151B6E65003B041E /* Default.png */,
-				C74FE7A01524892D00298CBB /* rect.png */,
 				C70F5EDA151B6E65003B041E /* fps_images.png */,
 				C70F5EDC151B6E65003B041E /* Icon-72.png */,
 				C70F5EDE151B6E65003B041E /* Icon-Small-50.png */,
@@ -1035,7 +1044,6 @@
 				C70F5EE5151B6E65003B041E /* Icon.png in Resources */,
 				C70F5EE7151B6E65003B041E /* Icon@2x.png in Resources */,
 				C70F5EEA151B6E65003B041E /* iTunesArtwork in Resources */,
-				C74FE7A11524892D00298CBB /* rect.png in Resources */,
 				C76CC3CC1526949600AE1C69 /* LICENSE.cocos2d in Resources */,
 				C76CC3CD1526949600AE1C69 /* LICENSE.cocosdenshion in Resources */,
 				C7612C9A1526AA88007CCABC /* font.png in Resources */,
@@ -1049,6 +1057,10 @@
 				C7E63BC215578F9A0081F946 /* 004.mp3 in Resources */,
 				C745514F15582E6D00404C32 /* 005.mp3 in Resources */,
 				C745515015582E6D00404C32 /* 006.mp3 in Resources */,
+				C7CA27A2155ED096009BCED3 /* damage2.wav in Resources */,
+				C7CA27A5155ED13D009BCED3 /* item.wav in Resources */,
+				C7CA27A7155ED639009BCED3 /* crash.wav in Resources */,
+				C7CA27A9155ED69E009BCED3 /* clock.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

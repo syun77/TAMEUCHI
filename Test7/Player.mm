@@ -596,7 +596,7 @@ enum eState {
 // 危険回避ショット
 - (void)shotDanger {
     
-    Sound_PlaySe(@"damage.wav");
+    Sound_PlaySe(@"clock.wav");
     
     // オートボム発動
     if (m_nLevel > 1) {
@@ -680,6 +680,11 @@ enum eState {
         
         // 初回ダメージ
         m_Hp -= MAX_HP * DAMAGE_HP_RATIO_INIT;
+        
+        if (m_Hp > 1) {
+            
+            Sound_PlaySe(@"damage2.wav");
+        }
         
     }
     else {

@@ -86,6 +86,7 @@
     }
     
     [self setRotation:m_tPast*4];
+    
     [self move:dt];
     
     if (self._y < -self._r) {
@@ -110,7 +111,7 @@
             r = Exerinya_GetRect(eExerinyaRect_Banana);
             [self setTexRect:r];
             [self setColor:ccc3(0x80, 0xFF, 0x80)];
-            self._ay = -0.5;
+            self._ay = -0.3;
             break;
             
         case eItem_Power:
