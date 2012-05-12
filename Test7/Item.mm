@@ -103,12 +103,14 @@
             r = Exerinya_GetRect(eExerinyaRect_Banana);
             [self setTexRect:r];
             [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
+            self._ay = -1;
             break;
             
         case eItem_Score:
             r = Exerinya_GetRect(eExerinyaRect_Banana);
             [self setTexRect:r];
             [self setColor:ccc3(0x80, 0xFF, 0x80)];
+            self._ay = -0.5;
             break;
             
         case eItem_Power:

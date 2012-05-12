@@ -37,4 +37,7 @@
 // 値を減らす
 - (int)sub:(int)v;
 
+// チャージ回復エフェクトの生成
+- (void)addChargeEffect;
+
 @end

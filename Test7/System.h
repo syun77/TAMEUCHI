@@ -42,3 +42,6 @@ bool System_IsDispCollision();
 
 // ブレンドモードの設定
 void System_SetBlend(eBlend mode);
+
+// メモリ残量を取得する (Byte単位)
+float System_GetAvailableBytes();

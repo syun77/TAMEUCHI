@@ -99,4 +99,5 @@ static const int SHOT_TIMER = 16;
 // 状態を取得
 - (NSString*)getStateString;
 
+
 @end

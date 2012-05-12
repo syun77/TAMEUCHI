@@ -56,6 +56,9 @@ static const int TIMER_AUTO_RECOVER = 20;
 // HP回復アイテム取得
 static const float RECOVER_ITEM_HP_RATIO = 0.2f;
 
+// チャージゲージ回復アイテム取得
+static const float CHARGE_ITEM_VAL = 5;
+
 // ダメージ量
 // 初回
 static const float DAMAGE_HP_RATIO_INIT   = 0.3f;
@@ -302,7 +305,7 @@ enum eState {
     
     if (m_nLevel > 9) {
         
-        if ([self getPowerRatio] > 0.95 && m_PowerMax - m_tPower < 8) {
+        if ([self getPowerRatio] > 0.95) {
             // 7WAV
             [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 45 speed:speed];
             [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 45 speed:speed];
@@ -886,7 +889,10 @@ enum eState {
             break;
             
         case eItem_Score:
-            [self addPower:3];
+            [self addPower:CHARGE_ITEM_VAL];
+            
+            // チャージ回復エフェクト生成
+            [[self getGauge] addChargeEffect];
             break;
             
         default:

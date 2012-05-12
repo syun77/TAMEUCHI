@@ -8,6 +8,11 @@
 
 #import "System.h"
 
+#include <sys/sysctl.h>
+#import <mach/mach.h>
+#import <mach/mach_host.h>
+
+
 /**
  * Retinaディスプレイかどうか
  */
@@ -49,7 +54,7 @@ float System_Height()
  */
 float System_CenterX()
 {
-    return System_Width() / 2.0f;
+    return System_Width() * 0.5f;
 }
 
 /**
@@ -57,7 +62,7 @@ float System_CenterX()
  */
 float System_CenterY()
 {
-    return System_Height() / 2.0f;
+    return System_Height() * 0.5f;
 }
 
 /**
@@ -109,3 +114,23 @@ void System_SetBlend(eBlend mode) {
             break;
     }
 }
+
+/**
+ * メモリ残量を取得する
+ * @return メモリ残量 (Byte単位)
+ */
+float System_GetAvailableBytes()
+{
+    vm_statistics_data_t vmStats;
+    mach_msg_type_number_t infoCount=HOST_VM_INFO_COUNT;
+    kern_return_t kernReturn=host_statistics(mach_host_self(),HOST_VM_INFO,(host_info_t)&vmStats,&infoCount);
+
+    if(kernReturn!=KERN_SUCCESS)
+    {
+        return NSNotFound;
+    }
+
+    return(vm_page_size *vmStats.free_count);
+}
+
+

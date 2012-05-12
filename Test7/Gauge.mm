@@ -8,6 +8,7 @@
 
 #import "Gauge.h"
 #import "Math.h"
+#import "Particle.h"
 
 static const int POS_X = 8;
 static const int POS_Y = 24;
@@ -139,5 +140,12 @@ static const int GAUGE_HEIGHT = 8;
     return  m_Now;
 }
 
+// チャージ回復エフェクトの生成
+- (void)addChargeEffect {
+    float x = POS_X + GAUGE_WIDTH * m_Now;
+    float y = POS_Y + GAUGE_HEIGHT / 2;
+    
+    [Particle add:eParticle_ChargeRecover x:x y:y rot:0 speed:0];
+}
 @end
 

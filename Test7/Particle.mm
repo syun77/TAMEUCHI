@@ -10,6 +10,9 @@
 #import "Exerinya.h"
 #import "GameScene.h"
 
+// 消滅用のタイマー
+static const int TIMER_VANISH = 48;
+
 @implementation Particle
 
 /**
@@ -50,14 +53,14 @@
 - (void)update:(ccTime)dt {
     [self move:dt];
     
-    m_Timer++;
-    
     self._vx *= 0.95f;
     self._vy *= 0.95f;
     
     switch (m_Type) {
         case eParticle_Ball:
             // 縮小する
+            m_Timer++;
+            
             self.scale = self.scale * 0.9f;
             
             // じわじわ半透明にして消す
@@ -66,6 +69,8 @@
             break;
         case eParticle_Ring:
             // 拡大する
+            m_Timer++;
+            
             m_Val *= 0.97f;
             self.scale = self.scale + m_Val;
             
@@ -74,6 +79,8 @@
             
         case eParticle_Blade:
             // 縮小する
+            m_Timer++;
+            
             self.scale = self.scale * 0.9f;
             
             // じわじわ半透明にして消す
@@ -84,7 +91,7 @@
             break;
     }
     
-    if (m_Timer > 48) {
+    if (m_Timer > TIMER_VANISH) {
         // 普通に消す
         [self vanish];
     }
@@ -110,9 +117,48 @@
 }
 
 /**
+ * プリミティブ描画
+ */
+- (void)visit {
+    [super visit];
+    
+    switch (m_Type) {
+        case eParticle_ChargeRecover:
+        {
+            float ratio = (float)(TIMER_VANISH - m_Timer) / TIMER_VANISH;
+            
+            float val = ratio * TIMER_VANISH * 0.2f;
+            if (val < 1) {
+                val = 1;
+            }
+            m_Timer += val;
+            
+            Player* player = [GameScene sharedInstance].player;
+            float pRatio = [player getPowerRatio];
+            float r = pRatio;
+            float g = 1.0 - pRatio;
+            float a = 0.2 + 0.8 * ratio;
+            // チャージ回復エフェクト
+            System_SetBlend(eBlend_Add);
+            glColor4f(r, g, 0, a);
+            glLineWidth(4);
+            [self drawCircle:self._x cy:self._y radius:m_Timer];
+            System_SetBlend(eBlend_Normal);
+        }
+            break;
+            
+        default:
+            break;
+    }
+}
+
+/**
  * 種別の設定
  */
 - (void)setType:(eParticle)type {
+    
+    [self.m_pSprite setVisible:YES];
+    
     m_Type = type;
     CGRect r = Exerinya_GetRect(eExerinyaRect_EftBall); 
     switch (m_Type) {
@@ -127,6 +173,10 @@
             
         case eParticle_Blade:
             r = Exerinya_GetRect(eExerinyaRect_EftBlade);
+            break;
+            
+        case eParticle_ChargeRecover:
+            [self.m_pSprite setVisible:NO];
             break;
             
         default:
