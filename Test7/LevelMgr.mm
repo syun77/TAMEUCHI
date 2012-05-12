@@ -27,12 +27,32 @@
 }
 
 /**
+ * 大型の敵の数をカウントする
+ */
+- (int)getEnemyCountBig {
+    TokenManager* mgr = [GameScene sharedInstance].mgrEnemy;
+    
+    int ret = 0;
+    for (Enemy* e in mgr.m_Pool) {
+        if ([e isExist] == NO) {
+            continue;
+        }
+        
+        if ([e getSize] == eSize_Big) {
+            ret++;
+        }
+    }
+    
+    return ret;
+}
+
+/**
  * 初期化
  */
 - (void)initialize {
     m_tPast     = 0;
     m_nLevel    = 1;
-    m_nLevel    = 10;
+    m_nLevel    = 1;
     m_Mode      = eLevel_Endless;
 //    m_Mode      = eLevel_TimeAttack;
 }
@@ -90,24 +110,39 @@
  */
 - (void)updateEndless {
 
-    if (m_nLevel < 100) {
-        if (m_Timer%40 == 20) {
-            if ([self getEnemyCount] < m_nLevel) {
-                [self addEnemy:eEnemy_Nasu];
-            }
+    if (m_Timer%40 == 20) {
+        if ([self getEnemyCount] < m_nLevel) {
+            
+            // なすの出現
+            [self addEnemy:eEnemy_Nasu];
         }
+    }
         
-        if (m_Timer%160 == 40) {
-            if (m_nLevel > 5) {
-                if ([self getEnemyCount] < m_nLevel) {
-                    [self addEnemy:eEnemy_Tako];
-                }
+    if (m_Timer%160 == 40) {
+        if (m_nLevel >= 6 && m_nLevel%2 == 0) {
+            
+            // Lv6以上 偶数レベルのみ
+            if ([self getEnemyCount] < m_nLevel) {
+                
+                // たこ焼きの出現
+                [self addEnemy:eEnemy_Tako];
             }
         }
+    }
+        
+    if (m_nLevel < 10) {
+        
+        // Lv10以下はなすとたこ焼きしか出ない
+        if (m_Timer > 800) {
+            m_nLevel++;
+            m_Timer = 0;
+        }
+    }
+    else if (m_nLevel < 100) {
         
         if (m_Timer%320 == 160) {
             if (m_nLevel > 10) {
-                if ([self getEnemyCount] < m_nLevel) {
+                if ([self getEnemyCountBig] < m_nLevel / 10) {
                     
                     if (Math_Rand(2) == 0) {
                         
@@ -121,19 +156,20 @@
             }
         }
         
-        if (m_Timer%240 == 180) {
+        if (m_Timer%600 == 180) {
             if (m_nLevel > 5) {
                 if ([self getEnemyCount] < m_nLevel) {
                     
                     if (Math_Rand(2) == 0) {
                         
+                        // 5箱出現
                         [self addEnemy:eEnemy_5Box];
                     }
                 }
             }
         }
         
-        if (m_Timer > 200) {
+        if (m_Timer > 800) {
             m_nLevel++;
             m_Timer = 0;
         }
