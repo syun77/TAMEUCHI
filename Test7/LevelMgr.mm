@@ -231,9 +231,4 @@
     return m_Timer;
 }
 
-// 更新の停止
-- (void)stop {
-    [self pauseSchedulerAndActions];
-}
-
 @end

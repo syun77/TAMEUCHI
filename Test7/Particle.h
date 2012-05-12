@@ -32,6 +32,9 @@ enum eParticle {
 // 種別の設定
 - (void)setType:(eParticle)type;
 
+// タイマーの設定
+- (void)setTimer:(int)timer;
+
 // 要素の追加
 + (Particle*)add:(eParticle)type x:(float)x y:(float)y rot:(float)rot speed:(float)speed;
 

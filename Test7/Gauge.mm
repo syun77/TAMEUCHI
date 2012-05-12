@@ -155,7 +155,8 @@ static const int GAUGE_HEIGHT = 8;
     float x = POS_X + GAUGE_WIDTH * m_Now;
     float y = POS_Y + GAUGE_HEIGHT / 2;
     
-    float rot = Math_RandInt(-45, 45);
+//    float rot = Math_RandInt(-45, 45);
+    float rot = Math_RandInt(-180, 180);
     float speed = 100;
     Particle* p = [Particle add:eParticle_Ball x:x y:y rot:rot speed:speed];
     if (p) {
@@ -165,6 +166,7 @@ static const int GAUGE_HEIGHT = 8;
         float r = pRatio;
         float g = 1.0 - pRatio;
         [p setColor:ccc3(0xFF * r, 0xFF * g, 0)];
+        [p setTimer:24];
     }
 }
 

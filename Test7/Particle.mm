@@ -210,6 +210,12 @@ static const int TIMER_VANISH = 48;
     }
     
     [self setTexRect:r];
+
+}
+
+// タイマーの設定
+- (void)setTimer:(int)timer {
+    m_Timer = timer;
 }
 
 /**

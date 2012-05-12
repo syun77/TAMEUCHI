@@ -510,9 +510,6 @@ static GameScene* scene_ = nil;
         // BGMを止める
         Sound_StopBgm();
         
-        // レベルの更新を止める
-        [self.levelMgr stop];
-        
         // 画面を暗くする
         [self.black setVisible:YES];
         
@@ -613,6 +610,7 @@ static GameScene* scene_ = nil;
             break;
             
         case eState_Main:
+            [self.levelMgr update:dt];
             switch (m_Step) {
                 case eStep_Main:
                     
@@ -658,7 +656,6 @@ static GameScene* scene_ = nil;
     }
     [self.asciiFont4 setText:[NSString stringWithFormat:@"Lv :%3d", [self.player getLevel]]];
     
-    [self.levelMgr update:dt];
 
     
     // フラグを下げる
