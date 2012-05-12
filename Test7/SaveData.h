@@ -13,7 +13,7 @@
  * ハイスコアを設定する
  * @param score ハイスコア
  */
-void SaveData_SetHiScore(int score);
+void SaveData_SetHiScore(int score, BOOL bForce=false);
 
 /**
  * ハイスコアを取得する

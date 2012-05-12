@@ -11,13 +11,17 @@
 /**
  * ハイスコアを設定する
  * @param score ハイスコア
+ * @param bForce 強制的に更新する
  */
-void SaveData_SetHiScore(int score)
+void SaveData_SetHiScore(int score, BOOL bForce)
 {
     int hiScore = SaveData_GetHiScore();
-    if (score <= hiScore) {
-        // 更新不要
-        return;
+    
+    if (bForce == NO) {
+        if (score <= hiScore) {
+            // 更新不要
+            return;
+        }
     }
     
     NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];

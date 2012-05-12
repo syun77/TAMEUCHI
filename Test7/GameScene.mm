@@ -244,6 +244,9 @@ static GameScene* scene_ = nil;
     [self scheduleUpdate];
     
    
+    // TODO: スコア初期化
+    SaveData_SetHiScore(0, YES);
+    
     // 初期化するフラグ
     m_State = eState_Init;
     m_nDestroy = 0;
@@ -700,6 +703,12 @@ static GameScene* scene_ = nil;
 // タイマーを取得する
 - (int)getTimer {
     return m_Timer;
+}
+
+// スコアを加算する（敵破壊点）
+- (void)addScoreEnemy:(Enemy *)enemy {
+    int score = [enemy getScore];
+    [self addScore:score];
 }
 
 // スコアを加算する

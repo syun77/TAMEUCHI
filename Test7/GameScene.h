@@ -14,6 +14,7 @@
 #import "TokenManager.h"
 #import "Back.h"
 #import "Player.h"
+#import "Enemy.h"
 #import "Aim.h"
 #import "Charge.h"
 #import "AsciiFont.h"
@@ -124,6 +125,9 @@ static const int SCORE_BANANA_BONUS = 500;
 
 // タイマーを取得する
 - (int)getTimer;
+
+// スコアを加算（敵破壊点）
+- (void)addScoreEnemy:(Enemy*)enemy;
 
 // スコアを加算する
 - (void)addScore:(int)score;

@@ -57,6 +57,34 @@ enum eRange {
 }
 
 /**
+ * 破壊点を取得する
+ */
+- (int)getScore {
+    switch (m_Id) {
+        case eEnemy_Carrot:
+        case eEnemy_Radish:
+        case eEnemy_Pokey:
+            // 小サイズ
+            return 30;
+            
+        case eEnemy_Nasu:
+        case eEnemy_5Box:
+        case eEnemy_Tako:
+            // 通常サイズ
+            return 100;
+            
+        case eEnemy_Milk:
+        case eEnemy_XBox:
+        case eEnemy_Pudding:
+            // 大サイズ
+            return 1000;
+            
+        default:
+            return 10;
+    }
+}
+
+/**
  * 敵の大きさを取得
  */
 - (eSize)getSize {

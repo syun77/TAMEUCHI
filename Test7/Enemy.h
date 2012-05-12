@@ -67,6 +67,9 @@ enum eSize {
 // 敵種別の設定
 - (void)setType:(eEnemy)type;
 
+// 敵破壊点を取得する
+- (int)getScore;
+
 // サイズの取得
 - (eSize)getSize;
 
