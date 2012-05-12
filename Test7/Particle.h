@@ -19,6 +19,7 @@ enum eParticle {
     eParticle_Ring,     // 輪っか
     eParticle_Blade,    // 刃
     eParticle_ChargeRecover, // チャージゲージ回復
+    eParticle_ChargeRecoverSmall, // チャージ回復エフェクト (小)
 };
 
 @interface Particle : Token {

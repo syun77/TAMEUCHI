@@ -9,6 +9,7 @@
 #import "Gauge.h"
 #import "Math.h"
 #import "Particle.h"
+#import "GameScene.h"
 
 static const int POS_X = 8;
 static const int POS_Y = 24;
@@ -147,5 +148,25 @@ static const int GAUGE_HEIGHT = 8;
     
     [Particle add:eParticle_ChargeRecover x:x y:y rot:0 speed:0];
 }
+
+// チャージ回復エフェクト(小)の生成
+- (void)addChargeEffectSmall {
+    
+    float x = POS_X + GAUGE_WIDTH * m_Now;
+    float y = POS_Y + GAUGE_HEIGHT / 2;
+    
+    float rot = Math_RandInt(-45, 45);
+    float speed = 100;
+    Particle* p = [Particle add:eParticle_Ball x:x y:y rot:rot speed:speed];
+    if (p) {
+        [p setScale:0.1];
+        Player* player = [GameScene sharedInstance].player;
+        float pRatio = [player getPowerRatio];
+        float r = pRatio;
+        float g = 1.0 - pRatio;
+        [p setColor:ccc3(0xFF * r, 0xFF * g, 0)];
+    }
+}
+
 @end
 

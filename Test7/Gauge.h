@@ -40,4 +40,7 @@
 // チャージ回復エフェクトの生成
 - (void)addChargeEffect;
 
+// チャージ回復エフェクト(小)の生成
+- (void)addChargeEffectSmall;
+
 @end

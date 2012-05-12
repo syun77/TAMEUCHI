@@ -381,6 +381,9 @@ enum eState {
             m_tPower += 0.3f;
             if (m_tPower > m_PowerMax) {
                 m_tPower = m_PowerMax;
+            } else {
+                // 回復エフェクト(小)生成
+                [[self getGauge] addChargeEffectSmall];
             }
         }
     }

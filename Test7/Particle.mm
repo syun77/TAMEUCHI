@@ -125,6 +125,7 @@ static const int TIMER_VANISH = 48;
     switch (m_Type) {
         case eParticle_ChargeRecover:
         {
+            // チャージ回復エフェクト
             float ratio = (float)(TIMER_VANISH - m_Timer) / TIMER_VANISH;
             
             float val = ratio * TIMER_VANISH * 0.2f;
@@ -137,7 +138,7 @@ static const int TIMER_VANISH = 48;
             float pRatio = [player getPowerRatio];
             float r = pRatio;
             float g = 1.0 - pRatio;
-            float a = 0.2 + 0.8 * ratio;
+            float a = ratio;
             // チャージ回復エフェクト
             System_SetBlend(eBlend_Add);
             glColor4f(r, g, 0, a);
@@ -145,6 +146,30 @@ static const int TIMER_VANISH = 48;
             [self drawCircle:self._x cy:self._y radius:m_Timer];
             System_SetBlend(eBlend_Normal);
         }
+            break;
+            
+        case eParticle_ChargeRecoverSmall:
+        {
+            // チャージ回復エフェクト
+            float ratio = (float)(TIMER_VANISH - m_Timer) / TIMER_VANISH;
+            
+            float val = ratio * TIMER_VANISH * 0.5f;
+            if (val < 1) {
+                val = 1;
+            }
+            m_Timer += val;
+            
+            Player* player = [GameScene sharedInstance].player;
+            float pRatio = [player getPowerRatio];
+            float r = pRatio;
+            float g = 1.0 - pRatio;
+            float a = ratio;
+            // チャージ回復エフェクト
+            System_SetBlend(eBlend_Add);
+            glColor4f(r, g, 0, a);
+            glLineWidth(4);
+            [self drawCircle:self._x cy:self._y radius:m_Timer/4];
+            System_SetBlend(eBlend_Normal);        }
             break;
             
         default:
@@ -176,6 +201,7 @@ static const int TIMER_VANISH = 48;
             break;
             
         case eParticle_ChargeRecover:
+        case eParticle_ChargeRecoverSmall:
             [self.m_pSprite setVisible:NO];
             break;
             
