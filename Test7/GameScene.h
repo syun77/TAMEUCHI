@@ -63,9 +63,9 @@ static const int SCORE_BANANA_BONUS = 500;
     LevelMgr*       levelMgr;       // レベル管理
     AsciiFont*      ascciFont2;     // フォント
     AsciiFont*      ascciFont3;     // フォント
-    AsciiFont*      ascciFont4;     // フォント
     AsciiFont*      ascciFont5;     // フォント
     AsciiFont*      ascciFontLevel; // フォント（レベル）
+    AsciiFont*      ascciFontRank;  // フォント（ランク）
     AsciiFont*      asciiFontScore; // フォント（スコア）
     AsciiFont*      asciiFontLevelUp; // フォント（レベルアップ演出）
     AsciiFont*      asciiFontGameover; // フォント（ゲームオーバー）
@@ -102,9 +102,9 @@ static const int SCORE_BANANA_BONUS = 500;
 @property (nonatomic, retain)LevelMgr*          levelMgr;
 @property (nonatomic, retain)AsciiFont*         asciiFont2;
 @property (nonatomic, retain)AsciiFont*         asciiFont3;
-@property (nonatomic, retain)AsciiFont*         asciiFont4;
 @property (nonatomic, retain)AsciiFont*         asciiFont5;
 @property (nonatomic, retain)AsciiFont*         asciiFontLevel;
+@property (nonatomic, retain)AsciiFont*         asciiFontRank;
 @property (nonatomic, retain)AsciiFont*         asciiFontScore;
 @property (nonatomic, retain)AsciiFont*         asciiFontLevelUp;
 @property (nonatomic, retain)AsciiFont*         asciiFontGameover;

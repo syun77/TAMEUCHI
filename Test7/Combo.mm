@@ -10,6 +10,8 @@
 #import "GameScene.h"
 
 static const int TIMER_APPEAR = 60;
+static const int POS_X = 420;
+static const int POS_Y = 320 - 24;
 
 // 状態
 enum eState {
@@ -39,8 +41,8 @@ enum eState {
     
     [self load:@"all.png"];
     [self create];
-    self._x = 420;
-    self._y = 40;
+    self._x = POS_X;
+    self._y = POS_Y;
     [self move:0];
     m_Timer = 0;
     [self setVisible:NO];
