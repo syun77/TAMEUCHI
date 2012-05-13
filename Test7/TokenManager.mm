@@ -54,7 +54,7 @@
     m_Layer = layer;
     m_Prio  = 0;
     
-    NSLog(@"TokenManager::Create '%@'", m_Name);
+//    NSLog(@"TokenManager::Create '%@'", m_Name);
 }
 
 /**
@@ -105,7 +105,7 @@
     
     [super dealloc];
     
-    NSLog(@"TokenManager::Dealloc '%@'", m_Name);
+//    NSLog(@"TokenManager::Dealloc '%@'", m_Name);
 }
 
 /**

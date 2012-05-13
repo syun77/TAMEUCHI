@@ -12,6 +12,9 @@
 #import "AsciiFont.h"
 #import "BackTitle.h"
 
+/**
+ * タイトル画面
+ */
 @interface TitleScene : CCScene {
     
     BackTitle*      back;           // 背景
@@ -22,6 +25,7 @@
     AsciiFont*      fontRank;       // フォント (ランク)
     AsciiFont*      fontRankMax;    // フォント (最大ランク)
     
+    BOOL            m_bNextScene;   // 次のシーンに進む
 }
 
 @property (nonatomic, retain)BackTitle*         back;

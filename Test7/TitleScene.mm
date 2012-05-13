@@ -75,8 +75,14 @@ static TitleScene* scene_ = nil;
     [self.fontRankMax setPos:8 y:9];
     [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK %d", SaveData_GetRankMax()]];
     
+    // 変数初期化
+    m_bNextScene = NO;
+    
     // 更新スケジューラ登録
     [self scheduleUpdate];
+    
+    // 入力コールバック登録
+    [self.interfaceLayer addCB:self];
     
     return self;
 }
@@ -96,11 +102,27 @@ static TitleScene* scene_ = nil;
 
 // 更新
 - (void)update:(ccTime)dt {
-    if ([self.interfaceLayer isTouch]) {
+    
+    [self.fontRank setText:[NSString stringWithFormat:@"RANK %3d", SaveData_GetRank()]];
+    
+    if (m_bNextScene) {
+        
+        // 登録したコールバックから除去
+        [self.interfaceLayer delCB];
         
         SceneManager_Change(@"GameScene");
         
     }
+}
+
+- (void)cbTouchStart:(float)x y:(float)y {
+    NSLog(@"Touch Start.");
+}
+
+- (void)cbTouchEnd:(float)x y:(float)y {
+    NSLog(@"Touch End.");
+    
+    m_bNextScene = YES;
 }
 
 @end

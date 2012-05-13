@@ -65,7 +65,8 @@ static const int GAUGE_HEIGHT = 8;
     
     float r = 1.0 * cnt / COUNT_MAX;
     float g = 1.0 * (COUNT_MAX - cnt) / COUNT_MAX;
-    glColor4f(r, g, 0, 1);
+    float b = 0;
+    glColor4f(r, g, b, 1);
     
     for (int i = 0; i < cnt; i++) {
         float rot = 360 / COUNT_MAX * i + m_tPast * 8;
@@ -79,6 +80,12 @@ static const int GAUGE_HEIGHT = 8;
     System_SetBlend(eBlend_Normal);
     
     // バーの描画
+    if (m_Now == m_Max) {
+        g = 0.5 * Math_SinEx((m_tPast*4)%180);
+        b = 0.5 * Math_SinEx((m_tPast*4)%180);
+        glColor4f(r, g, b, 1);
+    }
+    
     float px = POS_X;
     float py = POS_Y;
     [self fillRectLT:px y:py w:GAUGE_WIDTH * m_Now h:GAUGE_HEIGHT rot:0 scale:1];
