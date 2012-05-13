@@ -81,15 +81,15 @@ static const int GAUGE_HEIGHT = 8;
     
     // バーの描画
     if (m_Now == m_Max) {
-        g = 0.5 * Math_SinEx((m_tPast*4)%180);
-        b = 0.5 * Math_SinEx((m_tPast*4)%180);
+        g = 0.5 * Math_SinEx((m_tPast*3)%180);
+        b = 0.5 * Math_SinEx((m_tPast*3)%180);
         glColor4f(r, g, b, 0.5f);
     }
     
     float px = POS_X;
     float py = POS_Y;
     [self fillRectLT:px y:py w:GAUGE_WIDTH * m_Now h:GAUGE_HEIGHT rot:0 scale:1];
-    glColor4f(1, 1, 1, 1);
+    glColor4f(1, 1, 1, 0.5f);
     glLineWidth(1);
     [self drawRectLT:px y:py w:GAUGE_WIDTH * m_Max h:GAUGE_HEIGHT rot:0 scale:1];
 }
