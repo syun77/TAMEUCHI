@@ -18,6 +18,9 @@
     CCLayer*        baseLayer;      // 描画レイヤー
     InterfaceLayer* interfaceLayer; // 入力受け取り
     AsciiFont*      asciiFont;      // フォント
+    AsciiFont*      fontHiScore;    // フォント (ハイスコア)
+    AsciiFont*      fontRank;       // フォント (ランク)
+    AsciiFont*      fontRankMax;    // フォント (最大ランク)
     
 }
 
@@ -25,6 +28,9 @@
 @property (nonatomic, retain)CCLayer*           baseLayer;
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
 @property (nonatomic, retain)AsciiFont*         asciiFont;
+@property (nonatomic, retain)AsciiFont*         fontHiScore;
+@property (nonatomic, retain)AsciiFont*         fontRank;
+@property (nonatomic, retain)AsciiFont*         fontRankMax;
 
 + (TitleScene*)sharedInstance;
 + (void)releaseInstance;

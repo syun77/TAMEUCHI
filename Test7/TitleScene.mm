@@ -9,6 +9,7 @@
 #import "TitleScene.h"
 #import "GameScene.h"
 #import "SceneManager.h"
+#import "SaveData.h"
 
 // シングルトン
 static TitleScene* scene_ = nil;
@@ -19,6 +20,9 @@ static TitleScene* scene_ = nil;
 @synthesize baseLayer;
 @synthesize interfaceLayer;
 @synthesize asciiFont;
+@synthesize fontHiScore;
+@synthesize fontRank;
+@synthesize fontRankMax;
 
 // シングルトンを取得する
 + (TitleScene*)sharedInstance {
@@ -53,8 +57,23 @@ static TitleScene* scene_ = nil;
     
     self.asciiFont = [AsciiFont node];
     [self.asciiFont createFont:self.baseLayer length:24];
-    [self.asciiFont setPosScreen:8 y:320-24];
+    [self.asciiFont setPos:8 y:12];
     [self.asciiFont setText:@"TITLE"];
+    
+    self.fontHiScore = [AsciiFont node];
+    [self.fontHiScore createFont:self.baseLayer length:24];
+    [self.fontHiScore setPos:8 y:11];
+    [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", SaveData_GetHiScore()]];
+    
+    self.fontRank = [AsciiFont node];
+    [self.fontRank createFont:self.baseLayer length:24];
+    [self.fontRank setPos:8 y:10];
+    [self.fontRank setText:@"RANK"];
+    
+    self.fontRankMax = [AsciiFont node];
+    [self.fontRankMax createFont:self.baseLayer length:24];
+    [self.fontRankMax setPos:8 y:9];
+    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK %d", SaveData_GetRankMax()]];
     
     // 更新スケジューラ登録
     [self scheduleUpdate];
@@ -64,6 +83,9 @@ static TitleScene* scene_ = nil;
 
 // デストラクタ
 - (void)dealloc {
+    self.fontRankMax = nil;
+    self.fontRank = nil;
+    self.fontHiScore = nil;
     self.asciiFont = nil;
     self.interfaceLayer = nil;
     self.back = nil;

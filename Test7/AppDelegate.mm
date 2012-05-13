@@ -15,6 +15,7 @@
 #import "GameScene.h"
 #import "TitleScene.h"
 #import "SceneManager.h"
+#import "SaveData.h"
 
 @implementation AppDelegate
 
@@ -117,8 +118,12 @@
 	// Removes the startup flicker
 	[self removeStartupFlicker];
 	
+    // セーブデータを初期化する
+    SaveData_Init();
+    
 	// Run the intro Scene
-    SceneManager_Change(@"GameScene");
+    //SceneManager_Change(@"GameScene");
+    SceneManager_Change(@"TitleScene");
 }
 
 

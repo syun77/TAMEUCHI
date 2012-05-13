@@ -10,13 +10,42 @@
 #import "cocos2d.h"
 
 /**
- * ハイスコアを設定する
- * @param score ハイスコア
+ * セーブデータを初期化する
  */
-void SaveData_SetHiScore(int score, BOOL bForce=false);
+void SaveData_Init();
 
 /**
  * ハイスコアを取得する
  * @return ハイスコア
  */
 int SaveData_GetHiScore();
+
+/**
+ * ハイスコアを設定する
+ * @param score ハイスコア
+ */
+void SaveData_SetHiScore(int score, BOOL bForce=false);
+
+/**
+ * タイトル画面で選択した難易度を取得する
+ * @return 難易度
+ */
+int SaveData_GetRank();
+
+/**
+ * タイトル画面→メインゲーム用の難易度設定
+ * @param rank 難易度
+ */
+void SaveData_SetRank(int rank);
+
+/**
+ * 到達したことのある最大難易度を取得する
+ * @return 最大難易度
+ */
+int SaveData_GetRankMax();
+
+/**
+ * 最大難易度を取得する
+ * @param rank 最大難易度
+ */
+void SaveData_SetRankMax(int rank);

@@ -10,6 +10,7 @@
 #import "GameScene.h"
 #import "Enemy.h"
 #import "Player.h"
+#import "SaveData.h"
 
 /**
  * レベル管理
@@ -51,8 +52,8 @@
  */
 - (void)initialize {
     m_tPast     = 0;
-    m_nLevel    = 1;
-    m_nLevel    = 1;
+    m_nLevel    = SaveData_GetRank();
+//    m_nLevel    = 1;
     m_Mode      = eLevel_Endless;
 //    m_Mode      = eLevel_TimeAttack;
 }

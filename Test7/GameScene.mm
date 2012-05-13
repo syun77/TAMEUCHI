@@ -244,13 +244,10 @@ static GameScene* scene_ = nil;
     [self scheduleUpdate];
     
    
-    // TODO: スコア初期化
-    SaveData_SetHiScore(0, YES);
-    
     // 初期化するフラグ
     m_State = eState_Init;
     m_nDestroy = 0;
-    m_Score = SaveData_GetHiScore();
+    m_Score = 0;
     m_ComboMax = 0;
     m_tPast = 0;
     
@@ -396,8 +393,6 @@ static GameScene* scene_ = nil;
                     // スコアもアップ
                     [self addScore:100];
                     
-                    SaveData_SetHiScore(m_Score);
-                    
                     break;
                     
                 }
@@ -427,8 +422,6 @@ static GameScene* scene_ = nil;
                     
                     // スコアもアップ
                     [self addScore:100];
-                    
-                    SaveData_SetHiScore(m_Score);
                     
                     bHit = YES;
                     
@@ -504,14 +497,14 @@ static GameScene* scene_ = nil;
     
     // BGM 更新
     if ([self.player isDanger]) {
-        Sound_SetBgmVolume(0.5);
+        Sound_SetBgmVolume(0.4);
     }
     else {
         Sound_SetBgmVolume(1);
         
         // BGM切り替え判定
-        if (m_tBgm > 60 * 60 * 4) {
-            // おおよそ４分で切り替え
+        if (m_tBgm > 60 * 60 * 3) {
+            // おおよそ3分で切り替え
             [self changeBgm];
             m_tBgm = 0;
         }
@@ -525,6 +518,11 @@ static GameScene* scene_ = nil;
         
         // BGMを止める
         Sound_StopBgm();
+        
+        // ハイスコア更新
+        SaveData_SetHiScore(m_Score);
+        // 最大レベル更新
+        SaveData_SetRankMax([self.levelMgr getLevel]);
         
         // 画面を暗くする
         [self.black setVisible:YES];
@@ -660,7 +658,7 @@ static GameScene* scene_ = nil;
     
 //    [self.asciiFont5 setText:[NSString stringWithFormat:@"State: %@", [self.player getStateString]]];
     
-    [self.asciiFontLevel setText:[NSString stringWithFormat:@"Level: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
+    [self.asciiFontLevel setText:[NSString stringWithFormat:@"Rank: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
     
     [self.asciiFontScore setText:[NSString stringWithFormat:@"Score: %d", m_Score]];
    
