@@ -20,7 +20,7 @@ static NSUserDefaults* _Get()
  * セーブデータを初期化する
  */
 void SaveData_Init() {
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults* defaults = _Get();
     
     if ([defaults boolForKey:@"INIT"]) {
         
@@ -44,7 +44,7 @@ void SaveData_Init() {
  * @return ハイスコア
  */
 int SaveData_GetHiScore() {
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults* defaults = _Get();
     
     return [defaults integerForKey:@"HI_SCORE"];
     
@@ -65,7 +65,7 @@ void SaveData_SetHiScore(int score, BOOL bForce) {
         }
     }
     
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults* defaults = _Get();
     [defaults setInteger:score forKey:@"HI_SCORE"];
     
     // 保存
@@ -78,7 +78,7 @@ void SaveData_SetHiScore(int score, BOOL bForce) {
  */
 int SaveData_GetRank() {
     
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults* defaults = _Get();
     
     return [defaults integerForKey:@"RANK"];
 }
@@ -96,7 +96,7 @@ void SaveData_SetRank(int rank) {
         return;
     }
     
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    NSUserDefaults* defaults = _Get();
     [defaults setInteger:rank forKey:@"RANK"];
     
     // 保存
@@ -108,7 +108,9 @@ void SaveData_SetRank(int rank) {
  * @return 最大難易度
  */
 int SaveData_GetRankMax() {
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSUserDefaults* defaults = _Get();
+    
     
     return [defaults integerForKey:@"RANK_MAX"];
 }
@@ -118,7 +120,8 @@ int SaveData_GetRankMax() {
  * @param rank 最大難易度
  */
 void SaveData_SetRankMax(int rank) {
-    NSUserDefaults* defaults = [NSUserDefaults standardUserDefaults];
+    
+    NSUserDefaults* defaults = _Get();
     
     int max = SaveData_GetRank();
     if (rank < max) {
