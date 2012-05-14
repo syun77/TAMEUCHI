@@ -796,6 +796,8 @@ enum eState {
         
         m_tPower += v;
         if (m_tPower > m_PowerMax) {
+            
+            // 最大まで溜まった
             m_tPower = m_PowerMax;
             Sound_PlaySe(@"ladder.wav");
         }

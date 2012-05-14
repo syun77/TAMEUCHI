@@ -20,6 +20,7 @@
 #import "SaveData.h"
 
 static const int TIMER_GAMEOVER = 60;
+static const float TIMER_SHAKE = 64;
 
 static const int BGM_MIN = 1;
 static const int BGM_MAX = 6;
@@ -256,7 +257,9 @@ static GameScene* scene_ = nil;
     m_Score = 0;
     m_ComboMax = 0;
     m_tPast = 0;
+    m_tShake = 0;
     
+    // BGM再生
     m_nBgm = Math_RandInt(BGM_MIN, BGM_MAX);
     Sound_SetBgmVolume(1);
     [self changeBgm];
@@ -534,6 +537,9 @@ static GameScene* scene_ = nil;
         // 画面を暗くする
         [self.black setVisible:YES];
         
+        // 画面揺れ開始
+        m_tShake = TIMER_SHAKE;
+        
         // 更新を再開する
         [self resume];
     }
@@ -595,6 +601,7 @@ static GameScene* scene_ = nil;
  */
 - (void)updateGameOver:(ccTime)dt {
     
+    // ゲームオーバー文字
     [self.asciiFontGameover setScale:1.5];
     [self.asciiFontGameover setVisible:YES];
     [self.asciiFontGameover setText:@"GAME OVER"];
@@ -623,6 +630,24 @@ static GameScene* scene_ = nil;
     
     m_tPast++;
     m_tBgm++;
+    
+    if (m_tShake > 0) {
+        m_tShake *= 0.9f;
+        if (m_tShake < 3) {
+            m_tShake = 0;
+        }
+        
+        float ofsX = 0;
+        if (int(m_tShake)%2 == 0) {
+            ofsX = m_tShake;
+        }
+        else {
+            ofsX = -m_tShake;
+        }
+        float ofsY = Math_RandFloat(-m_tShake, m_tShake);
+        
+        self.baseLayer.position = CGPointMake(ofsX, ofsY);
+    }
     
     switch (m_State) {
         case eState_Init:
