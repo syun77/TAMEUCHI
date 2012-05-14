@@ -607,6 +607,41 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
     ccDrawCircle(CGPointMake(cx, cy), radius, 0, 20, NO);
 }
 
+// 三角形の描画
+- (void)fillTriangle:(float)cx cy:(float)cy radius:(float)radius rot:(float)rot scale:(float)scale {
+    
+    // iPhoneの座標系はYが逆
+    rot += 180;
+    
+    float r = radius * scale;
+    
+    float x1 = cx + Math_CosEx(rot + 90) * r;
+    float y1 = cy - Math_SinEx(rot + 90) * r;
+    float x2 = cx + Math_CosEx(rot + 210) * r;
+    float y2 = cy - Math_SinEx(rot + 210) * r;
+    float x3 = cx + Math_CosEx(rot + 330) * r;
+    float y3 = cy - Math_SinEx(rot + 330) * r;
+    
+    CGPoint vertices[] = {
+        {x1, y1 },
+        {x2, y2 },
+        {x3, y3 },
+    };
+    
+    ccFillPoly(vertices, 3, YES);
+}
+
+- (void)fillTriangleEx:(float)x1 y1:(float)y1 x2:(float)x2 y2:(float)y2 x3:(float)x3 y3:(float)y3 {
+    
+    CGPoint vertices[] = {
+        {x1, y1},
+        {x2, y2},
+        {x3, y3},
+    };
+    
+    ccFillPoly(vertices, 3, YES);
+}
+
 - (void)visit {
     [super visit];
     

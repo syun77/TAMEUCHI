@@ -127,6 +127,7 @@ enum eState {
     [self fillRect:0 cy:self._y w:System_Width() h:t rot:0 scale:1];
     
     System_SetBlend(eBlend_Normal);
+    
 }
 
 // コンボ開始

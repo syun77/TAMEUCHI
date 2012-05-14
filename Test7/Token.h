@@ -116,7 +116,7 @@
 - (BOOL)isHitEnabled;
 
 // 矩形の描画
-- (void)drawRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float) rot scale:(float)scale;
+- (void)drawRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float)rot scale:(float)scale;
 
 - (void)fillRect:(float)cx cy:(float)cy w:(float)w h:(float)h rot:(float)rot scale:(float)scale;
 - (void)drawRectLT:(float)x y:(float)y w:(float)w h:(float)h rot:(float)rot scale:(float)scale;
@@ -124,6 +124,10 @@
 
 // 円の描画
 - (void)drawCircle:(float)cx cy:(float)cy radius:(float)radius;
+
+// 三角形の描画
+- (void)fillTriangle:(float)cx cy:(float)cy radius:(float)radius rot:(float)rot scale:(float)scale;
+- (void)fillTriangleEx:(float)x1 y1:(float)y1 x2:(float)x2 y2:(float)y2 x3:(float)x3 y3:(float)y3;
 
 // ■コールバック関数
 - (void)cbTouchStart:(float)x y:(float)y;
