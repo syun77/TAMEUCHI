@@ -49,3 +49,28 @@ int SaveData_GetRankMax();
  * @param rank 最大難易度
  */
 void SaveData_SetRankMax(int rank);
+
+
+/**
+ * BGMが有効となっているかどうか
+ * @return BGMが有効ならば「YES」
+ */
+BOOL SaveData_isEnableBgm();
+
+/**
+ * BGMが有効・無効を設定する
+ * @param b 有効フラグ
+ */
+void SaveData_SetEnableBgm(BOOL b);
+
+/**
+ * SEが有効となっているかどうか
+ * @return SEが有効ならば「YES」
+ */
+BOOL SaveData_IsEnableSe();
+
+/**
+ * SEが有効・無効を設定する
+ * @param b 有効フラグ
+ */
+void SaveData_SetEnableSe(BOOL b);

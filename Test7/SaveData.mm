@@ -9,6 +9,14 @@
 #import "SaveData.h"
 
 /**
+ * NSUserDefaultsを取得する
+ */
+static NSUserDefaults* _Get()
+{
+    return [NSUserDefaults standardUserDefaults];
+}
+
+/**
  * セーブデータを初期化する
  */
 void SaveData_Init() {
@@ -24,6 +32,8 @@ void SaveData_Init() {
     [defaults setInteger:0 forKey:@"HI_SCORE"];
     [defaults setInteger:1 forKey:@"RANK"];
     [defaults setInteger:1 forKey:@"RANK_MAX"];
+    [defaults setBool:YES forKey:@"BGM"];
+    [defaults setBool:YES forKey:@"SE"];
     
     // 保存
     [defaults synchronize];
@@ -121,4 +131,50 @@ void SaveData_SetRankMax(int rank) {
     
     // 保存
     [defaults synchronize];
+}
+
+/**
+ * BGMが有効となっているかどうか
+ * @return BGMが有効ならば「YES」
+ */
+BOOL SaveData_isEnableBgm() {
+    NSUserDefaults* ix = _Get();
+    
+    return [ix boolForKey:@"BGM"];
+}
+
+/**
+ * BGMが有効・無効を設定する
+ * @param b 有効フラグ
+ */
+void SaveData_SetEnableBgm(BOOL b) {
+    NSUserDefaults* ix = _Get();
+    
+    [ix setBool:b forKey:@"BGM"];
+    
+    // 保存
+    [ix synchronize];
+}
+
+/**
+ * SEが有効となっているかどうか
+ * @return SEが有効ならば「YES」
+ */
+BOOL SaveData_IsEnableSe() {
+    NSUserDefaults* ix = _Get();
+    
+    return [ix boolForKey:@"SE"];
+}
+
+/**
+ * SEが有効・無効を設定する
+ * @param b 有効フラグ
+ */
+void SaveData_SetEnableSe(BOOL b) {
+    NSUserDefaults* ix = _Get();
+    
+    [ix setBool:b forKey:@"SE"];
+    
+    // 保存
+    [ix synchronize];
 }
