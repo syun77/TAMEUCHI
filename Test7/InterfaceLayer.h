@@ -20,6 +20,8 @@
     float m_StartY;     // タッチ開始座標(Y)
     float m_X;          // タッチしている座標(X)
     float m_Y;          // タッチしている座標(Y)
+    float m_MoveX;      // 移動距離 (X)
+    float m_MoveY;      // 移動距離 (Y)
     NSMutableArray* m_CBArray;  // コールバックで呼び出すオブジェクト(Token)
 }
 
@@ -41,5 +43,11 @@
 // タッチしている座標を取得
 - (float)getPosX;
 - (float)getPosY;
+
+// 移動距離を取得
+- (float)getMoveX;
+- (float)getMoveY;
+- (float)getMoveLength;
+- (void)resetMove;
 
 @end

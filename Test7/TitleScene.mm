@@ -118,13 +118,31 @@ static TitleScene* scene_ = nil;
 }
 
 - (void)cbTouchStart:(float)x y:(float)y {
-    NSLog(@"Touch Start.");
+    m_RankPrev = SaveData_GetRank();
+    
+}
+
+- (void)cbTouchMove:(float)x y:(float)y {
+    
+    int rank = m_RankPrev;
+    
+    float vx = [self.interfaceLayer getPosX] - [self.interfaceLayer startX];
+    rank += 10 * (int)(vx / 30);
+    if (rank < 1) {
+        rank = 1;
+    }
+    
+    SaveData_SetRank(rank);
 }
 
 - (void)cbTouchEnd:(float)x y:(float)y {
-    NSLog(@"Touch End.");
     
-    m_bNextScene = YES;
+    float len = [self.interfaceLayer getMoveLength];
+    if (len < 30) {
+        
+        // 移動距離が少なければタッチしたものとする
+        m_bNextScene = YES;
+    }
 }
 
 @end

@@ -88,7 +88,7 @@ int SaveData_GetRank() {
  * @param rank 難易度
  */
 void SaveData_SetRank(int rank) {
-    int max = SaveData_GetRank();
+    int max = SaveData_GetRankMax();
     
     if (rank < max) {
         

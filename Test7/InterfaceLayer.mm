@@ -7,6 +7,7 @@
 //
 
 #import "InterfaceLayer.h"
+#import "Vec.h"
 
 @implementation InterfaceLayer
 
@@ -43,6 +44,8 @@
     m_StartY = 0;
     m_X = 0;
     m_Y = 0;
+    [self resetMove];
+    
 }
 
 /**
@@ -81,6 +84,7 @@
     m_StartY = location.y;
     m_X = location.x;
     m_Y = location.y;
+    [self resetMove];
     
     for (id t in self.m_CBArray) {
         [t cbTouchStart:location.x y:location.y];
@@ -98,9 +102,19 @@
     CGPoint locationView = [touch locationInView:[touch view]];
     CGPoint location = [[CCDirector sharedDirector] convertToGL:locationView];
     
+    // 前回の座標から差分を出す
+    float dx = location.x - m_X;
+    float dy = location.y - m_Y;
+    m_MoveX += dx > 0 ? dx : -dx;
+    m_MoveY += dy > 0 ? dy : -dy;
+    
     // タッチ座標を設定
     m_X = location.x;
     m_Y = location.y;
+    
+    for (id t in self.m_CBArray) {
+        [t cbTouchMove:location.x y:location.y];
+    }
 }
 
 /**
@@ -156,6 +170,26 @@
 
 - (float)getPosY {
     return m_Y;
+}
+
+// 移動距離を取得
+- (float)getMoveX {
+    return m_MoveX;
+}
+
+- (float)getMoveY {
+    return m_MoveY;
+}
+
+- (float)getMoveLength {
+    Vec2D v = Vec2D(m_MoveX, m_MoveY);
+    
+    return v.Length();
+}
+
+- (void)resetMove {
+    m_MoveX = 0;
+    m_MoveY = 0;
 }
 
 @end
