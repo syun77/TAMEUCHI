@@ -359,6 +359,7 @@ static GameScene* scene_ = nil;
     
     if (bItemRecover) {
         
+        Sound_PlaySe(@"item3.wav");
     }
     
     if (bItemScore) {
@@ -626,6 +627,7 @@ static GameScene* scene_ = nil;
     switch (m_State) {
         case eState_Init:
             [self updateInit:dt];
+            Sound_PlaySe(@"ready.wav");
             m_Step = eStep_Main;
             break;
             

@@ -26,6 +26,8 @@
     AsciiFont*      fontRankMax;    // フォント (最大ランク)
     
     BOOL            m_bNextScene;   // 次のシーンに進む
+    float           m_TouchStartX;  // タッチ開始座標 (X)
+    float           m_TouchStartY;  // タッチ開始座標 (Y)
 }
 
 @property (nonatomic, retain)BackTitle*         back;

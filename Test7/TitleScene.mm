@@ -77,6 +77,8 @@ static TitleScene* scene_ = nil;
     
     // 変数初期化
     m_bNextScene = NO;
+    m_TouchStartX = 0;
+    m_TouchStartY = 0;
     
     // 更新スケジューラ登録
     [self scheduleUpdate];

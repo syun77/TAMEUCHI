@@ -64,7 +64,7 @@ static const int SHOT_TIMER = 16;
 - (float)getPowerRatio;
 
 // パワーの追加
-- (void)addPower:(float)v;
+- (BOOL)addPower:(float)v;
 
 // チャージタイマーの取得
 - (int)getChargeTimer;

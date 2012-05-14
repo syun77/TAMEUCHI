@@ -378,10 +378,8 @@ enum eState {
         m_tCharge++;
         if ([self isChargeStart]) {
             
-            m_tPower += 0.3f;
-            if (m_tPower > m_PowerMax) {
-                m_tPower = m_PowerMax;
-            } else {
+            if ([self addPower:0.3f]) {
+                
                 // 回復エフェクト(小)生成
                 [[self getGauge] addChargeEffectSmall];
             }
@@ -596,7 +594,7 @@ enum eState {
 // 危険回避ショット
 - (void)shotDanger {
     
-    Sound_PlaySe(@"clock.wav");
+    Sound_PlaySe(@"destroy4.wav");
     
     // オートボム発動
     if (m_nLevel > 1) {
@@ -793,11 +791,20 @@ enum eState {
 }
 
 // パワーの追加
-- (void)addPower:(float)v {
-    m_tPower += v;
-    if (m_tPower > m_PowerMax) {
-        m_tPower = m_PowerMax;
+- (BOOL)addPower:(float)v {
+    if (m_tPower < m_PowerMax) {
+        
+        m_tPower += v;
+        if (m_tPower > m_PowerMax) {
+            m_tPower = m_PowerMax;
+            Sound_PlaySe(@"ladder.wav");
+        }
+        
+        // 増やせた
+        return YES;
     }
+    
+    return NO;
 }
 
 
