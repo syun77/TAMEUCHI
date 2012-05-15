@@ -232,4 +232,16 @@
     return m_Timer;
 }
 
+// レベルアップタイマーのウェイと時間を取得する
+- (int)getLevelUpTimerWait {
+    
+    int ret = 60 - (m_nLevel / 4);
+    
+    if (ret < 20) {
+        ret = 20;
+    }
+    
+    return ret;
+}
+
 @end

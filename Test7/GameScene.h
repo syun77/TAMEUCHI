@@ -31,9 +31,6 @@
 // 危険時に有効となる速度の係数
 static const float DANGER_SLOW_RATIO = 0.7;
 
-// レベルアップ演出タイマー
-static const int TIMER_LEVELUP = 60;
-
 // バナナボーナススコア
 static const int SCORE_BANANA_BONUS = 500;
 
@@ -73,6 +70,7 @@ static const int SCORE_BANANA_BONUS = 500;
     int             m_State;        // 状態
     int             m_Step;         // ステップ
     int             m_Timer;        // 汎用タイマー
+    int             m_TimerMax;     // タイマーの最大値
     int             m_nDestroy;     // 敵を倒した数
     int             m_Score;        // スコア
     int             m_ComboMax;     // 最大コンボ数
@@ -126,6 +124,9 @@ static const int SCORE_BANANA_BONUS = 500;
 
 // タイマーを取得する
 - (int)getTimer;
+
+// タイマーの最大値を取得する
+- (int)getTimerMax;
 
 // スコアを加算（敵破壊点）
 - (void)addScoreEnemy:(Enemy*)enemy;

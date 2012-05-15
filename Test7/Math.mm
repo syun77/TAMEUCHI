@@ -109,7 +109,13 @@ float Math_RandFloat(float a, float b)
     return Math_Randf(d) + a;
 }
 
-// 指定の角度に近づくにはどれだけ回すのかを計算する
+
+/**
+ * 指定の角度に近づくにはどれだけ回すのかを計算する
+ * @param next 目標の角度
+ * @param now 現在の角度
+ * @return 回す角度
+ */
 float Math_GetNearestRot(float next, float now) {
     
     while (next < 0) {
@@ -130,4 +136,28 @@ float Math_GetNearestRot(float next, float now) {
         return dRot += 360;
     }
     return dRot;
+}
+
+// 当たり判定チェック
+BOOL Math_IsHitRect(CGRect rect, CGPoint p) {
+    
+    float x1 = rect.origin.x;
+    float y1 = rect.origin.y;
+    float x2 = rect.origin.x + rect.size.width;
+    float y2 = rect.origin.y + rect.size.height;
+    
+    if (p.x < x1) {
+        return NO;
+    }
+    if (p.y < y1) {
+        return NO;
+    }
+    if (p.x > x2) {
+        return NO;
+    }
+    if (p.y > y2) {
+        return NO;
+    }
+    
+    return YES;
 }

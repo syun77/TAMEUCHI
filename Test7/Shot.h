@@ -14,8 +14,9 @@
  * ショット種別
  */
 enum eShot {
-    eShot_Normal, // 通常
-    eShot_Power,  // パワーショット
+    eShot_Normal,   // 通常
+    eShot_Power,    // パワーショット
+    eShot_Homing,   // ホーミングショット
 };
 
 /**

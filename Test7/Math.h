@@ -56,4 +56,7 @@ float Math_RandFloat(float a, float b);
 // 指定の角度に近づくにはどれだけ回すのかを計算する
 float Math_GetNearestRot(float next, float now);
 
+// 当たり判定チェック
+BOOL Math_IsHitRect(CGRect rect, CGPoint p);
+
 #endif // __JP_2DGAMES_MATH_H__

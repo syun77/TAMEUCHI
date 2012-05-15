@@ -11,6 +11,7 @@
 #import "GameScene.h"
 #import "Particle.h"
 #import "Exerinya.h"
+#import "Enemy.h"
 
 /**
  * 自弾の実装
@@ -67,6 +68,20 @@
             else {
                 [self setColor:ccc3(0xFF, 0xFF, 0xFF)];
             }
+            break;
+            
+        case eShot_Homing:
+            // ホーミングショット
+        {
+            Vec2D v = Vec2D(self._vx, self._vy);
+            float rot = v.Rot();
+            float speed = v.Length();
+            Enemy* e = [Enemy getNearest:self._x y:self._y];
+            Vec2D d = Vec2D(e._x - self._x, e._y - self._y);
+            float rot2 = Math_GetNearestRot(d.Rot(), rot);
+            self._vx = speed * Math_CosEx(rot + rot2 * 0.1f);
+            self._vy = speed * Math_SinEx(rot + rot2 * 0.1f);
+        }
             break;
             
         default:

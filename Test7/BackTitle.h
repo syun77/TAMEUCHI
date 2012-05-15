@@ -14,7 +14,7 @@
  * タイトル画面用背景
  */
 @interface BackTitle : Token {
-    
+    int     m_tPast;    // 経過時間
 }
 
 @end

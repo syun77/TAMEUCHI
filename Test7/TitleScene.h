@@ -12,6 +12,12 @@
 #import "AsciiFont.h"
 #import "BackTitle.h"
 
+// ランク選択タッチエリア
+static const float RANK_SELECT_RECT_X = 0;
+static const float RANK_SELECT_RECT_Y = 160-64;
+static const float RANK_SELECT_RECT_W = 480;
+static const float RANK_SELECT_RECT_H = 64;
+
 /**
  * タイトル画面
  */
@@ -29,6 +35,7 @@
     float           m_TouchStartX;  // タッチ開始座標 (X)
     float           m_TouchStartY;  // タッチ開始座標 (Y)
     int             m_RankPrev;     // タッチ前のランク
+    BOOL            m_bRankSelect;  // ランク選択タッチ中
 }
 
 @property (nonatomic, retain)BackTitle*         back;
@@ -41,5 +48,8 @@
 
 + (TitleScene*)sharedInstance;
 + (void)releaseInstance;
+
+// ランク選択タッチ中
+- (BOOL)isTouchRankSelect;
 
 @end

@@ -138,7 +138,7 @@ static const int TIMER_DANGER = 10;
         // レベルアップ演出中
         
         System_SetBlend(eBlend_Add);
-        float height = 1 + 16 * [scene getTimer] / TIMER_LEVELUP;
+        float height = 1 + 16 * [scene getTimer] / [scene getTimerMax];
         
         glColor4f(1, 1, 1, 0.2);
         

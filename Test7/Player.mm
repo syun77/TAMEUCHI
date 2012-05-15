@@ -49,12 +49,12 @@ static const int MAX_HP = 100;
 
 // 自動回復用タイマー
 // 初回回復までの時間
-static const int TIMER_AUTO_RECOVER_INIT = 100;
+static const int TIMER_AUTO_RECOVER_INIT = 200;
 // それ以降の回復時間
 static const int TIMER_AUTO_RECOVER = 20;
 
 // HP回復アイテム取得
-static const float RECOVER_ITEM_HP_RATIO = 0.2f;
+static const float RECOVER_ITEM_HP_RATIO = 0.1f;
 
 // チャージゲージ回復アイテム取得
 static const float CHARGE_ITEM_VAL = 5;
@@ -193,6 +193,7 @@ enum eState {
     m_tShot = 0;
     m_tDamage = 0;
     m_tPower = 0;
+    m_PowerMax = 1;
     m_tCharge = 0;
     m_Combo = 0;
     m_ComboMax = 0;
@@ -305,7 +306,7 @@ enum eState {
     
     if (m_nLevel > 9) {
         
-        if ([self getPowerRatio] > 0.95) {
+        if ([self getPowerRatio] > 0.9) {
             // 7WAV
             [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 45 speed:speed];
             [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 45 speed:speed];
@@ -351,7 +352,7 @@ enum eState {
             // 弾を撃つ
             [self shotAim];
             if (m_tPower > 0) {
-                m_tPower--;
+                m_tPower -= 1 + (0.1 * m_nLevel) * (0.1 * m_nLevel);
                 m_tShot += 2;
                 if (nearestLength < 20000) {
                     m_tShot = 0;
@@ -378,7 +379,7 @@ enum eState {
         m_tCharge++;
         if ([self isChargeStart]) {
             
-            if ([self addPower:0.3f]) {
+            if ([self addPower:0.5f]) {
                 
                 // 回復エフェクト(小)生成
                 [[self getGauge] addChargeEffectSmall];
@@ -611,6 +612,7 @@ enum eState {
         for (int i = 0; i < cnt; i++) {
             // 全方位弾発射
             [Shot add:eShot_Power x:self._x y:self._y rot:i * (360/cnt) speed:100];
+
         }
     }
     

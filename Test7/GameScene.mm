@@ -318,6 +318,11 @@ static GameScene* scene_ = nil;
     [self.levelMgr initialize];
 }
 
+- (void)setTimer:(int)t {
+    m_TimerMax = t;
+    m_Timer    = t;
+}
+
 /**
  * 更新・初期化
  */
@@ -524,7 +529,7 @@ static GameScene* scene_ = nil;
         
         // プレイヤー死亡
         m_State = estate_GameOver;
-        m_Timer = TIMER_GAMEOVER;
+        [self setTimer:TIMER_GAMEOVER];
         
         // BGMを止める
         Sound_StopBgm();
@@ -569,10 +574,11 @@ static GameScene* scene_ = nil;
 */    
     
     // レベルアップ文字の表示
-    float px = System_CenterX() - 16 + 16.0 * m_Timer / TIMER_LEVELUP;
-    if (m_Timer > TIMER_LEVELUP - 10) {
+    float px = System_CenterX() - 16 + 16.0 * m_Timer / m_TimerMax;
+    int tWait = m_TimerMax / 6;
+    if (m_Timer > m_TimerMax - tWait) {
         
-        px += 32 * (10 - (TIMER_LEVELUP - m_Timer));
+        px += 32 * (tWait - (m_TimerMax - m_Timer));
     }
     
     [self.asciiFontLevelUp setPosScreen:px y:System_CenterY()];
@@ -727,7 +733,7 @@ static GameScene* scene_ = nil;
     Sound_PlaySe(@"kin.wav");
     
     m_Step = eStep_Levelup;
-    m_Timer = TIMER_LEVELUP;
+    [self setTimer:[self.levelMgr getLevelUpTimerWait]];
     
     // トークンの更新を止める
     [self pause]; 
@@ -747,6 +753,11 @@ static GameScene* scene_ = nil;
 // タイマーを取得する
 - (int)getTimer {
     return m_Timer;
+}
+
+// タイマーの最大値を取得する
+- (int)getTimerMax {
+    return m_TimerMax;
 }
 
 // スコアを加算する（敵破壊点）

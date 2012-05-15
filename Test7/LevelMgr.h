@@ -36,4 +36,7 @@ enum eLevel {
 // タイマーの取得
 - (int)getTimer;
 
+// レベルアップタイマーのウェイと時間を取得する
+- (int)getLevelUpTimerWait;
+
 @end

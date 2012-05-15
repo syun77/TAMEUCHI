@@ -120,29 +120,49 @@ static TitleScene* scene_ = nil;
 - (void)cbTouchStart:(float)x y:(float)y {
     m_RankPrev = SaveData_GetRank();
     
+    
+    CGRect rect = CGRectMake(RANK_SELECT_RECT_X, RANK_SELECT_RECT_Y, RANK_SELECT_RECT_W, RANK_SELECT_RECT_H);
+    CGPoint p = CGPointMake(x, y);
+    
+    if (Math_IsHitRect(rect, p)) {
+        m_bRankSelect = YES;
+    }
+    else {
+        m_bRankSelect = NO;
+    }
+    
 }
 
 - (void)cbTouchMove:(float)x y:(float)y {
-    
-    int rank = m_RankPrev;
-    
-    float vx = [self.interfaceLayer getPosX] - [self.interfaceLayer startX];
-    rank += 10 * (int)(vx / 30);
-    if (rank < 1) {
-        rank = 1;
+    if (m_bRankSelect) {
+        int rank = m_RankPrev;
+        
+        float vx = [self.interfaceLayer getPosX] - [self.interfaceLayer startX];
+        rank += 10 * (int)(vx / 15);
+        if (rank < 1) {
+            rank = 1;
+        }
+        
+        SaveData_SetRank(rank);
     }
-    
-    SaveData_SetRank(rank);
 }
 
 - (void)cbTouchEnd:(float)x y:(float)y {
     
     float len = [self.interfaceLayer getMoveLength];
-    if (len < 30) {
+    if (len < 15) {
         
         // 移動距離が少なければタッチしたものとする
         m_bNextScene = YES;
     }
+    
+    // タッチ終了
+    m_bRankSelect = NO;
+}
+
+// ランク選択タッチ中
+- (BOOL)isTouchRankSelect {
+    return m_bRankSelect;
 }
 
 @end
