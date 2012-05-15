@@ -922,7 +922,7 @@ enum eRange {
         
         const float SPEED_ROT = 3;
         float dRot = Math_GetNearestRot(aim, rot);
-        if (abs(dRot) > SPEED_ROT * 3) {
+        if (abs(dRot) > SPEED_ROT) {
             float next = rot;
             if (dRot > 0) {
                 next += SPEED_ROT;

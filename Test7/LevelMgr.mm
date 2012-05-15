@@ -232,10 +232,12 @@
     return m_Timer;
 }
 
-// レベルアップタイマーのウェイと時間を取得する
+// レベルアップタイマーのウェイト時間を取得する
 - (int)getLevelUpTimerWait {
     
     int ret = 60 - (m_nLevel / 4);
+    
+    ret -= [[GameScene sharedInstance].player getLevel];
     
     if (ret < 20) {
         ret = 20;
