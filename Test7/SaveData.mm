@@ -90,10 +90,10 @@ int SaveData_GetRank() {
 void SaveData_SetRank(int rank) {
     int max = SaveData_GetRankMax();
     
-    if (rank < max) {
+    if (rank > max) {
         
-        // 更新不要
-        return;
+        // 最大ランクでまるめる
+        rank = max;
     }
     
     NSUserDefaults* defaults = _Get();
@@ -123,7 +123,7 @@ void SaveData_SetRankMax(int rank) {
     
     NSUserDefaults* defaults = _Get();
     
-    int max = SaveData_GetRank();
+    int max = SaveData_GetRankMax();
     if (rank < max) {
         
         // 更新不要
