@@ -133,6 +133,14 @@ enum eRange {
 }
 
 /**
+ * 現在のレベルを取得する
+ */
+- (int)getLevel {
+    LevelMgr* level = [GameScene sharedInstance].levelMgr;
+    return [level getLevel];
+}
+
+/**
  * プレイヤーとの距離を計算する
  */
 - (eRange)getRange {
@@ -449,6 +457,56 @@ enum eRange {
                     [Bullet add:self._x y:self._y rot:rot speed:100];
                 }
                 
+            }
+            
+            if ([self getLevel] > 100) {
+                
+                if ([self getRange] == eRange_Middle) {
+                
+                    // 中距離のみ、乱射する
+                    if (500 < m_Timer && m_Timer < 700) {
+                        
+                        // 周期
+                        int cycle = 30 - [self getLevel] / 100;
+                        if (cycle < 5) {
+                            cycle = 5;
+                        }
+                        
+                        if (m_Timer%20 == 0) {
+                            
+                            float speed = [self getLevel];
+                            
+                            if (speed > 200) {
+                                speed = 200;
+                            }
+                            
+                            float rot = [self getAim] + Math_RandInt(-20, 20);
+                            [Bullet add:self._x y:self._y rot:rot speed:speed];
+                        }
+                        
+                    }
+                }
+            }
+            
+            if ([self getLevel] > 50) {
+                
+                // レベルが高いときのみ発動
+                // 遠距離のみ
+                if ([self getRange] == eRange_Long) {
+                    float speed = [self getLevel];
+                    
+                    if (speed > 500) {
+                        speed = 500;
+                    }
+                    
+                    if (m_Timer%1000 == 100) {
+                        int cnt = 3;
+                        for (int i = 0; i < cnt; i++) {
+                            float rot = [self getAim];
+                            [Bullet add:self._x y:self._y rot:rot speed:speed + i * 20];
+                        }
+                    }
+                }
             }
             
             if (m_Timer%80 == 0) {

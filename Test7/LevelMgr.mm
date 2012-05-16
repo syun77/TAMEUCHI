@@ -141,36 +141,77 @@
     }
     else if (m_nLevel < 100) {
         
+        // Lv100以下
         if (m_Timer%320 == 160) {
-            if (m_nLevel > 10) {
-                if ([self getEnemyCountBig] < m_nLevel / 10) {
+            
+            if ([self getEnemyCountBig] < m_nLevel / 10) {
+                
+                if (m_nLevel < 20 || Math_Rand(2) == 0) {
                     
-                    if (Math_Rand(2) == 0) {
-                        
-                        [self addEnemy:eEnemy_Pudding];
-                    }
-                    else {
-                        
-                        [self addEnemy:eEnemy_Milk];
-                    }
+                    // プリン出現
+                    [self addEnemy:eEnemy_Pudding];
+                }
+                else {
+                    
+                    // 牛乳出現
+                    [self addEnemy:eEnemy_Milk];
                 }
             }
         }
         
         if (m_Timer%600 == 180) {
-            if (m_nLevel > 5) {
-                if ([self getEnemyCount] < m_nLevel) {
+            if ([self getEnemyCount] < m_nLevel) {
+                
+                if (Math_Rand(2) == 0) {
                     
-                    if (Math_Rand(2) == 0) {
-                        
-                        // 5箱出現
-                        [self addEnemy:eEnemy_5Box];
-                    }
+                    // 5箱出現
+                    [self addEnemy:eEnemy_5Box];
                 }
             }
         }
         
         if (m_Timer > 800) {
+            m_nLevel++;
+            m_Timer = 0;
+        }
+    }
+    else {
+        
+        // Lv100以上
+        if (m_Timer%320 == 160) {
+            
+            if ([self getEnemyCountBig] < m_nLevel * m_nLevel / 50) {
+                
+                int cnt = Math_Rand(3) + 1;
+                
+                for (int i = 0; i < cnt; i++) {
+                    if (Math_Rand(2) == 0) {
+                        
+                        // プリン出現
+                        [self addEnemy:eEnemy_Pudding];
+                    }
+                    else {
+                        
+                        // 牛乳出現
+                        [self addEnemy:eEnemy_Milk];
+                    }
+                }
+                
+            }
+        }
+        
+        if (m_Timer%600 == 180) {
+            if ([self getEnemyCount] < m_nLevel) {
+                
+                if (Math_Rand(2) == 0) {
+                    
+                    // 5箱出現
+                    [self addEnemy:eEnemy_5Box];
+                }
+            }
+        }
+        
+        if (m_Timer > 1600) {
             m_nLevel++;
             m_Timer = 0;
         }

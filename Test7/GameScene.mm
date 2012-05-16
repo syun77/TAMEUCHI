@@ -129,7 +129,6 @@ static GameScene* scene_ = nil;
         return self;
     }
     
-    
     // 各種オブジェクト生成
     self.baseLayer = [CCLayer node];
     [self addChild:self.baseLayer];

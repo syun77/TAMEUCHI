@@ -96,7 +96,17 @@
 
 // オブジェクト追加
 + (Bullet*)add:(float)x y:(float)y rot:(float)rot speed:(float)speed {
+    
     GameScene* scene = [GameScene sharedInstance];
+    Player* player = scene.player;
+    
+    Vec2D v = Vec2D(player._x - x, player._y - y);
+    if (v.Length() < 150) {
+        
+        // 至近距離で弾は撃たない
+        return NULL;
+    }
+    
     Bullet* b = (Bullet*)[scene.mgrBullet add];
     if (b) {
         [b set2:x y:y rot:rot speed:speed ax:0 ay:0];
