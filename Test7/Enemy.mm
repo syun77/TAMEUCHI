@@ -169,6 +169,16 @@ enum eRange {
 }
 
 /**
+ * 危険な状態かどうか
+ * @return 危険な状態であれば「YES」
+ */
+- (BOOL)isDanger {
+    float ratio = (float)m_Hp / m_HpMax;
+    
+    return ratio < 0.3;
+}
+
+/**
  * 初期化
  */
 - (void)initialize {
@@ -502,7 +512,7 @@ enum eRange {
                     if (m_Timer%1000 == 100) {
                         int cnt = 3;
                         for (int i = 0; i < cnt; i++) {
-                            float rot = [self getAim];
+                            float rot = [self getAim] + Math_RandInt(-20, 20);
                             [Bullet add:self._x y:self._y rot:rot speed:speed + i * 20];
                         }
                     }
@@ -561,7 +571,13 @@ enum eRange {
  */
 - (void)updateTako {
     const float speedIn  = 100; // 画面に入る速度
-    const float speedMove = 500; // 移動速度
+    float speedMove = 300; // 移動速度
+    
+    speedMove += [self getLevel] * 2;
+    if (speedMove > 800) {
+        speedMove = 800;
+    }
+    
     m_Timer++;
     if (m_Timer < 40) {
         // 登場シーケンス
@@ -731,6 +747,8 @@ enum eRange {
                 self._vy = dy;
                 
                 // にんじん発射
+                if ([self getRange] == eRange_Middle) {
+                }
                 {
                 float speed = 200;
                 int cnt = 3;
@@ -832,16 +850,24 @@ enum eRange {
                 
                 if (range == eRange_Long) {
                     // 遠距離
-                    if (Math_Rand(2) == 0) {
+                    if ([self isDanger]) {
                         
                         // ウィップ弾
                         m_Val = [self getAim];
-                        m_Val2 = 64; // 16発撃つ
+                        m_Val2 = [self getLevel]; // これだけ撃つ
+                        if (m_Val2 > 96) {
+                            m_Val2 = 96;
+                        }
                         m_bWhip = YES;
                     }
                     else {
                         
                         // リング弾
+                        float base = 150 + [self getLevel] / 2;
+                        if (base > 300) {
+                            base = 300;
+                        }
+                        
                         for (int i = 0; i < 16; i++) {
                             float rot = i * (360 / 16);
                             float x = self._x + Math_CosEx(rot) * 64;
@@ -850,23 +876,34 @@ enum eRange {
                             Player* p = [self getTarget];
                             float rot2 = Math_Atan2Ex(p._y - y, p._x - x);
                             
-                            [Bullet add:x y:y rot:rot2 speed:200];
+                            [Bullet add:x y:y rot:rot2 speed:base];
                         }
                         
                     }
                 }
                 else if(range == eRange_Middle) {
                     // 中距離
-                    
+                    if (m_Timer%500 == 300) {
+                        // プレイヤーから離れようとする
+                        float aim = [self getAim] + 180;
+                        float dx = Math_CosEx(aim) * speedMove;
+                        float dy = -Math_SinEx(aim) * speedMove;
+                        self._vx = dx;
+                        self._vy = dy;
+                    }
                 }
                 else {
-                    // ポッキー発射
+                    // 近距離・ポッキー発射
                     float speed = 400;
-                    int cnt = 5;
-                    float rot = 180 + aim + (cnt / 2) * - 45;
+                    int cnt = 1 + [self getLevel] / 10;
+                    if (cnt > 10) {
+                        cnt = 10;
+                    }
+                    float dRot = 225 / cnt;
+                    float rot = 180 + aim + (cnt / 2) * - dRot;
                     for (int i = 0; i < cnt; i++) {
                         [Enemy add:eEnemy_Pokey x:self._x y:self._y rot:rot speed:speed];
-                        rot += 45;
+                        rot += dRot;
                     }
                     
                 }
@@ -901,7 +938,13 @@ enum eRange {
  * 更新・ポッキー
  */
 - (void)updatePokey {
-    const float SPEED = 300;
+    float speed = 100;
+    
+    speed += [self getLevel] * 5;
+    
+    if (speed > 400) {
+        speed = 400;
+    }
     
     switch (m_State) {
         case eState_Appear:
@@ -916,8 +959,8 @@ enum eRange {
                 m_State = eState_Main;
                 float aim = [self getAim];
                 
-                float dx = Math_CosEx(aim) * SPEED;
-                float dy = Math_SinEx(aim) * SPEED;
+                float dx = Math_CosEx(aim) * speed;
+                float dy = Math_SinEx(aim) * speed;
                 
                 self._vx = dx;
                 self._vy = dy;
@@ -1003,12 +1046,6 @@ enum eRange {
     }
     
     [self setRotation:Math_Atan2Ex(-self._vy, self._vx)];
-}
-
-- (BOOL)isDanger {
-    float ratio = (float)m_Hp / m_HpMax;
-    
-    return ratio < 0.3;
 }
 
 /**
