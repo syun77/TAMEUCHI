@@ -746,26 +746,42 @@ enum eRange {
                 self._vx = dx;
                 self._vy = dy;
                 
-                // にんじん発射
                 if ([self getRange] == eRange_Middle) {
+                    
+                    // にんじん発射
+                    float speed = 100 + [self getLevel];
+                    if (speed > 250) {
+                        speed = 250;
+                    }
+                    int cnt = 1 + [self getLevel] / 50;
+                    if (cnt > 8) {
+                        cnt = 8;
+                    }
+                    float dRot = 225 / cnt;
+                    float rot = 180 + aim + (cnt / 2) * - dRot;
+                    for (int i = 0; i < cnt; i++) {
+                        [Enemy add:eEnemy_Carrot x:self._x y:self._y rot:rot speed:speed];
+                        rot += 45;
+                    }
                 }
-                {
-                float speed = 200;
-                int cnt = 3;
-                float rot = aim - 180 - 45;
-                for (int i = 0; i < cnt; i++) {
-                    //[Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
-                    [Enemy add:eEnemy_Carrot x:self._x y:self._y rot:rot speed:speed];
-                    rot += 45;
-                }
-                }
-                // だいこん発射
-                float speed = 200;
-                int cnt = 3;
-                float rot = aim - 45;
-                for (int i = 0; i < cnt; i++) {
-                    [Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
-                    rot += 45;
+                else if([self getRange] == eRange_Long) {
+                    
+                    // だいこん発射
+                    float speed = 100 + [self getLevel];
+                    if (speed > 250) {
+                        speed = 250;
+                    }
+                    
+                    int cnt = 1 + [self getLevel] / 50;
+                    if (cnt > 8) {
+                        cnt = 8;
+                    }
+                    float dRot = 60 / cnt;
+                    float rot = aim + (cnt / 2) * - dRot;
+                    for (int i = 0; i < cnt; i++) {
+                        [Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
+                        rot += dRot;
+                    }
                 }
             }
             if([self isBoundRectX:self._r])
