@@ -211,7 +211,7 @@
             }
         }
         
-        if (m_Timer > 1600) {
+        if (m_Timer > 000) {
             m_nLevel++;
             m_Timer = 0;
         }
