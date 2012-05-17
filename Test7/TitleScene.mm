@@ -131,26 +131,53 @@ static TitleScene* scene_ = nil;
         m_bRankSelect = NO;
     }
     
+    // タッチ開始座標を保持
+    m_TouchStartX = x;
+    m_TouchStartY = y;
+    
 }
 
 - (void)cbTouchMove:(float)x y:(float)y {
-    if (m_bRankSelect) {
+    
+    if ([self isTouchRankSelect]) {
+        
+        // ランク選択有効
         int rank = m_RankPrev;
         
-        float vx = [self.interfaceLayer getPosX] - [self.interfaceLayer startX];
-        rank += 10 * (int)(vx / 15);
+        float vx = x - m_TouchStartX;
+        rank += 10 * (int)(vx / 10);
+        
         if (rank < 1) {
             rank = 1;
+            m_TouchStartX = x;
         }
         
-        SaveData_SetRank(rank);
+        if (rank != m_RankPrev) {
+            m_RankPrev = rank;
+            m_TouchStartX = x;
+        }
+        
+        if (SaveData_SetRank(rank)) {
+            // 設定できた
+            if (vx < 0) {
+                
+                // 左
+                [self.back moveCursorL];
+            }
+            else {
+                
+                // 右
+                [self.back moveCursorR];
+            }
+            
+        }
     }
 }
 
 - (void)cbTouchEnd:(float)x y:(float)y {
     
     float len = [self.interfaceLayer getMoveLength];
-    if (len < 15) {
+    if (len < 10) {
         
         // 移動距離が少なければタッチしたものとする
         m_bNextScene = YES;

@@ -760,8 +760,14 @@ enum eRange {
                     if (cnt > 8) {
                         cnt = 8;
                     }
+                    
+                    float dir = 180;
+                    if ([self getLevel] > 100 && Math_Rand(2) == 0) {
+                        dir = 0;
+                    }
+                    
                     float dRot = 225 / cnt;
-                    float rot = 180 + aim + (cnt / 2) * - dRot;
+                    float rot = dir + aim + (cnt / 2) * - dRot;
                     for (int i = 0; i < cnt; i++) {
                         [Enemy add:eEnemy_Carrot x:self._x y:self._y rot:rot speed:speed];
                         rot += 45;

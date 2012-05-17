@@ -87,13 +87,26 @@ int SaveData_GetRank() {
  * タイトル画面→メインゲーム用の難易度設定
  * @param rank 難易度
  */
-void SaveData_SetRank(int rank) {
-    int max = SaveData_GetRankMax();
+BOOL SaveData_SetRank(int rank) {
+    
+    // 10の倍数になるようにする
+    rank = (int)(rank / 10) * 10;
+    if (rank < 1) {
+        rank = 1;
+    }
+    
+    // 最大ランクの端数切捨てで丸める
+    int max = (int)(SaveData_GetRankMax() / 10) * 10;
     
     if (rank > max) {
         
-        // 最大ランクでまるめる
         rank = max;
+    }
+    
+    if (rank == SaveData_GetRank()) {
+        
+        // 更新できなかった
+        return NO;
     }
     
     NSUserDefaults* defaults = _Get();
@@ -101,6 +114,9 @@ void SaveData_SetRank(int rank) {
     
     // 保存
     [defaults synchronize];
+    
+    // 更新できた
+    return YES;
 }
 
 /**

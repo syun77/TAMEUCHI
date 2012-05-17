@@ -36,7 +36,7 @@ int SaveData_GetRank();
  * タイトル画面→メインゲーム用の難易度設定
  * @param rank 難易度
  */
-void SaveData_SetRank(int rank);
+BOOL SaveData_SetRank(int rank);
 
 /**
  * 到達したことのある最大難易度を取得する
