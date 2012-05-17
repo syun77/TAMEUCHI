@@ -667,10 +667,13 @@ enum eRange {
                         case 80:
                         case 120:
                         case 160:
-                            // 16way
-                            for (int i = 0; i < 16; i++) {
-                                float rot = i * (360 / 16);
-                                [Bullet add:self._x y:self._y rot:rot speed:200];
+                            if ([self getLevel] > 50) {
+                            
+                                // 16way
+                                for (int i = 0; i < 16; i++) {
+                                    float rot = i * (360 / 16);
+                                    [Bullet add:self._x y:self._y rot:rot speed:200];
+                                }
                             }
                             break;
                             
@@ -772,16 +775,26 @@ enum eRange {
                         speed = 250;
                     }
                     
-                    int cnt = 1 + [self getLevel] / 50;
-                    if (cnt > 8) {
-                        cnt = 8;
+                    if ([self isDanger]) {
+                        // 発狂モード
+                        for (int i = 0; i < 8; i++) {
+                            [Enemy add:eEnemy_Radish x:self._x y:self._y rot:i * (360/8) speed:speed];
+                        }
                     }
-                    float dRot = 60 / cnt;
-                    float rot = aim + (cnt / 2) * - dRot;
-                    for (int i = 0; i < cnt; i++) {
-                        [Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
-                        rot += dRot;
+                    else {
+                        
+                        int cnt = 1 + [self getLevel] / 50;
+                        if (cnt > 8) {
+                            cnt = 8;
+                        }
+                        float dRot = 60 / cnt;
+                        float rot = aim + (cnt / 2) * - dRot;
+                        for (int i = 0; i < cnt; i++) {
+                            [Enemy add:eEnemy_Radish x:self._x y:self._y rot:rot speed:speed];
+                            rot += dRot;
+                        }
                     }
+                    
                 }
             }
             if([self isBoundRectX:self._r])
