@@ -11,7 +11,7 @@
 
 static const int TIMER_APPEAR = 60;
 static const int POS_X = 420;
-static const int POS_Y = 320 - 24;
+static const int POS_Y = 320 - 40;
 
 // 状態
 enum eState {

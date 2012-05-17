@@ -216,12 +216,12 @@ static GameScene* scene_ = nil;
     // レベル表示
     self.asciiFontLevel = [AsciiFont node];
     [self.asciiFontLevel createFont:self.baseLayer length:24];
-    [self.asciiFontLevel setPosScreen:8 y:320-32];
+    [self.asciiFontLevel setPosScreen:8 y:320-48];
     
     // ランク表示
     self.asciiFontRank = [AsciiFont node];
     [self.asciiFontRank createFont:self.baseLayer length:24];
-    [self.asciiFontRank setPosScreen:8 y:320-24-80];
+    [self.asciiFontRank setPosScreen:8 y:320-32];
     
     // スコア表示
     self.asciiFontScore = [AsciiFont node];
@@ -700,7 +700,7 @@ static GameScene* scene_ = nil;
     
 //    [self.asciiFont5 setText:[NSString stringWithFormat:@"State: %@", [self.player getStateString]]];
     
-    [self.asciiFontRank setText:[NSString stringWithFormat:@"Rank: %3d %5d", [self.levelMgr getLevel], [self.levelMgr getTimer]]];
+    [self.asciiFontRank setText:[NSString stringWithFormat:@"Rank : %d", [self.levelMgr getLevel]]]; 
     
     [self.asciiFontScore setText:[NSString stringWithFormat:@"Score: %d", m_Score]];
    
@@ -710,7 +710,7 @@ static GameScene* scene_ = nil;
     else {
         [self.asciiFontLevel setColor:ccc3(0xFF, 0xFF, 0xFF)];
     }
-    [self.asciiFontLevel setText:[NSString stringWithFormat:@"Lv :%3d", [self.player getLevel]]];
+    [self.asciiFontLevel setText:[NSString stringWithFormat:@"Lv   : %d", [self.player getLevel]]];
     
 
     

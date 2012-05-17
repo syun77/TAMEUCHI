@@ -121,6 +121,9 @@
     // セーブデータを初期化する
     SaveData_Init();
     
+    // サウンド初期化
+    Sound_Init();
+    
 	// Run the intro Scene
     //SceneManager_Change(@"GameScene");
     SceneManager_Change(@"TitleScene");

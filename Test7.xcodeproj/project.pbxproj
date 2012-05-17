@@ -122,6 +122,8 @@
 		C70F6027151B6E67003B041E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = C70F6026151B6E67003B041E /* main.m */; };
 		C70F602A151B6E67003B041E /* AppDelegate.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70F6029151B6E67003B041E /* AppDelegate.mm */; };
 		C70F602D151B6E67003B041E /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70F602C151B6E67003B041E /* RootViewController.mm */; };
+		C70F9D7A156561530051D42A /* pi.wav in Resources */ = {isa = PBXBuildFile; fileRef = C70F9D78156561530051D42A /* pi.wav */; };
+		C70F9D7B156561530051D42A /* push.wav in Resources */ = {isa = PBXBuildFile; fileRef = C70F9D79156561530051D42A /* push.wav */; };
 		C72542E815260B81004C157A /* Bullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542E715260B81004C157A /* Bullet.mm */; };
 		C72542ED152614F4004C157A /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542EC152614F4004C157A /* Particle.mm */; };
 		C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73A11A31529630C00C10EC4 /* AsciiFont.mm */; };
@@ -416,6 +418,8 @@
 		C70F603A151B7043003B041E /* InterfaceLayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = InterfaceLayer.h; sourceTree = "<group>"; };
 		C70F603D151B7482003B041E /* Token.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Token.h; sourceTree = "<group>"; };
 		C70F603F151B7482003B041E /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenManager.h; sourceTree = "<group>"; };
+		C70F9D78156561530051D42A /* pi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pi.wav; path = Resources/pi.wav; sourceTree = "<group>"; };
+		C70F9D79156561530051D42A /* push.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = push.wav; path = Resources/push.wav; sourceTree = "<group>"; };
 		C72198EC151FFC2E009B8B9F /* Vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec.h; sourceTree = "<group>"; };
 		C72198F51520BF47009B8B9F /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
 		C72542E615260B81004C157A /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
@@ -591,6 +595,8 @@
 				C7CA27B615602337009BCED3 /* item2.wav */,
 				C7CA27B815602549009BCED3 /* item3.wav */,
 				C7CA27B915602549009BCED3 /* ladder.wav */,
+				C70F9D78156561530051D42A /* pi.wav */,
+				C70F9D79156561530051D42A /* push.wav */,
 				C7CA27B215602145009BCED3 /* ready.wav */,
 				C7F053A9152B14EA0095B76E /* all.png */,
 				C7612C991526AA88007CCABC /* font.png */,
@@ -1081,6 +1087,8 @@
 				C7CA27B715602337009BCED3 /* item2.wav in Resources */,
 				C7CA27BA15602549009BCED3 /* item3.wav in Resources */,
 				C7CA27BB15602549009BCED3 /* ladder.wav in Resources */,
+				C70F9D7A156561530051D42A /* pi.wav in Resources */,
+				C70F9D7B156561530051D42A /* push.wav in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

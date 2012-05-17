@@ -30,6 +30,9 @@ void Sound_Init() {
     
     ix->VolumeBgm = 1;
     ix->VolumeSe = 1;
+    
+    // 使用するサウンドをロード
+    Sound_LoadSe(@"push.wav");
 }
 
 /**

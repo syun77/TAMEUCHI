@@ -125,6 +125,9 @@ static TitleScene* scene_ = nil;
     CGPoint p = CGPointMake(x, y);
     
     if (Math_IsHitRect(rect, p)) {
+        
+        Sound_PlaySe(@"pi.wav");
+        
         m_bRankSelect = YES;
     }
     else {
@@ -170,6 +173,7 @@ static TitleScene* scene_ = nil;
                 [self.back moveCursorR];
             }
             
+            Sound_PlaySe(@"pi.wav");
         }
     }
 }
@@ -180,6 +184,7 @@ static TitleScene* scene_ = nil;
     if (len < 10) {
         
         // 移動距離が少なければタッチしたものとする
+        Sound_PlaySe(@"push.wav");
         m_bNextScene = YES;
     }
     

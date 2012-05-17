@@ -17,7 +17,7 @@ static const int TIMER_VANISH = 30;
 
 // 座標
 static const float POS_X = 400;
-static const float POS_Y = 320-48;
+static const float POS_Y = 320-64;
 
 enum eState {
     eState_None,    // 非表示

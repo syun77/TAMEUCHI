@@ -12,7 +12,7 @@
 #import "GameScene.h"
 
 static const int POS_X = 8;
-static const int POS_Y = 320-48;
+static const int POS_Y = 320-64;
 static const int GAUGE_WIDTH  = 2;
 static const int GAUGE_HEIGHT = 8;
 
