@@ -535,6 +535,10 @@ static GameScene* scene_ = nil;
         
         // ハイスコア更新
         SaveData_SetHiScore(m_Score);
+        
+        // ランク選択設定
+        SaveData_SetRank([self.levelMgr getLevel]);
+        
         // 最大レベル更新
         SaveData_SetRankMax([self.levelMgr getLevel]);
         
