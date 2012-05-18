@@ -29,6 +29,7 @@ enum eEnemy {
     eEnemy_Radish,  // 大根
     eEnemy_Carrot,  // 人参
     eEnemy_Pokey,   // ポッキー
+    eEnemy_Pokey2,  // ポッキー２
 };
 
 /**

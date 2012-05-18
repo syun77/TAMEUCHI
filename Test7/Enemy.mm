@@ -258,6 +258,11 @@ enum eRange {
             m_HpMax = 3;
             break;
             
+        case eEnemy_Pokey2:
+            
+            // 緑色ポッキー
+            [self setColor:ccc3(0x80, 0xFF, 0x80)];
+            
         case eEnemy_Pokey:   // ポッキー
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Pokey)];
             self._r = 8;
@@ -918,6 +923,21 @@ enum eRange {
                 }
                 else if(range == eRange_Middle) {
                     // 中距離
+                    
+                    // 緑ポッキーを撃つ
+                    if (Math_Rand(10) == 0 && [self getLevel] > 60) {
+                        
+                        float speed = 400;
+                        int cnt = [self getLevel] / 20 - 2;
+                        if (cnt > 10) {
+                            cnt = 10;
+                        }
+                        
+                        // ランダム方向
+                        for (int i = 0; i < cnt; i++) {
+                            [Enemy add:eEnemy_Pokey2 x:self._x y:self._y rot:aim + Math_RandInt(-135, 135) speed:speed];
+                        }
+                    }
                     if (m_Timer%500 == 300) {
                         // プレイヤーから離れようとする
                         float aim = [self getAim] + 180;
@@ -1014,6 +1034,79 @@ enum eRange {
     }
 }
 
+/**
+ * 更新・ポッキー2 (砲台)
+ */
+- (void)updatePokey2 {
+    float speed = 50;
+    
+    speed += [self getLevel];
+    
+    if (speed > 200) {
+        speed = 200;
+    }
+    
+    switch (m_State) {
+        case eState_Appear:
+            // 出現
+            m_Timer = m_Timer * 0.97;
+            self._vx *= 0.9f;
+            self._vy *= 0.9f;
+            [self setRotation:m_Timer*4];
+            
+            if (m_Timer == 0) {
+                
+                // 自機に向かって弾を打ち続ける
+                m_State = eState_Main;
+                m_Timer = 300;
+                m_Val = [self getAim];
+                if ([self getLevel] < 50) {
+                    m_Val2 = 1;
+                }
+                else if([self getLevel] < 100) {
+                    m_Val2 = 2;
+                }
+                else {
+                    m_Val2 = 3;
+                }
+            }
+            break;
+            
+        case eState_Main:
+            m_Timer = m_Timer * 0.97;
+            [self setRotation:m_Timer*4];
+            if (m_Timer > 200 && m_Timer%4 == 1) {
+                
+                [Bullet add:self._x y:self._y rot:m_Val speed:speed];
+            } 
+            
+            if (m_Timer == 0) {
+                
+                // 自機に向かって弾を打ち続ける
+                m_State = eState_Main;
+                m_Timer = 300;
+                m_Val = [self getAim];
+                
+                m_Val2--;
+                if (m_Val2 < 1) {
+                    
+                    // 一定回数で自動消滅する
+                    [self vanishSmall];
+                    [self vanish];
+                }
+            }
+            
+            break;
+            
+        default:
+            break;
+    }
+    
+    if ([self isOutCircle:self._r]) {
+        // 画面外に出たら消える
+        [self vanish];
+    }
+}
 /**
  * 更新・だいこん
  */
@@ -1125,6 +1218,10 @@ enum eRange {
             
         case eEnemy_Pokey:
             [self updatePokey];
+            break;
+        
+        case eEnemy_Pokey2:
+            [self updatePokey2];
             break;
             
         case eEnemy_Carrot:
