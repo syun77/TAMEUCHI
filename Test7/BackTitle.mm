@@ -13,7 +13,7 @@
 
 static const float POS_RANK_L = 80;
 static const float POS_RANK_R = 480-POS_RANK_L;
-static const float POS_RANK_Y = 128;
+static const float POS_RANK_Y = 160;
 
 /**
  * タイトル画面用背景

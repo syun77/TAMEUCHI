@@ -14,7 +14,7 @@
 
 // ランク選択タッチエリア
 static const float RANK_SELECT_RECT_X = 0;
-static const float RANK_SELECT_RECT_Y = 160-64;
+static const float RANK_SELECT_RECT_Y = 160-32;
 static const float RANK_SELECT_RECT_W = 480;
 static const float RANK_SELECT_RECT_H = 64;
 
@@ -35,6 +35,7 @@ static const float START_BUTTON_RECT_H = 32;
     AsciiFont*      fontHiScore;    // フォント (ハイスコア)
     AsciiFont*      fontRank;       // フォント (ランク)
     AsciiFont*      fontRankMax;    // フォント (最大ランク)
+    AsciiFont*      fontCopyRight;  // フォント（コピーライト）
     
     BOOL            m_bNextScene;   // 次のシーンに進む
     float           m_TouchStartX;  // タッチ開始座標 (X)
@@ -50,6 +51,7 @@ static const float START_BUTTON_RECT_H = 32;
 @property (nonatomic, retain)AsciiFont*         fontHiScore;
 @property (nonatomic, retain)AsciiFont*         fontRank;
 @property (nonatomic, retain)AsciiFont*         fontRankMax;
+@property (nonatomic, retain)AsciiFont*         fontCopyRight;
 
 + (TitleScene*)sharedInstance;
 + (void)releaseInstance;

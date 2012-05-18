@@ -23,6 +23,7 @@ static TitleScene* scene_ = nil;
 @synthesize fontHiScore;
 @synthesize fontRank;
 @synthesize fontRankMax;
+@synthesize fontCopyRight;
 
 // シングルトンを取得する
 + (TitleScene*)sharedInstance {
@@ -57,23 +58,31 @@ static TitleScene* scene_ = nil;
     
     self.asciiFont = [AsciiFont node];
     [self.asciiFont createFont:self.baseLayer length:24];
-    [self.asciiFont setPos:8 y:12];
-    [self.asciiFont setText:@"TITLE"];
+    [self.asciiFont setPos:9 y:17];
+    [self.asciiFont setScale:2];
+    [self.asciiFont setText:@"TAMEUCHI"];
     
     self.fontHiScore = [AsciiFont node];
     [self.fontHiScore createFont:self.baseLayer length:24];
-    [self.fontHiScore setPos:8 y:11];
+    [self.fontHiScore setPos:10 y:12];
     [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", SaveData_GetHiScore()]];
     
     self.fontRank = [AsciiFont node];
     [self.fontRank createFont:self.baseLayer length:24];
-    [self.fontRank setPos:8 y:10];
-    [self.fontRank setText:@"RANK"];
+    [self.fontRank setPos:10 y:11];
+    [self.fontRank setText:[NSString stringWithFormat:@"RANK     %3d", SaveData_GetRank()]];
     
     self.fontRankMax = [AsciiFont node];
     [self.fontRankMax createFont:self.baseLayer length:24];
-    [self.fontRankMax setPos:8 y:9];
-    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK %d", SaveData_GetRankMax()]];
+    [self.fontRankMax setPos:10 y:10];
+    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK  %d", SaveData_GetRankMax()]];
+    
+    self.fontCopyRight = [AsciiFont node];
+    [self.fontCopyRight createFont:self.baseLayer length:24];
+    [self.fontCopyRight setPos:16 y:1];
+    [self.fontCopyRight setScale:0.75];
+    [self.fontCopyRight setAlign:eFontAlign_Center];
+    [self.fontCopyRight setText:[NSString stringWithFormat:@"(c) 2dgames.jp"]];
     
     // 変数初期化
     m_bNextScene = NO;
@@ -91,6 +100,8 @@ static TitleScene* scene_ = nil;
 
 // デストラクタ
 - (void)dealloc {
+    
+    self.fontCopyRight = nil;
     self.fontRankMax = nil;
     self.fontRank = nil;
     self.fontHiScore = nil;
@@ -105,7 +116,16 @@ static TitleScene* scene_ = nil;
 // 更新
 - (void)update:(ccTime)dt {
     
-    [self.fontRank setText:[NSString stringWithFormat:@"RANK %3d", SaveData_GetRank()]];
+    // ランク数更新
+    if (m_bRankSelect) {
+        
+        [self.fontRank setColor:ccc3(0xFF, 0x80, 0x80)];
+        [self.fontRank setText:[NSString stringWithFormat:@"RANK     %3d", SaveData_GetRank()]];
+    }
+    else {
+        [self.fontRank setColor:ccc3(0xFF, 0xFF, 0xFF)];
+        
+    }
     
     if (m_bNextScene) {
         
