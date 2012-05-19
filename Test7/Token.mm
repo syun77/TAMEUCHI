@@ -415,6 +415,21 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
 //    self.m_pSprite = [CCSprite spriteWithFile:filename];
     [self addChild:self.m_pSprite];
 }
+- (void)load2:(NSString*)filename bLinear:(BOOL)bLinear {
+    CCTexture2D* pTex = [[CCTextureCache sharedTextureCache] addImage:filename];
+    if (bLinear == NO) {
+        ccTexParams params = {
+            GL_NEAREST,
+            GL_NEAREST,
+            GL_NEAREST,
+            GL_NEAREST,
+        };
+        [pTex setTexParameters:&params];
+    }
+    self.m_pSprite = [CCSprite spriteWithTexture:pTex];
+    [self addChild:self.m_pSprite];
+    
+}
 
 /**
  * 存在するかどうか

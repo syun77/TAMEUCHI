@@ -84,6 +84,7 @@
 
 // テクスチャをロードしてスプライトを生成
 - (void)load:(NSString*)filename;
+- (void)load2:(NSString*)filename bLinear:(BOOL)bLinear;
 
 // 存在するかどうか
 - (BOOL)isExist;

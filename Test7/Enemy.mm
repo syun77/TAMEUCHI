@@ -261,7 +261,7 @@ enum eRange {
         case eEnemy_Pokey2:
             
             // 緑色ポッキー
-            [self setColor:ccc3(0x80, 0xFF, 0x80)];
+            [self setColor:ccc3(0xC0, 0xFF, 0xC0)];
             
         case eEnemy_Pokey:   // ポッキー
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Pokey)];
@@ -995,7 +995,7 @@ enum eRange {
 - (void)updatePokey {
     float speed = 100;
     
-    speed += [self getLevel] * 5;
+    speed += [self getLevel] * 2;
     
     if (speed > 400) {
         speed = 400;
@@ -1050,16 +1050,16 @@ enum eRange {
         case eState_Appear:
             // 出現
             m_Timer = m_Timer * 0.97;
-            self._vx *= 0.9f;
-            self._vy *= 0.9f;
+            self._vx *= 0.8f;
+            self._vy *= 0.8f;
             [self setRotation:m_Timer*4];
             
             if (m_Timer == 0) {
                 
                 // 自機に向かって弾を打ち続ける
                 m_State = eState_Main;
-                m_Timer = 300;
-                m_Val = [self getAim];
+                m_Timer = 200;
+                m_Val = [self getAim] + 30 * Math_RandInt(-1, 1);
                 if ([self getLevel] < 50) {
                     m_Val2 = 1;
                 }
@@ -1075,7 +1075,7 @@ enum eRange {
         case eState_Main:
             m_Timer = m_Timer * 0.97;
             [self setRotation:m_Timer*4];
-            if (m_Timer > 200 && m_Timer%4 == 1) {
+            if (m_Timer > 50 && m_Timer%16 == 1) {
                 
                 [Bullet add:self._x y:self._y rot:m_Val speed:speed];
             } 
@@ -1084,8 +1084,8 @@ enum eRange {
                 
                 // 自機に向かって弾を打ち続ける
                 m_State = eState_Main;
-                m_Timer = 300;
-                m_Val = [self getAim];
+                m_Timer = 200;
+                m_Val = [self getAim] + 15 * Math_RandInt(-1, 1);
                 
                 m_Val2--;
                 if (m_Val2 < 1) {

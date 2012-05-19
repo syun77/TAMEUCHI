@@ -25,7 +25,8 @@
     }
     
     // フォント読み込み
-    [self load:@"font.png"];
+    [self load2:@"font.png" bLinear:NO];
+//    [self load:@"font.png"];
     
     [self setChar:' '];
     [self setVisible:NO];
