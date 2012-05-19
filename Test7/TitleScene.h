@@ -18,10 +18,10 @@ static const float RANK_SELECT_RECT_Y = 160-32;
 static const float RANK_SELECT_RECT_W = 480;
 static const float RANK_SELECT_RECT_H = 64;
 
-static const float START_BUTTON_RECT_X = 240-64;
-static const float START_BUTTON_RECT_Y = 32;
-static const float START_BUTTON_RECT_W = 128;
-static const float START_BUTTON_RECT_H = 32;
+static const float START_BUTTON_RECT_X = 240-96;
+static const float START_BUTTON_RECT_Y = 48;
+static const float START_BUTTON_RECT_W = 96*2;
+static const float START_BUTTON_RECT_H = 48;
 
 /**
  * タイトル画面
@@ -36,6 +36,7 @@ static const float START_BUTTON_RECT_H = 32;
     AsciiFont*      fontRank;       // フォント (ランク)
     AsciiFont*      fontRankMax;    // フォント (最大ランク)
     AsciiFont*      fontCopyRight;  // フォント（コピーライト）
+    AsciiFont*      fontStartButton;// フォント（スタートボタン）
     
     BOOL            m_bNextScene;   // 次のシーンに進む
     float           m_TouchStartX;  // タッチ開始座標 (X)
@@ -52,6 +53,7 @@ static const float START_BUTTON_RECT_H = 32;
 @property (nonatomic, retain)AsciiFont*         fontRank;
 @property (nonatomic, retain)AsciiFont*         fontRankMax;
 @property (nonatomic, retain)AsciiFont*         fontCopyRight;
+@property (nonatomic, retain)AsciiFont*         fontStartButton;
 
 + (TitleScene*)sharedInstance;
 + (void)releaseInstance;

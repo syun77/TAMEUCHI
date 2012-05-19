@@ -77,8 +77,7 @@ static const float POS_RANK_Y = 160;
 - (void)visit {
     [super visit];
     
-    System_SetBlend(eBlend_Normal);
-    
+    // ランク選択カーソルの描画
     glColor4f(0, 0, 0, 0.4);
     if ([[TitleScene sharedInstance] isTouchRankSelect]) {
         glColor4f(0, 0, 0.5, 0.4);
@@ -93,7 +92,14 @@ static const float POS_RANK_Y = 160;
     
     [self fillTriangle:POS_RANK_L - cursorLX cy:POS_RANK_Y radius:16 rot:270 scale:1];
     [self fillTriangle:POS_RANK_R + cursorRX cy:POS_RANK_Y radius:16 rot:90 scale:1];
+    
     System_SetBlend(eBlend_Normal);
+    
+    // ゲーム開始ボタンの描画
+    glColor4f(0.2, 0.2, 0.2, 0.5);
+    [self fillRectLT:START_BUTTON_RECT_X-2 y:START_BUTTON_RECT_Y-2 w:START_BUTTON_RECT_W+4 h:START_BUTTON_RECT_H+4 rot:0 scale:1];
+    glColor4f(0.5, 0.5, 0.5, 0.5);
+    [self fillRectLT:START_BUTTON_RECT_X y:START_BUTTON_RECT_Y w:START_BUTTON_RECT_W h:START_BUTTON_RECT_H rot:0 scale:1];
 }
 
 

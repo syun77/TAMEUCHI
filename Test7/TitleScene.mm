@@ -24,6 +24,7 @@ static TitleScene* scene_ = nil;
 @synthesize fontRank;
 @synthesize fontRankMax;
 @synthesize fontCopyRight;
+@synthesize fontStartButton;
 
 // シングルトンを取得する
 + (TitleScene*)sharedInstance {
@@ -82,7 +83,14 @@ static TitleScene* scene_ = nil;
     [self.fontCopyRight setPos:16 y:1];
     [self.fontCopyRight setScale:0.75];
     [self.fontCopyRight setAlign:eFontAlign_Center];
-    [self.fontCopyRight setText:[NSString stringWithFormat:@"(c) 2dgames.jp 2012"]];
+    [self.fontCopyRight setText:@"(c) 2dgames.jp 2012"];
+    
+    self.fontStartButton = [AsciiFont node];
+    [self.fontStartButton createFont:self.baseLayer length:12];
+    [self.fontStartButton setPos:17 y:5];
+    [self.fontStartButton setAlign:eFontAlign_Center];
+    [self.fontStartButton setScale:1];
+    [self.fontStartButton setText:@"START"];
     
     // 変数初期化
     m_bNextScene = NO;
