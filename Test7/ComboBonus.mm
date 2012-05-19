@@ -102,23 +102,28 @@ enum eState {
             break;
     }
     
-    [self.asciiFont setPosScreen:POS_X y:POS_Y];
+    float x = 480 + 16 - [self.asciiFont getLength] * ASCII_SIZE_REAL;
+    [self.asciiFont setPosScreen:x y:POS_Y];
 }
 
 /**
  * 演出開始
  */
 - (void)start:(int)nCombo {
-    m_nBase = 100;
+    GameScene* scene = [GameScene sharedInstance];
+    
+    m_nBase = 100 * [scene.player getLevel];
     m_nCombo = nCombo * nCombo;
     m_Timer = TIMER_APPEAR;
     m_State = eState_Appear;
     int score = m_nBase * m_nCombo;
+    if (score <= 0) {
+        return;
+    }
     
-    GameScene* scene = [GameScene sharedInstance];
     [scene addScore:score];
     
-    [self.asciiFont setText:[NSString stringWithFormat:@"%d x %d = %d", m_nBase, m_nCombo, score]];
+    [self.asciiFont setText:[NSString stringWithFormat:@"%dx%d=%d", m_nBase, m_nCombo, score]];
     
     [self.asciiFont setVisible:YES];
     [self.asciiFont setScale:1];

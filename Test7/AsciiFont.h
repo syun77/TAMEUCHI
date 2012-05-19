@@ -14,6 +14,7 @@
 /// ASCII文字のサイズ
 //#define ASCII_SIZE (16)
 #define ASCII_SIZE (14)
+#define ASCII_SIZE_REAL (16)
 
 /// ASCII文字の横の数
 #define ASCII_X_COUNT (16)
@@ -82,6 +83,9 @@ typedef enum {
 
 // 文字を設定する
 - (void)setText:(NSString*)pText;
+
+// 文字列長を取得する
+- (int)getLength;
 
 // 描画座標を設定する (フォント座標)
 - (void)setPos:(float)x y:(float)y;

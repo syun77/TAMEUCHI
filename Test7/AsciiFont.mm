@@ -201,6 +201,11 @@
     [self setPosScreen:m_X y:m_Y];
 }
 
+// 文字列長を取得する
+- (int)getLength {
+    return m_Length;
+}
+
 // 描画座標を設定する (フォント座標)
 - (void)setPos:(float)x y:(float)y {
     [self setPosScreen:x * ASCII_SIZE y:y * ASCII_SIZE];
