@@ -126,6 +126,7 @@
 		C70F9D7B156561530051D42A /* push.wav in Resources */ = {isa = PBXBuildFile; fileRef = C70F9D79156561530051D42A /* push.wav */; };
 		C72542E815260B81004C157A /* Bullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542E715260B81004C157A /* Bullet.mm */; };
 		C72542ED152614F4004C157A /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542EC152614F4004C157A /* Particle.mm */; };
+		C728CCF2156767F70053FB5E /* ComboBonus.mm in Sources */ = {isa = PBXBuildFile; fileRef = C728CCF1156767F70053FB5E /* ComboBonus.mm */; };
 		C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73A11A31529630C00C10EC4 /* AsciiFont.mm */; };
 		C73CEF0E1550363700B9F66C /* SaveData.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73CEF0D1550363700B9F66C /* SaveData.mm */; };
 		C73FEC25152BEED5008B5697 /* Back.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73FEC24152BEED5008B5697 /* Back.mm */; };
@@ -426,6 +427,8 @@
 		C72542E715260B81004C157A /* Bullet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bullet.mm; sourceTree = "<group>"; };
 		C72542EB152614F4004C157A /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		C72542EC152614F4004C157A /* Particle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Particle.mm; sourceTree = "<group>"; };
+		C728CCF0156767F70053FB5E /* ComboBonus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboBonus.h; sourceTree = "<group>"; };
+		C728CCF1156767F70053FB5E /* ComboBonus.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ComboBonus.mm; sourceTree = "<group>"; };
 		C73A11A21529630C00C10EC4 /* AsciiFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsciiFont.h; sourceTree = "<group>"; };
 		C73A11A31529630C00C10EC4 /* AsciiFont.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = AsciiFont.mm; sourceTree = "<group>"; };
 		C73CEF0C1550363700B9F66C /* SaveData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SaveData.h; sourceTree = "<group>"; };
@@ -944,6 +947,8 @@
 				C7F0DF54153A83BC006E26E4 /* Charge.mm */,
 				C7F36C5F1549072800D67933 /* Combo.h */,
 				C7F36C601549072800D67933 /* Combo.mm */,
+				C728CCF0156767F70053FB5E /* ComboBonus.h */,
+				C728CCF1156767F70053FB5E /* ComboBonus.mm */,
 				C7050CAE154E199B00871C27 /* ComboResult.h */,
 				C7050CAF154E199B00871C27 /* ComboResult.mm */,
 				C73FEC27152BF448008B5697 /* Enemy.h */,
@@ -1227,6 +1232,7 @@
 				C745514715580C5A00404C32 /* Banana.mm in Sources */,
 				C7E1FEDA155B7AE90088C835 /* Bomb.mm in Sources */,
 				C767DD9F155CAD5600FD7724 /* BackTitle.mm in Sources */,
+				C728CCF2156767F70053FB5E /* ComboBonus.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

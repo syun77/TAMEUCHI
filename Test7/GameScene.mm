@@ -73,6 +73,7 @@ static GameScene* scene_ = nil;
 @synthesize gaugeHp;
 @synthesize combo;
 @synthesize comboResult;
+@synthesize comboBonus;
 @synthesize black;
 @synthesize mgrShot;
 @synthesize mgrItem;
@@ -162,6 +163,11 @@ static GameScene* scene_ = nil;
     [self.baseLayer addChild:self.comboResult z:ePrio_UI];
     [self.comboResult.asciiFont createFont:self.baseLayer length:12];
     [self.comboResult.asciiFont setText:@""];
+    
+    self.comboBonus = [ComboBonus node];
+    [self.baseLayer addChild:self.comboBonus z:ePrio_UI];
+    [self.comboBonus.asciiFont createFont:self.baseLayer length:36];
+    [self.comboBonus.asciiFont setText:@""];
     
     self.player = [Player node];
     [self.baseLayer addChild:self.player z:ePrio_Player];
@@ -291,6 +297,7 @@ static GameScene* scene_ = nil;
     self.mgrItem = nil;
     self.mgrShot = nil;
     self.black = nil;
+    self.comboBonus = nil;
     self.comboResult = nil;
     self.combo = nil;
     self.gaugeHp = nil;

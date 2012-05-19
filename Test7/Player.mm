@@ -835,6 +835,8 @@ enum eState {
         // コンボ結果表示
         ComboResult* result = [GameScene sharedInstance].comboResult;
         [result start:m_Combo];
+        ComboBonus* bonus = [GameScene sharedInstance].comboBonus;
+        [bonus start:m_Combo];
         
         // レベルアップ判定
         if ([self checkLevelUp]) {

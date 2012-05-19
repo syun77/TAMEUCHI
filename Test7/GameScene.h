@@ -23,6 +23,7 @@
 #import "GaugeHp.h"
 #import "Combo.h"
 #import "ComboResult.h"
+#import "ComboBonus.h"
 #import "Item.h"
 #import "Black.h"
 #import "Banana.h"
@@ -48,6 +49,7 @@ static const int SCORE_BANANA_BONUS = 500;
     GaugeHp*        gaugeHp;        // チャージゲージHP
     Combo*          combo;          // コンボ数表示
     ComboResult*    comboResult;    // コンボ結果表示
+    ComboBonus*     comboBonus;     // コンボボーナス
     TokenManager*   mgrShot;        // 自弾
     TokenManager*   mgrItem;        // アイテム
     TokenManager*   mgrEnemy;       // 敵
@@ -88,6 +90,7 @@ static const int SCORE_BANANA_BONUS = 500;
 @property (nonatomic, retain)GaugeHp*           gaugeHp;
 @property (nonatomic, retain)Combo*             combo;
 @property (nonatomic, retain)ComboResult*       comboResult;
+@property (nonatomic, retain)ComboBonus*        comboBonus;
 @property (nonatomic, retain)Charge*            charge;
 @property (nonatomic, retain)Black*             black;
 @property (nonatomic, retain)TokenManager*      mgrShot;
