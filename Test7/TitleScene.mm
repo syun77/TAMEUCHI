@@ -82,7 +82,7 @@ static TitleScene* scene_ = nil;
     [self.fontCopyRight setPos:16 y:1];
     [self.fontCopyRight setScale:0.75];
     [self.fontCopyRight setAlign:eFontAlign_Center];
-    [self.fontCopyRight setText:[NSString stringWithFormat:@"(c) 2dgames.jp"]];
+    [self.fontCopyRight setText:[NSString stringWithFormat:@"(c) 2dgames.jp 2012"]];
     
     // 変数初期化
     m_bNextScene = NO;
