@@ -77,9 +77,11 @@ static const float POS_RANK_Y = 160;
 - (void)visit {
     [super visit];
     
-    // ランク選択カーソルの描画
+    // ■ランク選択カーソルの描画
     glColor4f(0, 0, 0, 0.4);
     if ([[TitleScene sharedInstance] isTouchRankSelect]) {
+        
+        // タッチ中
         glColor4f(0, 0, 0.5, 0.4);
     }
     [self fillRectLT:RANK_SELECT_RECT_X y:RANK_SELECT_RECT_Y w:RANK_SELECT_RECT_W h:RANK_SELECT_RECT_H rot:0 scale:1];
@@ -95,11 +97,38 @@ static const float POS_RANK_Y = 160;
     
     System_SetBlend(eBlend_Normal);
     
-    // ゲーム開始ボタンの描画
+    // ■ゲーム開始ボタンの描画
     glColor4f(0.2, 0.2, 0.2, 0.5);
     [self fillRectLT:START_BUTTON_RECT_X-2 y:START_BUTTON_RECT_Y-2 w:START_BUTTON_RECT_W+4 h:START_BUTTON_RECT_H+4 rot:0 scale:1];
     glColor4f(0.5, 0.5, 0.5, 0.5);
+    if ([[TitleScene sharedInstance] isTouchGameStart]) {
+        
+        // タッチ中
+        glColor4f(0, 0, 0.5, 0.4);
+    }
     [self fillRectLT:START_BUTTON_RECT_X y:START_BUTTON_RECT_Y w:START_BUTTON_RECT_W h:START_BUTTON_RECT_H rot:0 scale:1];
+    
+    // ■BGM ON/OFF
+    glColor4f(0.2, 0.2, 0.2, 0.5);
+    [self fillRectLT:BGM_BUTTON_RECT_X-2 y:BGM_BUTTON_RECT_Y-2 w:BGM_BUTTON_RECT_W+4 h:BGM_BUTTON_RECT_H+4 rot:0 scale:1];
+    glColor4f(0.5, 0.5, 0.5, 0.5);
+    if ([[TitleScene sharedInstance] isTouchBgm]) {
+        
+        // タッチ中
+        glColor4f(0, 0, 0.5, 0.4);
+    }
+    [self fillRectLT:BGM_BUTTON_RECT_X y:BGM_BUTTON_RECT_Y w:BGM_BUTTON_RECT_W h:BGM_BUTTON_RECT_H rot:0 scale:1];
+    
+    // ■SE ON/OFF
+    glColor4f(0.2, 0.2, 0.2, 0.5);
+    [self fillRectLT:SE_BUTTON_RECT_X-2 y:SE_BUTTON_RECT_Y-2 w:SE_BUTTON_RECT_W+4 h:SE_BUTTON_RECT_H+4 rot:0 scale:1];
+    glColor4f(0.5, 0.5, 0.5, 0.5);
+    if ([[TitleScene sharedInstance] isTouchSe]) {
+        
+        // タッチ中
+        glColor4f(0, 0, 0.5, 0.4);
+    }
+    [self fillRectLT:SE_BUTTON_RECT_X y:SE_BUTTON_RECT_Y w:SE_BUTTON_RECT_W h:SE_BUTTON_RECT_H rot:0 scale:1];
 }
 
 

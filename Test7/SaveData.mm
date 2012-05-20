@@ -156,7 +156,7 @@ void SaveData_SetRankMax(int rank) {
  * BGMが有効となっているかどうか
  * @return BGMが有効ならば「YES」
  */
-BOOL SaveData_isEnableBgm() {
+BOOL SaveData_IsEnableBgm() {
     NSUserDefaults* ix = _Get();
     
     return [ix boolForKey:@"BGM"];

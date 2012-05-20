@@ -421,8 +421,8 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
         ccTexParams params = {
             GL_NEAREST,
             GL_NEAREST,
-            GL_NEAREST,
-            GL_NEAREST,
+            GL_CLAMP_TO_EDGE,
+            GL_CLAMP_TO_EDGE,
         };
         [pTex setTexParameters:&params];
     }

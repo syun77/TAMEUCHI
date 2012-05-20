@@ -112,7 +112,7 @@ void Sound_SetEnableSe(BOOL b) {
  */
 BOOL Sound_IsEnableBgm() {
     
-    return SaveData_isEnableBgm();
+    return SaveData_IsEnableBgm();
 }
 
 /**

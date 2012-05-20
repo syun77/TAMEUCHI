@@ -23,6 +23,16 @@ static const float START_BUTTON_RECT_Y = 48;
 static const float START_BUTTON_RECT_W = 96*2;
 static const float START_BUTTON_RECT_H = 48;
 
+static const float BGM_BUTTON_RECT_X = 480-80-8;
+static const float BGM_BUTTON_RECT_Y = 48+8;
+static const float BGM_BUTTON_RECT_W = 80;
+static const float BGM_BUTTON_RECT_H = 32;
+
+static const float SE_BUTTON_RECT_X = 480-80-8;
+static const float SE_BUTTON_RECT_Y = 16;
+static const float SE_BUTTON_RECT_W = 80;
+static const float SE_BUTTON_RECT_H = 32;
+
 /**
  * タイトル画面
  */
@@ -37,12 +47,17 @@ static const float START_BUTTON_RECT_H = 48;
     AsciiFont*      fontRankMax;    // フォント (最大ランク)
     AsciiFont*      fontCopyRight;  // フォント（コピーライト）
     AsciiFont*      fontStartButton;// フォント（スタートボタン）
+    AsciiFont*      fontBgm;        // フォント（BGM）
+    AsciiFont*      fontSe;         // フォント（SE）
     
     BOOL            m_bNextScene;   // 次のシーンに進む
     float           m_TouchStartX;  // タッチ開始座標 (X)
     float           m_TouchStartY;  // タッチ開始座標 (Y)
     int             m_RankPrev;     // タッチ前のランク
     BOOL            m_bRankSelect;  // ランク選択タッチ中
+    BOOL            m_bGameStart;   // ゲームスタートタッチ中
+    BOOL            m_bBgm;         // BGM ON/OFF タッチ中
+    BOOL            m_bSe;          // SE ON/OF タッチ中
 }
 
 @property (nonatomic, retain)BackTitle*         back;
@@ -54,11 +69,22 @@ static const float START_BUTTON_RECT_H = 48;
 @property (nonatomic, retain)AsciiFont*         fontRankMax;
 @property (nonatomic, retain)AsciiFont*         fontCopyRight;
 @property (nonatomic, retain)AsciiFont*         fontStartButton;
+@property (nonatomic, retain)AsciiFont*         fontBgm;
+@property (nonatomic, retain)AsciiFont*         fontSe;
 
 + (TitleScene*)sharedInstance;
 + (void)releaseInstance;
 
 // ランク選択タッチ中
 - (BOOL)isTouchRankSelect;
+
+// ゲームスタートタッチ中
+- (BOOL)isTouchGameStart;
+
+// BGM ON/OFF タッチ中
+- (BOOL)isTouchBgm;
+
+// SE ON/OFF タッチ中
+- (BOOL)isTouchSe;
 
 @end
