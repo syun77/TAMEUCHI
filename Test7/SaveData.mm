@@ -102,6 +102,9 @@ BOOL SaveData_SetRank(int rank) {
         
         rank = max;
     }
+    if (rank < 1) {
+        rank = 1;
+    }
     
     if (rank == SaveData_GetRank()) {
         

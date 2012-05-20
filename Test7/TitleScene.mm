@@ -73,7 +73,7 @@ static TitleScene* scene_ = nil;
     self.fontRank = [AsciiFont node];
     [self.fontRank createFont:self.baseLayer length:24];
     [self.fontRank setPos:10 y:11];
-    [self.fontRank setText:[NSString stringWithFormat:@"RANK     %3d", SaveData_GetRank()]];
+    [self.fontRank setText:[NSString stringWithFormat:@"RANK     %d", SaveData_GetRank()]];
     
     self.fontRankMax = [AsciiFont node];
     [self.fontRankMax createFont:self.baseLayer length:24];
@@ -83,7 +83,7 @@ static TitleScene* scene_ = nil;
     self.fontCopyRight = [AsciiFont node];
     [self.fontCopyRight createFont:self.baseLayer length:24];
     [self.fontCopyRight setPos:17 y:1];
-    [self.fontCopyRight setScale:0.5];
+    [self.fontCopyRight setScale:0.75];
     [self.fontCopyRight setAlign:eFontAlign_Center];
     [self.fontCopyRight setText:@"(c) 2dgames.jp 2012"];
     
@@ -146,7 +146,7 @@ static TitleScene* scene_ = nil;
     if (m_bRankSelect) {
         
         [self.fontRank setColor:ccc3(0xFF, 0x80, 0x80)];
-        [self.fontRank setText:[NSString stringWithFormat:@"RANK     %3d", SaveData_GetRank()]];
+        [self.fontRank setText:[NSString stringWithFormat:@"RANK     %d", SaveData_GetRank()]];
     }
     else {
         [self.fontRank setColor:ccc3(0xFF, 0xFF, 0xFF)];
