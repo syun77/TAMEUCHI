@@ -438,7 +438,8 @@ enum eState {
         [aim setActive:NO];
         
         // 照準も移動する
-        [aim setTarget:[input getPosX] y:[input getPosY]];
+//        [aim setTarget:[input getPosX] y:[input getPosY]];
+        [aim setTarget:self._x y:self._y];
         
         // チャージエフェクト有効
         if ([self isChargeStart]) {
@@ -646,10 +647,16 @@ enum eState {
      */
     
     // レベルリセット
-    m_nLevel = 0;
+//    m_nLevel = 0;
+//    // パワーゲージを初期値に戻す
+//    m_PowerMax = POWER_MIN;
+//    Gauge* gauge = [self getGauge];
+//    [gauge setMax:m_PowerMax];
+    // レベル半分になる
+    m_nLevel = m_nLevel / 2;
     
-    // パワーゲージを初期値に戻す
-    m_PowerMax = POWER_MIN;
+    // パワーゲージを減らす
+    m_PowerMax = POWER_MIN + POWER_INC * m_nLevel;
     Gauge* gauge = [self getGauge];
     [gauge setMax:m_PowerMax];
 }
