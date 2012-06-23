@@ -22,6 +22,14 @@ static NSUserDefaults* _Get()
 void SaveData_Init() {
     NSUserDefaults* defaults = _Get();
     
+    int hiRank = SaveData_GetRankMax();
+    if (hiRank < 70) {
+        
+        // Lv75以下であれば75にする
+        SaveData_SetRankMax(70);
+    }
+    
+    
     if ([defaults boolForKey:@"INIT"]) {
         
         // 初期化済みなので何もしない
