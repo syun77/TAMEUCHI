@@ -97,8 +97,24 @@
         float y1 = size;
         float x2 = System_Width() - size;
         float y2 = System_Height() - size;
-        x = Math_RandFloat(x1, x2);
-        y = Math_RandFloat(y1, y2);
+        
+        for (int i = 0; i < 32; i++) {
+            
+            x = Math_RandFloat(x1, x2);
+            y = Math_RandFloat(y1, y2);
+            
+            float dx = player._x - x;
+            float dy = player._y - y;
+            Vec2D v = Vec2D(dx, dy);
+            if (v.Length() < 128) {
+                
+                // 近すぎたらやり直し
+                continue;
+            }
+            
+            break;
+        }
+        
         
     }
     
