@@ -114,6 +114,14 @@ enum eState {
 }
 
 /**
+ * ロックオンオブジェクトを取得する
+ */
+- (Lockon*)getLockon {
+    GameScene* scene = [GameScene sharedInstance];
+    return scene.lockon;
+}
+
+/**
  * チャージが開始できるかどうか
  */
 - (BOOL)isChargeStart {
@@ -333,8 +341,12 @@ enum eState {
         // 一番近い敵を探す
         Aim* aim = [self getAim];
         Enemy* e = [Enemy getNearest:aim._x y:aim._y];
+        Lockon* lockon = [self getLockon];
         if (e) {
             [aim setTarget:e._x y:e._y];
+            // ロックオン消去
+            [lockon end];
+        
         }
         
         float nearestLength = 9999999;
@@ -440,6 +452,11 @@ enum eState {
         // 照準も移動する
 //        [aim setTarget:[input getPosX] y:[input getPosY]];
         [aim setTarget:self._x y:self._y];
+        
+        // ロックオン表示
+        Lockon* lockon = [self getLockon];
+        Enemy* e = [Enemy getNearest:aim._x y:aim._y];
+        [lockon start:[e getIndex] x:e._x y:e._y r:e._r];
         
         // チャージエフェクト有効
         if ([self isChargeStart]) {

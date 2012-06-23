@@ -124,6 +124,7 @@
 		C70F602D151B6E67003B041E /* RootViewController.mm in Sources */ = {isa = PBXBuildFile; fileRef = C70F602C151B6E67003B041E /* RootViewController.mm */; };
 		C70F9D7A156561530051D42A /* pi.wav in Resources */ = {isa = PBXBuildFile; fileRef = C70F9D78156561530051D42A /* pi.wav */; };
 		C70F9D7B156561530051D42A /* push.wav in Resources */ = {isa = PBXBuildFile; fileRef = C70F9D79156561530051D42A /* push.wav */; };
+		C718C2D51595EE4900CA718A /* Lockon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C718C2D41595EE4900CA718A /* Lockon.mm */; };
 		C72542E815260B81004C157A /* Bullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542E715260B81004C157A /* Bullet.mm */; };
 		C72542ED152614F4004C157A /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542EC152614F4004C157A /* Particle.mm */; };
 		C728CCF2156767F70053FB5E /* ComboBonus.mm in Sources */ = {isa = PBXBuildFile; fileRef = C728CCF1156767F70053FB5E /* ComboBonus.mm */; };
@@ -421,6 +422,8 @@
 		C70F603F151B7482003B041E /* TokenManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TokenManager.h; sourceTree = "<group>"; };
 		C70F9D78156561530051D42A /* pi.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = pi.wav; path = Resources/pi.wav; sourceTree = "<group>"; };
 		C70F9D79156561530051D42A /* push.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; name = push.wav; path = Resources/push.wav; sourceTree = "<group>"; };
+		C718C2D31595EE4900CA718A /* Lockon.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Lockon.h; sourceTree = "<group>"; };
+		C718C2D41595EE4900CA718A /* Lockon.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Lockon.mm; sourceTree = "<group>"; };
 		C72198EC151FFC2E009B8B9F /* Vec.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Vec.h; sourceTree = "<group>"; };
 		C72198F51520BF47009B8B9F /* Math.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Math.h; sourceTree = "<group>"; };
 		C72542E615260B81004C157A /* Bullet.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Bullet.h; sourceTree = "<group>"; };
@@ -961,6 +964,8 @@
 				C7731E78154C493100D773DE /* Item.mm */,
 				C7E47376152F3EB7008EACDF /* LevelMgr.h */,
 				C7E47377152F3EB7008EACDF /* LevelMgr.mm */,
+				C718C2D31595EE4900CA718A /* Lockon.h */,
+				C718C2D41595EE4900CA718A /* Lockon.mm */,
 				C72542EB152614F4004C157A /* Particle.h */,
 				C72542EC152614F4004C157A /* Particle.mm */,
 				C7D722E21524B550000AFB86 /* Player.h */,
@@ -1233,6 +1238,7 @@
 				C7E1FEDA155B7AE90088C835 /* Bomb.mm in Sources */,
 				C767DD9F155CAD5600FD7724 /* BackTitle.mm in Sources */,
 				C728CCF2156767F70053FB5E /* ComboBonus.mm in Sources */,
+				C718C2D51595EE4900CA718A /* Lockon.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1246,8 +1252,8 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -1261,7 +1267,6 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				ONLY_ACTIVE_ARCH = NO;
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -1273,8 +1278,8 @@
 					armv6,
 					"$(ARCHS_STANDARD_32_BIT)",
 				);
-				CODE_SIGN_IDENTITY = "iPhone Distribution";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Syunsuke Ozeki (AJA8PZK3K3)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_PREPROCESSOR_DEFINITIONS = NDEBUG;
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
@@ -1284,7 +1289,7 @@
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				PROVISIONING_PROFILE = "";
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "FEEDBD6A-99D3-4B1D-BAC4-AB95AF7DBFC5";
 				SDKROOT = iphoneos;
 			};
 			name = Release;

@@ -39,6 +39,7 @@ enum {
     ePrio_Charge,   // チャージエフェクト
     ePrio_Bomb,     // ボム
     ePrio_Particle, // パーティクル
+    ePrio_Lockon,   // ロックオン
     ePrio_Gauge,    // ゲージ表示
     ePrio_UI,       // ユーザインターフェース
     ePrio_Black,    // 画面全体を暗くする
@@ -74,6 +75,7 @@ static GameScene* scene_ = nil;
 @synthesize combo;
 @synthesize comboResult;
 @synthesize comboBonus;
+@synthesize lockon;
 @synthesize black;
 @synthesize mgrShot;
 @synthesize mgrItem;
@@ -168,6 +170,9 @@ static GameScene* scene_ = nil;
     [self.baseLayer addChild:self.comboBonus z:ePrio_UI];
     [self.comboBonus.asciiFont createFont:self.baseLayer length:36];
     [self.comboBonus.asciiFont setText:@""];
+    
+    self.lockon = [Lockon node];
+    [self.baseLayer addChild:self.lockon z:ePrio_Lockon];
     
     self.player = [Player node];
     [self.baseLayer addChild:self.player z:ePrio_Player];
@@ -297,6 +302,7 @@ static GameScene* scene_ = nil;
     self.mgrItem = nil;
     self.mgrShot = nil;
     self.black = nil;
+    self.lockon = nil;
     self.comboBonus = nil;
     self.comboResult = nil;
     self.combo = nil;

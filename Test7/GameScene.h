@@ -28,6 +28,7 @@
 #import "Black.h"
 #import "Banana.h"
 #import "Bomb.h"
+#import "Lockon.h"
 
 // 危険時に有効となる速度の係数
 static const float DANGER_SLOW_RATIO = 0.7;
@@ -50,6 +51,7 @@ static const int SCORE_BANANA_BONUS = 500;
     Combo*          combo;          // コンボ数表示
     ComboResult*    comboResult;    // コンボ結果表示
     ComboBonus*     comboBonus;     // コンボボーナス
+    Lockon*         lockon;         // ロックオン表示
     TokenManager*   mgrShot;        // 自弾
     TokenManager*   mgrItem;        // アイテム
     TokenManager*   mgrEnemy;       // 敵
@@ -91,6 +93,7 @@ static const int SCORE_BANANA_BONUS = 500;
 @property (nonatomic, retain)Combo*             combo;
 @property (nonatomic, retain)ComboResult*       comboResult;
 @property (nonatomic, retain)ComboBonus*        comboBonus;
+@property (nonatomic, retain)Lockon*            lockon;
 @property (nonatomic, retain)Charge*            charge;
 @property (nonatomic, retain)Black*             black;
 @property (nonatomic, retain)TokenManager*      mgrShot;
