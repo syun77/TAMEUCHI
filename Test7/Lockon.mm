@@ -65,7 +65,7 @@ enum eState {
         System_SetBlend(eBlend_Add);
     }
     
-    glColor4f(1, 0, 0, 1);
+    glColor4f(0.8, 0.8, 0, 0.5);
     float r = self._r + 16 + 24 * m_Timer / TIMER_APPEAR;
     if (m_Timer > 0) {
         
