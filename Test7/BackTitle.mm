@@ -129,6 +129,17 @@ static const float POS_RANK_Y = 160;
         glColor4f(0, 0, 0.5, 0.4);
     }
     [self fillRectLT:SE_BUTTON_RECT_X y:SE_BUTTON_RECT_Y w:SE_BUTTON_RECT_W h:SE_BUTTON_RECT_H rot:0 scale:1];
+    
+    // ■EASY ON/OFF
+    glColor4f(0.2, 0.2, 0.2, 0.5);
+    [self fillRectLT:EASY_BUTTON_RECT_X-2 y:EASY_BUTTON_RECT_Y-2 w:EASY_BUTTON_RECT_W+4 h:EASY_BUTTON_RECT_H+4 rot:0 scale:1];
+    glColor4f(0.5, 0.5, 0.5, 0.5);
+    if ([[TitleScene sharedInstance] isTouchEasy]) {
+        
+        // タッチ中
+        glColor4f(0, 0, 0.5, 0.4);
+    }
+    [self fillRectLT:EASY_BUTTON_RECT_X y:EASY_BUTTON_RECT_Y w:EASY_BUTTON_RECT_W h:EASY_BUTTON_RECT_H rot:0 scale:1];
 }
 
 

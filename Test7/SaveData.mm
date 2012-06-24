@@ -42,6 +42,7 @@ void SaveData_Init() {
     //[defaults setInteger:1 forKey:@"RANK_MAX"];
     [defaults setBool:YES forKey:@"BGM"];
     [defaults setBool:YES forKey:@"SE"];
+    [defaults setBool:NO forKey:@"EASY"];
     
     // 保存
     [defaults synchronize];
@@ -207,4 +208,27 @@ void SaveData_SetEnableSe(BOOL b) {
     
     // 保存
     [ix synchronize];
+}
+
+/**
+ * EASYモードの設定
+ */
+void SaveData_SetEasy(BOOL b) {
+    
+    NSUserDefaults* ix = _Get();
+    
+    [ix setBool:b forKey:@"EASY"];
+    
+    // 保存
+    [ix synchronize];
+}
+
+/**
+ * EASYモードの取得
+ */
+BOOL SaveData_IsEasy() {
+    
+    NSUserDefaults* ix = _Get();
+    
+    return [ix boolForKey:@"EASY"];
 }

@@ -22,6 +22,7 @@
 #import "Item.h"
 #import "Bullet.h"
 #import "Bomb.h"
+#import "SaveData.h"
 
 // ダメージタイマー
 static const int TIMER_DAMAGE = 30;
@@ -522,6 +523,15 @@ enum eState {
     if (m_tDamage > 0) {
         // ダメージ中画像
         [self setTexRect:Exerinya_GetRect(eExerinyaRect_PlayerDamage)];
+        
+        if (m_State == eState_Standby) {
+            if (m_tDamage%8 >= 4) {
+                [self setVisible:NO];
+            }
+            else {
+                [self setVisible:YES];
+            }
+        }
     }
     
     Aim* aim = [self getAim];
@@ -678,6 +688,17 @@ enum eState {
     [gauge setMax:m_PowerMax];
 }
 
+// 無敵状態かどうか
+- (BOOL)isInvicible {
+    if (SaveData_IsEasy()) {
+        
+        // ダメージタイマーが残っていれば無敵
+        return m_tDamage > 0;
+    }
+    
+    return NO;
+}
+
 // ダメージ
 - (void)damage:(Token*)t {
     
@@ -685,18 +706,29 @@ enum eState {
     [self initCombo];
     
     // パワーゲージをリセット
-    m_tPower = 0;
+    if (SaveData_IsEasy()) {
+        // EASYモードは半分だけ減らす
+        m_tPower = m_tPower * 0.5;
+        
+    }
+    else {
+        
+        m_tPower = 0;
+    }
     
     // チャージエフェクト終了
     Charge* charge = [self getCharge];
     [charge setParam:eCharge_Disable x:self._x y:self._y];
    
-    // 吹き飛ばす
-    Vec2D d = Vec2D(self._x - t._x, self._y - t._y);
-    d.Normalize();
-    d *= SPEED_DAMAGE;
-    self._vx = d.x;
-    self._vy = d.y;
+    if (SaveData_IsEasy() == NO) {
+        // 吹き飛ばす
+        Vec2D d = Vec2D(self._x - t._x, self._y - t._y);
+        d.Normalize();
+        d *= SPEED_DAMAGE;
+        self._vx = d.x;
+        self._vy = d.y;
+        
+    }
     
     // HPを減らす
     float bDanger = [self isDanger];
@@ -782,8 +814,16 @@ enum eState {
         
         // 回復用タイマーをリセットする
         m_tRecover = 0;
-        m_tDamage = TIMER_DAMAGE;
-        m_Timer = TIMER_DAMAGE;
+        
+        if (SaveData_IsEasy()) {
+            m_tDamage = TIMER_DAMAGE * 2;
+            m_Timer = 1;
+        }
+        else {
+            
+            m_tDamage = TIMER_DAMAGE;
+            m_Timer = TIMER_DAMAGE;
+        }
         
         [self changeState:eState_Damage];
     }

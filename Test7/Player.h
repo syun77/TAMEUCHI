@@ -48,6 +48,9 @@ static const int SHOT_TIMER = 16;
 // 弾を撃つ
 - (void)shot:(float)rot;
 
+// 無敵状態かどうか
+- (BOOL)isInvicible;
+
 // ダメージ
 - (void)damage:(Token*)t;
 

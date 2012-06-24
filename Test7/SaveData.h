@@ -74,3 +74,13 @@ BOOL SaveData_IsEnableSe();
  * @param b 有効フラグ
  */
 void SaveData_SetEnableSe(BOOL b);
+
+/**
+ * EASYモードの設定
+ */
+void SaveData_SetEasy(BOOL b);
+
+/**
+ * EASYモードの取得
+ */
+BOOL SaveData_IsEasy();

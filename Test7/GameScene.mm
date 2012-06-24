@@ -465,6 +465,12 @@ static GameScene* scene_ = nil;
             continue;
         }
         
+        if ([self.player isInvicible]) {
+            
+            // 無敵中
+            continue;
+        }
+        
         if ([e isHit2:self.player]) {
             // ダメージ判定
             [self.player damage:e];
@@ -502,6 +508,12 @@ static GameScene* scene_ = nil;
         }
         
         if (bHit) {
+            continue;
+        }
+        
+        if ([self.player isInvicible]) {
+            
+            // 無敵中
             continue;
         }
         

@@ -33,6 +33,10 @@ static const float SE_BUTTON_RECT_Y = 16;
 static const float SE_BUTTON_RECT_W = 80;
 static const float SE_BUTTON_RECT_H = 32;
 
+static const float EASY_BUTTON_RECT_X = 8;
+static const float EASY_BUTTON_RECT_Y = 48+8;
+static const float EASY_BUTTON_RECT_W = 96;
+static const float EASY_BUTTON_RECT_H = 32;
 /**
  * タイトル画面
  */
@@ -49,6 +53,7 @@ static const float SE_BUTTON_RECT_H = 32;
     AsciiFont*      fontStartButton;// フォント（スタートボタン）
     AsciiFont*      fontBgm;        // フォント（BGM）
     AsciiFont*      fontSe;         // フォント（SE）
+    AsciiFont*      fontEasy;       // フォント (EASY)
     
     BOOL            m_bNextScene;   // 次のシーンに進む
     float           m_TouchStartX;  // タッチ開始座標 (X)
@@ -57,7 +62,8 @@ static const float SE_BUTTON_RECT_H = 32;
     BOOL            m_bRankSelect;  // ランク選択タッチ中
     BOOL            m_bGameStart;   // ゲームスタートタッチ中
     BOOL            m_bBgm;         // BGM ON/OFF タッチ中
-    BOOL            m_bSe;          // SE ON/OF タッチ中
+    BOOL            m_bSe;          // SE ON/OFF タッチ中
+    BOOL            m_bEasy;        // EASY ON/OFF タッチ中
 }
 
 @property (nonatomic, retain)BackTitle*         back;
@@ -71,6 +77,7 @@ static const float SE_BUTTON_RECT_H = 32;
 @property (nonatomic, retain)AsciiFont*         fontStartButton;
 @property (nonatomic, retain)AsciiFont*         fontBgm;
 @property (nonatomic, retain)AsciiFont*         fontSe;
+@property (nonatomic, retain)AsciiFont*         fontEasy;
 
 + (TitleScene*)sharedInstance;
 + (void)releaseInstance;
@@ -86,5 +93,8 @@ static const float SE_BUTTON_RECT_H = 32;
 
 // SE ON/OFF タッチ中
 - (BOOL)isTouchSe;
+
+// EASY ON/OFF タッチ中
+- (BOOL)isTouchEasy;
 
 @end
