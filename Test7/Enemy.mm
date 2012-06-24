@@ -228,6 +228,12 @@ enum eRange {
             m_HpMax = 30;
             break;
             
+        case eEnemy_5Box2:   // ５箱２
+            [self setTexRect: Exerinya_GetRect(eExerinyaRect_5Box)];
+            self._r = 16;
+            m_HpMax = 20;
+            break;
+            
         case eEnemy_Pudding: // プリン
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_Pudding)];
             self._r = 48;
@@ -242,8 +248,8 @@ enum eRange {
             
         case eEnemy_XBox:    // XBox
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_XBox)];
-            self._r = 48;
-            m_HpMax = 50;
+            self._r = 56;
+            m_HpMax = 1000;
             break;
             
         case eEnemy_Radish:  // 大根
@@ -276,6 +282,11 @@ enum eRange {
     
     // HPを設定する
     m_Hp = m_HpMax;
+}
+
+// 敵種別の取得
+- (eEnemy)getType {
+    return m_Id;
 }
 
 /**
@@ -710,6 +721,17 @@ enum eRange {
     [self setRotation:m_Val];
 }
 
+- (void)update5Box2 {
+    
+    if ([self isOutCircle:self._r]) {
+        // 画面外に出たら消える
+        [self vanish];
+    }
+    
+    
+    
+}
+
 /**
  * 更新・牛乳
  */
@@ -986,6 +1008,165 @@ enum eRange {
  * 更新・XBox
  */
 - (void)updateXBox {
+    const float speedIn  = 100; // 画面に入る速度
+    const float speedMove = 200; // 移動速度
+    eRange range = [self getRange]; // プレイヤーとの距離
+    
+    switch (m_State) {
+        case eState_Appear:
+            // 登場シーケンス
+            m_Timer++;
+            [self moveAppear:speedIn radius:self._r];
+            if ([self isOutCircle:-self._r] == NO || m_Timer > 200) {
+                m_Timer = 0;
+                m_State = eState_Main;
+                // プレイヤーに向かって移動する
+                float aim = [self getAim];
+                float dx = Math_CosEx(aim) * speedMove;
+                float dy = -Math_SinEx(aim) * speedMove;
+                self._vx = dx;
+                self._vy = dy;
+            }
+            self._vx *= 0.5f;
+            self._vy *= 0.5f;
+            break;
+            
+        case eState_Main:
+            m_Timer++;
+            if (m_bWhip) {
+                if (m_Val2 > 0) {
+                    m_Val2--;
+                    
+                    float rot1 = m_Val + 40 * Math_SinEx(m_Val2*7);
+                    float rot2 = m_Val - 40 * Math_SinEx(m_Val2*7);
+                    
+                    [Bullet add:self._x y:self._y rot:rot1 speed:100 + m_Val2 * 1];
+                    [Bullet add:self._x y:self._y rot:rot2 speed:100 + m_Val2 * 1];
+                    
+                    if (m_Val2 < 1) {
+                        // ウィップ弾終了
+                        m_bWhip = NO;
+                    }
+                }
+            }
+            
+            if (m_Timer%120 == 11) {
+                // 移動シーケンス
+                // プレイヤーから直角に移動する
+                float deg1 = Math_RandInt(-1, 1) * 90;
+                float deg2 = Math_RandInt(-1, 1) * 90;
+                
+                float aim = [self getAim];
+                float dx = Math_CosEx(aim + deg1) * speedMove;
+                float dy = -Math_SinEx(aim + deg2) * speedMove;
+                self._vx = dx;
+                self._vy = dy;
+                
+                if (range == eRange_Long) {
+                    // 遠距離
+                    if ([self isDanger]) {
+                        
+                        // ウィップ弾
+                        m_Val = [self getAim];
+                        m_Val2 = [self getLevel]; // これだけ撃つ
+                        if (m_Val2 > 96) {
+                            m_Val2 = 96;
+                        }
+                        m_bWhip = YES;
+                    }
+                    else {
+                        
+                        // 5箱を投げつける
+                        float base = 150 + [self getLevel] / 2;
+                        if (base > 300) {
+                            base = 300;
+                        }
+                        
+                        Player* p = [self getTarget];
+                        float rot2 = Math_Atan2Ex(p._y - self._y, p._x - self._x);
+                        
+                        [Enemy add:eEnemy_5Box2 x:self._x y:self._y rot:rot2 speed:base];
+                        
+                        if (Math_Rand(5) == 0) {
+                            m_Timer += 100;
+                        }
+                        
+                    }
+                }
+                else if(range == eRange_Middle) {
+                    // 中距離
+                    
+                    // 5箱を投げる
+                    if (Math_Rand(3) == 0 && [self getLevel] > 100) {
+                        
+                        float speed = 200;
+                        int cnt = [self getLevel] / 20 - 2;
+                        if (cnt > 10) {
+                            cnt = 10;
+                        }
+                        
+                        Player* p = [self getTarget];
+                        float rot2 = Math_Atan2Ex(p._y - self._y, p._x - self._x);
+                        
+                        float dRot = 5;
+                        if (p._x - self._x < 0) {
+                            // 左にいる
+                            rot2 -= 30;
+                            dRot = -dRot;
+                        }
+                        else {
+                            // 右にいる
+                            rot2 += 30;
+                            dRot = dRot;
+                        }
+                        
+                        for (int i = 0; i < cnt; i++) {
+                            rot2 += dRot;
+                            Enemy* e = [Enemy add:eEnemy_5Box2 x:self._x y:self._y rot:rot2 speed:speed];
+                            if (e) {
+                                e._ay = -3;
+                            }
+                            
+                        }
+                        
+                        
+                    }
+                    if (m_Timer%500 == 300) {
+                        // プレイヤーから離れようとする
+                        float aim = [self getAim] + 180;
+                        float dx = Math_CosEx(aim) * speedMove;
+                        float dy = -Math_SinEx(aim) * speedMove;
+                        self._vx = dx;
+                        self._vy = dy;
+                    }
+                }
+                else {
+                    // 近距離
+                    // プレイヤーから離れようとする
+                    float aim = [self getAim] + 180;
+                    float dx = Math_CosEx(aim) * speedMove;
+                    float dy = -Math_SinEx(aim) * speedMove;
+                    self._vx = dx;
+                    self._vy = dy;
+                    
+                }
+                
+            }
+            if([self isBoundRectX:self._r])
+            {
+                self._vx = -self._vx * 0.8;
+            }
+            if([self isBoundRectY:self._r])
+            {
+                self._vy = -self._vy * 0.8;
+            }
+            self._vx *= 0.97f;
+            self._vy *= 0.97f;
+            break;
+            
+        default:
+            break;
+    }
     
 }
 
@@ -1204,6 +1385,10 @@ enum eRange {
             [self update5Box];
             break;
             
+        case eEnemy_5Box2:
+            [self update5Box2];
+            break;
+            
         case eEnemy_Milk:
             [self updateMilk];
             break;
@@ -1262,10 +1447,16 @@ enum eRange {
             // 通常サイズ
             [self vanishNormal];
             
-            if (m_Id == eEnemy_5Box) {
-                // 5箱は爆発する
-                
-                [Bomb add:80 x:self._x y:self._y];
+            switch (m_Id) {
+                case eEnemy_5Box:
+                case eEnemy_5Box2:
+                    // 5箱は爆発する
+                    
+                    [Bomb add:80 x:self._x y:self._y];
+                    break;
+                    
+                default:
+                    break;
             }
             
             // チャージゲージ回復アイテム出現

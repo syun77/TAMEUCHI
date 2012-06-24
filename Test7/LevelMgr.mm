@@ -53,7 +53,6 @@
 - (void)initialize {
     m_tPast     = 0;
     m_nLevel    = SaveData_GetRank();
-//    m_nLevel    = 1;
     m_Mode      = eLevel_Endless;
 //    m_Mode      = eLevel_TimeAttack;
 }
@@ -226,6 +225,17 @@
                 }
             }
         }
+    
+#ifdef VERSION_LIMITED
+        // 制限版には箱○はでない
+        
+#else
+        if (m_nLevel%30 == 29 && m_Timer == 320) {
+            
+            // XBox出現
+            [self addEnemy:eEnemy_XBox];
+        }
+#endif
         
         if (m_Timer > 800) {
 #ifdef VERSION_LIMITED
@@ -248,6 +258,7 @@
     
     switch (m_Mode) {
         case eLevel_Endless:
+            
             [self updateEndless];
             break;
             

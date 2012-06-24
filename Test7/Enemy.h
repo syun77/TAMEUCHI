@@ -23,6 +23,7 @@ enum eEnemy {
     eEnemy_Nasu,    // ナス
     eEnemy_Tako,    // たこ焼き
     eEnemy_5Box,    // ５箱
+    eEnemy_5Box2,   // ５箱２
     eEnemy_Pudding, // プリン
     eEnemy_Milk,    // 牛乳
     eEnemy_XBox,    // XBox
@@ -68,11 +69,16 @@ enum eSize {
 // 敵種別の設定
 - (void)setType:(eEnemy)type;
 
+// 敵種別の取得
+- (eEnemy)getType;
+
 // 敵破壊点を取得する
 - (int)getScore;
 
 // サイズの取得
 - (eSize)getSize;
+
+- (void)destroy;
 
 // 残りHPの割合を取得(0〜1)
 - (float)getHpRatio;

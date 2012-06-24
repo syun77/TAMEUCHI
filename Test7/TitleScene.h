@@ -46,6 +46,7 @@ static const float EASY_BUTTON_RECT_H = 32;
     CCLayer*        baseLayer;      // 描画レイヤー
     InterfaceLayer* interfaceLayer; // 入力受け取り
     AsciiFont*      asciiFont;      // フォント
+    AsciiFont*      fontLite;       // フォント (Lite)
     AsciiFont*      fontHiScore;    // フォント (ハイスコア)
     AsciiFont*      fontRank;       // フォント (ランク)
     AsciiFont*      fontRankMax;    // フォント (最大ランク)
@@ -70,6 +71,7 @@ static const float EASY_BUTTON_RECT_H = 32;
 @property (nonatomic, retain)CCLayer*           baseLayer;
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
 @property (nonatomic, retain)AsciiFont*         asciiFont;
+@property (nonatomic, retain)AsciiFont*         fontLite;
 @property (nonatomic, retain)AsciiFont*         fontHiScore;
 @property (nonatomic, retain)AsciiFont*         fontRank;
 @property (nonatomic, retain)AsciiFont*         fontRankMax;

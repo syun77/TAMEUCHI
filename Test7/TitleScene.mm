@@ -20,6 +20,7 @@ static TitleScene* scene_ = nil;
 @synthesize baseLayer;
 @synthesize interfaceLayer;
 @synthesize asciiFont;
+@synthesize fontLite;
 @synthesize fontHiScore;
 @synthesize fontRank;
 @synthesize fontRankMax;
@@ -65,6 +66,17 @@ static TitleScene* scene_ = nil;
     [self.asciiFont setPos:9 y:17];
     [self.asciiFont setScale:2];
     [self.asciiFont setText:@"TAMEUCHI"];
+    
+    self.fontLite = [AsciiFont node];
+    [self.fontLite createFont:self.baseLayer length:24];
+    [self.fontLite setPos:20 y:15];
+    [self.fontLite setScale:1];
+    [self.fontLite setColor:ccc3(0xFF, 0x80, 0x80)];
+    [self.fontLite setText:@"Lite"];
+#ifdef VERSION_LIMITED
+#else
+    [self.fontLite setVisible:NO];
+#endif
     
     self.fontHiScore = [AsciiFont node];
     [self.fontHiScore createFont:self.baseLayer length:24];
@@ -144,6 +156,7 @@ static TitleScene* scene_ = nil;
     self.fontRankMax = nil;
     self.fontRank = nil;
     self.fontHiScore = nil;
+    self.fontLite = nil;
     self.asciiFont = nil;
     self.interfaceLayer = nil;
     self.back = nil;

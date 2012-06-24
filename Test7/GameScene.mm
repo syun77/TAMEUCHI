@@ -396,6 +396,8 @@ static GameScene* scene_ = nil;
             continue;
         }
         
+        BOOL bDestroyEnemy = NO;
+        
         // 敵 vs 自弾
         for (Shot* s in self.mgrShot.m_Pool) {
             if ([s isExist] == NO) {
@@ -420,10 +422,16 @@ static GameScene* scene_ = nil;
                     // スコアもアップ
                     [self addScore:100];
                     
+                    bDestroyEnemy = YES;
+                    
                     break;
                     
                 }
             }
+        }
+        
+        if (bDestroyEnemy) {
+            continue;
         }
         
         // ボム vs 敵
@@ -453,6 +461,49 @@ static GameScene* scene_ = nil;
                     bHit = YES;
                     
                     break;
+                }
+            }
+        }
+        if (bHit) {
+            continue;
+        }
+        
+        if ([e getType] == eEnemy_XBox) {
+            
+            // XBoxは他の敵を破壊する
+            for (Enemy* e2 in self.mgrEnemy.m_Pool) {
+                
+                if ([e2 isExist] == NO) {
+                    continue;
+                }
+                
+                switch ([e2 getType]) {
+                    case eEnemy_XBox:
+                    case eEnemy_5Box:
+                    case eEnemy_5Box2:
+                        // 箱は除外
+                        continue;
+                        break;
+                        
+                    default:
+                        break;
+                }
+                if ([e2 isHit2:e]) {
+                    
+                    // 破壊
+                    [e hit:0 y:0];
+                    [e2 destroy];
+                    if ([e2 getSize] == eSize_Big) {
+                        bDestroyBig = YES;
+                    }
+                    else {
+                        bDestroy = YES;
+                    }
+                    // 倒したらコンボ回数アップ
+                    [self.player addCombo];
+                    
+                    // スコアもアップ
+                    [self addScore:100];
                 }
             }
         }
