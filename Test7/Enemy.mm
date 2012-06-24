@@ -231,7 +231,7 @@ enum eRange {
         case eEnemy_5Box2:   // ５箱２
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_5Box)];
             self._r = 16;
-            m_HpMax = 20;
+            m_HpMax = 30;
             break;
             
         case eEnemy_Pudding: // プリン
@@ -1166,6 +1166,11 @@ enum eRange {
             
         default:
             break;
+    }
+    
+    if (m_tPast > 60 * 60 * 3) {
+        // 3分経過で自爆
+        [self destroy];
     }
     
 }
