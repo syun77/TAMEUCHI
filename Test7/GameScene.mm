@@ -564,8 +564,13 @@ static GameScene* scene_ = nil;
         // 最大レベル更新
         SaveData_SetRankMax([self.levelMgr getLevel]);
         
+#ifdef VERSION_LIMITED
+        
+        // 制限バージョンは現在ランクを保存しない
+#else
         // ランク選択設定
         SaveData_SetRank([self.levelMgr getLevel]);
+#endif // #ifdef VERSION_LIMITED
         
         // 画面を暗くする
         [self.black setVisible:YES];
@@ -757,6 +762,12 @@ static GameScene* scene_ = nil;
         // メインでなければ開始できない
         return;
     }
+    
+#ifdef VERSION_LIMITED
+    // 制限モードはランクアップする
+    [self.levelMgr addLevel];
+    
+#endif
     
     Sound_PlaySe(@"kin.wav");
     

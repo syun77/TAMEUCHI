@@ -29,7 +29,6 @@ void SaveData_Init() {
         SaveData_SetRankMax(80);
     }
     
-    
     if ([defaults boolForKey:@"INIT"]) {
         
         // 初期化済みなので何もしない
@@ -43,6 +42,12 @@ void SaveData_Init() {
     [defaults setBool:YES forKey:@"BGM"];
     [defaults setBool:YES forKey:@"SE"];
     [defaults setBool:NO forKey:@"EASY"];
+    
+#ifdef VERSION_LIMITED
+    
+    // 制限バージョンはLv80固定
+    [defaults setInteger:80 forKey:@"RANK"];
+#endif
     
     // 保存
     [defaults synchronize];

@@ -33,10 +33,13 @@ enum eLevel {
 // レベルの取得
 - (int)getLevel;
 
+// レベルを加算する
+- (void)addLevel;
+
 // タイマーの取得
 - (int)getTimer;
 
-// レベルアップタイマーのウェイと時間を取得する
+// レベルアップタイマーのウェイト時間を取得する
 - (int)getLevelUpTimerWait;
 
 @end

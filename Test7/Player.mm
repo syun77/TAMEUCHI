@@ -123,6 +123,14 @@ enum eState {
 }
 
 /**
+ * レベル管理を取得する
+ */
+- (LevelMgr*)getLevelMgr {
+    GameScene* scene = [GameScene sharedInstance];
+    return scene.levelMgr;
+}
+
+/**
  * チャージが開始できるかどうか
  */
 - (BOOL)isChargeStart {
@@ -528,13 +536,20 @@ enum eState {
         // ダメージ中画像
         [self setTexRect:Exerinya_GetRect(eExerinyaRect_PlayerDamage)];
         
+        if (SaveData_IsEasy()) {
+            if (m_State == eState_Standby) {
+                if (m_tDamage%8 >= 4) {
+                    [self setVisible:NO];
+                }
+                else {
+                    [self setVisible:YES];
+                }
+            }
+        }
+    }
+    else {
         if (m_State == eState_Standby) {
-            if (m_tDamage%8 >= 4) {
-                [self setVisible:NO];
-            }
-            else {
-                [self setVisible:YES];
-            }
+            [self setVisible:YES];
         }
     }
     

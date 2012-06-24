@@ -112,6 +112,11 @@ static TitleScene* scene_ = nil;
     [self.fontEasy setPos:4 y:5];
     [self.fontEasy setAlign:eFontAlign_Center];
     [self.fontEasy setScale:1];
+#ifdef VERSION_LIMITED
+    
+    // 制限モードはEASYを選べない
+    [self.fontEasy setVisible:NO];
+#endif
     
     // 変数初期化
     m_bNextScene = NO;
@@ -163,7 +168,14 @@ static TitleScene* scene_ = nil;
     
     [self.fontBgm setText:[NSString stringWithFormat:@"BGM:%@", Sound_IsEnableBgm() ? @"o" : @"x"]];
     [self.fontSe setText:[NSString stringWithFormat:@"SE:%@", Sound_IsEnableSe() ? @"o" : @"x"]];
+#ifdef VERSION_LIMITED
+    
+    // 制限モードはEASYを選べない
+    [self.fontEasy setVisible:NO];
+    
+#else
     [self.fontEasy setText:[NSString stringWithFormat:@"EASY:%@", SaveData_IsEasy() ? @"o" : @"x"]];
+#endif
     
     if (m_bNextScene) {
         
@@ -179,6 +191,12 @@ static TitleScene* scene_ = nil;
  * ランク選択の矩形にヒットしているかどうか
  */
 - (BOOL)isHitRankSelect:(float)x y:(float)y {
+    
+#ifdef VERSION_LIMITED
+    
+    // 制限モードはランク選択不可
+    return NO;
+#endif
     
     CGRect rect = CGRectMake(RANK_SELECT_RECT_X, RANK_SELECT_RECT_Y, RANK_SELECT_RECT_W, RANK_SELECT_RECT_H);
     CGPoint p = CGPointMake(x, y);
@@ -237,6 +255,11 @@ static TitleScene* scene_ = nil;
 
 - (BOOL)isHitEasy:(float)x y:(float)y {
     
+#ifdef VERSION_LIMITED
+    
+    // 制限モードはEASY選択不可
+    return NO;
+#endif
     CGRect rect = CGRectMake(EASY_BUTTON_RECT_X, EASY_BUTTON_RECT_Y, EASY_BUTTON_RECT_W, EASY_BUTTON_RECT_H);
     CGPoint p = CGPointMake(x, y);
     

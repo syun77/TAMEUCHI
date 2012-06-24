@@ -10,6 +10,7 @@
 #import "Exerinya.h"
 #import "TitleScene.h"
 #import "Math.h"
+#import "SaveData.h"
 
 static const float POS_RANK_L = 80;
 static const float POS_RANK_R = 480-POS_RANK_L;
@@ -76,7 +77,12 @@ static const float POS_RANK_Y = 160;
 
 - (void)visit {
     [super visit];
+   
+#ifdef VERSION_LIMITED
     
+    // 制限モードはランク選択不可
+    
+#else
     // ■ランク選択カーソルの描画
     glColor4f(0, 0, 0, 0.4);
     if ([[TitleScene sharedInstance] isTouchRankSelect]) {
@@ -94,6 +100,7 @@ static const float POS_RANK_Y = 160;
     
     [self fillTriangle:POS_RANK_L - cursorLX cy:POS_RANK_Y radius:16 rot:270 scale:1];
     [self fillTriangle:POS_RANK_R + cursorRX cy:POS_RANK_Y radius:16 rot:90 scale:1];
+#endif // #ifdef VERSION_LIMITED 
     
     System_SetBlend(eBlend_Normal);
     
@@ -130,6 +137,11 @@ static const float POS_RANK_Y = 160;
     }
     [self fillRectLT:SE_BUTTON_RECT_X y:SE_BUTTON_RECT_Y w:SE_BUTTON_RECT_W h:SE_BUTTON_RECT_H rot:0 scale:1];
     
+#ifdef VERSION_LIMITED
+    
+    // 制限モードはランク選択不可
+    
+#else
     // ■EASY ON/OFF
     glColor4f(0.2, 0.2, 0.2, 0.5);
     [self fillRectLT:EASY_BUTTON_RECT_X-2 y:EASY_BUTTON_RECT_Y-2 w:EASY_BUTTON_RECT_W+4 h:EASY_BUTTON_RECT_H+4 rot:0 scale:1];
@@ -140,6 +152,8 @@ static const float POS_RANK_Y = 160;
         glColor4f(0, 0, 0.5, 0.4);
     }
     [self fillRectLT:EASY_BUTTON_RECT_X y:EASY_BUTTON_RECT_Y w:EASY_BUTTON_RECT_W h:EASY_BUTTON_RECT_H rot:0 scale:1];
+#endif // #ifdef VERSION_LIMITED
+    
 }
 
 

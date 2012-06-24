@@ -228,7 +228,11 @@
         }
         
         if (m_Timer > 800) {
+#ifdef VERSION_LIMITED
+            m_nLevel += 2;
+#else
             m_nLevel++;
+#endif
             m_Timer = 0;
         }
     }
@@ -282,6 +286,14 @@
  */
 - (int)getLevel {
     return m_nLevel;
+}
+
+/**
+ * レベルを加算する
+ */
+- (void)addLevel {
+    
+    m_nLevel += 5;
 }
 
 // タイマーの取得
