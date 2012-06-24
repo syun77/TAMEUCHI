@@ -23,10 +23,10 @@ void SaveData_Init() {
     NSUserDefaults* defaults = _Get();
     
     int hiRank = SaveData_GetRankMax();
-    if (hiRank < 70) {
+    if (hiRank < 80) {
         
-        // Lv75以下であれば75にする
-        SaveData_SetRankMax(70);
+        // Lv80以下であれば80にする
+        SaveData_SetRankMax(80);
     }
     
     
@@ -39,7 +39,7 @@ void SaveData_Init() {
     [defaults setBool:YES forKey:@"INIT"];
     [defaults setInteger:0 forKey:@"HI_SCORE"];
     [defaults setInteger:1 forKey:@"RANK"];
-    [defaults setInteger:1 forKey:@"RANK_MAX"];
+    //[defaults setInteger:1 forKey:@"RANK_MAX"];
     [defaults setBool:YES forKey:@"BGM"];
     [defaults setBool:YES forKey:@"SE"];
     

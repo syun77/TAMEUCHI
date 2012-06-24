@@ -305,7 +305,7 @@ enum eState {
     }
     
     if (m_nLevel > 4) {
-        if ([self getPowerRatio] > 0.8) {
+        if ([self getPowerRatio] > 0.72) {
             // 5WAV
             [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 30 speed:speed];
             [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 30 speed:speed];
@@ -314,7 +314,7 @@ enum eState {
     
     if (m_nLevel > 9) {
         
-        if ([self getPowerRatio] > 0.9) {
+        if ([self getPowerRatio] > 0.85) {
             // 7WAV
             [Shot add:eShot_Normal x:self._x y:self._y rot:rot - 45 speed:speed];
             [Shot add:eShot_Normal x:self._x y:self._y rot:rot + 45 speed:speed];
@@ -364,7 +364,7 @@ enum eState {
             // 弾を撃つ
             [self shotAim];
             if (m_tPower > 0) {
-                m_tPower -= 1 + (0.1 * m_nLevel) * (0.1 * m_nLevel);
+                m_tPower -= 1 + (0.1 * m_nLevel) * (0.08 * m_nLevel);
                 m_tShot += 2;
                 if (nearestLength < 20000) {
                     m_tShot = 0;
