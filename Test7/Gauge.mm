@@ -31,6 +31,9 @@ static const int GAUGE_HEIGHT = 8;
     m_Max = 1;
     m_tPast = 0;
     
+    self._x = System_Width()/2;
+    self._y = System_Height()/2;
+    
     return self;
 }
 

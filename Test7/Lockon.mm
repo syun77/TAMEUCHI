@@ -40,6 +40,11 @@ enum eState {
     m_Id    = -1;
     m_tPast = 0;
     
+    
+    // 画面外に出しておく
+    self._x = -320;
+    self._y = -480;
+    
     return self;
 }
 

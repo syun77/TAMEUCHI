@@ -191,6 +191,8 @@ enum eState {
     self._y = System_CenterY();
     m_Target.Set(self._x, self._y);
     
+    [self move:0];
+    
     [self setTexRect:Exerinya_GetRect(eExerinyaRect_Player1)];
     [self setScale:0.5f];
     [self setSize2:24];
@@ -457,7 +459,9 @@ enum eState {
         // ロックオン表示
         Lockon* lockon = [self getLockon];
         Enemy* e = [Enemy getNearest:aim._x y:aim._y];
-        [lockon start:[e getIndex] x:e._x y:e._y r:e._r];
+        if (e) {
+            [lockon start:[e getIndex] x:e._x y:e._y r:e._r];
+        }
         
         // チャージエフェクト有効
         if ([self isChargeStart]) {

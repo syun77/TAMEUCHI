@@ -26,6 +26,8 @@
     m_tRot = 0;
     m_bActive = YES;
     
+    [self move:0];
+    
     // 照準の半径
     self._r = 48;
     

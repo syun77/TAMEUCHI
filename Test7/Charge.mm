@@ -26,6 +26,9 @@
     m_State = eCharge_Disable;
     [self setParam:eCharge_Disable x:System_CenterX() y:System_CenterY()];
     
+    self._x = System_Width()/2;
+    self._y = System_Height()/2;
+    
     // エフェクト描画設定
     CGRect r = Exerinya_GetRect(eExerinyaRect_EftRing);
     [self setTexRect:r];
