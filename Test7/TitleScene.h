@@ -65,6 +65,8 @@ static const float EASY_BUTTON_RECT_H = 32;
     BOOL            m_bBgm;         // BGM ON/OFF タッチ中
     BOOL            m_bSe;          // SE ON/OFF タッチ中
     BOOL            m_bEasy;        // EASY ON/OFF タッチ中
+    
+    BOOL            m_bInit;
 }
 
 @property (nonatomic, retain)BackTitle*         back;

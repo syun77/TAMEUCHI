@@ -10,6 +10,7 @@
 #import "GameScene.h"
 #import "SceneManager.h"
 #import "SaveData.h"
+#import "AppDelegate.h"
 
 // シングルトン
 static TitleScene* scene_ = nil;
@@ -144,6 +145,8 @@ static TitleScene* scene_ = nil;
     // 入力コールバック登録
     [self.interfaceLayer addCB:self];
     
+    m_bInit = NO;
+    
     return self;
 }
 
@@ -167,6 +170,13 @@ static TitleScene* scene_ = nil;
 
 // 更新
 - (void)update:(ccTime)dt {
+    
+    if (m_bInit == NO) {
+        // 広告表示
+        [AppDelegate setVisibleAdWhirlView:YES];
+        
+        m_bInit = YES;
+    }
     
     // ランク数更新
     if (m_bRankSelect) {
@@ -196,6 +206,11 @@ static TitleScene* scene_ = nil;
         [self.interfaceLayer delCB];
         
         SceneManager_Change(@"GameScene");
+        
+#ifdef VERSION_LIMITED
+        // 広告非表示
+        [AppDelegate setVisibleAdWhirlView:NO];
+#endif
         
     }
 }

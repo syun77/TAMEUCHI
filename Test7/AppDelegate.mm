@@ -20,6 +20,17 @@
 @implementation AppDelegate
 
 @synthesize window;
+@synthesize adWhirlView;
+
+// アプリケーションキーの取得
+- (NSString*)adWhirlApplicationKey {
+    return @"22478561a0a74dea94c47d2acb4c0320";
+}
+
+// ViewControllerの取得
+- (UIViewController*)viewControllerForPresentingModalView {
+    return viewController;
+}
 
 - (void) removeStartupFlicker
 {
@@ -117,6 +128,12 @@
 	
 	// Removes the startup flicker
 	[self removeStartupFlicker];
+    
+    // AdWhirlの生成
+    self.adWhirlView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
+    
+    // ViewControllerに登録
+    [viewController.view addSubview:self.adWhirlView];
 	
     // セーブデータを初期化する
     SaveData_Init();
@@ -170,6 +187,17 @@
 	[[CCDirector sharedDirector] end];
 	[window release];
 	[super dealloc];
+}
+// AdWhirlView の表示・非表示を切り替え
++ (void)setVisibleAdWhirlView:(BOOL)b {
+    
+    AppDelegate* app = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    if (b) {
+        app.adWhirlView.hidden = NO;
+    }
+    else {
+        app.adWhirlView.hidden = YES;
+    }
 }
 
 @end

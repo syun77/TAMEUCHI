@@ -781,11 +781,11 @@ enum eRange {
                     // にんじん発射
                     float speed = 100 + [self getLevel];
                     if (speed > 250) {
-                        speed = 250;
+                        speed = 250 + ([self getLevel] - 150) * 0.1;
                     }
                     int cnt = 1 + [self getLevel] / 50;
-                    if (cnt > 8) {
-                        cnt = 8;
+                    if (cnt > 12) {
+                        cnt = 12;
                     }
                     
                     float dir = 180;
@@ -805,7 +805,7 @@ enum eRange {
                     // だいこん発射
                     float speed = 100 + [self getLevel];
                     if (speed > 250) {
-                        speed = 250;
+                        speed = 250 + ([self getLevel] - 150) * 0.1;
                     }
                     
                     if ([self isDanger]) {
@@ -926,8 +926,8 @@ enum eRange {
                         
                         // リング弾
                         float base = 150 + [self getLevel] / 2;
-                        if (base > 300) {
-                            base = 300;
+                        if (base > 400) {
+                            base = 400;
                         }
                         
                         for (int i = 0; i < 16; i++) {
@@ -1050,7 +1050,7 @@ enum eRange {
                 }
             }
             
-            if (m_Timer%120 == 11) {
+            if (m_Timer%180 == 11) {
                 // 移動シーケンス
                 // プレイヤーから直角に移動する
                 float deg1 = Math_RandInt(-1, 1) * 90;
