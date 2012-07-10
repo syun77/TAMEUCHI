@@ -209,6 +209,8 @@
 		C7F053AE152B15CF0095B76E /* Exerinya.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F053AD152B15CF0095B76E /* Exerinya.mm */; };
 		C7F0DF55153A83BC006E26E4 /* Charge.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F0DF54153A83BC006E26E4 /* Charge.mm */; };
 		C7F36C611549072800D67933 /* Combo.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7F36C601549072800D67933 /* Combo.mm */; };
+		C7FDE74415A98B48001B292C /* GameKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C7FDE74315A98B48001B292C /* GameKit.framework */; };
+		C7FDE74815A9B10E001B292C /* GameCenter.mm in Sources */ = {isa = PBXBuildFile; fileRef = C7FDE74715A9B10E001B292C /* GameCenter.mm */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -606,6 +608,9 @@
 		C7F0DF54153A83BC006E26E4 /* Charge.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Charge.mm; sourceTree = "<group>"; };
 		C7F36C5F1549072800D67933 /* Combo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Combo.h; sourceTree = "<group>"; };
 		C7F36C601549072800D67933 /* Combo.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Combo.mm; sourceTree = "<group>"; };
+		C7FDE74315A98B48001B292C /* GameKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GameKit.framework; path = System/Library/Frameworks/GameKit.framework; sourceTree = SDKROOT; };
+		C7FDE74615A9B10E001B292C /* GameCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GameCenter.h; sourceTree = "<group>"; };
+		C7FDE74715A9B10E001B292C /* GameCenter.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = GameCenter.mm; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -613,6 +618,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C7FDE74415A98B48001B292C /* GameKit.framework in Frameworks */,
 				C762CE5D1597FCBA0074EA1C /* SystemConfiguration.framework in Frameworks */,
 				C762CE5F1597FCCD0074EA1C /* MessageUI.framework in Frameworks */,
 				C70F5EC7151B6E65003B041E /* QuartzCore.framework in Frameworks */,
@@ -658,6 +664,7 @@
 		C70F5EC5151B6E65003B041E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				C7FDE74315A98B48001B292C /* GameKit.framework */,
 				C762CE5E1597FCCD0074EA1C /* MessageUI.framework */,
 				C762CE5C1597FCBA0074EA1C /* SystemConfiguration.framework */,
 				C762CE5A1597FCA30074EA1C /* iAd.framework */,
@@ -1209,6 +1216,8 @@
 			children = (
 				C73A11A21529630C00C10EC4 /* AsciiFont.h */,
 				C73A11A31529630C00C10EC4 /* AsciiFont.mm */,
+				C7FDE74615A9B10E001B292C /* GameCenter.h */,
+				C7FDE74715A9B10E001B292C /* GameCenter.mm */,
 				C70F603A151B7043003B041E /* InterfaceLayer.h */,
 				C786B37815253D7600049CA8 /* InterfaceLayer.mm */,
 				C76591D315462AA700018DD2 /* IScene.h */,
@@ -1489,6 +1498,7 @@
 				C762CE4C1597FB800074EA1C /* ARRollerView.m in Sources */,
 				C762CE4D1597FB800074EA1C /* AWNetworkReachabilityWrapper.m in Sources */,
 				C762CE4E1597FB800074EA1C /* UIColor+AdWhirlConfig.m in Sources */,
+				C7FDE74815A9B10E001B292C /* GameCenter.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

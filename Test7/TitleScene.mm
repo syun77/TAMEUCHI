@@ -11,6 +11,7 @@
 #import "SceneManager.h"
 #import "SaveData.h"
 #import "AppDelegate.h"
+#import "GameCenter.h"
 
 // シングルトン
 static TitleScene* scene_ = nil;
@@ -170,6 +171,11 @@ static TitleScene* scene_ = nil;
 
 // 更新
 - (void)update:(ccTime)dt {
+    
+    // リーダーボード表示
+    if ([self.interfaceLayer isTouch]) {
+        GameCenter_ShowLeaderboard();
+    }
     
     if (m_bInit == NO) {
         // 広告表示

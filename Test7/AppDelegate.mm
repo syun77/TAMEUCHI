@@ -6,6 +6,7 @@
 //  Copyright 2dgame.jp 2012年. All rights reserved.
 //
 
+
 #import "cocos2d.h"
 
 #import "AppDelegate.h"
@@ -16,6 +17,7 @@
 #import "TitleScene.h"
 #import "SceneManager.h"
 #import "SaveData.h"
+#import "GameCenter.h"
 
 @implementation AppDelegate
 
@@ -117,6 +119,7 @@
 	
 	// make the View Controller a child of the main window
 	[window addSubview: viewController.view];
+//    window.rootViewController = viewController;
 	
 	[window makeKeyAndVisible];
 	
@@ -141,7 +144,13 @@
     // サウンド初期化
     Sound_Init();
     
+    // GameCenterを使う
+    GameCenter_Init();
+    
 	// Run the intro Scene
+    // GameCenterへの認証
+    GameCenter_Login();
+    
     //SceneManager_Change(@"GameScene");
     SceneManager_Change(@"TitleScene");
 }
@@ -168,6 +177,10 @@
 }
 
 - (void)applicationWillTerminate:(UIApplication *)application {
+    
+    // ゲームセンターを破棄する
+    GameCenter_End();
+    
 	CCDirector *director = [CCDirector sharedDirector];
 	
 	[[director openGLView] removeFromSuperview];
