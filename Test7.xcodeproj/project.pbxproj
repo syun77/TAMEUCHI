@@ -121,6 +121,7 @@
 		C718C2D51595EE4900CA718A /* Lockon.mm in Sources */ = {isa = PBXBuildFile; fileRef = C718C2D41595EE4900CA718A /* Lockon.mm */; };
 		C72542E815260B81004C157A /* Bullet.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542E715260B81004C157A /* Bullet.mm */; };
 		C72542ED152614F4004C157A /* Particle.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72542EC152614F4004C157A /* Particle.mm */; };
+		C72722F415AE3B3E00B1B4AA /* Button.mm in Sources */ = {isa = PBXBuildFile; fileRef = C72722F315AE3B3E00B1B4AA /* Button.mm */; };
 		C728CCF2156767F70053FB5E /* ComboBonus.mm in Sources */ = {isa = PBXBuildFile; fileRef = C728CCF1156767F70053FB5E /* ComboBonus.mm */; };
 		C73A11A41529630C00C10EC4 /* AsciiFont.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73A11A31529630C00C10EC4 /* AsciiFont.mm */; };
 		C73CEF0E1550363700B9F66C /* SaveData.mm in Sources */ = {isa = PBXBuildFile; fileRef = C73CEF0D1550363700B9F66C /* SaveData.mm */; };
@@ -457,6 +458,8 @@
 		C72542E715260B81004C157A /* Bullet.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Bullet.mm; sourceTree = "<group>"; };
 		C72542EB152614F4004C157A /* Particle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Particle.h; sourceTree = "<group>"; };
 		C72542EC152614F4004C157A /* Particle.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Particle.mm; sourceTree = "<group>"; };
+		C72722F215AE3B3E00B1B4AA /* Button.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Button.h; sourceTree = "<group>"; };
+		C72722F315AE3B3E00B1B4AA /* Button.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = Button.mm; sourceTree = "<group>"; };
 		C728CCF0156767F70053FB5E /* ComboBonus.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ComboBonus.h; sourceTree = "<group>"; };
 		C728CCF1156767F70053FB5E /* ComboBonus.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = ComboBonus.mm; sourceTree = "<group>"; };
 		C73A11A21529630C00C10EC4 /* AsciiFont.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AsciiFont.h; sourceTree = "<group>"; };
@@ -1216,6 +1219,8 @@
 			children = (
 				C73A11A21529630C00C10EC4 /* AsciiFont.h */,
 				C73A11A31529630C00C10EC4 /* AsciiFont.mm */,
+				C72722F215AE3B3E00B1B4AA /* Button.h */,
+				C72722F315AE3B3E00B1B4AA /* Button.mm */,
 				C7FDE74615A9B10E001B292C /* GameCenter.h */,
 				C7FDE74715A9B10E001B292C /* GameCenter.mm */,
 				C70F603A151B7043003B041E /* InterfaceLayer.h */,
@@ -1499,6 +1504,7 @@
 				C762CE4D1597FB800074EA1C /* AWNetworkReachabilityWrapper.m in Sources */,
 				C762CE4E1597FB800074EA1C /* UIColor+AdWhirlConfig.m in Sources */,
 				C7FDE74815A9B10E001B292C /* GameCenter.mm in Sources */,
+				C72722F415AE3B3E00B1B4AA /* Button.mm in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
