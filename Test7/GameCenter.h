@@ -39,6 +39,16 @@ BOOL GameCenter_IsLoginError();
 void GameCenter_Report(NSString* pName, int value);
 
 /**
+ * スコア送信が完了したかどうか
+ */
+BOOL GameCenter_IsReportConnecting();
+
+/**
+ * スコア送信に失敗したかどうか
+ */
+BOOL GameCenter_IsReportError();
+
+/**
  * Leaderboardを表示する
  */
 void GameCenter_ShowLeaderboard();

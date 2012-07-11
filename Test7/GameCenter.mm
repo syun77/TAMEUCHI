@@ -100,7 +100,9 @@ enum eReport {
     [self dismissModalViewControllerAnimated:YES];
 }
 
-@end
+@end // @implementation GCController
+
+
 
 static GCController* s_pController = nil;
 
@@ -238,7 +240,7 @@ void GameCenter_Report(NSString* pName, int value)
         return;
     }
     
-    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     [ix setReport:eReport_Connecting];
     
@@ -246,12 +248,13 @@ void GameCenter_Report(NSString* pName, int value)
     report.value = value;
     [report reportScoreWithCompletionHandler:^(NSError* error) {
         
-        UIAlertView* alert = nil;
+//        UIAlertView* alert = nil;
         GCController* ix = _Get();
         
         if (error) {
             // エラー処理
             [ix setReport:eReport_Error];
+/*
             NSLog(@"%@", error);
             alert = [[UIAlertView alloc] initWithTitle:@"Send score failed"
                                                message:@"Send score failed"
@@ -260,6 +263,7 @@ void GameCenter_Report(NSString* pName, int value)
                                      otherButtonTitles:nil];
             [alert show];
             [alert release];
+ */
         }
         else {
             // 送信成功
@@ -269,6 +273,51 @@ void GameCenter_Report(NSString* pName, int value)
     
     report = nil;
     
+}
+
+/**
+ * スコア送信が完了したかどうか
+ */
+BOOL GameCenter_IsReportConnecting() {
+    
+    GCController* ix = _Get();
+    if (ix == nil) {
+        
+        NSLog(@"Error: GameCenter Report failed.");
+        
+        // 完了したことにする
+        return YES;
+    }
+    
+    switch ([ix getReport]) {
+        case eReport_Error:
+        case eReport_Success:
+            return YES;
+            
+        default:
+            return NO;
+    }
+}
+
+/**
+ * スコア送信に失敗したかどうか
+ */
+BOOL GameCenter_IsReportError() {
+    
+    GCController* ix = _Get();
+    if (ix == nil) {
+        
+        // 失敗
+        return YES;
+    }
+    
+    switch ([ix getReport]) {
+        case eReport_Success:
+            return NO;
+            
+        default:
+            return YES;
+    }
 }
 
 /**
@@ -293,9 +342,13 @@ void GameCenter_ShowLeaderboard()
     leader.leaderboardDelegate = ix;
     [s_pController presentModalViewController:leader animated:YES];
     
+#ifdef LEADER_BOARD_PORTRAIT
+    
+    // 横持ち対応
     leader.view.transform = CGAffineTransformMakeRotation(CC_DEGREES_TO_RADIANS(0.0f));
     leader.view.bounds = CGRectMake(0, 0, 480, 320);
     leader.view.center = CGPointMake(240, 160);
+#endif // #ifdef LEADER_BOARD_PORTRAIT
 }
 
 
