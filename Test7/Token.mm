@@ -348,6 +348,36 @@ void ccFillPoly( const CGPoint *poli, NSUInteger numberOfPoints, BOOL closePolyg
 }
 
 /**
+ * 指定の座標との当たり判定チェック (点)
+ */
+- (BOOL)isHitPoint:(float)x y:(float)y {
+    
+    float x1 = self._x - self._w;
+    float y1 = self._y - self._h;
+    float x2 = self._x + self._w;
+    float y2 = self._y + self._h;
+    
+    if (x1 <= x && x <= x2) {
+        
+        if (y1 <= y && y <= y2) {
+            
+            // 当たり
+            return YES;
+        }
+    }
+    
+    return NO;
+}
+
+/**
+ * 当たり判定チェック (矩形)
+ */
+- (BOOL)isHit:(Token*)t {
+    
+    return NO;
+}
+
+/**
  * 当たり判定チェック
  */
 - (BOOL)isHit2:(Token*)t {
