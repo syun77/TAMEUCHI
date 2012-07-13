@@ -17,6 +17,7 @@
  */
 @interface Button : Token {
     InterfaceLayer* m_pInput;       // 入力管理
+    BOOL            m_bSelectedPrev;// １フレーム前に選択状態だったかどうか
     BOOL            m_bSelected;    // 選択状態かどうか
     BOOL            m_bVisibled;    // 表示可能かどうか
     BOOL            m_bEnabled;     // 有効かどうか

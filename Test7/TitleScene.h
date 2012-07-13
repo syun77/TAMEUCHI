@@ -29,15 +29,16 @@ static const float BGM_BUTTON_CY = 72;
 static const float BGM_BUTTON_W  = 40;
 static const float BGM_BUTTON_H  = 16;
 
-static const float SE_BUTTON_RECT_X = 480-80-8;
-static const float SE_BUTTON_RECT_Y = 16;
-static const float SE_BUTTON_RECT_W = 80;
-static const float SE_BUTTON_RECT_H = 32;
+static const float SE_BUTTON_CX = 432;
+static const float SE_BUTTON_CY = 24;
+static const float SE_BUTTON_W = 40;
+static const float SE_BUTTON_H = 16;
 
-static const float EASY_BUTTON_RECT_X = 8;
-static const float EASY_BUTTON_RECT_Y = 48+8;
-static const float EASY_BUTTON_RECT_W = 96;
-static const float EASY_BUTTON_RECT_H = 32;
+static const float EASY_BUTTON_CX = 8+48;
+static const float EASY_BUTTON_CY = 28;
+static const float EASY_BUTTON_W  = 48;
+static const float EASY_BUTTON_H  = 16;
+
 /**
  * タイトル画面
  */
@@ -52,21 +53,17 @@ static const float EASY_BUTTON_RECT_H = 32;
     AsciiFont*      fontRank;       // フォント (ランク)
     AsciiFont*      fontRankMax;    // フォント (最大ランク)
     AsciiFont*      fontCopyRight;  // フォント（コピーライト）
-//    AsciiFont*      fontBgm;        // フォント（BGM）
-    AsciiFont*      fontSe;         // フォント（SE）
-    AsciiFont*      fontEasy;       // フォント (EASY)
     
     Button*         btnStart;       // ボタン（スタート）
     Button*         btnBgm;         // ボタン（BGM）
     Button*         btnSe;          // ボタン（SE）
+    Button*         btnEasy;        // ボタン（EASY）
     
     BOOL            m_bNextScene;   // 次のシーンに進む
     float           m_TouchStartX;  // タッチ開始座標 (X)
     float           m_TouchStartY;  // タッチ開始座標 (Y)
     int             m_RankPrev;     // タッチ前のランク
     BOOL            m_bRankSelect;  // ランク選択タッチ中
-    BOOL            m_bSe;          // SE ON/OFF タッチ中
-    BOOL            m_bEasy;        // EASY ON/OFF タッチ中
     
     BOOL            m_bInit;
 }
@@ -80,22 +77,15 @@ static const float EASY_BUTTON_RECT_H = 32;
 @property (nonatomic, retain)AsciiFont*         fontRank;
 @property (nonatomic, retain)AsciiFont*         fontRankMax;
 @property (nonatomic, retain)AsciiFont*         fontCopyRight;
-@property (nonatomic, retain)AsciiFont*         fontSe;
-@property (nonatomic, retain)AsciiFont*         fontEasy;
 @property (nonatomic, retain)Button*            btnStart;
 @property (nonatomic, retain)Button*            btnBgm;
 @property (nonatomic, retain)Button*            btnSe;
+@property (nonatomic, retain)Button*            btnEasy;
 
 + (TitleScene*)sharedInstance;
 + (void)releaseInstance;
 
 // ランク選択タッチ中
 - (BOOL)isTouchRankSelect;
-
-// SE ON/OFF タッチ中
-- (BOOL)isTouchSe;
-
-// EASY ON/OFF タッチ中
-- (BOOL)isTouchEasy;
 
 @end

@@ -27,6 +27,9 @@
     [self create];
     [self setVisible:NO];
     
+    m_bSelected = NO;
+    m_bSelectedPrev = NO;
+    
     return self;
 }
 
@@ -87,6 +90,7 @@
     
     m_pInput    = pInput;
     m_bSelected = NO;
+    m_bSelectedPrev = NO;
     m_bVisibled = YES;
     m_bEnabled  = YES;
     m_cbDecide  = onDecide;
@@ -120,20 +124,38 @@
 }
 
 /**
- * タッチ開始
+ * タッチ状態を更新する
  */
-- (void)cbTouchStart:(float)x y:(float)y {
+- (void)checkTouch:(float)x y:(float)y {
+    
+    BOOL bPrev = m_bSelectedPrev;
     
     if([self isHitPoint:x y:y]) {
             
         // 選択状態
         m_bSelected = YES;
+        
+        if (bPrev == NO) {
+            
+            // 選択状態になったのでSEを再生する
+            Sound_PlaySe(@"pi.wav");
+        }
     }
     else {
         
         // 非選択状態
         m_bSelected = NO;
     }
+    
+    m_bSelectedPrev = m_bSelected;
+}
+
+/**
+ * タッチ開始
+ */
+- (void)cbTouchStart:(float)x y:(float)y {
+    
+    [self checkTouch:x y:y];
 }
 
 /**
@@ -141,16 +163,7 @@
  */
 - (void)cbTouchMove:(float)x y:(float)y {
     
-    if([self isHitPoint:x y:y]) {
-            
-        // 選択状態
-        m_bSelected = YES;
-    }
-    else {
-        
-        // 非選択状態
-        m_bSelected = NO;
-    }
+    [self checkTouch:x y:y];
 }
 
 /**

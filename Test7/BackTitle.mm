@@ -115,16 +115,16 @@ static const float POS_RANK_Y = 160;
 //    }
 //    [self fillRectLT:BGM_BUTTON_RECT_X y:BGM_BUTTON_RECT_Y w:BGM_BUTTON_RECT_W h:BGM_BUTTON_RECT_H rot:0 scale:1];
     
-    // ■SE ON/OFF
-    glColor4f(0.2, 0.2, 0.2, 0.5);
-    [self fillRectLT:SE_BUTTON_RECT_X-2 y:SE_BUTTON_RECT_Y-2 w:SE_BUTTON_RECT_W+4 h:SE_BUTTON_RECT_H+4 rot:0 scale:1];
-    glColor4f(0.5, 0.5, 0.5, 0.5);
-    if ([[TitleScene sharedInstance] isTouchSe]) {
-        
-        // タッチ中
-        glColor4f(0, 0, 0.5, 0.4);
-    }
-    [self fillRectLT:SE_BUTTON_RECT_X y:SE_BUTTON_RECT_Y w:SE_BUTTON_RECT_W h:SE_BUTTON_RECT_H rot:0 scale:1];
+//    // ■SE ON/OFF
+//    glColor4f(0.2, 0.2, 0.2, 0.5);
+//    [self fillRectLT:SE_BUTTON_RECT_X-2 y:SE_BUTTON_RECT_Y-2 w:SE_BUTTON_RECT_W+4 h:SE_BUTTON_RECT_H+4 rot:0 scale:1];
+//    glColor4f(0.5, 0.5, 0.5, 0.5);
+//    if ([[TitleScene sharedInstance] isTouchSe]) {
+//        
+//        // タッチ中
+//        glColor4f(0, 0, 0.5, 0.4);
+//    }
+//    [self fillRectLT:SE_BUTTON_RECT_X y:SE_BUTTON_RECT_Y w:SE_BUTTON_RECT_W h:SE_BUTTON_RECT_H rot:0 scale:1];
     
 #ifdef VERSION_LIMITED
     
