@@ -19,11 +19,6 @@ static const float RANK_SELECT_RECT_Y = 160-32;
 static const float RANK_SELECT_RECT_W = 480;
 static const float RANK_SELECT_RECT_H = 64;
 
-static const float START_BUTTON_RECT_X = 240-96;
-static const float START_BUTTON_RECT_Y = 48;
-static const float START_BUTTON_RECT_W = 96*2;
-static const float START_BUTTON_RECT_H = 48;
-
 static const float START_BUTTON_CX = 240;
 static const float START_BUTTON_CY = 72;
 static const float START_BUTTON_W  = 96;
@@ -57,7 +52,6 @@ static const float EASY_BUTTON_RECT_H = 32;
     AsciiFont*      fontRank;       // フォント (ランク)
     AsciiFont*      fontRankMax;    // フォント (最大ランク)
     AsciiFont*      fontCopyRight;  // フォント（コピーライト）
-//    AsciiFont*      fontStartButton;// フォント（スタートボタン）
     AsciiFont*      fontBgm;        // フォント（BGM）
     AsciiFont*      fontSe;         // フォント（SE）
     AsciiFont*      fontEasy;       // フォント (EASY)
@@ -86,7 +80,6 @@ static const float EASY_BUTTON_RECT_H = 32;
 @property (nonatomic, retain)AsciiFont*         fontRank;
 @property (nonatomic, retain)AsciiFont*         fontRankMax;
 @property (nonatomic, retain)AsciiFont*         fontCopyRight;
-//@property (nonatomic, retain)AsciiFont*         fontStartButton;
 @property (nonatomic, retain)AsciiFont*         fontBgm;
 @property (nonatomic, retain)AsciiFont*         fontSe;
 @property (nonatomic, retain)AsciiFont*         fontEasy;
@@ -97,9 +90,6 @@ static const float EASY_BUTTON_RECT_H = 32;
 
 // ランク選択タッチ中
 - (BOOL)isTouchRankSelect;
-
-// ゲームスタートタッチ中
-- (BOOL)isTouchGameStart;
 
 // BGM ON/OFF タッチ中
 - (BOOL)isTouchBgm;

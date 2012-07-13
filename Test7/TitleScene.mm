@@ -48,8 +48,12 @@ static TitleScene* scene_ = nil;
     scene_ = nil;
 }
 
-- (void)hoge {
-    NSLog(@"hoge");
+/**
+ * スタートボタン押したコールバック
+ */
+- (void)cbBtnStart {
+    
+    m_bNextScene = YES;
 }
 
 // コンストラクタ
@@ -141,7 +145,7 @@ static TitleScene* scene_ = nil;
 #endif
     
     self.btnStart = [Button node];
-    [self.btnStart initWith:self.interfaceLayer text:@"START" cx:START_BUTTON_CX cy:START_BUTTON_CY w:START_BUTTON_W h:START_BUTTON_H cls:self onDecide:@selector(hoge)];
+    [self.btnStart initWith:self.interfaceLayer text:@"START" cx:START_BUTTON_CX cy:START_BUTTON_CY w:START_BUTTON_W h:START_BUTTON_H cls:self onDecide:@selector(cbBtnStart)];
     
     // 変数初期化
     m_bNextScene = NO;
@@ -258,21 +262,6 @@ static TitleScene* scene_ = nil;
 /**
  * ゲーム開始の矩形にヒットしているかどうか
  */
-- (BOOL)isHitGameStart:(float)x y:(float)y {
-    
-    CGRect rect = CGRectMake(START_BUTTON_RECT_X, START_BUTTON_RECT_Y, START_BUTTON_RECT_W, START_BUTTON_RECT_H);
-    CGPoint p = CGPointMake(x, y);
-    
-    if (Math_IsHitRect(rect, p)) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-/**
- * ゲーム開始の矩形にヒットしているかどうか
- */
 - (BOOL)isHitBgm:(float)x y:(float)y {
     
     CGRect rect = CGRectMake(BGM_BUTTON_RECT_X, BGM_BUTTON_RECT_Y, BGM_BUTTON_RECT_W, BGM_BUTTON_RECT_H);
@@ -333,18 +322,6 @@ static TitleScene* scene_ = nil;
             Sound_PlaySe(@"pi.wav");
             
             m_bRankSelect = YES;
-        }
-    }
-    
-    // ■ゲームスタートタッチ判定
-    {
-        
-        if ([self isHitGameStart:x y:y]) {
-            
-            // タッチした
-            Sound_PlaySe(@"pi.wav");
-            
-            m_bGameStart = YES;
         }
     }
     
@@ -430,23 +407,6 @@ static TitleScene* scene_ = nil;
         }
     }
     
-    // ゲームスタートタッチ判定
-    {
-        
-        if ([self isHitGameStart:x y:y] == NO) {
-            
-            // フォーカスが外れた
-            m_bGameStart = NO;
-        }
-        if (m_bGameStart == NO) {
-            if ([self isHitGameStart:x y:y]) {
-                
-                // フォーカスに入った
-                Sound_PlaySe(@"pi.wav");
-                m_bGameStart = YES;
-            }
-        }
-    }
     // BGMタッチ判定
     {
         

@@ -104,17 +104,6 @@ static const float POS_RANK_Y = 160;
     
     System_SetBlend(eBlend_Normal);
     
-    // ■ゲーム開始ボタンの描画
-    glColor4f(0.2, 0.2, 0.2, 0.5);
-//    [self fillRectLT:START_BUTTON_RECT_X-2 y:START_BUTTON_RECT_Y-2 w:START_BUTTON_RECT_W+4 h:START_BUTTON_RECT_H+4 rot:0 scale:1];
-    glColor4f(0.5, 0.5, 0.5, 0.5);
-    if ([[TitleScene sharedInstance] isTouchGameStart]) {
-        
-        // タッチ中
-        glColor4f(0, 0, 0.5, 0.4);
-    }
-//    [self fillRectLT:START_BUTTON_RECT_X y:START_BUTTON_RECT_Y w:START_BUTTON_RECT_W h:START_BUTTON_RECT_H rot:0 scale:1];
-    
     // ■BGM ON/OFF
     glColor4f(0.2, 0.2, 0.2, 0.5);
     [self fillRectLT:BGM_BUTTON_RECT_X-2 y:BGM_BUTTON_RECT_Y-2 w:BGM_BUTTON_RECT_W+4 h:BGM_BUTTON_RECT_H+4 rot:0 scale:1];
