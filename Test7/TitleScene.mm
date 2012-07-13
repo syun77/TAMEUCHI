@@ -27,10 +27,12 @@ static TitleScene* scene_ = nil;
 @synthesize fontRank;
 @synthesize fontRankMax;
 @synthesize fontCopyRight;
-@synthesize fontStartButton;
+//@synthesize fontStartButton;
 @synthesize fontBgm;
 @synthesize fontSe;
 @synthesize fontEasy;
+@synthesize btnStart;
+
 
 // シングルトンを取得する
 + (TitleScene*)sharedInstance {
@@ -44,6 +46,10 @@ static TitleScene* scene_ = nil;
 
 + (void)releaseInstance {
     scene_ = nil;
+}
+
+- (void)hoge {
+    NSLog(@"hoge");
 }
 
 // コンストラクタ
@@ -102,12 +108,14 @@ static TitleScene* scene_ = nil;
     [self.fontCopyRight setAlign:eFontAlign_Center];
     [self.fontCopyRight setText:@"(c) 2012 2dgames.jp"];
     
+    /*
     self.fontStartButton = [AsciiFont node];
     [self.fontStartButton createFont:self.baseLayer length:12];
     [self.fontStartButton setPos:17 y:5];
     [self.fontStartButton setAlign:eFontAlign_Center];
     [self.fontStartButton setScale:1];
     [self.fontStartButton setText:@"START"];
+     */
     
     self.fontBgm = [AsciiFont node];
     [self.fontBgm createFont:self.baseLayer length:12];
@@ -132,6 +140,9 @@ static TitleScene* scene_ = nil;
     [self.fontEasy setVisible:NO];
 #endif
     
+    self.btnStart = [Button node];
+    [self.btnStart initWith:self.interfaceLayer text:@"START" cx:START_BUTTON_CX cy:START_BUTTON_CY w:START_BUTTON_W h:START_BUTTON_H cls:self onDecide:@selector(hoge)];
+    
     // 変数初期化
     m_bNextScene = NO;
     m_TouchStartX = 0;
@@ -154,6 +165,8 @@ static TitleScene* scene_ = nil;
 // デストラクタ
 - (void)dealloc {
     
+    self.btnStart = nil;
+    
     self.fontSe = nil;
     self.fontBgm = nil;
     self.fontCopyRight = nil;
@@ -174,7 +187,7 @@ static TitleScene* scene_ = nil;
     
     // リーダーボード表示
     if ([self.interfaceLayer isTouch]) {
-        GameCenter_ShowLeaderboard();
+//        GameCenter_ShowLeaderboard();
     }
     
     if (m_bInit == NO) {

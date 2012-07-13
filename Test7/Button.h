@@ -23,6 +23,7 @@
     
     AsciiFont*      m_Text;         // フォント
     
+    id              m_Class;
     SEL             m_cbDecide;     // 選択時に呼び出すコールバック
 }
 
@@ -31,7 +32,7 @@
 /**
  * 初期パラメータを設定する
  */
-- (void)initWith:(NSString*)pText cx:(float)cx cy:(float)cy w:(float)w h:(float)h onDecide:(SEL)onDecide;
+- (void)initWith:(InterfaceLayer*)pInput text:(NSString*)pText cx:(float)cx cy:(float)cy w:(float)w h:(float)h cls:(id)cls onDecide:(SEL)onDecide;
 
 // 選択しているかどうか
 - (BOOL)isSelected;
