@@ -76,6 +76,12 @@
  */
 - (BOOL)ccTouchBegan:(UITouch *)touch withEvent:(UIEvent *)event {
     
+    if ([self isEnable] == NO) {
+        
+        // 無効の場合何もしない
+        return YES;
+    }
+    
     CGPoint locationView = [touch locationInView:[touch view]];
     CGPoint location = [[CCDirector sharedDirector] convertToGL:locationView];
     
@@ -99,6 +105,13 @@
  * タッチ座標更新
  */
 - (void)ccTouchMoved:(UITouch *)touch withEvent:(UIEvent *)event {
+    
+    if ([self isEnable] == NO) {
+        
+        // 無効の場合何もしない
+        return;
+    }
+    
     CGPoint locationView = [touch locationInView:[touch view]];
     CGPoint location = [[CCDirector sharedDirector] convertToGL:locationView];
     
@@ -122,6 +135,12 @@
  */
 - (void)ccTouchEnded:(UITouch *)touch withEvent:(UIEvent *)event {
     
+    if ([self isEnable] == NO) {
+        
+        // 無効の場合何もしない
+        return;
+    }
+    
     CGPoint locationView = [touch locationInView:[touch view]];
     CGPoint location = [[CCDirector sharedDirector] convertToGL:locationView];
     
@@ -141,6 +160,19 @@
     
     // タッチ状態を更新
     m_isTouch = NO;
+}
+
+// 有効かどうか
+- (BOOL)isEnable {
+    
+    if ([self parent].visible == NO) {
+        
+        // 非表示なので無効
+        return NO;
+    }
+    
+    // 有効
+    return YES;
 }
 
 // タッチしているかどうか

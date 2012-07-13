@@ -30,6 +30,9 @@
 - (void)addCB:(id)token;
 - (void)delCB;
 
+// 有効かどうか
+- (BOOL)isEnable;
+
 // タッチしているかどうか
 - (BOOL)isTouch;
 
