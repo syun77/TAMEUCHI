@@ -219,8 +219,6 @@ static TitleScene* scene_ = nil;
     m_TouchStartX = 0;
     m_TouchStartY = 0;
     m_bRankSelect = NO;
-//    m_bGameStart = NO;
-//    m_bEasy = NO;
     
     // 更新スケジューラ登録
     [self scheduleUpdate];
@@ -241,8 +239,6 @@ static TitleScene* scene_ = nil;
     self.btnBgm = nil;
     self.btnStart = nil;
     
-//    self.fontSe = nil;
-//    self.fontBgm = nil;
     self.fontCopyRight = nil;
     self.fontRankMax = nil;
     self.fontRank = nil;
@@ -282,16 +278,6 @@ static TitleScene* scene_ = nil;
         
     }
     
-//    [self.fontSe setText:[NSString stringWithFormat:@"SE:%@", Sound_IsEnableSe() ? @"o" : @"x"]];
-#ifdef VERSION_LIMITED
-    
-    // 制限モードはEASYを選べない
-//    [self.fontEasy setVisible:NO];
-    
-#else
-    [self.fontEasy setText:[NSString stringWithFormat:@"EASY:%@", SaveData_IsEasy() ? @"o" : @"x"]];
-#endif
-    
     if (m_bNextScene) {
         
         // 登録したコールバックから除去
@@ -328,38 +314,6 @@ static TitleScene* scene_ = nil;
     return NO;
 }
 
-///**
-// * ゲーム開始の矩形にヒットしているかどうか
-// */
-//- (BOOL)isHitSe:(float)x y:(float)y {
-//    
-//    CGRect rect = CGRectMake(SE_BUTTON_RECT_X, SE_BUTTON_RECT_Y, SE_BUTTON_RECT_W, SE_BUTTON_RECT_H);
-//    CGPoint p = CGPointMake(x, y);
-//    
-//    if (Math_IsHitRect(rect, p)) {
-//        return YES;
-//    }
-//    
-//    return NO;
-//}
-
-//- (BOOL)isHitEasy:(float)x y:(float)y {
-//    
-//#ifdef VERSION_LIMITED
-//    
-//    // 制限モードはEASY選択不可
-//    return NO;
-//#endif
-//    CGRect rect = CGRectMake(EASY_BUTTON_RECT_X, EASY_BUTTON_RECT_Y, EASY_BUTTON_RECT_W, EASY_BUTTON_RECT_H);
-//    CGPoint p = CGPointMake(x, y);
-//    
-//    if (Math_IsHitRect(rect, p)) {
-//        return YES;
-//    }
-//    
-//    return NO;
-//}
-
 /**
  * タッチ開始
  */
@@ -378,30 +332,6 @@ static TitleScene* scene_ = nil;
             m_bRankSelect = YES;
         }
     }
-    
-//    // ■SEタッチ判定
-//    {
-//        
-//        if ([self isHitSe:x y:y]) {
-//            
-//            // タッチした
-//            Sound_PlaySe(@"pi.wav");
-//            
-//            m_bSe = YES;
-//        }
-//    }
-    
-//    // ■EASYタッチ判定
-//    {
-//        
-//        if ([self isHitEasy:x y:y]) {
-//            
-//            // タッチした
-//            Sound_PlaySe(@"pi.wav");
-//            
-//            m_bEasy = YES;
-//        }
-//    }
     
     // タッチ開始座標を保持
     m_TouchStartX = x;
@@ -449,42 +379,6 @@ static TitleScene* scene_ = nil;
         }
     }
     
-//    // SEタッチ判定
-//    {
-//        
-//        if ([self isHitSe:x y:y] == NO) {
-//            
-//            // フォーカスが外れた
-//            m_bSe = NO;
-//        }
-//        
-//        if (m_bSe == NO) {
-//            if ([self isHitSe:x y:y]) {
-//                
-//                // フォーカスに入った
-//                Sound_PlaySe(@"pi.wav");
-//                m_bSe = YES;
-//            }
-//        }
-//    }
-//    // EASYタッチ判定
-//    {
-//        
-//        if ([self isHitEasy:x y:y] == NO) {
-//            
-//            // フォーカスが外れた
-//            m_bEasy = NO;
-//        }
-//        
-//        if (m_bEasy == NO) {
-//            if ([self isHitEasy:x y:y]) {
-//                
-//                // フォーカスに入った
-//                Sound_PlaySe(@"pi.wav");
-//                m_bEasy = YES;
-//            }
-//        }
-//    }
 }
 
 /**
@@ -492,32 +386,13 @@ static TitleScene* scene_ = nil;
  */
 - (void)cbTouchEnd:(float)x y:(float)y {
     
-//    if (m_bSe) {
-//        Sound_SetEnableSe(Sound_IsEnableSe() ? NO : YES);
-//    }
-//    if (m_bEasy) {
-//        SaveData_SetEasy(SaveData_IsEasy() ? NO : YES);
-//    }
-    
     // タッチ終了
     m_bRankSelect = NO;
-//    m_bSe = NO;
-//    m_bEasy = NO;
 }
 
 // ランク選択タッチ中
 - (BOOL)isTouchRankSelect {
     return m_bRankSelect;
 }
-
-//// SE ON/OFF タッチ中
-//- (BOOL)isTouchSe {
-//    return m_bSe;
-//}
-
-//// EASY ON/OFF タッチ中
-//- (BOOL)isTouchEasy {
-//    return m_bEasy;
-//}
 
 @end
