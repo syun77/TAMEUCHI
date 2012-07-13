@@ -27,11 +27,12 @@ static TitleScene* scene_ = nil;
 @synthesize fontRank;
 @synthesize fontRankMax;
 @synthesize fontCopyRight;
-//@synthesize fontStartButton;
-@synthesize fontBgm;
 @synthesize fontSe;
 @synthesize fontEasy;
+
 @synthesize btnStart;
+@synthesize btnBgm;
+@synthesize btnSe;
 
 
 // シングルトンを取得する
@@ -54,6 +55,30 @@ static TitleScene* scene_ = nil;
 - (void)cbBtnStart {
     
     m_bNextScene = YES;
+}
+
+- (void)setBtnBgm {
+    
+    BOOL b = Sound_IsEnableBgm();
+    
+    [self.btnBgm setText:[NSString stringWithFormat:@"BGM:%s", b ? "o" : "x"]];
+}
+
+/**
+ * BGM ON/OFF ボタン押したコールバック
+ */
+- (void)cbBtnBgm {
+    
+    if(Sound_IsEnableBgm()) {
+        
+        Sound_SetEnableBgm(NO);
+    }
+    else {
+        
+        Sound_SetEnableBgm(YES);
+    }
+    
+    [self setBtnBgm];
 }
 
 // コンストラクタ
@@ -112,21 +137,6 @@ static TitleScene* scene_ = nil;
     [self.fontCopyRight setAlign:eFontAlign_Center];
     [self.fontCopyRight setText:@"(c) 2012 2dgames.jp"];
     
-    /*
-    self.fontStartButton = [AsciiFont node];
-    [self.fontStartButton createFont:self.baseLayer length:12];
-    [self.fontStartButton setPos:17 y:5];
-    [self.fontStartButton setAlign:eFontAlign_Center];
-    [self.fontStartButton setScale:1];
-    [self.fontStartButton setText:@"START"];
-     */
-    
-    self.fontBgm = [AsciiFont node];
-    [self.fontBgm createFont:self.baseLayer length:12];
-    [self.fontBgm setPos:31 y:5];
-    [self.fontBgm setAlign:eFontAlign_Center];
-    [self.fontBgm setScale:1];
-    
     self.fontSe = [AsciiFont node];
     [self.fontSe createFont:self.baseLayer length:12];
     [self.fontSe setPos:31 y:2];
@@ -147,12 +157,16 @@ static TitleScene* scene_ = nil;
     self.btnStart = [Button node];
     [self.btnStart initWith:self.interfaceLayer text:@"START" cx:START_BUTTON_CX cy:START_BUTTON_CY w:START_BUTTON_W h:START_BUTTON_H cls:self onDecide:@selector(cbBtnStart)];
     
+    self.btnBgm = [Button node];
+    [self.btnBgm initWith:self.interfaceLayer text:@"BGM" cx:BGM_BUTTON_CX cy:BGM_BUTTON_CY w:BGM_BUTTON_W h:BGM_BUTTON_H cls:self onDecide:@selector(cbBtnBgm)];
+    [self setBtnBgm];
+    
     // 変数初期化
     m_bNextScene = NO;
     m_TouchStartX = 0;
     m_TouchStartY = 0;
     m_bRankSelect = NO;
-    m_bGameStart = NO;
+//    m_bGameStart = NO;
     m_bEasy = NO;
     
     // 更新スケジューラ登録
@@ -169,10 +183,11 @@ static TitleScene* scene_ = nil;
 // デストラクタ
 - (void)dealloc {
     
+    self.btnBgm = nil;
     self.btnStart = nil;
     
     self.fontSe = nil;
-    self.fontBgm = nil;
+//    self.fontBgm = nil;
     self.fontCopyRight = nil;
     self.fontRankMax = nil;
     self.fontRank = nil;
@@ -212,7 +227,6 @@ static TitleScene* scene_ = nil;
         
     }
     
-    [self.fontBgm setText:[NSString stringWithFormat:@"BGM:%@", Sound_IsEnableBgm() ? @"o" : @"x"]];
     [self.fontSe setText:[NSString stringWithFormat:@"SE:%@", Sound_IsEnableSe() ? @"o" : @"x"]];
 #ifdef VERSION_LIMITED
     
@@ -250,21 +264,6 @@ static TitleScene* scene_ = nil;
 #endif
     
     CGRect rect = CGRectMake(RANK_SELECT_RECT_X, RANK_SELECT_RECT_Y, RANK_SELECT_RECT_W, RANK_SELECT_RECT_H);
-    CGPoint p = CGPointMake(x, y);
-    
-    if (Math_IsHitRect(rect, p)) {
-        return YES;
-    }
-    
-    return NO;
-}
-
-/**
- * ゲーム開始の矩形にヒットしているかどうか
- */
-- (BOOL)isHitBgm:(float)x y:(float)y {
-    
-    CGRect rect = CGRectMake(BGM_BUTTON_RECT_X, BGM_BUTTON_RECT_Y, BGM_BUTTON_RECT_W, BGM_BUTTON_RECT_H);
     CGPoint p = CGPointMake(x, y);
     
     if (Math_IsHitRect(rect, p)) {
@@ -322,18 +321,6 @@ static TitleScene* scene_ = nil;
             Sound_PlaySe(@"pi.wav");
             
             m_bRankSelect = YES;
-        }
-    }
-    
-    // ■BGMタッチ判定
-    {
-        
-        if ([self isHitBgm :x y:y]) {
-            
-            // タッチした
-            Sound_PlaySe(@"pi.wav");
-            
-            m_bBgm = YES;
         }
     }
     
@@ -407,23 +394,6 @@ static TitleScene* scene_ = nil;
         }
     }
     
-    // BGMタッチ判定
-    {
-        
-        if ([self isHitBgm:x y:y] == NO) {
-            
-            // フォーカスが外れた
-            m_bBgm = NO;
-        }
-        if (m_bBgm == NO) {
-            if ([self isHitBgm:x y:y]) {
-                
-                // フォーカスに入った
-                Sound_PlaySe(@"pi.wav");
-                m_bBgm = YES;
-            }
-        }
-    }
     // SEタッチ判定
     {
         
@@ -467,16 +437,6 @@ static TitleScene* scene_ = nil;
  */
 - (void)cbTouchEnd:(float)x y:(float)y {
     
-    if (m_bGameStart) {
-        
-        // ゲーム開始
-        Sound_PlaySe(@"push.wav");
-        m_bNextScene = YES;
-    }
-    
-    if (m_bBgm) {
-        Sound_SetEnableBgm(Sound_IsEnableBgm() ? NO : YES);
-    }
     if (m_bSe) {
         Sound_SetEnableSe(Sound_IsEnableSe() ? NO : YES);
     }
@@ -486,8 +446,6 @@ static TitleScene* scene_ = nil;
     
     // タッチ終了
     m_bRankSelect = NO;
-    m_bGameStart = NO;
-    m_bBgm = NO;
     m_bSe = NO;
     m_bEasy = NO;
 }
@@ -495,16 +453,6 @@ static TitleScene* scene_ = nil;
 // ランク選択タッチ中
 - (BOOL)isTouchRankSelect {
     return m_bRankSelect;
-}
-
-// ゲームスタートタッチ中
-- (BOOL)isTouchGameStart {
-    return m_bGameStart;
-}
-
-// BGM ON/OFF タッチ中
-- (BOOL)isTouchBgm {
-    return m_bBgm;
 }
 
 // SE ON/OFF タッチ中

@@ -104,16 +104,16 @@ static const float POS_RANK_Y = 160;
     
     System_SetBlend(eBlend_Normal);
     
-    // ■BGM ON/OFF
-    glColor4f(0.2, 0.2, 0.2, 0.5);
-    [self fillRectLT:BGM_BUTTON_RECT_X-2 y:BGM_BUTTON_RECT_Y-2 w:BGM_BUTTON_RECT_W+4 h:BGM_BUTTON_RECT_H+4 rot:0 scale:1];
-    glColor4f(0.5, 0.5, 0.5, 0.5);
-    if ([[TitleScene sharedInstance] isTouchBgm]) {
-        
-        // タッチ中
-        glColor4f(0, 0, 0.5, 0.4);
-    }
-    [self fillRectLT:BGM_BUTTON_RECT_X y:BGM_BUTTON_RECT_Y w:BGM_BUTTON_RECT_W h:BGM_BUTTON_RECT_H rot:0 scale:1];
+//    // ■BGM ON/OFF
+//    glColor4f(0.2, 0.2, 0.2, 0.5);
+//    [self fillRectLT:BGM_BUTTON_RECT_X-2 y:BGM_BUTTON_RECT_Y-2 w:BGM_BUTTON_RECT_W+4 h:BGM_BUTTON_RECT_H+4 rot:0 scale:1];
+//    glColor4f(0.5, 0.5, 0.5, 0.5);
+//    if ([[TitleScene sharedInstance] isTouchBgm]) {
+//        
+//        // タッチ中
+//        glColor4f(0, 0, 0.5, 0.4);
+//    }
+//    [self fillRectLT:BGM_BUTTON_RECT_X y:BGM_BUTTON_RECT_Y w:BGM_BUTTON_RECT_W h:BGM_BUTTON_RECT_H rot:0 scale:1];
     
     // ■SE ON/OFF
     glColor4f(0.2, 0.2, 0.2, 0.5);
