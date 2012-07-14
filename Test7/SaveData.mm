@@ -34,7 +34,7 @@ void SaveData_Init() {
     if ([defaults boolForKey:@"INIT"]) {
         
         // 初期化済みなので何もしない
-//        return;
+        return;
     }
     
     [defaults setBool:YES forKey:@"INIT"];
@@ -242,6 +242,12 @@ BOOL SaveData_IsEasy() {
     
     NSUserDefaults* ix = _Get();
     
+    if (SaveData_IsScoreAttack()) {
+        
+        // スコアアタックモードの時は無効
+        return NO;
+    }
+    
     return [ix boolForKey:@"EASY"];
 }
 
@@ -253,6 +259,17 @@ BOOL SaveData_IsScoreAttack() {
     NSUserDefaults* ix = _Get();
     
     return [ix boolForKey:@"SCORE_ATTACK"];
+}
+
+/**
+ * スコアアタックモードの設定
+ */
+void SaveData_SetScoreAttack(BOOL b) {
+    
+    NSUserDefaults* ix = _Get();
+    
+    [ix setBool:b forKey:@"SCORE_ATTACK"];
+    
 }
 
 /**

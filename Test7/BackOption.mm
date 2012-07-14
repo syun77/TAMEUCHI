@@ -38,7 +38,7 @@
     [super visit];
     
     System_SetBlend(eBlend_Normal);
-    glColor4f(0, 0, 0, 0.5);
+    glColor4f(0, 0, 0, 0.2);
     [self fillRect:System_CenterX() cy:System_CenterY() w:240 h:160 rot:0 scale:1];
 }
 

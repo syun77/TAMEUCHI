@@ -94,6 +94,11 @@ BOOL SaveData_IsEasy();
 BOOL SaveData_IsScoreAttack();
 
 /**
+ * スコアアタックモードの設定
+ */
+void SaveData_SetScoreAttack(BOOL b);
+
+/**
  * ハイスコアを取得する
  * @return ハイスコア
  */

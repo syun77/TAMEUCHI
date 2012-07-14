@@ -35,6 +35,7 @@ static TitleScene* scene_ = nil;
 @synthesize fontCopyRight;
 
 @synthesize btnStart;
+@synthesize btnGamemode;
 @synthesize btnOption;
 
 
@@ -62,6 +63,40 @@ static TitleScene* scene_ = nil;
     // メインゲーム開始
     m_bNextScene = YES;
     m_NextSceneId = eScene_Main;
+}
+
+
+/**
+ * ゲームモードの表示を切り替える
+ */
+- (void)setBtnGamemode {
+    
+    if (SaveData_IsScoreAttack()) {
+        
+        [self.btnGamemode setText:@"SCORE ATTACK"];
+    }
+    else {
+        
+        [self.btnGamemode setText:@"FREE PLAY"];
+    }
+}
+
+/**
+ * ゲームモードの切り替え
+ */
+- (void)cbBtnGamemove {
+    Sound_PlaySe(@"pi.wav");
+    
+    if (SaveData_IsScoreAttack()) {
+        
+        SaveData_SetScoreAttack(NO);
+    }
+    else {
+        
+        SaveData_SetScoreAttack(YES);
+    }
+    
+    [self setBtnGamemode];
 }
 
 /**
@@ -121,17 +156,17 @@ static TitleScene* scene_ = nil;
     
     self.fontHiScore = [AsciiFont node];
     [self.fontHiScore createFont:self.baseLayer length:24];
-    [self.fontHiScore setPos:10 y:12];
+    [self.fontHiScore setPos:10 y:13];
     [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", SaveData_GetHiScore()]];
     
     self.fontRank = [AsciiFont node];
     [self.fontRank createFont:self.baseLayer length:24];
-    [self.fontRank setPos:10 y:11];
+    [self.fontRank setPos:10 y:12];
     [self.fontRank setText:[NSString stringWithFormat:@"RANK     %d", SaveData_GetRank()]];
     
     self.fontRankMax = [AsciiFont node];
     [self.fontRankMax createFont:self.baseLayer length:24];
-    [self.fontRankMax setPos:10 y:10];
+    [self.fontRankMax setPos:10 y:11];
     [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK  %d", SaveData_GetRankMax()]];
     
     self.fontCopyRight = [AsciiFont node];
@@ -144,6 +179,10 @@ static TitleScene* scene_ = nil;
     
     self.btnStart = [Button node];
     [self.btnStart initWith:self.interfaceLayer text:@"START" cx:START_BUTTON_CX cy:START_BUTTON_CY w:START_BUTTON_W h:START_BUTTON_H cls:self onDecide:@selector(cbBtnStart)];
+    
+    self.btnGamemode = [Button node];
+    [self.btnGamemode initWith:self.interfaceLayer text:@"" cx:GAMEMODE_BUTTON_CX cy:GAMEMODE_BUTTON_CY w:GAMEMODE_BUTTON_W h:GAMEMODE_BUTTON_H cls:self onDecide:@selector(cbBtnGamemove)];
+    [self setBtnGamemode];
     
     self.btnOption = [Button node];
     [self.btnOption initWith:self.interfaceLayer text:@"OPTION" cx:OPTION_BUTTON_CX cy:OPTION_BUTTON_CY w:OPTION_BUTTON_W h:OPTION_BUTTON_H cls:self onDecide:@selector(cbBtnOption)];
@@ -170,6 +209,7 @@ static TitleScene* scene_ = nil;
 - (void)dealloc {
     
     self.btnOption = nil;
+    self.btnGamemode = nil;
     self.btnStart = nil;
     
     self.fontCopyRight = nil;
