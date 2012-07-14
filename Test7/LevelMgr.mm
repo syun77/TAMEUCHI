@@ -242,6 +242,11 @@
             m_nLevel += 2;
 #else
             m_nLevel++;
+            if (SaveData_IsScoreAttack()) {
+                
+                // スコアアタックモード中は更にレベルが上昇する
+                m_nLevel++;
+            }
 #endif
             m_Timer = 0;
         }

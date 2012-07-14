@@ -609,19 +609,34 @@ static GameScene* scene_ = nil;
         // BGMを止める
         Sound_StopBgm();
         
-        // ハイスコア更新
-        SaveData_SetHiScore(m_Score);
-        
-        // 最大レベル更新
-        SaveData_SetRankMax([self.levelMgr getLevel]);
-        
+        if (SaveData_IsScoreAttack()) {
+            
+            // スコアアタックモード
+            
+            // ハイスコア更新
+            SaveData2_SetHiScore(m_Score);
+            
+            // 最大レベルを更新
+            SaveData2_SetRankMax([self.levelMgr getLevel]);
+            
+        }
+        else {
+            // ハイスコア更新
+            SaveData_SetHiScore(m_Score);
+            
+            // 最大レベル更新
+            SaveData_SetRankMax([self.levelMgr getLevel]);
+            
 #ifdef VERSION_LIMITED
-        
-        // 制限バージョンは現在ランクを保存しない
+            
+            // 制限バージョンは現在ランクを保存しない
 #else
-        // ランク選択設定
-        SaveData_SetRank([self.levelMgr getLevel]);
+            // ランク選択設定
+            SaveData_SetRank([self.levelMgr getLevel]);
 #endif // #ifdef VERSION_LIMITED
+            
+        }
+        
         
         // 画面を暗くする
         [self.black setVisible:YES];
@@ -818,7 +833,15 @@ static GameScene* scene_ = nil;
     // 制限モードはランクアップする
     [self.levelMgr addLevel];
     
+#else
+    
+    if (SaveData_IsScoreAttack()) {
+        // スコアアタックモードはランクアップする
+        [self.levelMgr addLevel];
+        
+    }
 #endif
+    
     
     Sound_PlaySe(@"kin.wav");
     

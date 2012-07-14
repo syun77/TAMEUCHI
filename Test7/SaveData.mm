@@ -270,6 +270,8 @@ void SaveData_SetScoreAttack(BOOL b) {
     
     [ix setBool:b forKey:@"SCORE_ATTACK"];
     
+    // 保存
+    [ix synchronize];
 }
 
 /**
