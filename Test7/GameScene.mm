@@ -18,12 +18,18 @@
 #import "Sound.h"
 
 #import "SaveData.h"
+#import "GameCenter.h"
 
 static const int TIMER_GAMEOVER = 60;
 static const float TIMER_SHAKE = 64;
 
 static const int BGM_MIN = 1;
 static const int BGM_MAX = 6;
+
+//static const float BTN_BACK_CX = 240;
+//static const float BTN_BACK_CY = 64;
+//static const float BTN_BACK_W  = 96;
+//static const float BTN_BACK_H  = 24;
 
 // 描画プライオリティ
 enum {
@@ -94,6 +100,8 @@ static GameScene* scene_ = nil;
 @synthesize asciiFontScore;
 @synthesize asciiFontLevelUp;
 @synthesize asciiFontGameover;
+@synthesize btnBackToTitle;
+@synthesize btnSubmitScore;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance {
@@ -254,6 +262,11 @@ static GameScene* scene_ = nil;
     [self.asciiFontGameover setAlign:eFontAlign_Center];
     [self.asciiFontGameover setVisible:NO];
     
+    // ボタン
+//    self.btnBackToTitle = [Button node];
+    
+//    self.btnSubmitScore = [Button node];
+    
     // コールバック関数登録
     [self.interfaceLayer addCB:self.player];
     
@@ -285,6 +298,9 @@ static GameScene* scene_ = nil;
     [self unscheduleUpdate];
     
     // インスタンス開放
+    self.btnSubmitScore = nil;
+    self.btnBackToTitle = nil;
+    
     self.asciiFontGameover = nil;
     self.asciiFontLevelUp = nil;
     self.asciiFontScore = nil;
@@ -619,6 +635,9 @@ static GameScene* scene_ = nil;
             // 最大レベルを更新
             SaveData2_SetRankMax([self.levelMgr getLevel]);
             
+            // とりあえずスコアを送信する
+            GameCenter_Report(@"score02", m_Score);
+            
         }
         else {
             // ハイスコア更新
@@ -633,6 +652,10 @@ static GameScene* scene_ = nil;
 #else
             // ランク選択設定
             SaveData_SetRank([self.levelMgr getLevel]);
+            
+            // とりあえずスコアを送信する
+            GameCenter_Report(@"score01", m_Score);
+            
 #endif // #ifdef VERSION_LIMITED
             
         }

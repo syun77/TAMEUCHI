@@ -29,6 +29,7 @@
 #import "Banana.h"
 #import "Bomb.h"
 #import "Lockon.h"
+#import "Button.h"
 
 // 危険時に有効となる速度の係数
 static const float DANGER_SLOW_RATIO = 0.7;
@@ -70,6 +71,8 @@ static const int SCORE_BANANA_BONUS = 500;
     AsciiFont*      asciiFontScore; // フォント（スコア）
     AsciiFont*      asciiFontLevelUp; // フォント（レベルアップ演出）
     AsciiFont*      asciiFontGameover; // フォント（ゲームオーバー）
+    Button*         btnBackToTitle;     // タイトル画面に戻る
+    Button*         btnSubmitScore;     // スコア送信
     
     int             m_State;        // 状態
     int             m_Step;         // ステップ
@@ -113,6 +116,8 @@ static const int SCORE_BANANA_BONUS = 500;
 @property (nonatomic, retain)AsciiFont*         asciiFontScore;
 @property (nonatomic, retain)AsciiFont*         asciiFontLevelUp;
 @property (nonatomic, retain)AsciiFont*         asciiFontGameover;
+@property (nonatomic, retain)Button*            btnBackToTitle;
+@property (nonatomic, retain)Button*            btnSubmitScore;
 
 // シングルトンを取得
 + (GameScene*)sharedInstance;
