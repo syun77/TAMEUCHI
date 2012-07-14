@@ -54,6 +54,17 @@ static TitleScene* scene_ = nil;
 }
 
 /**
+ * ランク選択の表示を切り替える
+ */
+- (void)setRankSelect:(BOOL)b {
+    
+    BackTitle* backTitle = [TitleScene sharedInstance].back;
+    
+    
+    [backTitle setRankSelect:b];
+}
+
+/**
  * スタートボタン押したコールバック
  */
 - (void)cbBtnStart {
@@ -71,14 +82,31 @@ static TitleScene* scene_ = nil;
  */
 - (void)setBtnGamemode {
     
+    int hiScore = 0;
+    int rank    = 0;
+    int hiRank  = 0;
     if (SaveData_IsScoreAttack()) {
         
+        // スコアアタックモード
         [self.btnGamemode setText:@"SCORE ATTACK"];
+        hiScore = SaveData2_GetHiScore();
+        rank    = SaveData2_GetRank();
+        hiRank  = SaveData2_GetRankMax();
+        [self setRankSelect:NO];
     }
     else {
         
         [self.btnGamemode setText:@"FREE PLAY"];
+        hiScore = SaveData_GetHiScore();
+        rank    = SaveData_GetRank();
+        hiRank  = SaveData_GetRankMax();
+        [self setRankSelect:YES];
     }
+    
+    [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", hiScore]];
+    
+    [self.fontRank setText:[NSString stringWithFormat:@"RANK     %d", rank]];
+    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK  %d", hiRank]];
 }
 
 /**
@@ -107,17 +135,6 @@ static TitleScene* scene_ = nil;
     
     m_NextSceneId = eScene_Option;
     m_bNextScene = YES;
-}
-
-/**
- * ランク選択の表示を切り替える
- */
-- (void)setRankSelect:(BOOL)b {
-    
-    BackTitle* backTitle = [TitleScene sharedInstance].back;
-    
-    
-    [backTitle setRankSelect:b];
 }
 
 // コンストラクタ
@@ -157,17 +174,16 @@ static TitleScene* scene_ = nil;
     self.fontHiScore = [AsciiFont node];
     [self.fontHiScore createFont:self.baseLayer length:24];
     [self.fontHiScore setPos:10 y:13];
-    [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", SaveData_GetHiScore()]];
+//    [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", SaveData_GetHiScore()]];
     
     self.fontRank = [AsciiFont node];
     [self.fontRank createFont:self.baseLayer length:24];
     [self.fontRank setPos:10 y:12];
-    [self.fontRank setText:[NSString stringWithFormat:@"RANK     %d", SaveData_GetRank()]];
     
     self.fontRankMax = [AsciiFont node];
     [self.fontRankMax createFont:self.baseLayer length:24];
     [self.fontRankMax setPos:10 y:11];
-    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK  %d", SaveData_GetRankMax()]];
+//    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK  %d", SaveData_GetRankMax()]];
     
     self.fontCopyRight = [AsciiFont node];
     [self.fontCopyRight createFont:self.baseLayer length:24];
@@ -182,7 +198,6 @@ static TitleScene* scene_ = nil;
     
     self.btnGamemode = [Button node];
     [self.btnGamemode initWith:self.interfaceLayer text:@"" cx:GAMEMODE_BUTTON_CX cy:GAMEMODE_BUTTON_CY w:GAMEMODE_BUTTON_W h:GAMEMODE_BUTTON_H cls:self onDecide:@selector(cbBtnGamemove)];
-    [self setBtnGamemode];
     
     self.btnOption = [Button node];
     [self.btnOption initWith:self.interfaceLayer text:@"OPTION" cx:OPTION_BUTTON_CX cy:OPTION_BUTTON_CY w:OPTION_BUTTON_W h:OPTION_BUTTON_H cls:self onDecide:@selector(cbBtnOption)];
@@ -193,6 +208,9 @@ static TitleScene* scene_ = nil;
     m_TouchStartX = 0;
     m_TouchStartY = 0;
     m_bRankSelect = NO;
+    
+    // 最初は非表示にしておく
+    [self.baseLayer setVisible:NO];
     
     // 更新スケジューラ登録
     [self scheduleUpdate];
@@ -236,14 +254,31 @@ static TitleScene* scene_ = nil;
         // 広告表示
         [AppDelegate setVisibleAdWhirlView:YES];
         
+        // ゲームモードの表示を更新
+        [self setBtnGamemode];
+        
+        // 表示を有効にする
+        [self.baseLayer setVisible:YES];
+        
         m_bInit = YES;
     }
     
     // ランク数更新
     if (m_bRankSelect) {
         
-        [self.fontRank setColor:ccc3(0xFF, 0x80, 0x80)];
-        [self.fontRank setText:[NSString stringWithFormat:@"RANK     %d", SaveData_GetRank()]];
+        
+        if (SaveData_IsScoreAttack()) {
+            
+            // スコアアタックモード
+            [self.fontRank setText:[NSString stringWithFormat:@"RANK     %d", SaveData2_GetRank()]];
+        }
+        else {
+            
+            // フリープレイモード
+            [self.fontRank setColor:ccc3(0xFF, 0x80, 0x80)];
+            [self.fontRank setText:[NSString stringWithFormat:@"RANK     %d", SaveData_GetRank()]];
+        }
+        
     }
     else {
         [self.fontRank setColor:ccc3(0xFF, 0xFF, 0xFF)];
@@ -379,6 +414,13 @@ static TitleScene* scene_ = nil;
 
 // ランク選択タッチ中
 - (BOOL)isTouchRankSelect {
+    
+    if (SaveData_IsScoreAttack()) {
+        
+        // スコアアタックモードはランク選択できない
+        return NO;
+    }
+    
     return m_bRankSelect;
 }
 

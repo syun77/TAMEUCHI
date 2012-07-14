@@ -52,7 +52,14 @@
  */
 - (void)initialize {
     m_tPast     = 0;
-    m_nLevel    = SaveData_GetRank();
+    if (SaveData_IsScoreAttack()) {
+        // スコアアタックモード
+        m_nLevel    = SaveData2_GetRank();
+    }
+    else {
+        // フリープレイモード
+        m_nLevel    = SaveData_GetRank();
+    }
     m_Mode      = eLevel_Endless;
 //    m_Mode      = eLevel_TimeAttack;
 }
