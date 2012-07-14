@@ -10,7 +10,7 @@
 #import "cocos2d.h"
 
 // 制限バージョンかどうか
-#define VERSION_LIMITED
+//#define VERSION_LIMITED
 
 /**
  * セーブデータを初期化する

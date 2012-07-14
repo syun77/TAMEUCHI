@@ -155,6 +155,17 @@ static TitleScene* scene_ = nil;
     m_bNextScene = YES;
 }
 
+/**
+ * ランク選択の表示を切り替える
+ */
+- (void)setRankSelect:(BOOL)b {
+    
+    BackTitle* back = [TitleScene sharedInstance].back;
+    
+    
+    [back setRankSelect:b];
+}
+
 // コンストラクタ
 - (id)init {
     self = [super init];
@@ -305,13 +316,28 @@ static TitleScene* scene_ = nil;
         
         // 登録したコールバックから除去
         [self.interfaceLayer delCB];
-        
-        SceneManager_Change(@"GameScene");
+       
+        switch (m_NextSceneId) {
+            case eScene_Main:
+                
+                // 次のシーンに進む
+                SceneManager_Change(@"GameScene");
         
 #ifdef VERSION_LIMITED
-        // 広告非表示
-        [AppDelegate setVisibleAdWhirlView:NO];
+                // 広告非表示
+                [AppDelegate setVisibleAdWhirlView:NO];
 #endif
+                break;
+                
+            case eScene_Option:
+                
+                // オプション画面に遷移する
+                SceneManager_Change(@"OptionScene");
+                break;
+                
+            default:
+                break;
+        }
         
     }
 }

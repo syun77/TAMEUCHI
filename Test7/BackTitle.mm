@@ -42,6 +42,7 @@ static const float POS_RANK_Y = 160;
     m_tPast = 0;
     m_tCursorL = 0;
     m_tCursorR = 0;
+    m_bRankSelect = YES;
     
     return self;
 }
@@ -51,6 +52,12 @@ static const float POS_RANK_Y = 160;
  */
 - (void)update:(ccTime)dt {
     m_tPast++;
+    
+    if (m_bRankSelect == NO) {
+        
+        // ランク選択無効
+        return;
+    }
     
     if ([[TitleScene sharedInstance] isTouchRankSelect]) {
         // タッチセレクト中はタイマーを減衰させる
@@ -77,6 +84,13 @@ static const float POS_RANK_Y = 160;
 
 - (void)visit {
     [super visit];
+    
+    if (m_bRankSelect == NO) {
+        
+        // ランク選択無効
+        return;
+    }
+    
    
 #ifdef VERSION_LIMITED
     
@@ -104,44 +118,6 @@ static const float POS_RANK_Y = 160;
     
     System_SetBlend(eBlend_Normal);
     
-//    // ■BGM ON/OFF
-//    glColor4f(0.2, 0.2, 0.2, 0.5);
-//    [self fillRectLT:BGM_BUTTON_RECT_X-2 y:BGM_BUTTON_RECT_Y-2 w:BGM_BUTTON_RECT_W+4 h:BGM_BUTTON_RECT_H+4 rot:0 scale:1];
-//    glColor4f(0.5, 0.5, 0.5, 0.5);
-//    if ([[TitleScene sharedInstance] isTouchBgm]) {
-//        
-//        // タッチ中
-//        glColor4f(0, 0, 0.5, 0.4);
-//    }
-//    [self fillRectLT:BGM_BUTTON_RECT_X y:BGM_BUTTON_RECT_Y w:BGM_BUTTON_RECT_W h:BGM_BUTTON_RECT_H rot:0 scale:1];
-    
-//    // ■SE ON/OFF
-//    glColor4f(0.2, 0.2, 0.2, 0.5);
-//    [self fillRectLT:SE_BUTTON_RECT_X-2 y:SE_BUTTON_RECT_Y-2 w:SE_BUTTON_RECT_W+4 h:SE_BUTTON_RECT_H+4 rot:0 scale:1];
-//    glColor4f(0.5, 0.5, 0.5, 0.5);
-//    if ([[TitleScene sharedInstance] isTouchSe]) {
-//        
-//        // タッチ中
-//        glColor4f(0, 0, 0.5, 0.4);
-//    }
-//    [self fillRectLT:SE_BUTTON_RECT_X y:SE_BUTTON_RECT_Y w:SE_BUTTON_RECT_W h:SE_BUTTON_RECT_H rot:0 scale:1];
-    
-#ifdef VERSION_LIMITED
-    
-    // 制限モードはランク選択不可
-    
-#else
-    // ■EASY ON/OFF
-    glColor4f(0.2, 0.2, 0.2, 0.5);
-    [self fillRectLT:EASY_BUTTON_RECT_X-2 y:EASY_BUTTON_RECT_Y-2 w:EASY_BUTTON_RECT_W+4 h:EASY_BUTTON_RECT_H+4 rot:0 scale:1];
-    glColor4f(0.5, 0.5, 0.5, 0.5);
-    if ([[TitleScene sharedInstance] isTouchEasy]) {
-        
-        // タッチ中
-        glColor4f(0, 0, 0.5, 0.4);
-    }
-    [self fillRectLT:EASY_BUTTON_RECT_X y:EASY_BUTTON_RECT_Y w:EASY_BUTTON_RECT_W h:EASY_BUTTON_RECT_H rot:0 scale:1];
-#endif // #ifdef VERSION_LIMITED
     
 }
 
@@ -154,6 +130,16 @@ static const float POS_RANK_Y = 160;
 // カーソルを動かす（右）
 - (void)moveCursorR {
     m_tCursorR = 90 / 4;
+}
+
+// ランク選択を表示切り替え
+- (void)setRankSelect:(BOOL)b {
+    m_bRankSelect = b;
+}
+
+// ランク選択が有効かどうか
+- (BOOL)isRankSelect {
+    return m_bRankSelect;
 }
 
 @end
