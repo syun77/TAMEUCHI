@@ -132,11 +132,13 @@
 	// Removes the startup flicker
 	[self removeStartupFlicker];
     
+#ifdef VERSION_LIMITED 
     // AdWhirlの生成
     self.adWhirlView = [AdWhirlView requestAdWhirlViewWithDelegate:self];
     
     // ViewControllerに登録
     [viewController.view addSubview:self.adWhirlView];
+#endif
 	
     // セーブデータを初期化する
     SaveData_Init();

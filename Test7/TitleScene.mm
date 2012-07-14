@@ -35,9 +35,6 @@ static TitleScene* scene_ = nil;
 @synthesize fontCopyRight;
 
 @synthesize btnStart;
-@synthesize btnBgm;
-@synthesize btnSe;
-@synthesize btnEasy;
 @synthesize btnOption;
 
 
@@ -67,84 +64,6 @@ static TitleScene* scene_ = nil;
     m_NextSceneId = eScene_Main;
 }
 
-- (void)setBtnBgm {
-    
-    BOOL b = Sound_IsEnableBgm();
-    
-    [self.btnBgm setText:[NSString stringWithFormat:@"BGM:%s", b ? "o" : "x"]];
-}
-
-/**
- * BGM ON/OFF ボタン押したコールバック
- */
-- (void)cbBtnBgm {
-    
-    Sound_PlaySe(@"pi.wav");
-    
-    if(Sound_IsEnableBgm()) {
-        
-        Sound_SetEnableBgm(NO);
-    }
-    else {
-        
-        Sound_SetEnableBgm(YES);
-    }
-    
-    [self setBtnBgm];
-}
-
-- (void)setBtnSe {
-    
-    BOOL b = Sound_IsEnableSe();
-    
-    [self.btnSe setText:[NSString stringWithFormat:@"SE:%s", b ? "o" : "x"]];
-}
-
-/**
- * SE ON/OFF ボタン押したコールバック
- */
-- (void)cbBtnSe {
-    
-    Sound_PlaySe(@"pi.wav");
-    
-    if (Sound_IsEnableSe()) {
-        
-        Sound_SetEnableSe(NO);
-    }
-    else {
-        
-        Sound_SetEnableSe(YES);
-    }
-    
-    [self setBtnSe];
-}
-
-- (void)setBtnEasy {
-    
-    BOOL b = SaveData_IsEasy();
-    
-    [self.btnEasy setText:[NSString stringWithFormat:@"EASY:%s", b ? "o" : "x"]];
-}
-
-/**
- * EASYモード ボタン押したコールバック
- */
-- (void)cbBtnEasy {
-    
-    Sound_PlaySe(@"pi.wav");
-    
-    if (SaveData_IsEasy()) {
-        
-        SaveData_SetEasy(NO);
-    }
-    else {
-        
-        SaveData_SetEasy(YES);
-    }
-    
-    [self setBtnEasy];
-}
-
 /**
  * Optionボタン押したコールバック
  */
@@ -160,10 +79,10 @@ static TitleScene* scene_ = nil;
  */
 - (void)setRankSelect:(BOOL)b {
     
-    BackTitle* back = [TitleScene sharedInstance].back;
+    BackTitle* backTitle = [TitleScene sharedInstance].back;
     
     
-    [back setRankSelect:b];
+    [backTitle setRankSelect:b];
 }
 
 // コンストラクタ
@@ -226,25 +145,8 @@ static TitleScene* scene_ = nil;
     self.btnStart = [Button node];
     [self.btnStart initWith:self.interfaceLayer text:@"START" cx:START_BUTTON_CX cy:START_BUTTON_CY w:START_BUTTON_W h:START_BUTTON_H cls:self onDecide:@selector(cbBtnStart)];
     
-    self.btnBgm = [Button node];
-    [self.btnBgm initWith:self.interfaceLayer text:@"BGM" cx:BGM_BUTTON_CX cy:BGM_BUTTON_CY w:BGM_BUTTON_W h:BGM_BUTTON_H cls:self onDecide:@selector(cbBtnBgm)];
-    [self setBtnBgm];
-    
-    self.btnSe = [Button node];
-    [self.btnSe initWith:self.interfaceLayer text:@"SE" cx:SE_BUTTON_CX cy:SE_BUTTON_CY w:SE_BUTTON_W h:SE_BUTTON_H cls:self onDecide:@selector(cbBtnSe)];
-    
     self.btnOption = [Button node];
     [self.btnOption initWith:self.interfaceLayer text:@"OPTION" cx:OPTION_BUTTON_CX cy:OPTION_BUTTON_CY w:OPTION_BUTTON_W h:OPTION_BUTTON_H cls:self onDecide:@selector(cbBtnOption)];
-    
-#ifdef VERSION_LIMITED
-    
-    // 制限モードはEASYを選べない
-#else
-    
-    self.btnEasy = [Button node];
-    [self.btnEasy initWith:self.interfaceLayer text:@"EASY" cx:EASY_BUTTON_CX cy:EASY_BUTTON_CY w:EASY_BUTTON_W h:EASY_BUTTON_H cls:self onDecide:@selector(cbBtnEasy)];
-    [self setBtnEasy];
-#endif
     
     // 変数初期化
     m_NextSceneId = eScene_Main;
@@ -268,9 +170,6 @@ static TitleScene* scene_ = nil;
 - (void)dealloc {
     
     self.btnOption = nil;
-    self.btnEasy = nil;
-    self.btnSe = nil;
-    self.btnBgm = nil;
     self.btnStart = nil;
     
     self.fontCopyRight = nil;
@@ -280,7 +179,6 @@ static TitleScene* scene_ = nil;
     self.fontLite = nil;
     self.asciiFont = nil;
     self.interfaceLayer = nil;
-    self.back = nil;
     self.baseLayer = nil;
     
     [super dealloc];

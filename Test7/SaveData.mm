@@ -8,6 +8,8 @@
 
 #import "SaveData.h"
 
+static const int RANK_DEFAULT = 80;
+
 /**
  * NSUserDefaultsを取得する
  */
@@ -23,10 +25,10 @@ void SaveData_Init() {
     NSUserDefaults* defaults = _Get();
     
     int hiRank = SaveData_GetRankMax();
-    if (hiRank < 80) {
+    if (hiRank < RANK_DEFAULT) {
         
         // Lv80以下であれば80にする
-        SaveData_SetRankMax(80);
+        SaveData_SetRankMax(RANK_DEFAULT);
     }
     
     if ([defaults boolForKey:@"INIT"]) {
@@ -43,10 +45,15 @@ void SaveData_Init() {
     [defaults setBool:YES forKey:@"SE"];
     [defaults setBool:NO forKey:@"EASY"];
     
+    [defaults setBool:NO forKey:@"SCORE_ATTACK"];
+    [defaults setInteger:0 forKey:@"HI_SCORE2"];
+    [defaults setInteger:RANK_DEFAULT forKey:@"RANK_MAX2"];
+    
+    
 #ifdef VERSION_LIMITED
     
     // 制限バージョンはLv80固定
-    [defaults setInteger:80 forKey:@"RANK"];
+    [defaults setInteger:RANK_DEFAULT forKey:@"RANK"];
 #endif
     
     // 保存
@@ -236,4 +243,87 @@ BOOL SaveData_IsEasy() {
     NSUserDefaults* ix = _Get();
     
     return [ix boolForKey:@"EASY"];
+}
+
+/**
+ * スコアアタックモードが有効かどうか
+ */
+BOOL SaveData_IsScoreAttack() {
+    
+    NSUserDefaults* ix = _Get();
+    
+    return [ix boolForKey:@"SCORE_ATTACK"];
+}
+
+/**
+ * ハイスコアを取得する
+ * @return ハイスコア
+ */
+int SaveData2_GetHiScore() {
+    
+    NSUserDefaults* ix = _Get();
+    
+    return [ix integerForKey:@"HI_SCORE2"];
+}
+
+/**
+ * ハイスコアを設定する
+ * @param score ハイスコア
+ */
+void SaveData2_SetHiScore(int score, BOOL bForce) {
+    
+    NSUserDefaults* ix = _Get();
+    
+    if (bForce == NO) {
+        
+        int max = SaveData2_GetHiScore();
+        if (score < max) {
+            
+            // 更新不要
+            return;
+        }
+    }
+    
+    [ix setInteger:score forKey:@"HI_SCORE2"];
+    
+    // 保存
+    [ix synchronize];
+}
+
+/**
+ * 到達したことのある最大難易度を取得する
+ * @return 最大難易度
+ */
+int SaveData2_GetRankMax() {
+    
+    NSUserDefaults* ix = _Get();
+    
+    return [ix integerForKey:@"RANK_MAX2"];
+}
+
+/**
+ * 最大難易度を取得する
+ * @param rank 最大難易度
+ */
+void SaveData2_SetRankMax(int rank) {
+    
+    NSUserDefaults* ix = _Get();
+    
+    int max = SaveData2_GetRankMax();
+    if (rank < max) {
+        
+        // 更新不要
+        return;
+    }
+    
+    [ix setInteger:rank forKey:@"RANK_MAX2"];
+    
+    // 保存
+    [ix synchronize];
+    
+}
+
+int SaveData2_GetRank()
+{
+    return RANK_DEFAULT;
 }

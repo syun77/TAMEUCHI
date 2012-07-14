@@ -14,10 +14,25 @@
 #import "Button.h"
 #import "BackOption.h"
 
-static const float BACK_BUTTON_CX = 240;
-static const float BACK_BUTTON_CY = 72;
-static const float BACK_BUTTON_W  = 96;
-static const float BACK_BUTTON_H  = 24;
+static const float BGM_BUTTON_CX = 432;
+static const float BGM_BUTTON_CY = 72;
+static const float BGM_BUTTON_W  = 40;
+static const float BGM_BUTTON_H  = 16;
+
+static const float SE_BUTTON_CX = 432;
+static const float SE_BUTTON_CY = 24;
+static const float SE_BUTTON_W = 40;
+static const float SE_BUTTON_H = 16;
+
+static const float EASY_BUTTON_CX = 56;
+static const float EASY_BUTTON_CY = 28;
+static const float EASY_BUTTON_W  = 48;
+static const float EASY_BUTTON_H  = 16;
+
+static const float BACK_BUTTON_CX = 56;
+static const float BACK_BUTTON_CY = 28;
+static const float BACK_BUTTON_W  = 48;
+static const float BACK_BUTTON_H  = 16;
 
 /**
  * オプション画面
@@ -28,7 +43,9 @@ static const float BACK_BUTTON_H  = 24;
     InterfaceLayer* interfaceLayer; // 入力受け取り
     BackOption*     back;           // 背景
     
-    
+    Button*         btnBgm;         // ボタン（BGM）
+    Button*         btnSe;          // ボタン（SE）
+    Button*         btnEasy;        // ボタン（EASY）
     Button*         btnBack;        // タイトル画面に戻る
     
     BOOL            m_bNextScene;   // 次のシーンに進む
@@ -37,6 +54,9 @@ static const float BACK_BUTTON_H  = 24;
 @property (nonatomic, retain)CCLayer*           baseLayer;
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
 @property (nonatomic, retain)BackOption*        back;
+@property (nonatomic, retain)Button*            btnBgm;
+@property (nonatomic, retain)Button*            btnSe;
+@property (nonatomic, retain)Button*            btnEasy;
 @property (nonatomic, retain)Button*            btnBack;
 
 + (OptionScene*)sharedInstance;

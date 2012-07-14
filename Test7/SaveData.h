@@ -27,7 +27,7 @@ int SaveData_GetHiScore();
  * ハイスコアを設定する
  * @param score ハイスコア
  */
-void SaveData_SetHiScore(int score, BOOL bForce=false);
+void SaveData_SetHiScore(int score, BOOL bForce=NO);
 
 /**
  * タイトル画面で選択した難易度を取得する
@@ -87,3 +87,34 @@ void SaveData_SetEasy(BOOL b);
  * EASYモードの取得
  */
 BOOL SaveData_IsEasy();
+
+/**
+ * スコアアタックモードが有効かどうか
+ */
+BOOL SaveData_IsScoreAttack();
+
+/**
+ * ハイスコアを取得する
+ * @return ハイスコア
+ */
+int SaveData2_GetHiScore();
+
+/**
+ * ハイスコアを設定する
+ * @param score ハイスコア
+ */
+void SaveData2_SetHiScore(int score, BOOL bForce=NO);
+
+/**
+ * 到達したことのある最大難易度を取得する
+ * @return 最大難易度
+ */
+int SaveData2_GetRankMax();
+
+/**
+ * 最大難易度を取得する
+ * @param rank 最大難易度
+ */
+void SaveData2_SetRankMax(int rank);
+
+int SaveData2_GetRank();
