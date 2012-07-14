@@ -10,6 +10,9 @@
 
 #import "SceneManager.h"
 
+enum ePrio {
+    ePrio_Back,
+};
 
 static OptionScene* scene_ = nil;
 
@@ -17,6 +20,7 @@ static OptionScene* scene_ = nil;
 
 @synthesize baseLayer;
 @synthesize interfaceLayer;
+@synthesize back;
 @synthesize btnBack;
 
 /**
@@ -61,6 +65,9 @@ static OptionScene* scene_ = nil;
     self.interfaceLayer = [InterfaceLayer node];
     [self.baseLayer addChild:self.interfaceLayer];
     
+    self.back = [BackOption node];
+    [self.baseLayer addChild:self.back z:ePrio_Back];
+    
     self.btnBack = [Button node];
     [self.btnBack initWith:self.interfaceLayer text:@"BACK" cx:BACK_BUTTON_CX cy:BACK_BUTTON_CY w:BACK_BUTTON_W h:BACK_BUTTON_H cls:self onDecide:@selector(cbBtnBack)];
     
@@ -78,6 +85,7 @@ static OptionScene* scene_ = nil;
 - (void)dealloc {
     
     self.btnBack = nil;
+    self.back = nil;
     self.interfaceLayer = nil;
     self.baseLayer = nil;
     

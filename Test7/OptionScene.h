@@ -12,6 +12,7 @@
 #import "InterfaceLayer.h"
 #import "AsciiFont.h"
 #import "Button.h"
+#import "BackOption.h"
 
 static const float BACK_BUTTON_CX = 240;
 static const float BACK_BUTTON_CY = 72;
@@ -25,6 +26,8 @@ static const float BACK_BUTTON_H  = 24;
     
     CCLayer*        baseLayer;      // 基準レイヤー
     InterfaceLayer* interfaceLayer; // 入力受け取り
+    BackOption*     back;           // 背景
+    
     
     Button*         btnBack;        // タイトル画面に戻る
     
@@ -33,6 +36,7 @@ static const float BACK_BUTTON_H  = 24;
 
 @property (nonatomic, retain)CCLayer*           baseLayer;
 @property (nonatomic, retain)InterfaceLayer*    interfaceLayer;
+@property (nonatomic, retain)BackOption*        back;
 @property (nonatomic, retain)Button*            btnBack;
 
 + (OptionScene*)sharedInstance;
