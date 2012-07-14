@@ -34,10 +34,15 @@ static const float SE_BUTTON_CY = 24;
 static const float SE_BUTTON_W = 40;
 static const float SE_BUTTON_H = 16;
 
-static const float EASY_BUTTON_CX = 8+48;
+static const float EASY_BUTTON_CX = 56;
 static const float EASY_BUTTON_CY = 28;
 static const float EASY_BUTTON_W  = 48;
 static const float EASY_BUTTON_H  = 16;
+
+static const float OPTION_BUTTON_CX = 56;
+static const float OPTION_BUTTON_CY = 28;
+static const float OPTION_BUTTON_W  = 48;
+static const float OPTION_BUTTON_H  = 16;
 
 /**
  * タイトル画面
@@ -58,8 +63,10 @@ static const float EASY_BUTTON_H  = 16;
     Button*         btnBgm;         // ボタン（BGM）
     Button*         btnSe;          // ボタン（SE）
     Button*         btnEasy;        // ボタン（EASY）
+    Button*         btnOption;      // ボタン（オプション）
     
     BOOL            m_bNextScene;   // 次のシーンに進む
+    int             m_NextSceneId;  // 次のシーンの番号
     float           m_TouchStartX;  // タッチ開始座標 (X)
     float           m_TouchStartY;  // タッチ開始座標 (Y)
     int             m_RankPrev;     // タッチ前のランク
@@ -81,6 +88,7 @@ static const float EASY_BUTTON_H  = 16;
 @property (nonatomic, retain)Button*            btnBgm;
 @property (nonatomic, retain)Button*            btnSe;
 @property (nonatomic, retain)Button*            btnEasy;
+@property (nonatomic, retain)Button*            btnOption;
 
 + (TitleScene*)sharedInstance;
 + (void)releaseInstance;

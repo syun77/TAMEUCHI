@@ -13,6 +13,12 @@
 #import "AppDelegate.h"
 #import "GameCenter.h"
 
+
+enum eScene {
+    eScene_Main,    // メインゲーム
+    eScene_Option,  // オプション画面
+};
+
 // シングルトン
 static TitleScene* scene_ = nil;
 
@@ -32,6 +38,7 @@ static TitleScene* scene_ = nil;
 @synthesize btnBgm;
 @synthesize btnSe;
 @synthesize btnEasy;
+@synthesize btnOption;
 
 
 // シングルトンを取得する
@@ -55,7 +62,9 @@ static TitleScene* scene_ = nil;
     
     Sound_PlaySe(@"push.wav");
     
+    // メインゲーム開始
     m_bNextScene = YES;
+    m_NextSceneId = eScene_Main;
 }
 
 - (void)setBtnBgm {
@@ -136,6 +145,16 @@ static TitleScene* scene_ = nil;
     [self setBtnEasy];
 }
 
+/**
+ * Optionボタン押したコールバック
+ */
+- (void)cbBtnOption {
+    Sound_PlaySe(@"push.wav");
+    
+    m_NextSceneId = eScene_Option;
+    m_bNextScene = YES;
+}
+
 // コンストラクタ
 - (id)init {
     self = [super init];
@@ -202,7 +221,9 @@ static TitleScene* scene_ = nil;
     
     self.btnSe = [Button node];
     [self.btnSe initWith:self.interfaceLayer text:@"SE" cx:SE_BUTTON_CX cy:SE_BUTTON_CY w:SE_BUTTON_W h:SE_BUTTON_H cls:self onDecide:@selector(cbBtnSe)];
-    [self setBtnSe];
+    
+    self.btnOption = [Button node];
+    [self.btnOption initWith:self.interfaceLayer text:@"OPTION" cx:OPTION_BUTTON_CX cy:OPTION_BUTTON_CY w:OPTION_BUTTON_W h:OPTION_BUTTON_H cls:self onDecide:@selector(cbBtnOption)];
     
 #ifdef VERSION_LIMITED
     
@@ -215,6 +236,7 @@ static TitleScene* scene_ = nil;
 #endif
     
     // 変数初期化
+    m_NextSceneId = eScene_Main;
     m_bNextScene = NO;
     m_TouchStartX = 0;
     m_TouchStartY = 0;
@@ -234,6 +256,7 @@ static TitleScene* scene_ = nil;
 // デストラクタ
 - (void)dealloc {
     
+    self.btnOption = nil;
     self.btnEasy = nil;
     self.btnSe = nil;
     self.btnBgm = nil;
