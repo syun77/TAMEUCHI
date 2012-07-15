@@ -636,7 +636,8 @@ static GameScene* scene_ = nil;
             SaveData2_SetRankMax([self.levelMgr getLevel]);
             
             // とりあえずスコアを送信する
-            GameCenter_Report(@"score02", m_Score);
+            GameCenter_Report(@"scoreattack_score", m_Score);
+            GameCenter_Report(@"scoreattack_rank", [self.levelMgr getLevel]);
             
         }
         else {
@@ -655,6 +656,7 @@ static GameScene* scene_ = nil;
             
             // とりあえずスコアを送信する
             GameCenter_Report(@"score01", m_Score);
+            GameCenter_Report(@"freeplay_rank", [self.levelMgr getLevel]);
             
 #endif // #ifdef VERSION_LIMITED
             

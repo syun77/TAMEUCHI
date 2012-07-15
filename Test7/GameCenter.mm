@@ -323,7 +323,7 @@ BOOL GameCenter_IsReportError() {
 /**
  * Leaderboardを表示する
  */
-void GameCenter_ShowLeaderboard()
+void GameCenter_ShowLeaderboard(NSString* pName)
 {
     GCController* ix = _Get();
     if (ix == nil) {
@@ -340,6 +340,7 @@ void GameCenter_ShowLeaderboard()
     }
     
     leader.leaderboardDelegate = ix;
+    leader.category = pName;
     [s_pController presentModalViewController:leader animated:YES];
     
 #ifdef LEADER_BOARD_PORTRAIT

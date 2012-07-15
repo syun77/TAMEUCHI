@@ -36,6 +36,7 @@ static TitleScene* scene_ = nil;
 
 @synthesize btnStart;
 @synthesize btnGamemode;
+@synthesize btnScore;
 @synthesize btnOption;
 
 
@@ -128,6 +129,22 @@ static TitleScene* scene_ = nil;
 }
 
 /**
+ * リーダーボード表示
+ */
+- (void)cbBtnScore {
+    Sound_PlaySe(@"pi.wav");
+    
+    if (SaveData_IsScoreAttack()) {
+        
+        GameCenter_ShowLeaderboard(@"scoreattack_score");
+    }
+    else {
+        
+        GameCenter_ShowLeaderboard(@"score01");
+    }
+}
+
+/**
  * Optionボタン押したコールバック
  */
 - (void)cbBtnOption {
@@ -174,7 +191,6 @@ static TitleScene* scene_ = nil;
     self.fontHiScore = [AsciiFont node];
     [self.fontHiScore createFont:self.baseLayer length:24];
     [self.fontHiScore setPos:10 y:13];
-//    [self.fontHiScore setText:[NSString stringWithFormat:@"HI-SCORE %d", SaveData_GetHiScore()]];
     
     self.fontRank = [AsciiFont node];
     [self.fontRank createFont:self.baseLayer length:24];
@@ -183,7 +199,6 @@ static TitleScene* scene_ = nil;
     self.fontRankMax = [AsciiFont node];
     [self.fontRankMax createFont:self.baseLayer length:24];
     [self.fontRankMax setPos:10 y:11];
-//    [self.fontRankMax setText:[NSString stringWithFormat:@"HI-RANK  %d", SaveData_GetRankMax()]];
     
     self.fontCopyRight = [AsciiFont node];
     [self.fontCopyRight createFont:self.baseLayer length:24];
@@ -198,6 +213,9 @@ static TitleScene* scene_ = nil;
     
     self.btnGamemode = [Button node];
     [self.btnGamemode initWith:self.interfaceLayer text:@"" cx:GAMEMODE_BUTTON_CX cy:GAMEMODE_BUTTON_CY w:GAMEMODE_BUTTON_W h:GAMEMODE_BUTTON_H cls:self onDecide:@selector(cbBtnGamemove)];
+    
+    self.btnScore = [Button node];
+    [self.btnScore initWith:self.interfaceLayer text:@"SCORE" cx:SCORE_BUTTON_CX cy:SCORE_BUTTON_CY w:SCORE_BUTTON_W h:SCORE_BUTTON_H cls:self onDecide:@selector(cbBtnScore)];
     
     self.btnOption = [Button node];
     [self.btnOption initWith:self.interfaceLayer text:@"OPTION" cx:OPTION_BUTTON_CX cy:OPTION_BUTTON_CY w:OPTION_BUTTON_W h:OPTION_BUTTON_H cls:self onDecide:@selector(cbBtnOption)];
@@ -227,6 +245,7 @@ static TitleScene* scene_ = nil;
 - (void)dealloc {
     
     self.btnOption = nil;
+    self.btnScore = nil;
     self.btnGamemode = nil;
     self.btnStart = nil;
     

@@ -51,6 +51,6 @@ BOOL GameCenter_IsReportError();
 /**
  * Leaderboardを表示する
  */
-void GameCenter_ShowLeaderboard();
+void GameCenter_ShowLeaderboard(NSString* pName);
 
 void GameCenter_GetScore();

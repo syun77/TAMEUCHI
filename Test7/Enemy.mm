@@ -249,7 +249,7 @@ enum eRange {
         case eEnemy_XBox:    // XBox
             [self setTexRect: Exerinya_GetRect(eExerinyaRect_XBox)];
             self._r = 56;
-            m_HpMax = 1000;
+            m_HpMax = 300;
             break;
             
         case eEnemy_Radish:  // 大根
