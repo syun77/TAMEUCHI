@@ -215,6 +215,7 @@ void GameCenter_DispLoginDialog()
     [alert show];
     
     [alert release];
+    
                                            
 }
 
