@@ -10,6 +10,7 @@
 
 #import "SceneManager.h"
 #import "SaveData.h"
+#import "GameCenter.h"
 
 enum ePrio {
     ePrio_Back,
@@ -25,6 +26,8 @@ static OptionScene* scene_ = nil;
 @synthesize btnBgm;
 @synthesize btnSe;
 @synthesize btnEasy;
+@synthesize btnSubmit; 
+@synthesize btnLogin;
 @synthesize btnBack;
 
 /**
@@ -120,6 +123,43 @@ static OptionScene* scene_ = nil;
     
     [self setBtnEasy];
 }
+
+- (void)setBtnSubmit {
+    
+    if (SaveData_IsScoreAutoSubmit()) {
+        [self.btnSubmit setText:@"AUTO"];
+    }
+    else {
+        [self.btnSubmit setText:@"OFF"];
+    }
+}
+
+/**
+ * スコア自動送信ボタンを押した時のコールバック
+ */
+- (void)cbBtnSubmit {
+    
+    Sound_PlaySe(@"pi.wav");
+    
+    if (SaveData_IsScoreAutoSubmit()) {
+        
+        SaveData_SetScoreAutoSubmit(NO);
+    }
+    else {
+        
+        SaveData_SetScoreAutoSubmit(YES);
+    }
+    
+    [self setBtnSubmit];
+}
+
+- (void)cbBtnLogin {
+    
+    Sound_PlaySe(@"pi.wav");
+    
+    GameCenter_Login();
+}
+
 /**
  * 戻るボタンを押した時のコールバック
  */
@@ -161,6 +201,13 @@ static OptionScene* scene_ = nil;
     [self.btnEasy initWith:self.interfaceLayer text:@"EASY" cx:EASY_BUTTON_CX cy:EASY_BUTTON_CY w:EASY_BUTTON_W h:EASY_BUTTON_H cls:self onDecide:@selector(cbBtnEasy)];
     [self setBtnEasy];
     
+    self.btnSubmit = [Button node];
+    [self.btnSubmit initWith:self.interfaceLayer text:@"" cx:SUBMIT_BUTTON_CX cy:SUBMIT_BUTTON_CY w:SUBMIT_BUTTON_W h:SUBMIT_BUTTON_H cls:self onDecide:@selector(cbBtnSubmit)];
+    [self setBtnSubmit];
+    
+    self.btnLogin = [Button node];
+    [self.btnLogin initWith:self.interfaceLayer text:@"LOGIN" cx:LOGIN_BUTTON_CX cy:LOGIN_BUTTON_CY w:LOGIN_BUTTON_W h:LOGIN_BUTTON_H cls:self onDecide:@selector(cbBtnLogin)];
+    
     self.btnBack = [Button node];
     [self.btnBack initWith:self.interfaceLayer text:@"BACK" cx:BACK_BUTTON_CX cy:BACK_BUTTON_CY w:BACK_BUTTON_W h:BACK_BUTTON_H cls:self onDecide:@selector(cbBtnBack)];
     
@@ -178,6 +225,8 @@ static OptionScene* scene_ = nil;
 - (void)dealloc {
     
     self.btnBack = nil;
+    self.btnLogin = nil;
+    self.btnSubmit = nil;
     self.btnSe = nil;
     self.btnEasy = nil;
     self.btnBgm = nil;

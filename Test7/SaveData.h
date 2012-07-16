@@ -123,3 +123,10 @@ int SaveData2_GetRankMax();
 void SaveData2_SetRankMax(int rank);
 
 int SaveData2_GetRank();
+
+/**
+ * スコア自動送信設定
+ */
+void SaveData_SetScoreAutoSubmit(BOOL b);
+
+BOOL SaveData_IsScoreAutoSubmit();

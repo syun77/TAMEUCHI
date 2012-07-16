@@ -119,8 +119,14 @@ static GCController* _Get()
  */
 void GameCenter_Init()
 {
+    GCController* ix = _Get();
     if (s_pController == nil) {
+        AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
         s_pController = [[[GCController alloc] init] autorelease];
+        
+        // Viewを登録
+        [delegate.window addSubview:ix.view];
+        [[CCDirector sharedDirector].openGLView addSubview:s_pController.view];
     }
 }
 
@@ -145,38 +151,71 @@ void GameCenter_Login()
         return;
     }
     
-    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+//    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     // GameCenterにログインする
     [ix setLogin:eLogin_Connecting];
     [[GKLocalPlayer localPlayer] authenticateWithCompletionHandler:^(NSError* error) {
         
-        UIAlertView* alert = nil;
+//        UIAlertView* alert = nil;
         
         if (error == nil) {
             // 認証に成功
             [ix setLogin:eLogin_Success];
             NSLog(@"GameCenter auth success.");
             
-            // Viewを登録
-//            [delegate.window addSubview:ix.view];
-            [[CCDirector sharedDirector].openGLView addSubview:s_pController.view];
         }
         else {
             // 認証に失敗
             [ix setLogin:eLogin_Error];
             NSLog(@"%@", error);
-            alert = [[UIAlertView alloc] initWithTitle:@"GameCenter auth failed"
-                                               message:@"GameCenter auth failed"
-                                              delegate:delegate
-                                     cancelButtonTitle:@"ok"
-                                     otherButtonTitles:nil];
-            [alert show];
-            [alert release];
+//            alert = [[UIAlertView alloc] initWithTitle:@"Auth GameCenter  failed"
+//                                               message:@"Server connection problem. Please try to 'LOGIN' from OPTION."
+//                                              delegate:delegate
+//                                     cancelButtonTitle:@"ok"
+//                                     otherButtonTitles:nil];
+//            [alert show];
+//            [alert release];
             
         }
     }];
     
+}
+
+/**
+ * 認証が完了しているかどうか
+ */
+BOOL GameCenter_IsLogin() {
+    
+    GCController* ix = _Get();
+    if (ix == nil) {
+        
+        NSLog(@"Error: GameCenter IsLogin failed.");
+        
+        return NO;
+    }
+    
+    switch ([ix getLogin]) {
+        case eLogin_Success:
+            return YES;
+            
+        default:
+            return NO;
+    }
+}
+
+/**
+ * ログイン確認ダイアログの表示
+ */
+void GameCenter_DispLoginDialog()
+{
+    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+                 
+    UIAlertView* alert = [[UIAlertView alloc] initWithTitle:@"GameCenter auth fali." message:@"Can you retry to auth GameCenter?" delegate:delegate cancelButtonTitle:@"retry" otherButtonTitles:@"cancel", nil];
+    [alert show];
+    
+    [alert release];
+                                           
 }
 
 /**
@@ -240,7 +279,7 @@ void GameCenter_Report(NSString* pName, int value)
         return;
     }
     
-//    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
+    AppDelegate* delegate = (AppDelegate*)[[UIApplication sharedApplication] delegate];
     
     [ix setReport:eReport_Connecting];
     
@@ -248,22 +287,24 @@ void GameCenter_Report(NSString* pName, int value)
     report.value = value;
     [report reportScoreWithCompletionHandler:^(NSError* error) {
         
-//        UIAlertView* alert = nil;
+        UIAlertView* alert = nil;
         GCController* ix = _Get();
         
         if (error) {
             // エラー処理
+            if ([ix getReport] != eReport_Error) {
+                NSLog(@"%@", error);
+                alert = [[UIAlertView alloc] initWithTitle:@"Submit score failed"
+                                                   message:@"Server connection problem. Please try to press 'SUBMIT SCORE' button."
+                                                  delegate:delegate
+                                         cancelButtonTitle:@"ok"
+                                         otherButtonTitles:nil];
+                [alert show];
+                [alert release];
+                
+            }
+            
             [ix setReport:eReport_Error];
-/*
-            NSLog(@"%@", error);
-            alert = [[UIAlertView alloc] initWithTitle:@"Send score failed"
-                                               message:@"Send score failed"
-                                              delegate:delegate
-                                     cancelButtonTitle:@"ok"
-                                     otherButtonTitles:nil];
-            [alert show];
-            [alert release];
- */
         }
         else {
             // 送信成功
@@ -278,7 +319,7 @@ void GameCenter_Report(NSString* pName, int value)
 /**
  * スコア送信が完了したかどうか
  */
-BOOL GameCenter_IsReportConnecting() {
+BOOL GameCenter_IsEndReportConnect() {
     
     GCController* ix = _Get();
     if (ix == nil) {
@@ -290,6 +331,7 @@ BOOL GameCenter_IsReportConnecting() {
     }
     
     switch ([ix getReport]) {
+        case eReport_None:
         case eReport_Error:
         case eReport_Success:
             return YES;
@@ -312,6 +354,7 @@ BOOL GameCenter_IsReportError() {
     }
     
     switch ([ix getReport]) {
+        case eReport_None:
         case eReport_Success:
             return NO;
             

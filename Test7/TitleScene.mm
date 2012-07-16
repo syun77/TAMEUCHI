@@ -363,8 +363,10 @@ static TitleScene* scene_ = nil;
     
     // ■ランク選択タッチ判定
     m_bRankSelect = NO;
-    {
+    
+    if ([self.back isRankSelect]) {
         
+        // ランク選択有効
         if ([self isHitRankSelect:x y:y]) {
             
             // タッチした

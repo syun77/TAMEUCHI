@@ -14,22 +14,32 @@
 #import "Button.h"
 #import "BackOption.h"
 
-static const float BGM_BUTTON_CX = 432;
-static const float BGM_BUTTON_CY = 72;
+static const float BGM_BUTTON_CX = 240;
+static const float BGM_BUTTON_CY = 200;
 static const float BGM_BUTTON_W  = 40;
 static const float BGM_BUTTON_H  = 16;
 
-static const float SE_BUTTON_CX = 432;
-static const float SE_BUTTON_CY = 24;
+static const float SE_BUTTON_CX = 240;
+static const float SE_BUTTON_CY = 160;
 static const float SE_BUTTON_W = 40;
 static const float SE_BUTTON_H = 16;
 
-static const float EASY_BUTTON_CX = 56;
-static const float EASY_BUTTON_CY = 28;
+static const float EASY_BUTTON_CX = 240;
+static const float EASY_BUTTON_CY = 120;
 static const float EASY_BUTTON_W  = 48;
 static const float EASY_BUTTON_H  = 16;
 
-static const float BACK_BUTTON_CX = 56;
+static const float SUBMIT_BUTTON_CX = 240;
+static const float SUBMIT_BUTTON_CY = 80;
+static const float SUBMIT_BUTTON_W  = 48;
+static const float SUBMIT_BUTTON_H  = 16;
+
+static const float LOGIN_BUTTON_CX = 240;
+static const float LOGIN_BUTTON_CY = 40;
+static const float LOGIN_BUTTON_W  = 48;
+static const float LOGIN_BUTTON_H  = 16;
+
+static const float BACK_BUTTON_CX = 480-56;
 static const float BACK_BUTTON_CY = 28;
 static const float BACK_BUTTON_W  = 48;
 static const float BACK_BUTTON_H  = 16;
@@ -46,6 +56,8 @@ static const float BACK_BUTTON_H  = 16;
     Button*         btnBgm;         // ボタン（BGM）
     Button*         btnSe;          // ボタン（SE）
     Button*         btnEasy;        // ボタン（EASY）
+    Button*         btnSubmit;      // ボタン (SUBMIT)
+    Button*         btnLogin;       // ボタン (LOGIN)
     Button*         btnBack;        // タイトル画面に戻る
     
     BOOL            m_bNextScene;   // 次のシーンに進む
@@ -57,6 +69,8 @@ static const float BACK_BUTTON_H  = 16;
 @property (nonatomic, retain)Button*            btnBgm;
 @property (nonatomic, retain)Button*            btnSe;
 @property (nonatomic, retain)Button*            btnEasy;
+@property (nonatomic, retain)Button*            btnSubmit;
+@property (nonatomic, retain)Button*            btnLogin;
 @property (nonatomic, retain)Button*            btnBack;
 
 + (OptionScene*)sharedInstance;

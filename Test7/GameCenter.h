@@ -24,6 +24,11 @@ void GameCenter_End();
 void GameCenter_Login();
 
 /**
+ * 認証が完了しているかどうか
+ */
+BOOL GameCenter_IsLogin();
+
+/**
  * 認証が完了したかどうか
  */
 BOOL GameCenter_IsLoginConnecting();
@@ -34,6 +39,11 @@ BOOL GameCenter_IsLoginConnecting();
 BOOL GameCenter_IsLoginError();
 
 /**
+ * ログイン確認ダイアログの表示
+ */
+void GameCenter_DispLoginDialog();
+
+/**
  * スコアを送信する
  */
 void GameCenter_Report(NSString* pName, int value);
@@ -41,7 +51,7 @@ void GameCenter_Report(NSString* pName, int value);
 /**
  * スコア送信が完了したかどうか
  */
-BOOL GameCenter_IsReportConnecting();
+BOOL GameCenter_IsEndReportConnect();
 
 /**
  * スコア送信に失敗したかどうか

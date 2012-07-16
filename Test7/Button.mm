@@ -56,10 +56,16 @@
  */
 - (void)visit {
     
+    if (m_bVisibled == NO) {
+        return;
+    }
+    
     float cx = self._x;
     float cy = self._y;
     float w  = self._w;
     float h  = self._h;
+    
+    System_SetBlend(eBlend_Normal);
     
     glColor4f(0.2, 0.2, 0.2, 0.5);
     [self fillRect:cx cy:cy w:w+2 h:h+2 rot:0 scale:1];
@@ -73,6 +79,12 @@
         
         // 非選択
         glColor4f(0.5, 0.5, 0.5, 0.5);
+    }
+    
+    if (m_bEnabled == NO) {
+        
+        // 無効状態
+        glColor4f(0.2, 0.2, 0.2, 0.5);
     }
     
     [self fillRect:cx cy:cy w:w h:h rot:0 scale:1];
@@ -96,7 +108,7 @@
     m_cbDecide  = onDecide;
     m_Class     = cls;
     
-    [[pInput parent] addChild:self];
+    [[pInput parent] addChild:self z:10];
     // コールバックに登録
     [pInput addCB:self];
     
@@ -128,6 +140,13 @@
  */
 - (void)checkTouch:(float)x y:(float)y {
     
+    if (m_bEnabled == NO) {
+        return;
+    }
+    if (m_bVisibled == NO) {
+        return;
+    }
+    
     BOOL bPrev = m_bSelectedPrev;
     
     if([self isHitPoint:x y:y]) {
@@ -150,6 +169,25 @@
     m_bSelectedPrev = m_bSelected;
 }
 
+// 表示非表示切り替え
+- (void)setVisible:(BOOL)b {
+    m_bVisibled = b;
+    
+    [self.m_Text setVisible:b];
+}
+
+// 有効無効切り替え
+- (void)setEnable:(BOOL)b {
+    m_bEnabled = b;
+    
+    if (b) {
+        [self.m_Text setColor:ccc3(0xFF, 0xFF, 0xFF)];
+    }
+    else {
+        [self.m_Text setColor:ccc3(0x80, 0x80, 0x80)];
+    }
+}
+
 /**
  * タッチ開始
  */
@@ -170,6 +208,13 @@
  * タッチ終了
  */
 - (void)cbTouchEnd:(float)x y:(float)y {
+    
+    if (m_bEnabled == NO) {
+        return;
+    }
+    if (m_bVisibled == NO) {
+        return;
+    }
     
     if (m_bSelected) {
         // 項目を決定した

@@ -41,5 +41,12 @@
 // テキストの変更
 - (void)setText:(NSString*)pText;
 
+// 表示非表示切り替え
+- (void)setVisible:(BOOL)b;
+
+// 有効無効切り替え
+- (void)setEnable:(BOOL)b;
+
+
 
 @end

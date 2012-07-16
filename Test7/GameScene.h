@@ -85,6 +85,7 @@ static const int SCORE_BANANA_BONUS = 500;
     int             m_tBgm;         // BGM切り替え用番号
     int             m_nBgm;         // BGM番号
     float           m_tShake;       // 画面揺れタイマー
+    BOOL            m_bNextScene;   // 次のシーンに進むかどうか
 }
 
 @property (nonatomic, retain)CCLayer*           baseLayer;

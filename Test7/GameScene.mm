@@ -26,10 +26,15 @@ static const float TIMER_SHAKE = 64;
 static const int BGM_MIN = 1;
 static const int BGM_MAX = 6;
 
-//static const float BTN_BACK_CX = 240;
-//static const float BTN_BACK_CY = 64;
-//static const float BTN_BACK_W  = 96;
-//static const float BTN_BACK_H  = 24;
+static const float BTN_SUBMIT_CX = 128;
+static const float BTN_SUBMIT_CY = 64;
+static const float BTN_SUBMIT_W  = 96;
+static const float BTN_SUBMIT_H  = 24;
+
+static const float BTN_BACK_CX = 480-128;
+static const float BTN_BACK_CY = 64;
+static const float BTN_BACK_W  = 96;
+static const float BTN_BACK_H  = 24;
 
 // 描画プライオリティ
 enum {
@@ -125,6 +130,38 @@ static GameScene* scene_ = nil;
     m_nBgm++;
     if (m_nBgm > BGM_MAX) {
         m_nBgm = BGM_MIN;
+    }
+}
+
+/**
+ * タイトルへ戻る
+ */
+- (void)cbBtnTitle {
+    m_bNextScene = YES;
+}
+
+/**
+ * スコア送信コールバック
+ */
+- (void)cbBtnSubmit {
+    
+    if (GameCenter_IsLogin() == NO) {
+        
+        // ログインしていなければ何もしない
+        return;
+    }
+    
+    if (SaveData_IsScoreAttack()) {
+        
+        // スコアアタックモード
+        GameCenter_Report(@"scoreattack_score", m_Score);
+        GameCenter_Report(@"scoreattack_rank", [self.levelMgr getLevel]);
+    }
+    else {
+        
+        // フリープレイ
+        GameCenter_Report(@"score01", m_Score);
+        GameCenter_Report(@"freeplay_rank", [self.levelMgr getLevel]);
     }
 }
 
@@ -263,9 +300,14 @@ static GameScene* scene_ = nil;
     [self.asciiFontGameover setVisible:NO];
     
     // ボタン
-//    self.btnBackToTitle = [Button node];
+    self.btnBackToTitle = [Button node];
+    [self.btnBackToTitle initWith:self.interfaceLayer text:@"BACK TO TITLE" cx:BTN_BACK_CX cy:BTN_BACK_CY w:BTN_BACK_W h:BTN_BACK_H cls:self onDecide:@selector(cbBtnTitle)];
+    [self.btnBackToTitle setVisible:NO];
     
-//    self.btnSubmitScore = [Button node];
+    self.btnSubmitScore = [Button node];
+    [self.btnSubmitScore initWith:self.interfaceLayer text:@"SUBMIT SCORE" cx:BTN_SUBMIT_CX cy:BTN_SUBMIT_CY w:BTN_SUBMIT_W h:BTN_SUBMIT_H cls:self onDecide:@selector(cbBtnSubmit)];
+    [self.btnSubmitScore setVisible:NO];
+    
     
     // コールバック関数登録
     [self.interfaceLayer addCB:self.player];
@@ -635,9 +677,12 @@ static GameScene* scene_ = nil;
             // 最大レベルを更新
             SaveData2_SetRankMax([self.levelMgr getLevel]);
             
-            // とりあえずスコアを送信する
-            GameCenter_Report(@"scoreattack_score", m_Score);
-            GameCenter_Report(@"scoreattack_rank", [self.levelMgr getLevel]);
+            if (SaveData_IsScoreAutoSubmit()) {
+                
+                // スコア送信
+                [self cbBtnSubmit];
+                
+            }
             
         }
         else {
@@ -654,13 +699,19 @@ static GameScene* scene_ = nil;
             // ランク選択設定
             SaveData_SetRank([self.levelMgr getLevel]);
             
-            // とりあえずスコアを送信する
-            GameCenter_Report(@"score01", m_Score);
-            GameCenter_Report(@"freeplay_rank", [self.levelMgr getLevel]);
+            if (SaveData_IsScoreAutoSubmit()) {
+                
+                // とりあえずスコアを送信する
+                [self cbBtnSubmit];
+                
+            }
             
 #endif // #ifdef VERSION_LIMITED
             
         }
+        
+        // ボタンを表示する
+        [self.btnBackToTitle setVisible:YES];
         
         
         // 画面を暗くする
@@ -736,12 +787,38 @@ static GameScene* scene_ = nil;
     [self.asciiFontGameover setVisible:YES];
     [self.asciiFontGameover setText:@"GAME OVER"];
     
+    [self.btnSubmitScore setEnable:NO];
+    [self.btnBackToTitle setEnable:NO];
     if (m_Timer > 0) {
         m_Timer--;
         return;
     }
     
-    if ([self isPress]) {
+    [self.btnSubmitScore setEnable:YES];
+    [self.btnBackToTitle setEnable:YES];
+    if (GameCenter_IsEndReportConnect() == NO) {
+        
+        // 通信中
+        [self.btnSubmitScore setEnable:NO];
+        [self.btnBackToTitle setEnable:NO];
+        
+    }
+    else {
+        
+        // 通信完了
+        if (GameCenter_IsReportError()) {
+            
+            // 通信エラー
+            [self.btnSubmitScore setVisible:YES];
+        }
+        else {
+            
+            // エラーでないので送信ボタンを消す
+            [self.btnSubmitScore setVisible:NO];
+        }
+    }
+    
+    if (m_bNextScene) {
         
         [self pause];
         

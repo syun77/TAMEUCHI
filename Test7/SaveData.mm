@@ -34,20 +34,32 @@ void SaveData_Init() {
     if ([defaults boolForKey:@"INIT"]) {
         
         // 初期化済みなので何もしない
-        return;
+    }
+    else {
+        [defaults setBool:YES forKey:@"INIT"];
+        [defaults setInteger:0 forKey:@"HI_SCORE"];
+        [defaults setInteger:1 forKey:@"RANK"];
+        //[defaults setInteger:1 forKey:@"RANK_MAX"];
+        [defaults setBool:YES forKey:@"BGM"];
+        [defaults setBool:YES forKey:@"SE"];
+        [defaults setBool:NO forKey:@"EASY"];
+        
     }
     
-    [defaults setBool:YES forKey:@"INIT"];
-    [defaults setInteger:0 forKey:@"HI_SCORE"];
-    [defaults setInteger:1 forKey:@"RANK"];
-    //[defaults setInteger:1 forKey:@"RANK_MAX"];
-    [defaults setBool:YES forKey:@"BGM"];
-    [defaults setBool:YES forKey:@"SE"];
-    [defaults setBool:NO forKey:@"EASY"];
+    if ([defaults boolForKey:@"INIT2"]) {
+        
+        // 初期化済み
+        
+    }
+    else {
+        
+        [defaults setBool:YES forKey:@"INIT2"];
+        [defaults setBool:NO forKey:@"SCORE_ATTACK"];
+        [defaults setInteger:0 forKey:@"HI_SCORE2"];
+        [defaults setInteger:RANK_DEFAULT forKey:@"RANK_MAX2"];
+        [defaults setBool:YES forKey:@"SCORE_AUTO_SUBMIT"];
+    }
     
-    [defaults setBool:NO forKey:@"SCORE_ATTACK"];
-    [defaults setInteger:0 forKey:@"HI_SCORE2"];
-    [defaults setInteger:RANK_DEFAULT forKey:@"RANK_MAX2"];
     
     
 #ifdef VERSION_LIMITED
@@ -345,4 +357,25 @@ void SaveData2_SetRankMax(int rank) {
 int SaveData2_GetRank()
 {
     return RANK_DEFAULT;
+}
+
+/**
+ * スコア自動送信設定
+ */
+void SaveData_SetScoreAutoSubmit(BOOL b) {
+    
+    NSUserDefaults* ix = _Get();
+    
+    [ix setBool:b forKey:@"SCORE_AUTO_SUBMIT"];
+    
+    // 保存
+    [ix synchronize];
+    
+}
+
+BOOL SaveData_IsScoreAutoSubmit() {
+    
+    NSUserDefaults* ix = _Get();
+    
+    return [ix integerForKey:@"SCORE_AUTO_SUBMIT"];
 }
